@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>LZMA compression method in GZIP files - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=12065">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="21"><a itemprop="item" href="./viewforum.php?f=21"><span itemprop="name">Compressed files and methods</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./12065.html">LZMA compression method in GZIP files</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Read or post about compression. And decompression. Or ask questions how to decompress your files.<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=12065" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=21&amp;t=12065&amp;watch=topic&amp;start=0&amp;hash=821e3881" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=21&amp;t=12065&amp;unwatch=topic&amp;start=0&amp;hash=821e3881" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=12065&amp;bookmark=1&amp;hash=821e3881" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=12065" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=12065&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="12065" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p99239" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile99239">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/45101.html" class="username">gregkwaste</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=45101&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 15, 2014 10:17 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="45101"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="45101"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact gregkwaste">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact gregkwaste</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=99239" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content99239">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=99239#p99239">LZMA compression method in GZIP files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/99239/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=99239" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post99239' href="./viewtopic.php?f=21&amp;p=99239&amp;thanks=99239&amp;to_id=45101&amp;from_id=123876" title="Say Thanks to the author of the post: gregkwaste"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=99239#p99239" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/45101.html" class="username">gregkwaste</a></strong> &raquo; </span><time datetime="2014-10-08T15:10:15+00:00">Wed Oct 08, 2014 4:10 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Someone sent me some new 2k15 archives to work on and try to extract anything from them.<br>
+<br>
+I located some zip headers and managed to parse some zip files from it but there are some other issues which i don't fully understand.<br>
+<br>
+I found this (which is repeated again many times in the archive)<br>
+<br>
+<img src="http://i.gyazo.com/e5f5bb1fd51914e179544aa863b83016.png" class="postimage" alt="Image"><br>
+<br>
+The first 2 bytes indicate a gzip header, but then the compression is 0x0E. Gzip as far as i know comes only with deflation method which is noted with 0x08. How the heck is this 0x0E there? Because of the zip parsing i found out that they use LZMA for the file compression and the method is noted with 0x0E in the local zip header.<br>
+<br>
+I've tried decompressing raw data using python lzma libraries and with zlib as well, but nothing worked.<br>
+<br>
+<br>
+Does any "guru" have any idea about what the heck may be happening?</div>
+
+			
+			
+									
+						<div id='list_thanks99239'>
+</div>
+<div id='div_post_reput99239'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p99240" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile99240">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/31086.html" class="username">GMMan</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=31086&amp;sr=posts">139</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 05, 2010 10:14 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="31086"></dd>
+    <dd class="profile-posts" data-user-receive-id="31086"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/31086/false">56 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact GMMan">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact GMMan</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=99240" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content99240">
+
+					<h3 >
+						<a href="./viewtopic.php?p=99240#p99240">Re: LZMA compression method in GZIP files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/99240/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=99240" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post99240' href="./viewtopic.php?f=21&amp;p=99240&amp;thanks=99240&amp;to_id=31086&amp;from_id=123876" title="Say Thanks to the author of the post: GMMan"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=99240#p99240" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/31086.html" class="username">GMMan</a></strong> &raquo; </span><time datetime="2014-10-08T15:21:24+00:00">Wed Oct 08, 2014 4:21 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">(Duplicate, my mouse fucked up. Please ignore.)</div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/31086.html" class="username">GMMan</a> on Wed Oct 08, 2014 4:22 pm, edited 1 time in total.
+									</div>
+			
+						<div id='list_thanks99240'>
+</div>
+<div id='div_post_reput99240'>
+</div>
+
+							<div id="sig99240" class="signature">Currently researching: Alpha Prime scripting (AI and mods)<br>
+Queued: EE .cache repacking, CustomPak repacking, Gameloft Scrambled Zip multitool, GRAF Extractor Skeleton repacking, Gun Metal filenames CRC</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p99241" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile99241">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/31086.html" class="username">GMMan</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=31086&amp;sr=posts">139</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 05, 2010 10:14 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="31086"></dd>
+    <dd class="profile-posts" data-user-receive-id="31086"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/31086/false">56 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact GMMan">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact GMMan</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=99241" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content99241">
+
+					<h3 >
+						<a href="./viewtopic.php?p=99241#p99241">Re: LZMA compression method in GZIP files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/99241/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=99241" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post99241' href="./viewtopic.php?f=21&amp;p=99241&amp;thanks=99241&amp;to_id=31086&amp;from_id=123876" title="Say Thanks to the author of the post: GMMan"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=99241#p99241" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/31086.html" class="username">GMMan</a></strong> &raquo; </span><time datetime="2014-10-08T15:21:24+00:00">Wed Oct 08, 2014 4:21 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">LZMA requires some encoder properties before it will decompress. With 7-Zip, they store it as 5 bytes. So if they're using the 7-Zip LZMA SDK, you'll need to find those 5 encoder properties bytes before you can do anything.</div>
+
+			
+			
+									
+						<div id='list_thanks99241'>
+</div>
+<div id='div_post_reput99241'>
+</div>
+
+							<div id="sig99241" class="signature">Currently researching: Alpha Prime scripting (AI and mods)<br>
+Queued: EE .cache repacking, CustomPak repacking, Gameloft Scrambled Zip multitool, GRAF Extractor Skeleton repacking, Gun Metal filenames CRC</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p99243" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile99243">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/45101.html" class="username">gregkwaste</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=45101&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 15, 2014 10:17 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="45101"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="45101"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact gregkwaste">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact gregkwaste</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=99243" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content99243">
+
+					<h3 >
+						<a href="./viewtopic.php?p=99243#p99243">Re: LZMA compression method in GZIP files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/99243/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=99243" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post99243' href="./viewtopic.php?f=21&amp;p=99243&amp;thanks=99243&amp;to_id=45101&amp;from_id=123876" title="Say Thanks to the author of the post: gregkwaste"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=99243#p99243" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/45101.html" class="username">gregkwaste</a></strong> &raquo; </span><time datetime="2014-10-08T16:11:13+00:00">Wed Oct 08, 2014 5:11 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>GMMan wrote:</cite>LZMA requires some encoder properties before it will decompress. With 7-Zip, they store it as 5 bytes. So if they're using the 7-Zip LZMA SDK, you'll need to find those 5 encoder properties bytes before you can do anything.</div></blockquote>
+
+Should i pass those excplicitly in the decompressor? or the decompressor reads them implicitly at the start of the stream?<br>
+<br>
+<img src="http://i.gyazo.com/9b1e100085964ac0315c5f99400da877.png" class="postimage" alt="Image"><br>
+<br>
+Check this<br>
+<br>
+This is from a zip archive that i managed to get out and successfuly decompress it with winrar.<br>
+<br>
+This is the whole local header of the first file of the archive and you can clearly see that VERY SAME SEQUENCE HERE AS WELL: 0x091605005D then ALWAYS comes this 0x00000001 which could be something like a dictionary size?? and the first 0x09 0x16 0x05 0x00 0x5D be the encoding properties you are talking about?<br>
+<br>
+I tried with decompressing the stream starting from this 091605 etc but i got an error <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"></div>
+
+			
+			
+									
+						<div id='list_thanks99243'>
+</div>
+<div id='div_post_reput99243'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p99247" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile99247">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/45101.html" class="username">gregkwaste</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=45101&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 15, 2014 10:17 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="45101"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="45101"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact gregkwaste">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact gregkwaste</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=99247" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content99247">
+
+					<h3 >
+						<a href="./viewtopic.php?p=99247#p99247">Re: LZMA compression method in GZIP files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/99247/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=99247" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post99247' href="./viewtopic.php?f=21&amp;p=99247&amp;thanks=99247&amp;to_id=45101&amp;from_id=123876" title="Say Thanks to the author of the post: gregkwaste"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=99247#p99247" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/45101.html" class="username">gregkwaste</a></strong> &raquo; </span><time datetime="2014-10-08T18:26:49+00:00">Wed Oct 08, 2014 7:26 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I think i got it working using a wrapper for the LZ SDK, using the decomppress_compat function and passing in the data starting from 5D, i guess there is where the options start <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"><br>
+<br>
+I got some weird textures from the files though :S<br>
+<br>
+<img src="http://i.gyazo.com/7c175edfd1cdd0c2aa63750fb422c46a.png" class="postimage" alt="Image"><br>
+<br>
+I'm not asking about what is going on with the texture (i'll ask on the correct section <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy">)<br>
+<br>
+But my question is, can that decompression produce corrupt decompression data? The dds header is perfect structured, but the image is very very weird, so i am wondering what could have gone wrong :S I just want to make sure that the decompression has worked.</div>
+
+			
+			
+									
+						<div id='list_thanks99247'>
+</div>
+<div id='div_post_reput99247'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p99248" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile99248">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/889.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=889_1454619021.png" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/889.html" class="username">aluigi</a>							</dt>
+
+						<dd class="profile-rank">VVIP member<br /><img src="./images/ranks/vip-3.png" alt="VVIP member" title="VVIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=889&amp;sr=posts">1916</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 08, 2005 12:26 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> <!-- w --><a class="postlink" href="http://www.ZENHAX.com">www.ZENHAX.com</a><!-- w --></dd>
+							    <dd class="profile-posts" data-user-give-id="889"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/889/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="889"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/889/false">664 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact aluigi">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact aluigi</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://zenhax.com" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content99248">
+
+					<h3 >
+						<a href="./viewtopic.php?p=99248#p99248">Re: LZMA compression method in GZIP files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/99248/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=99248" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post99248' href="./viewtopic.php?f=21&amp;p=99248&amp;thanks=99248&amp;to_id=889&amp;from_id=123876" title="Say Thanks to the author of the post: aluigi"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=99248#p99248" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/889.html" class="username">aluigi</a></strong> &raquo; </span><time datetime="2014-10-08T19:02:30+00:00">Wed Oct 08, 2014 8:02 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">QuickBMS already supports lzma in gzip files, you can try:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>comtype gzip
+get SIZE asize
+clog "dump.dat" 0 SIZE SIZE</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks99248'>
+</div>
+<div id='div_post_reput99248'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p99249" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile99249">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/45101.html" class="username">gregkwaste</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=45101&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 15, 2014 10:17 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="45101"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="45101"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45101/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact gregkwaste">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact gregkwaste</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=99249" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content99249">
+
+					<h3 >
+						<a href="./viewtopic.php?p=99249#p99249">Re: LZMA compression method in GZIP files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/99249/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=99249" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post99249' href="./viewtopic.php?f=21&amp;p=99249&amp;thanks=99249&amp;to_id=45101&amp;from_id=123876" title="Say Thanks to the author of the post: gregkwaste"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=99249#p99249" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/45101.html" class="username">gregkwaste</a></strong> &raquo; </span><time datetime="2014-10-08T19:43:28+00:00">Wed Oct 08, 2014 8:43 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>aluigi wrote:</cite>QuickBMS already supports lzma in gzip files, you can try:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>comtype gzip
+get SIZE asize
+clog "dump.dat" 0 SIZE SIZE</code></pre></div></div></blockquote>
+
+Yeah it worked as well, the file was exactly the same size, and (unfortunately) looked exactly the same way. So i guess LZMA decompression worked like a charm in both cases <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"></div>
+
+			
+			
+									
+						<div id='list_thanks99249'>
+</div>
+<div id='div_post_reput99249'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=12065" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=21&amp;t=12065&amp;watch=topic&amp;start=0&amp;hash=821e3881" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=21&amp;t=12065&amp;unwatch=topic&amp;start=0&amp;hash=821e3881" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=12065&amp;bookmark=1&amp;hash=821e3881" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=12065" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=12065&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=12065">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=21" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Compressed files and methods”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

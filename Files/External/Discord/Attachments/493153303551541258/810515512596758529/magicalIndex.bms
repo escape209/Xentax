@@ -1,0 +1,19 @@
+get OUTPUT_NAME basename
+string OUTPUT_NAME + "_decrypted.unity3d"
+
+Goto 0x7
+Get TEST0 byte
+Get TEST1 byte
+Get TEST2 byte
+Get TEST3 byte
+
+if TEST0 == TEST1 & TEST0 == TEST2 & TEST0 == TEST3
+	Goto 0x7
+	filexor "0x0"
+	getdstring KEY 1
+	filexor ""
+
+	get SIZE asize
+	encryption xor KEY
+	log OUTPUT_NAME 0 SIZE
+endif

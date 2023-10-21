@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Extracting 3D data from PSX games using NO$PSX - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=21699">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./21699.html">Extracting 3D data from PSX games using NO$PSX</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=21699" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=21699&amp;watch=topic&amp;start=0&amp;hash=8bf626be" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=21699&amp;unwatch=topic&amp;start=0&amp;hash=8bf626be" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=21699&amp;bookmark=1&amp;hash=8bf626be" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=21699" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=21699&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="21699" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			12 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p159639" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile159639">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/83975.html" class="username">Tomaszewski1994</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=83975&amp;sr=posts">9</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Nov 03, 2019 7:03 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="83975"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/83975/true">3 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="83975"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Tomaszewski1994">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Tomaszewski1994</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=159639" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content159639">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=159639#p159639">Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/159639/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=159639" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post159639' href="./viewtopic.php?f=16&amp;p=159639&amp;thanks=159639&amp;to_id=83975&amp;from_id=123876" title="Say Thanks to the author of the post: Tomaszewski1994"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=159639#p159639" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/83975.html" class="username">Tomaszewski1994</a></strong> &raquo; </span><time datetime="2020-02-05T02:07:58+00:00">Wed Feb 05, 2020 3:07 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I am trying to extract 3D data from a PlayStation game, NASCAR Rumble, so far to no avail.<br>
+<br>
+Any 3D ripping software, such as 3D Ripper DX or NinjaRipper would be useless as the PlayStation doesn't support Z-buffer, so all captures would be just flat graphics (although they are useful for extracting texture data, though they would be transparent DDS files). I also know that the vertex data (I am only concerned with vertex data for right now) for the models MUST be stored in the game's files somewhere, somehow.<br>
+<br>
+So, I decided to use FlexHex on what I assume is the game's archive file, GLBLDATA.PSX, to see how the game's files are structured, and all I get is garbled text with what appears to be pointers to the actual game models, as opposed to a clean, human-readable file structure.<br>
+<br>
+Referencing the post Analyzing and Reverse Engineering a Game Archive (<a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17891" class="postlink">viewtopic.php?f=29&amp;t=17891</a>), I assume that the file starts with file magic LRTC. When searching this set of characters, I found that subsequent appearances are preceded by what appears to be pointers to the car models (eg. Ccar.001.1_A).<br>
+<br>
+However, when I tried to get OBJ data using Hex2Obj, with settings such as having a point cloud (again, I am only concerned with vertex data; I can fill the lines and triangles using Blender), I would only get a 2D plane of points.<br>
+<br>
+For those who'd like to take a crack at it, here's a link to the game's files on my Google Drive: <a href="https://drive.google.com/open?id=1SoU3UeYTakRhnXXgqi40q2srXlLw7bUQ" class="postlink">https://drive.google.com/open?id=1SoU3U ... srXlLw7bUQ</a>. It includes everything, from the archive file to the executable and even subfolders containing movies and track data.<br>
+<br>
+So, my next course of action is to use the No$PSX emulator, specifically the No$PSX VRAM Viewer.<br>
+<br>
+What I've noticed is that whenever I highlight a quad or triangle, that above the texture viewer in the bottom-right corner, there are several lines of vertex data. I have attached a screenshot below:
+<div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="./download/file.php?id=17461" class="postimage" alt="NO$PSXscreenshot.jpg" onclick="viewableArea(this);" /></dt>
+						<dd>NO$PSXscreenshot.jpg (254.75 KiB) Viewed 458 times</dd>
+		</dl>
+		
+		
+			</div>
+
+Most quads have twelve lines of Hex data, which I (possibly incorrectly, probably not) assumed were each a coordinate for a vertex on the quad.<br>
+<br>
+After getting what I assumed was the vertex data for some triangles and quads, and loaded them onto Hex2Obj, what I got was nothing close to what the model was supposed to look like, even for a partial "capture".<br>
+<br>
+What, exactly, does the hex data mean, and what can be done, if anything, to extract the 3D data from the game.<br>
+<br>
+Thanks in advance.</div>
+
+			
+			
+									
+						<div id='list_thanks159639'>
+</div>
+<div id='div_post_reput159639'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p159663" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile159663">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/68319.html" class="username">Fiammanera628</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=68319&amp;sr=posts">96</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Jan 07, 2018 6:51 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="68319"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/68319/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="68319"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Fiammanera628">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Fiammanera628</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=159663" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content159663">
+
+					<h3 >
+						<a href="./viewtopic.php?p=159663#p159663">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/159663/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=159663" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post159663' href="./viewtopic.php?f=16&amp;p=159663&amp;thanks=159663&amp;to_id=68319&amp;from_id=123876" title="Say Thanks to the author of the post: Fiammanera628"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=159663#p159663" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/68319.html" class="username">Fiammanera628</a></strong> &raquo; </span><time datetime="2020-02-05T19:43:55+00:00">Wed Feb 05, 2020 8:43 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Only for knowledge: there is something like this for PS2?</div>
+
+			
+			
+									
+						<div id='list_thanks159663'>
+</div>
+<div id='div_post_reput159663'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p159671" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile159671">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/83975.html" class="username">Tomaszewski1994</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=83975&amp;sr=posts">9</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Nov 03, 2019 7:03 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="83975"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/83975/true">3 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="83975"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Tomaszewski1994">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Tomaszewski1994</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=159671" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content159671">
+
+					<h3 >
+						<a href="./viewtopic.php?p=159671#p159671">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/159671/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=159671" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post159671' href="./viewtopic.php?f=16&amp;p=159671&amp;thanks=159671&amp;to_id=83975&amp;from_id=123876" title="Say Thanks to the author of the post: Tomaszewski1994"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=159671#p159671" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/83975.html" class="username">Tomaszewski1994</a></strong> &raquo; </span><time datetime="2020-02-06T00:59:26+00:00">Thu Feb 06, 2020 1:59 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Not that I'm aware of.</div>
+
+			
+			
+									
+						<div id='list_thanks159671'>
+</div>
+<div id='div_post_reput159671'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p159684" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile159684">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/75368.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=75368_1576848493.png" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/75368.html" class="username">Henchman800</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=75368&amp;sr=posts">308</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 16, 2018 5:00 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="75368"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/75368/true">72 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="75368"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/75368/false">34 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Henchman800">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Henchman800</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=159684" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content159684">
+
+					<h3 >
+						<a href="./viewtopic.php?p=159684#p159684">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/159684/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=159684" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post159684' href="./viewtopic.php?f=16&amp;p=159684&amp;thanks=159684&amp;to_id=75368&amp;from_id=123876" title="Say Thanks to the author of the post: Henchman800"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=159684#p159684" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/75368.html" class="username">Henchman800</a></strong> &raquo; </span><time datetime="2020-02-06T09:53:54+00:00">Thu Feb 06, 2020 10:53 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=159663#p159663"><div><cite><a href="../Users/68319.html">Fiammanera628</a> wrote: <a href="./viewtopic.php?p=159663#p159663" data-post-id="159663" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Wed Feb 05, 2020 8:43 pm</span></cite>
+Only for knowledge: there is something like this for PS2?
+</div></blockquote>
+
+Well you have rdtechladys ps2 screenprint method:<br>
+<strong class="text-strong">1. Models:</strong> <a href="https://youtu.be/oYuHGlm0xKs" class="postlink">https://youtu.be/oYuHGlm0xKs</a><br>
+<strong class="text-strong">2. Textures:</strong> <a href="https://youtu.be/iHlJ3qO4lys" class="postlink">https://youtu.be/iHlJ3qO4lys</a></div>
+
+			
+			
+									
+						<div id='list_thanks159684'>
+</div>
+<div id='div_post_reput159684'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p160038" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile160038">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/83975.html" class="username">Tomaszewski1994</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=83975&amp;sr=posts">9</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Nov 03, 2019 7:03 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="83975"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/83975/true">3 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="83975"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Tomaszewski1994">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Tomaszewski1994</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=160038" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content160038">
+
+					<h3 >
+						<a href="./viewtopic.php?p=160038#p160038">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/160038/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=160038" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post160038' href="./viewtopic.php?f=16&amp;p=160038&amp;thanks=160038&amp;to_id=83975&amp;from_id=123876" title="Say Thanks to the author of the post: Tomaszewski1994"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=160038#p160038" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/83975.html" class="username">Tomaszewski1994</a></strong> &raquo; </span><time datetime="2020-02-17T00:03:13+00:00">Mon Feb 17, 2020 1:03 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=159684#p159684"><div><cite><a href="../Users/75368.html">Henchman800</a> wrote: <a href="./viewtopic.php?p=159684#p159684" data-post-id="159684" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Thu Feb 06, 2020 10:53 am</span></cite>
+<blockquote cite="./viewtopic.php?p=159663#p159663"><div><cite><a href="../Users/68319.html">Fiammanera628</a> wrote: <a href="./viewtopic.php?p=159663#p159663" data-post-id="159663" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Wed Feb 05, 2020 8:43 pm</span></cite>
+Only for knowledge: there is something like this for PS2?
+</div></blockquote>
+
+Well you have rdtechladys ps2 screenprint method:<br>
+<strong class="text-strong">1. Models:</strong> <a href="https://youtu.be/oYuHGlm0xKs" class="postlink">https://youtu.be/oYuHGlm0xKs</a><br>
+<strong class="text-strong">2. Textures:</strong> <a href="https://youtu.be/iHlJ3qO4lys" class="postlink">https://youtu.be/iHlJ3qO4lys</a>
+</div></blockquote>
+
+This only works for PCSX2 0.9.8, and it only works about half the time. Also, the resulting rip is distorted. Only the latest version of PCSX2, 1.5.0, has support for PlayStation games.<br>
+<br>
+Using Ninja Ripper on this emulator using this tutorial, <a href="https://www.youtube.com/watch?v=svnWzkjuguY" class="postlink">https://www.youtube.com/watch?v=svnWzkjuguY</a>, I got a flat mesh, surprisingly (but not), though I would be able to make out all the different faces that make it up.<br>
+<br>
+Again, using model rippers would be out of the question.</div>
+
+			
+			
+									
+						<div id='list_thanks160038'>
+</div>
+<div id='div_post_reput160038'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p163456" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile163456">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/88885.html" class="username">psugorilla</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=88885&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun May 24, 2020 4:38 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="88885"></dd>
+    <dd class="profile-posts" data-user-receive-id="88885"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact psugorilla">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact psugorilla</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=163456" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content163456">
+
+					<h3 >
+						<a href="./viewtopic.php?p=163456#p163456">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/163456/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=163456" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post163456' href="./viewtopic.php?f=16&amp;p=163456&amp;thanks=163456&amp;to_id=88885&amp;from_id=123876" title="Say Thanks to the author of the post: psugorilla"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=163456#p163456" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/88885.html" class="username">psugorilla</a></strong> &raquo; </span><time datetime="2020-05-24T15:58:27+00:00">Sun May 24, 2020 4:58 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Thomas,<br>
+I was wondering if you ever managed to complete the extraction? I am admittedly a complete noob at all of this but I too am trying to pull the 3d models from the game. Best I can tell, it appears that all the cars in the game of the same type use the same model. So the rookie cars are 1 model, the rookie trucks are a model etc. I didn't notice any difference in them based strictly on if the car was supposed to be a chevy or a ford. <br>
+There's a whole lot more info in your post than I have found anywhere else online and I really thank you for that. <br>
+I don't know if there is anything helpful I can offer but I was using PSXviewer on the ISO last night and the only models it could find were CROC models. <br>
+314 of them I believe it was. But I haven't found any reference to those online. So now I am back at square one.</div>
+
+			
+			
+									
+						<div id='list_thanks163456'>
+</div>
+<div id='div_post_reput163456'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p163457" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile163457">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/88885.html" class="username">psugorilla</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=88885&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun May 24, 2020 4:38 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="88885"></dd>
+    <dd class="profile-posts" data-user-receive-id="88885"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact psugorilla">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact psugorilla</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=163457" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content163457">
+
+					<h3 >
+						<a href="./viewtopic.php?p=163457#p163457">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/163457/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=163457" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post163457' href="./viewtopic.php?f=16&amp;p=163457&amp;thanks=163457&amp;to_id=88885&amp;from_id=123876" title="Say Thanks to the author of the post: psugorilla"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=163457#p163457" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/88885.html" class="username">psugorilla</a></strong> &raquo; </span><time datetime="2020-05-24T16:02:37+00:00">Sun May 24, 2020 5:02 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Would I be correct in assuming the .TRK files are the tracks? If so, then do you know what the .LSC files are?</div>
+
+			
+			
+									
+						<div id='list_thanks163457'>
+</div>
+<div id='div_post_reput163457'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p164712" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile164712">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/83975.html" class="username">Tomaszewski1994</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=83975&amp;sr=posts">9</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Nov 03, 2019 7:03 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="83975"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/83975/true">3 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="83975"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Tomaszewski1994">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Tomaszewski1994</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=164712" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content164712">
+
+					<h3 >
+						<a href="./viewtopic.php?p=164712#p164712">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/164712/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=164712" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post164712' href="./viewtopic.php?f=16&amp;p=164712&amp;thanks=164712&amp;to_id=83975&amp;from_id=123876" title="Say Thanks to the author of the post: Tomaszewski1994"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=164712#p164712" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/83975.html" class="username">Tomaszewski1994</a></strong> &raquo; </span><time datetime="2020-07-04T15:16:47+00:00">Sat Jul 04, 2020 4:16 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=163456#p163456"><div><cite><a href="../Users/88885.html">psugorilla</a> wrote: <a href="./viewtopic.php?p=163456#p163456" data-post-id="163456" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sun May 24, 2020 4:58 pm</span></cite>
+Thomas,<br>
+I was wondering if you ever managed to complete the extraction? I am admittedly a complete noob at all of this but I too am trying to pull the 3d models from the game. Best I can tell, it appears that all the cars in the game of the same type use the same model. So the rookie cars are 1 model, the rookie trucks are a model etc. I didn't notice any difference in them based strictly on if the car was supposed to be a chevy or a ford. <br>
+There's a whole lot more info in your post than I have found anywhere else online and I really thank you for that. <br>
+I don't know if there is anything helpful I can offer but I was using PSXviewer on the ISO last night and the only models it could find were CROC models. <br>
+314 of them I believe it was. But I haven't found any reference to those online. So now I am back at square one.
+</div></blockquote>
+
+Hello,<br>
+<br>
+No, I haven't finished the conversion. As a matter of fact, I haven't been working on it, and I apologize for that; I have other projects I've been needing to finish, as well as my day-job and other personal things.<br>
+<br>
+This, however, is one of the many things I've placed on the backburner, so I plan on getting back to it when I have finished my other projects.<br>
+<br>
+I have noticed, too, that each of the Cup, Truck, and Legend vehicles are all the same model.<br>
+<br>
+I appreciate your gratitude and interest; I have been no more successful than you on finding resources online, and the PlayStation does not use modern or even standard protocols for storing and accessing data.</div>
+
+			
+			
+									
+						<div id='list_thanks164712'>
+</div>
+<div id='div_post_reput164712'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p164714" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile164714">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41194.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41194_1430129462.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/41194.html" class="username">shakotay2</a>							</dt>
+
+						<dd class="profile-rank">MEGAVETERAN<br /><img src="./images/ranks/vip-2.png" alt="MEGAVETERAN" title="MEGAVETERAN" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41194&amp;sr=posts">4293</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 20, 2012 9:24 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Nexus, searching for Jim Kirk</dd>
+							    <dd class="profile-posts" data-user-give-id="41194"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/true">1152 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41194"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/false">2245 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact shakotay2">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact shakotay2</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=164714" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content164714">
+
+					<h3 >
+						<a href="./viewtopic.php?p=164714#p164714">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/164714/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=164714" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post164714' href="./viewtopic.php?f=16&amp;p=164714&amp;thanks=164714&amp;to_id=41194&amp;from_id=123876" title="Say Thanks to the author of the post: shakotay2"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=164714#p164714" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41194.html" class="username">shakotay2</a></strong> &raquo; </span><time datetime="2020-07-04T16:09:30+00:00">Sat Jul 04, 2020 5:09 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">A little bit low poly, but a poly: <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"> <br>
+.
+<div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="./download/file.php?id=18425" class="postimage" alt="GLBLDATA-PSX.png" onclick="viewableArea(this);" /></dt>
+						<dd>GLBLDATA-PSX.png (24.2 KiB) Viewed 336 times</dd>
+		</dl>
+		
+		
+			</div>That's between "TADS" and "LND4".</div>
+
+			
+			
+									
+						<div id='list_thanks164714'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/41194.html" class="username">shakotay2</a> for the post (total 3):</dt>
+			<dd><span title="Sun Jul 05, 2020 2:59 am"><a href="../Users/4970.html" class="username">Acewell</a></span>, <span title="Sun Jul 05, 2020 5:08 pm"><a href="../Users/83975.html" class="username">Tomaszewski1994</a></span>, <span title="Sun Jul 05, 2020 6:30 pm"><a href="../Users/45425.html" class="username">AMG</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput164714'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;5.17%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 5.17%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig164714" class="signature">Tuts: a) Bigchillghost, <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17889" class="postlink">viewtopic.php?f=29&amp;t=17889</a><br>
+b) Extracting simple models: <a href="http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894" class="postlink">http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894</a><br>
+"Quoting the whole thing. Would u ever stop this nonsense?"</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p172911" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile172911">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/88885.html" class="username">psugorilla</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=88885&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun May 24, 2020 4:38 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="88885"></dd>
+    <dd class="profile-posts" data-user-receive-id="88885"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact psugorilla">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact psugorilla</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=172911" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content172911">
+
+					<h3 >
+						<a href="./viewtopic.php?p=172911#p172911">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/172911/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=172911" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post172911' href="./viewtopic.php?f=16&amp;p=172911&amp;thanks=172911&amp;to_id=88885&amp;from_id=123876" title="Say Thanks to the author of the post: psugorilla"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=172911#p172911" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/88885.html" class="username">psugorilla</a></strong> &raquo; </span><time datetime="2021-04-02T15:07:36+00:00">Fri Apr 02, 2021 4:07 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">So I got in touch with a couple of the game's developers and so far, this is the information I have received. I am not entirely sure I understand deciphering Chunks but this might be useful to some of you who do. <br>
+<br>
+The data on disk are very game specific and were produced using custom tools to process Soft Image (I don't think we had switched to Maya yet) exported files into game optimized data. <br>
+So the only way to extract the data from the game would be to create some tools to extract the data back. Also, and forgive me if I doubt but it has been 20+ years, I think these tools ran on Mac on the MacOS 9...  I could certainly dig up some archive to find the runtime PS1 c code to get some indication on the format itself. <br>
+Also if I properly recall, the TRK files are not just the track, they are actually "streamable files" where a large set of game data were embedded/sliced/"chunkified" in some IFF format, perhaps with built-in custom compression, so that would also need to be considered. If you open such TRK file in an hex editor, you'd see IFF chunk, meaning a 4 character code indicating the type of chunk, followed by the chunk size (including the chunk header), followed by the data whose type is specific to the chunk. Typically, the iff chunk header has these 5 fields (PSX1 being little endian, the data in the TRK files are in little endian fo// generic IFF header chunk<br>
+<br>
+#defineIFF_CHUNK_COMMON \<br>
+int32 ChunkType; /* chunk type */ \ <br>
+int32 ChunkSize; /* chunk size including header */ \ <br>
+int32 time; /* position in stream time */ \ <br>
+int32 channel; /* logical channel number */ \ <br>
+int32 SubChunkType; /* data sub-type */<br>
+<br>
+typedef struct StreamChunkS {<br>
+IFF_CHUNK_COMMON }<br>
+StreamChunk, *StreamChunkPtr;<br>
+<br>
+<br>
+Typically, you'd find CTRL, SHOC and FILL chunks but other types are possible since our stream could be used to embed audio, video or whatever, and even do this in an interleaved format (this was used extensively in other games). <br>
+CTRL as the name implies is a control chunk mostly used to define sub section on a TRK file. FILL chunk are padding chunk so the TRK file can be read in fixed 24KB buffer size (easily streamed in the background). <br>
+The SHOC chunks (this name comes from the Shockwave Game for 3DO then PSX for whose that game engine was first developed) are the game data specific that comes with 2 types of sub chunks: SHDR and SDAT. <br>
+SHDR announces the game data type along with its size and additional optional stuff (like things allowing to conditionally load or skip for specific chunks). <br>
+<br>
+It is typically formated to match this: <br>
+<br>
+typedef struct Drive3DChunkHdrS {<br>
+IFF_CHUNK_COMMON<br>
+uint32 MemoryKind; <br>
+uint32 AssocChkID; <br>
+uint32 AssocChkRef; <br>
+uint32 GlobalSize; <br>
+uint32 HitActionOffset; <br>
+uint32 FreeActionOffset; <br>
+uint32 TargActionOffset; <br>
+uint32 ConditionStrLength; <br>
+uint32 LoadActionStrLength; <br>
+} Drive3DChunkHdr, *Drive3DChunkHdrPtr;  <br>
+<br>
+The SHDR (data header) chunk is then typically followed by 1 or more SDAT (actual data) chunks containing the sliced (and optionally compressed but if I recall not in Nascar Rumble) data. <br>
+So the first step would be to write a little tool to extract all the game data from a TRK file. Then the game data itself (it could be track, cars or plenty of other things) would need to be interpreted according to its specific game format. <br>
+<br>
+The AssocChkID can be used to identify the track specific game data. <br>
+It can be matched to: <br>
+#define OPM_PATH MAKE_IFF_TYPE('C','p','t','h') <br>
+#define CHUNK_PATH MAKE_IFF_TYPE('t','P','T','H') <br>
+#define CHUNK_PATHeDGEaRRAY MAKE_IFF_TYPE('a','P','T','H') <br>
+#define CHUNK_PATHoTHERaRRAY MAKE_IFF_TYPE('a','P','T','O') <br>
+#define OPM_TRACK MAKE_IFF_TYPE('C','t','r','k') <br>
+#define	kTrackColorChunkID MAKE_IFF_TYPE('T','C','O','L') <br>
+#define	kTrackCurveChunkID MAKE_IFF_TYPE('T','C','R','V') <br>
+#define	kTrackTexturesChunkID MAKE_IFF_TYPE('T','T','E','X') <br>
+#define	kTrackSegmentChunkID MAKE_IFF_TYPE('T','S','E','G') <br>
+#define	kTrackHorizonChunkID MAKE_IFF_TYPE('T','H','O','R') <br>
+#define	kTrackInfoGridChunkID MAKE_IFF_TYPE('T','I','G','R') <br>
+#define	kSunDefinitionChunkID MAKE_IFF_TYPE('T','S','U','N') <br>
+#define	kTrackTexturesAnimChunkID MAKE_IFF_TYPE('T','T','X','A') <br>
+#define OPM_3DCLASS MAKE_IFF_TYPE('C','o','b','j') // for 3D objects <br>
+<br>
+The MemoryKind was used to know where to rebuild the data being streamed in (main, temp, video, audio...)</div>
+
+			
+			
+									
+						<div id='list_thanks172911'>
+</div>
+<div id='div_post_reput172911'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p172993" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile172993">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/88885.html" class="username">psugorilla</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=88885&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun May 24, 2020 4:38 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="88885"></dd>
+    <dd class="profile-posts" data-user-receive-id="88885"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact psugorilla">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact psugorilla</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=172993" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content172993">
+
+					<h3 >
+						<a href="./viewtopic.php?p=172993#p172993">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/172993/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=172993" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post172993' href="./viewtopic.php?f=16&amp;p=172993&amp;thanks=172993&amp;to_id=88885&amp;from_id=123876" title="Say Thanks to the author of the post: psugorilla"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=172993#p172993" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/88885.html" class="username">psugorilla</a></strong> &raquo; </span><time datetime="2021-04-04T22:24:58+00:00">Sun Apr 04, 2021 11:24 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">As I mentioned, 'Cobj' was used for object subclasses so vehicles meshes should come as such data. Then you should find 'Cpag' game data type that are the texture pages. On the PSX, if my memory is not destroyed, textures were only compressed through the usage of palette so basically textures could be 8888, 556, 16 colors or 256 colors. Unfortunately, the format of the 'Cobj' or 'Cpag' might not be trivial.to reverse engineer.<br>
+<br>
+<br>
+Forgot to mention that .AV are indeed likely movie files and .LSC are the load screen files if I recall. So all the data you care about are in the .TRK file. BTW, the PSX did not have a floating point unit so all vertices, normals are stored in some fixed point format.</div>
+
+			
+			
+									
+						<div id='list_thanks172993'>
+</div>
+<div id='div_post_reput172993'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p173299" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile173299">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/88885.html" class="username">psugorilla</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=88885&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun May 24, 2020 4:38 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="88885"></dd>
+    <dd class="profile-posts" data-user-receive-id="88885"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact psugorilla">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact psugorilla</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=173299" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content173299">
+
+					<h3 >
+						<a href="./viewtopic.php?p=173299#p173299">Re: Extracting 3D data from PSX games using NO$PSX</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/173299/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=173299" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post173299' href="./viewtopic.php?f=16&amp;p=173299&amp;thanks=173299&amp;to_id=88885&amp;from_id=123876" title="Say Thanks to the author of the post: psugorilla"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=173299#p173299" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/88885.html" class="username">psugorilla</a></strong> &raquo; </span><time datetime="2021-04-14T01:35:19+00:00">Wed Apr 14, 2021 2:35 am</time>
+			</p>
+			
+			
+			
+			<div class="content">there are two files that may be of interest: GLBLDATA.PSX and  FE.TRK They are both in the same streamable IFF format. The first contains the global data (any data that might be shared against all tracks), the second contains the FrontEnd specific data. So it is very likely that the vehicle data are stored in GLBLDATA.PSX, no in the track specific .TRK files. I don't recall if we had made FrontEnd specific models for the vehicle (higher-res models and/or textures) to view in the car select menu but if we had, they would be in the FE.TRK.</div>
+
+			
+			
+									
+						<div id='list_thanks173299'>
+</div>
+<div id='div_post_reput173299'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=21699" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=21699&amp;watch=topic&amp;start=0&amp;hash=8bf626be" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=21699&amp;unwatch=topic&amp;start=0&amp;hash=8bf626be" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=21699&amp;bookmark=1&amp;hash=8bf626be" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=21699" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=21699&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=21699">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			12 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <span style="color: #9E8DA7;" class="username-coloured">Ahrefs [Bot]</span>, <a href="../Users/123992.html" class="username">bloblabl</a>, <a href="../Users/123876.html" class="username">escape209</a>, <a href="../Users/107425.html" class="username">lili2corne</a> and 5 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

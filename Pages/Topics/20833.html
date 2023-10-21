@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Convert triangles into an integer array - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=20833">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="13"><a itemprop="item" href="./viewforum.php?f=13"><span itemprop="name">Code Talk</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./20833.html">Convert triangles into an integer array</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Coders and would-be coders alike, this is the place to talk about programming.<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=20833" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=13&amp;t=20833&amp;watch=topic&amp;start=0&amp;hash=80666e6d" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=13&amp;t=20833&amp;unwatch=topic&amp;start=0&amp;hash=80666e6d" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=20833&amp;bookmark=1&amp;hash=80666e6d" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=20833" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=20833&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="20833" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p154826" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile154826">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/60523.html" class="username">eatrawmeat391</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=60523&amp;sr=posts">20</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Dec 06, 2016 10:51 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="60523"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/60523/true">8 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="60523"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/60523/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact eatrawmeat391">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact eatrawmeat391</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=154826" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content154826">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=154826#p154826">Convert triangles into an integer array</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/154826/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=154826" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post154826' href="./viewtopic.php?f=13&amp;p=154826&amp;thanks=154826&amp;to_id=60523&amp;from_id=123876" title="Say Thanks to the author of the post: eatrawmeat391"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=154826#p154826" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/60523.html" class="username">eatrawmeat391</a></strong> &raquo; </span><time datetime="2019-07-19T16:06:28+00:00">Fri Jul 19, 2019 5:06 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Convert triangles to an integer array<br>
+<br>
+We have this array of integer:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>integer_array = [27, 68, 72, 74, 76, 96, 114, 113, 64, 9, 98, 0, 20, 106, 1, 128, 86, 32, 131, 53, 58, 1, 121, 49, 143, 99, 62, 28, 26, 7, 76, 71, 44, 146, 18, 68, 42, 135, 154, 156, 70, 24, 5]
+</code></pre></div>
+Using code we can transfer it into array of triangles:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>triangle_array = [[27, 68, 72], [68, 72, 74], [72, 74, 76], [74, 76, 96], [76, 96, 114], [96, 114, 113], [114, 113, 64], [113, 64, 9], [64, 9, 98], [9, 98, 0], [98, 0, 20], [0, 20, 106], [20, 106, 1], [106, 1, 128], [1, 128, 86], [128, 86, 32], [86, 32, 131], [32, 131, 53], [131, 53, 58], [53, 58, 1], [58, 1, 121], [1, 121, 49], [121, 49, 143], [49, 143, 99], [143, 99, 62], [99, 62, 28], [62, 28, 26], [28, 26, 7], [26, 7, 76], [7, 76, 71], [76, 71, 44], [71, 44, 146], [44, 146, 18], [146, 18, 68], [18, 68, 42], [68, 42, 135], [42, 135, 154], [135, 154, 156], [154, 156, 70], [156, 70, 24], [70, 24, 5]]
+</code></pre></div>
+- The code works like this:<br>
++ Item 0: The first 3 items are in <br>
+[27,68,72]<br>
+f1 = 27, f2=68,f3=72<br>
+<br>
+Everytime<br>
+f1 = f2 = 68<br>
+f2 = f3 = 72<br>
++ Item 1: Replace f3 with the next item of the integer list<br>
+f1 = 68, f2=72,f3=74<br>
+[[27, 68, 72], [68, 72, 74]<br>
+f1 = f2 = 72<br>
+f2 = f3 = 74<br>
++ Item 2 and on: Just replace f3 with the next item of the integer list, and shift f2 to f1 and f3 to f2<br>
+<br>
+*** What we want is to convert the triangle array back into an integer array<br>
+*** However, Blender gives us the triangle array that might not follow the rule of the integer unpacking, user might edit and alert the triangle array so we can't depend on the unpacking rule of the array and we need to convert that triangle array to integer array.<br>
+*** If not possible, split them in group<br>
+For example<br>
+[[4,5,9], [5,9,6], [3,8,2]]<br>
+the third items cannot be fit into the integer array, so they will be move into another group<br>
+we will get 2 group<br>
+group 0: [4,5,9,6]<br>
+group 1: [3,8,2]<br>
+My current algorithm is like this:<br>
+Turn the 3D array into a dict with 2D keys<br>
+{4: [[5,9]], 5: [[4,9] , [9,6]], 6: [[5,9]], 9: [[4,5], [5,6]], 3: [[8,2]], 8: [3,2], 2:[[8,3]]}<br>
+<br>
+We will get the first key 4 and write out the 3 items in position 0<br>
+[4, 5, 9]<br>
+next we will decide if we want to use 5 or 9, this part I don't know how to efficient pick choose the next key to follow. <br>
++ Path 1: In this sitation I will go first with 5<br>
+[[4,9], [9,6]], since 4 and 9 is already in the list we will skip it, we get [9,6] , 9 is already in so we pick 6<br>
+our output will be<br>
+[4,5,9,6]<br>
++ Path 2: I will go with 9<br>
+in 9 we get [[4,5], [5,6]]<br>
+Using the same procedure we will get<br>
+[4,5,9,6]<br>
+* In this case we can choose either one, my algorithm is programmed to select the list with the highest length<br>
+<br>
+Problem with my algorithm:<br>
+- It is dependent on the position, it has to be exactly unpacked the way I said above.<br>
+- It cannot work on the integer array which has duplicates since I have coded it to ignore duplicate<br>
+[27, 68, 72, 74, 76, 96, 114, 113, 64, 9, 98, 0, 20, 106, 1, 128, 86, 32, 131, 53, 58, 1, 121, 49, 143, 99, 62, 28, 26, 7, 76, 71, 44, 146, 18, 68, 42, 135, 154, 156, 70, 24, 5]<br>
+You can see in this array the number 1 appears in 2 places. - I don't know how to specify the end condition, I would go on until I meet a key with only 1 element of 2D arrays. However not all situation works with this condition. Especially when multiple groups are involved<br>
+- It seems wasteful and redundant way to use data structure.<br>
+Example Blender data:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>[[1, 59, 0], [59, 60, 0], [0, 60, 9], [60, 66, 9], [9, 66, 41], [66, 42, 41], [41, 42, 43], [42, 107, 43], [43, 107, 48], [107, 104, 48], [48, 104, 51], [104, 40, 51], [51, 40, 54], [40, 38, 54], [1, 0, 4], [0, 5, 4], [4, 5, 14], [5, 26, 14], [14, 26, 27], [26, 28, 27], [27, 28, 45], [28, 44, 45], [45, 44, 47], [44, 48, 47], [47, 48, 50], [48, 51, 50], [50, 51, 53], [51, 54, 53], [62, 2, 7], [2, 6, 7], [7, 6, 25], [6, 10, 25], [25, 10, 18], [10, 12, 18], [18, 12, 16], [12, 13, 16], [16, 13, 17], [13, 15, 17], [17, 15, 22], [15, 55, 22], [22, 55, 46], [55, 45, 46], [22, 73, 17], [73, 72, 17], [17, 72, 16], [72, 71, 16], [16, 71, 19], [71, 74, 19], [19, 74, 20], [74, 75, 20]]]
+</code></pre></div>
+If anyone can help me or can tell me what this problem is called and how can I search for it I would be appreciated.</div>
+
+			
+			
+									
+						<div id='list_thanks154826'>
+</div>
+<div id='div_post_reput154826'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p154868" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile154868">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/45121.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=45121_1557762078.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/45121.html" class="username">PredatorCZ</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=45121&amp;sr=posts">291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Apr 21, 2014 8:32 pm</dd>		
+		
+											    <dd class="profile-posts" data-user-give-id="45121"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45121/true">11 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="45121"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/45121/false">256 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PredatorCZ">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PredatorCZ</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=154868" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://lukascone.wordpress.com" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content154868">
+
+					<h3 >
+						<a href="./viewtopic.php?p=154868#p154868">Re: Convert triangles into an integer array</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/154868/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=154868" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post154868' href="./viewtopic.php?f=13&amp;p=154868&amp;thanks=154868&amp;to_id=45121&amp;from_id=123876" title="Say Thanks to the author of the post: PredatorCZ"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=154868#p154868" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/45121.html" class="username">PredatorCZ</a></strong> &raquo; </span><time datetime="2019-07-21T08:00:09+00:00">Sun Jul 21, 2019 9:00 am</time>
+			</p>
+			
+			
+			
+			<div class="content">What you are talking is converting stripped indices into a triangle array and back.<br>
+Converting stripped triangles to triangles is easy, but it's much harder to do the other way.<br>
+<br>
+Here is a theory behind it: <a href="http://www.learnopengles.com/tag/triangle-strips/" class="postlink">http://www.learnopengles.com/tag/triangle-strips/</a><br>
+And here is a library written in C++ that I use: <a href="https://github.com/spoonless/tristripper" class="postlink">https://github.com/spoonless/tristripper</a><br>
+<br>
+Also you didn't wrote, what format are you using to store these values.<br>
+int is 32bit, and is never used to store index data, unless its an very old non-standard format.<br>
+API's supports int index buffers, however this does not mean it should be used.</div>
+
+			
+			
+									
+						<div id='list_thanks154868'>
+</div>
+<div id='div_post_reput154868'>
+</div>
+
+							<div id="sig154868" class="signature"><span style="font-size:150%;line-height:116%"><a href="https://lukascone.wordpress.com" class="postlink">My Blog</a></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p154880" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile154880">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/60523.html" class="username">eatrawmeat391</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=60523&amp;sr=posts">20</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Dec 06, 2016 10:51 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="60523"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/60523/true">8 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="60523"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/60523/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact eatrawmeat391">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact eatrawmeat391</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=154880" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content154880">
+
+					<h3 >
+						<a href="./viewtopic.php?p=154880#p154880">Re: Convert triangles into an integer array</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/154880/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=154880" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post154880' href="./viewtopic.php?f=13&amp;p=154880&amp;thanks=154880&amp;to_id=60523&amp;from_id=123876" title="Say Thanks to the author of the post: eatrawmeat391"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=154880#p154880" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/60523.html" class="username">eatrawmeat391</a></strong> &raquo; </span><time datetime="2019-07-21T15:23:53+00:00">Sun Jul 21, 2019 4:23 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I sort of solved the problem.<br>
+It turns out that Blender sorts the triangles in the right order that I want for converting it back into an integer array<br>
+For example:<br>
+[0]: 0,1, 2,<br>
+[1]: 1,2,3<br>
+[2]: 4,2,3,<br>
+[3]: 4,6,7<br>
+[4]: 6,7,9<br>
+I take the first 3 items 0,1,2 into the list<br>
+list = [0,1,2]<br>
+So<br>
+last_f1 = 0<br>
+last_f2 = 1<br>
+last_f3 = 2<br>
+Now for the next items, we will see if it contains at least 2 vertices of the last processed , so<br>
+if at least 2 items in (f1,f2,f3) is in (last_f1,last_f2, last_f3)<br>
+so 0,1,2 we see 1 = last_f2, 2 = last_f3 so list = [0,1,2,3]<br>
+then <br>
+last_f1 = 1<br>
+last_f2 = 2<br>
+last_f3 = 3<br>
+...<br>
+Keep doing that we get <br>
+[0,1,2,3,4] after processing index 2<br>
+So the algorithm keeps running in a loop and now the same process but the function will starts at index 3<br>
+So the function returns new_int_array, next_index<br>
+If there is no more items to read,next_index = -1 and specify the stop condition<br>
+<br>
+So I got<br>
+[0,1,2,3,4]<br>
+[4,6,7,9]<br>
+as output<br>
+<br>
+And about data type, I have been using to python so it is not necessary to define a type for that. But it uses 32bit integer. The game I am working for pack the triangles as integer array , and each integer in the array also comes with 2D UV coordinate. It uses non-standard format for sure but I have solved that problem as well.</div>
+
+			
+			
+									
+						<div id='list_thanks154880'>
+</div>
+<div id='div_post_reput154880'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=20833" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=13&amp;t=20833&amp;watch=topic&amp;start=0&amp;hash=80666e6d" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=13&amp;t=20833&amp;unwatch=topic&amp;start=0&amp;hash=80666e6d" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=20833&amp;bookmark=1&amp;hash=80666e6d" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=20833" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=20833&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=20833">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=13" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Code Talk”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 1 guest</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

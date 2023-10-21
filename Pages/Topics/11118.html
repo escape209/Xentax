@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Thinking about: DRM wrapper for releases - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=11118">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="26"><a itemprop="item" href="../Forums/26 - XeNTaX - General Discussion.html"><span itemprop="name">General Discussion</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="22"><a itemprop="item" href="./viewforum.php?f=22"><span itemprop="name">Holy Cow!</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./11118.html">Thinking about: DRM wrapper for releases</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">The Off-Topic Forum - Anything goes! As long as it's legal(ish). Things that made you scream "Holy Cow!"<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=11118" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=22&amp;t=11118&amp;watch=topic&amp;start=0&amp;hash=86682599" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=22&amp;t=11118&amp;unwatch=topic&amp;start=0&amp;hash=86682599" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=11118&amp;bookmark=1&amp;hash=86682599" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=11118" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=11118&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="11118" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			24 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./11118 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./11118 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p91464" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91464">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/31086.html" class="username">GMMan</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=31086&amp;sr=posts">139</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 05, 2010 10:14 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="31086"></dd>
+    <dd class="profile-posts" data-user-receive-id="31086"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/31086/false">56 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact GMMan">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact GMMan</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91464" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91464">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=91464#p91464">Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91464/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91464" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91464' href="./viewtopic.php?f=22&amp;p=91464&amp;thanks=91464&amp;to_id=31086&amp;from_id=123876" title="Say Thanks to the author of the post: GMMan"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91464#p91464" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/31086.html" class="username">GMMan</a></strong> &raquo; </span><time datetime="2014-01-09T03:21:46+00:00">Thu Jan 09, 2014 4:21 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Just a novel idea I had this afternoon: what if programs uploaded to Xentax are encased in a DRM wrapper at the discretion of the developer?<br>
+<br>
+As you know, people tend to like to leech on the programs developed here. I'm actually fine with people redistributing my files, however I am not fine with the lack of attribution, back to the original link where they obtained it from. It basically encourages others to profit off of programs that people here had taken a tremendous amount of time developing, without so much as attempting to understand the theory behind the program and where the program actually came from.<br>
+<br>
+I propose that programs be given a period of time where it's available exclusively to Xentax members, and enforced until a month or two after someone off-site complains. Yeah, I'm a bit of a sadist, but I just want to see the reaction.<br>
+<br>
+This would be enforced by the program, requiring logging in to the forums through the wrapper around the program, which upon successful login, will download a forum attachment specific to the program (hence the need to log in) and use the information in it to decrypt the program. For .NET programs, this would be really easy to do (after writing the wrapper, that is), and the original executables won't even need to be extracted. It's completely doable too, since there's a builtin web browser control in .NET Framework that I can use to get the session cookies, and the rest of the encryption stuff is also built in.<br>
+<br>
+I'm crazy, right?</div>
+
+			
+			
+									
+						<div id='list_thanks91464'>
+</div>
+<div id='div_post_reput91464'>
+</div>
+
+							<div id="sig91464" class="signature">Currently researching: Alpha Prime scripting (AI and mods)<br>
+Queued: EE .cache repacking, CustomPak repacking, Gameloft Scrambled Zip multitool, GRAF Extractor Skeleton repacking, Gun Metal filenames CRC</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91468" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91468">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/2861.html" class="username">Darkstar</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=2861&amp;sr=posts">67</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 14, 2007 1:14 pm</dd>		
+		
+																					<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Southern Germany</dd>
+							    <dd class="profile-posts" data-user-give-id="2861"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="2861"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Darkstar">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Darkstar</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91468" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://www.icq.com/people/28480255/" title="ICQ">
+										<span class="contact-icon phpbb_icq-icon">ICQ</span>									</a>
+																																																<a href="http://rewiki.regengedanken.de" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91468">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91468#p91468">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91468/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91468" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91468' href="./viewtopic.php?f=22&amp;p=91468&amp;thanks=91468&amp;to_id=2861&amp;from_id=123876" title="Say Thanks to the author of the post: Darkstar"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91468#p91468" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/2861.html" class="username">Darkstar</a></strong> &raquo; </span><time datetime="2014-01-09T10:45:17+00:00">Thu Jan 09, 2014 11:45 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I actually think that open-sourcing everything (e.g. on github) would be better. It's really annoying to find a binary-only extractor in an age-old thread which doesn't work for a newer revision of the data file it's supposed to extract, and you have no way of updating or fixing it. Also, what would you do if you want to run a program but the forum is currently down? Or your internet is having trouble? And what's stopping people to take the downloaded "key" (or the decrypted binary itself) and post that somewhere else? <br>
+<br>
+Thus I propose the opposite: Every program posted here must be accompanied by its source code (maybe a few weeks/months later, as you suggest, as a "grace period"). That way the work done here will at least be future-proof and not lost when the original author leaves the board</div>
+
+			
+			
+									
+						<div id='list_thanks91468'>
+</div>
+<div id='div_post_reput91468'>
+</div>
+
+							<div id="sig91468" class="signature">Check out the <a href="http://rewiki.regengedanken.de" class="postlink">REWiki</a>!</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91481" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91481">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/31086.html" class="username">GMMan</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=31086&amp;sr=posts">139</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 05, 2010 10:14 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="31086"></dd>
+    <dd class="profile-posts" data-user-receive-id="31086"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/31086/false">56 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact GMMan">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact GMMan</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91481" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91481">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91481#p91481">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91481/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91481" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91481' href="./viewtopic.php?f=22&amp;p=91481&amp;thanks=91481&amp;to_id=31086&amp;from_id=123876" title="Say Thanks to the author of the post: GMMan"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91481#p91481" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/31086.html" class="username">GMMan</a></strong> &raquo; </span><time datetime="2014-01-09T15:41:55+00:00">Thu Jan 09, 2014 4:41 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">True, true. My intention is to give Xentax a period of exclusivity. I release source code for all my programs, and under the DRM system, once the grace period elapses, I'd update the downloads to contain a non-wrapped version with source code. As for stopping people from unwrapping, there'll be signature checks on the whole EXE to prevent modification, and the compiled wrapper will be run through an obfuscator. I doubt the people who rehost the files will bother to figure it out, and if anyone does, I won't mind (modding communities always need good reverse engineers).</div>
+
+			
+			
+									
+						<div id='list_thanks91481'>
+</div>
+<div id='div_post_reput91481'>
+</div>
+
+							<div id="sig91481" class="signature">Currently researching: Alpha Prime scripting (AI and mods)<br>
+Queued: EE .cache repacking, CustomPak repacking, Gameloft Scrambled Zip multitool, GRAF Extractor Skeleton repacking, Gun Metal filenames CRC</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91488" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91488">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/2861.html" class="username">Darkstar</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=2861&amp;sr=posts">67</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 14, 2007 1:14 pm</dd>		
+		
+																					<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Southern Germany</dd>
+							    <dd class="profile-posts" data-user-give-id="2861"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="2861"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Darkstar">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Darkstar</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91488" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://www.icq.com/people/28480255/" title="ICQ">
+										<span class="contact-icon phpbb_icq-icon">ICQ</span>									</a>
+																																																<a href="http://rewiki.regengedanken.de" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91488">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91488#p91488">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91488/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91488" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91488' href="./viewtopic.php?f=22&amp;p=91488&amp;thanks=91488&amp;to_id=2861&amp;from_id=123876" title="Say Thanks to the author of the post: Darkstar"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91488#p91488" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/2861.html" class="username">Darkstar</a></strong> &raquo; </span><time datetime="2014-01-09T19:19:00+00:00">Thu Jan 09, 2014 8:19 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Seems hardly worth the trouble. All unpackers etc. I write/wrote are so small I don't even bother writing a GUI for them (people who can't use the command line shouldn't be allowed to call themselves "hacker" or "modder", let alone "reverse engineer"). So I definitely wouldn't bother pulling up a wrapper. Especially since command line tools are often called from batch files, and maybe even looping over 100s of files, and I don't want a user type a login every frickin time.<br>
+<br>
+I think that a well-placed "coded by XXX" or "this is brought to you by XXX" printed by your program (maybe in a splash screen if needed) is attribution enough. People who edit the EXE to overwrite that will probably go to great lengths to rip out your DRM as well (and you could still use any stock EXE packer/encrypter to make it harder for them). And if they need their name in it for their ego then I don't really care, it's not as if nobody will ever find out that they can't code shit themselves if they pass it around as theirs <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"><br>
+<br>
+Again, I ask you: What happens when after 2 years this forum is updated, all the URLs change, and now every single program doesn't work anymore? And probably the original developers have left as well. Someone else has to start back from square 1 (happened to me more than once already)</div>
+
+			
+			
+									
+						<div id='list_thanks91488'>
+</div>
+<div id='div_post_reput91488'>
+</div>
+
+							<div id="sig91488" class="signature">Check out the <a href="http://rewiki.regengedanken.de" class="postlink">REWiki</a>!</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91490" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91490">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/31086.html" class="username">GMMan</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=31086&amp;sr=posts">139</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 05, 2010 10:14 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="31086"></dd>
+    <dd class="profile-posts" data-user-receive-id="31086"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/31086/false">56 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact GMMan">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact GMMan</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91490" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91490">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91490#p91490">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91490/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91490" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91490' href="./viewtopic.php?f=22&amp;p=91490&amp;thanks=91490&amp;to_id=31086&amp;from_id=123876" title="Say Thanks to the author of the post: GMMan"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91490#p91490" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/31086.html" class="username">GMMan</a></strong> &raquo; </span><time datetime="2014-01-09T22:07:08+00:00">Thu Jan 09, 2014 11:07 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Darkstar wrote:</cite>Again, I ask you: What happens when after 2 years this forum is updated, all the URLs change, and now every single program doesn't work anymore? And probably the original developers have left as well. Someone else has to start back from square 1 (happened to me more than once already)</div></blockquote>
+
+The non-wrapped version will be uploaded before then. I only intend it to be an experiment, not anything long term (actually, just to piss off a few guys at another forum full of noobs who just want tools).</div>
+
+			
+			
+									
+						<div id='list_thanks91490'>
+</div>
+<div id='div_post_reput91490'>
+</div>
+
+							<div id="sig91490" class="signature">Currently researching: Alpha Prime scripting (AI and mods)<br>
+Queued: EE .cache repacking, CustomPak repacking, Gameloft Scrambled Zip multitool, GRAF Extractor Skeleton repacking, Gun Metal filenames CRC</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91491" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91491">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/2861.html" class="username">Darkstar</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=2861&amp;sr=posts">67</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 14, 2007 1:14 pm</dd>		
+		
+																					<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Southern Germany</dd>
+							    <dd class="profile-posts" data-user-give-id="2861"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="2861"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Darkstar">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Darkstar</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91491" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://www.icq.com/people/28480255/" title="ICQ">
+										<span class="contact-icon phpbb_icq-icon">ICQ</span>									</a>
+																																																<a href="http://rewiki.regengedanken.de" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91491">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91491#p91491">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91491/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91491" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91491' href="./viewtopic.php?f=22&amp;p=91491&amp;thanks=91491&amp;to_id=2861&amp;from_id=123876" title="Say Thanks to the author of the post: Darkstar"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91491#p91491" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/2861.html" class="username">Darkstar</a></strong> &raquo; </span><time datetime="2014-01-09T22:24:27+00:00">Thu Jan 09, 2014 11:24 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>GMMan wrote:</cite>The non-wrapped version will be uploaded before then. I only intend it to be an experiment, not anything long term (actually, just to piss off a few guys at another forum full of noobs who just want tools).</div></blockquote>
+Ah, so you want to use Xentax as a way of getting your personal revenge; or maybe for proving to someone that you're "better" than them? Well, nobody is keeping you from coding your own tools in such a way (e.g. limited runtime or feature set without proper unlock-code which can be gotten from you via PM here, for example) but I think pulling the community in your personal vendetta against other forums is not the way to go.<br>
+<br>
+Instead, why not provide source code ONLY so that they at least have to compile it themselves? Maybe lock the unpacker to only a subset of the files (via fixed offsets or something which work only for some files and not for others) and then tell them (abstractly) how to code around that?That would be much more educating in the long term...</div>
+
+			
+			
+									
+						<div id='list_thanks91491'>
+</div>
+<div id='div_post_reput91491'>
+</div>
+
+							<div id="sig91491" class="signature">Check out the <a href="http://rewiki.regengedanken.de" class="postlink">REWiki</a>!</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91494" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91494">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/31086.html" class="username">GMMan</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=31086&amp;sr=posts">139</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 05, 2010 10:14 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="31086"></dd>
+    <dd class="profile-posts" data-user-receive-id="31086"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/31086/false">56 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact GMMan">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact GMMan</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91494" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91494">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91494#p91494">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91494/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91494" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91494' href="./viewtopic.php?f=22&amp;p=91494&amp;thanks=91494&amp;to_id=31086&amp;from_id=123876" title="Say Thanks to the author of the post: GMMan"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91494#p91494" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/31086.html" class="username">GMMan</a></strong> &raquo; </span><time datetime="2014-01-09T23:07:59+00:00">Fri Jan 10, 2014 12:07 am</time>
+			</p>
+			
+			
+			
+			<div class="content">An observation I've made: isn't MultiEx Commander using a similar system, sans encryption, by withholding program data without valid login?</div>
+
+			
+			
+									
+						<div id='list_thanks91494'>
+</div>
+<div id='div_post_reput91494'>
+</div>
+
+							<div id="sig91494" class="signature">Currently researching: Alpha Prime scripting (AI and mods)<br>
+Queued: EE .cache repacking, CustomPak repacking, Gameloft Scrambled Zip multitool, GRAF Extractor Skeleton repacking, Gun Metal filenames CRC</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91529" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91529">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41065.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41065_1379632077.gif" width="30" height="27" alt="User avatar" /></a>														</div>
+								<a href="../Users/41065.html" class="username">Bastien</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41065&amp;sr=posts">70</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Apr 15, 2012 1:08 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41065"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41065/true">27 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41065"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41065/false">13 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bastien">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bastien</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91529" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91529">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91529#p91529">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91529/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91529" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91529' href="./viewtopic.php?f=22&amp;p=91529&amp;thanks=91529&amp;to_id=41065&amp;from_id=123876" title="Say Thanks to the author of the post: Bastien"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91529#p91529" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41065.html" class="username">Bastien</a></strong> &raquo; </span><time datetime="2014-01-11T01:06:09+00:00">Sat Jan 11, 2014 2:06 am</time>
+			</p>
+			
+			
+			
+			<div class="content">IMO using DRM in a reversing site is kinda ironic. <br>
+If leechers don't give credit or reference the original source, that's bad for them/their forum, since many tools are updated on a regular basis, and they can't give feedback/report bugs. A google search would be enough to bring the interested people here if the tool name is distinctive enough or have an "about" with info and author name, right? <br>
+Scripts on the other hand can be easily modified, but what they would do that?<br>
+<br>
+<br>
+I agree with darkstar in making xentax more open too, so also people could learn, and maybe some exclusivity for people who contribute with actual research and tools (1% maybe?), but that might be offtopic.</div>
+
+			
+			
+									
+						<div id='list_thanks91529'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/41065.html" class="username">Bastien</a> for the post: </dt>
+			<dd><span title="Sat Jan 11, 2014 10:19 am"><a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput91529'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91534" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91534">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=6331&amp;sr=posts">1007</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Mar 23, 2009 2:57 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="6331"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/true">44 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="6331"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/false">505 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact MrAdults">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact MrAdults</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91534" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91534">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91534#p91534">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91534/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91534" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91534' href="./viewtopic.php?f=22&amp;p=91534&amp;thanks=91534&amp;to_id=6331&amp;from_id=123876" title="Say Thanks to the author of the post: MrAdults"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91534#p91534" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a></strong> &raquo; </span><time datetime="2014-01-11T04:21:47+00:00">Sat Jan 11, 2014 5:21 am</time>
+			</p>
+			
+			
+			
+			<div class="content">No one would adhere to it, getting developer cooperation in this kind of environment is worse than herding cats. It also overlooks the real problem. The real problem being that people are pieces of shit.<br>
+<br>
+When I see someone abusing Noesis or posting ripped model batches for their own idiot manchild life-wasted glory, I yell at them. But the simple fact of the matter is, I don't witness 99% of it firsthand, and people have 0 respect when it comes to respecting me for the thing I've spent hundreds of hours making and subsequently given away for free. Over the years of Noesis work, I've gotten $0 from any kind of attached publicity or ad revenue others have made on it, and maybe $300 or so total in random donations, from a total of 3 different people that have continued donating small sums over time just to show their appreciation, and their sentiment means more to me than the money.<br>
+<br>
+That's 3 out of, oh, probably around 10,000 or so total users. If the volume of unique crash reports that I get from old versions of Noesis alone is any indication, thousands more are passing it around in unofficial channels and idiotically submitting crashes that I fixed months ago. People are fucking dicks. But I digress.<br>
+<br>
+Practically speaking, I don't think a forum-based DRM is a good solution, and it just leaves a bad taste in my mouth.</div>
+
+			
+			
+									
+						<div id='list_thanks91534'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a> for the post: </dt>
+			<dd><span title="Sat Jan 11, 2014 10:18 am"><a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput91534'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91538" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91538">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a>							</dt>
+
+						<dd class="profile-rank">Site Admin</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=3&amp;sr=posts">4073</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jan 15, 2003 6:45 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Dungeons of Doom</dd>
+							    <dd class="profile-posts" data-user-give-id="3"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/3/true">450 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="3"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/3/false">682 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Mr.Mouse">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Mr.Mouse</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91538" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://www.xentax.com" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91538">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91538#p91538">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91538/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91538" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91538' href="./viewtopic.php?f=22&amp;p=91538&amp;thanks=91538&amp;to_id=3&amp;from_id=123876" title="Say Thanks to the author of the post: Mr.Mouse"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91538#p91538" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a></strong> &raquo; </span><time datetime="2014-01-11T09:10:57+00:00">Sat Jan 11, 2014 10:10 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>GMMan wrote:</cite>An observation I've made: isn't MultiEx Commander using a similar system, sans encryption, by withholding program data without valid login?</div></blockquote>
+
+Interesting observation, how did you make it ? <br>
+<br>
+As for the topic, I agree that it goes against the vision to DRMify tools posted. And it is development hell to get any system to work properly integrated. I'm not going to spend any time on that, and I'm sure no other at XeNTaX would. <br>
+<br>
+MrAdults raises a good point, people are being cowardly dogs by pretending to be cool, while all they do is rip other people's work without properly giving credit where credit is due. That is the real issue, but one that is not easily handled, as humanity has shown time and again to produce an overwhelming stream of bastards on a hourly basis.  <br>
+<br>
+I do see the point that it is very annoying if you miss the source code when a binary is no longer available, but it really is at the discretion of the developer to release it or not. So whenever you see a tool posted, and would like to have the souce code, you can always ask the developer. Perhaps he or she agrees. <br>
+<br>
+So, XeNTaX is already very OPEN, and we are not going to make it obligatory to release source code, though we may give people a hard time when to come in here to boast about their skills to work with a certain game but refuse to share their information on how they did it. Sharing is key, as long as other people can then at least build their own tools.</div>
+
+			
+			
+									
+						<div id='list_thanks91538'>
+</div>
+<div id='div_post_reput91538'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91546" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91546">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a>							</dt>
+
+						<dd class="profile-rank">Site Admin</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=3&amp;sr=posts">4073</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jan 15, 2003 6:45 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Dungeons of Doom</dd>
+							    <dd class="profile-posts" data-user-give-id="3"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/3/true">450 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="3"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/3/false">682 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Mr.Mouse">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Mr.Mouse</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91546" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://www.xentax.com" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91546">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91546#p91546">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91546/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91546" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91546' href="./viewtopic.php?f=22&amp;p=91546&amp;thanks=91546&amp;to_id=3&amp;from_id=123876" title="Say Thanks to the author of the post: Mr.Mouse"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91546#p91546" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a></strong> &raquo; </span><time datetime="2014-01-11T21:18:28+00:00">Sat Jan 11, 2014 10:18 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">To add another note: <a href="http://forum.xentax.com/blog/" class="postlink">blog/</a><br>
+<br>
+That is the blog where forum members can post their (or other) tools of interest. I created that blog to store the tools in one place, not to be lost.</div>
+
+			
+			
+									
+						<div id='list_thanks91546'>
+</div>
+<div id='div_post_reput91546'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91547" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91547">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=6331&amp;sr=posts">1007</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Mar 23, 2009 2:57 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="6331"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/true">44 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="6331"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/false">505 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact MrAdults">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact MrAdults</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91547" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91547">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91547#p91547">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91547/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91547" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91547' href="./viewtopic.php?f=22&amp;p=91547&amp;thanks=91547&amp;to_id=6331&amp;from_id=123876" title="Say Thanks to the author of the post: MrAdults"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91547#p91547" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a></strong> &raquo; </span><time datetime="2014-01-11T22:53:27+00:00">Sat Jan 11, 2014 11:53 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">When I first started contributing compression/format/etc. specs, I came in with the mentality of "What's wrong with you people? Why doesn't anyone share their findings instead of just throwing up a binary?" So I went out of my way to write spec docs, put full source up for all of my reversed formats, and so on. Then I saw people using my work and not throwing so much as a "hey thanks" in my direction, and the whole strange and screwed up secretive nature of the community made a lot more sense. People don't release their code because the ego isn't fed when someone else takes the code and does something with it without proper attribution, and the person that steals the code thanklessly doesn't get their ego stroked as much if they correctly attribute and acknowledge that someone else did 99% of the work. It's an issue of ego on both sides, with the weak taking from the strong, leading to a basic hostility in what would otherwise be a flourishing community.<br>
+<br>
+My policy these days is, if I have a reason to respect you, I'll give you code, specs, and help and expect nothing in return. If I don't have a reason to respect you, it's probably because you haven't done anything to impress me in the context of this community, which means you're probably the type to take a lot and give little to nothing back, therefore you deserve nothing from me. It's a haphazard system, but it works. Unfortunately, it's still a closed system in its nature, but people have shown that they just can't play nicely in an open environment.<br>
+<br>
+The up side to all of this in terms of preservation of data/knowledge is, we're making all these tools for x86. (or at least x64) Someone with some decent knowledge and experience can reverse-engineer our work if they want, a lot more easily than having to do it in the native environment and code for whatever game/app/etc. it is that they're interested in, without worrying that the hardware is gone forever or was never properly documented itself due to some commercial entity keeping a tight hold on the information. x86 isn't going anywhere, and it will be a debuggable architecture for the common man for longer than C is likely to be a common language. So in this way, there's no danger of our work being lost to time, as long as the work is significant enough for someone to want it enough to do a little bit of disassembly down the line. And if someone is willing to go at least that far, they probably know what it is to work hard to make something, and aren't the kind of thoughtless wankbags that would just steal source code and compile it as something slightly changed to stroke their egos. So it kind of naturally filters the benefactors of the work down to the people that actually deserve it.</div>
+
+			
+			
+									
+						<div id='list_thanks91547'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a> for the post: </dt>
+			<dd><span title="Sun Jan 12, 2014 12:46 am"><a href="../Users/31071.html" style="color: #00AA00;" class="username-coloured">MichaelDarkAngel</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput91547'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91549" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91549">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/2861.html" class="username">Darkstar</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=2861&amp;sr=posts">67</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 14, 2007 1:14 pm</dd>		
+		
+																					<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Southern Germany</dd>
+							    <dd class="profile-posts" data-user-give-id="2861"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="2861"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/2861/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Darkstar">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Darkstar</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91549" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://www.icq.com/people/28480255/" title="ICQ">
+										<span class="contact-icon phpbb_icq-icon">ICQ</span>									</a>
+																																																<a href="http://rewiki.regengedanken.de" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91549">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91549#p91549">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91549/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91549" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91549' href="./viewtopic.php?f=22&amp;p=91549&amp;thanks=91549&amp;to_id=2861&amp;from_id=123876" title="Say Thanks to the author of the post: Darkstar"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91549#p91549" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/2861.html" class="username">Darkstar</a></strong> &raquo; </span><time datetime="2014-01-11T23:44:27+00:00">Sun Jan 12, 2014 12:44 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>MrAdults wrote:</cite>...Someone with some decent knowledge and experience can reverse-engineer our work if they want, a lot more easily than having to do it in the native environment and code for whatever game/app/etc. it is that they're interested in, without worrying that the hardware is gone forever or was never properly documented itself due to some commercial entity keeping a tight hold on the information. </div></blockquote>
+Heh, this is the most backward argument in the whole thread. Reversing a program that someone else wrote to reverse a file format? Yeah, because with every layer you put on top the reversing gets easier and easier, right? Normally this is not about running an old binary on some other system (Linux or ARM or whatever), but rather to extend it because some slightly new/different file format made some subtle changes that make the tool crash/not work. While you are theoretically right that you can still fix that in a binary, it is infinitely more complex than having a file format description in the first place and fixing just that...<br>
+<br>
+Also, the whole notion of other people grabbing source code from somewhere and passing it off as their own is not really new. If everyone thought like you we wouldn't have any Open Source software today. Licenses exist for a reason. If you put it under a (L)GPL license (or any other open source license), people will STILL steal your code but now you have legal grounds to go against them if you want. Open Source relies on trust, for 100 users who obey and respect your choice of license, there's maybe 5 or 10 who don't. Or maybe even 20, I don't know. Still you "punish" all 100 of them just to get those 20. That's the same as with DRM, you punish the many "good guys" with crippleware while the few "bad guys" just crack your program and be done with it.<br>
+<br>
+It took the game industry many many years to realize that (see gog.com, desura, humblebundle, etc.), I thought that at least the reverse engineering community would understand that as well by now.<br>
+<br>
+So in your case of noesis, if you want/need revenue from it, why not make it (feature-limited) Shareware? Or keep it free but sell the source code for 2 bucks? I for one would gladly pay for the specs to so many 3D formats (even if my own 3D experience is still rather small), and even though I couldn't use it directly in any of my programs (because I tend to give away the source for free) I could still create clean-room documentation from it (and that would be a bliss because so many of the formats noesis supports are still not documented at all...) and preserve at least that...</div>
+
+			
+			
+									
+						<div id='list_thanks91549'>
+</div>
+<div id='div_post_reput91549'>
+</div>
+
+							<div id="sig91549" class="signature">Check out the <a href="http://rewiki.regengedanken.de" class="postlink">REWiki</a>!</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91552" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91552">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=6331&amp;sr=posts">1007</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Mar 23, 2009 2:57 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="6331"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/true">44 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="6331"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/false">505 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact MrAdults">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact MrAdults</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91552" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91552">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91552#p91552">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91552/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91552" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91552' href="./viewtopic.php?f=22&amp;p=91552&amp;thanks=91552&amp;to_id=6331&amp;from_id=123876" title="Say Thanks to the author of the post: MrAdults"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91552#p91552" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a></strong> &raquo; </span><time datetime="2014-01-12T04:09:34+00:00">Sun Jan 12, 2014 5:09 am</time>
+			</p>
+			
+			
+			
+			<div class="content">It's not an argument. It's a simple statement. The code and data is there in a way that guarantees preservation, and allows extension if someone perseveres enough to bother. How easy/complex it is has no relevance to the statement, although I do think saying it's "infinitely more complex" is silly and subjective.<br>
+<br>
+I wouldn't be arrogant enough to try to put the license of my choice on code that's derived from disassembled binary. That's in itself ridiculous and just asking for legal problems of your own. It's all about pettiness and ego, and how we deal with it outside of typical open source constructs. That's the whole reason this community and reverse engineering is different and has to exist under different rules. An actual GPL zealot wouldn't consider touching RE'd code with a 10 foot pole.<br>
+<br>
+Selling Noesis is a ridiculous notion for he same reasons, I never implied money was the goal either. Terrible inference.</div>
+
+			
+			
+									
+						<div id='list_thanks91552'>
+</div>
+<div id='div_post_reput91552'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p91553" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile91553">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41388.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41388_1421243282.gif" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/41388.html" class="username">cra0</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41388&amp;sr=posts">438</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 27, 2012 9:37 am</dd>		
+		
+																    <dd class="profile-posts" data-user-give-id="41388"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41388/true">29 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41388"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41388/false">189 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact cra0">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact cra0</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=91553" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://cra0.net" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																																																<a href="https://youtube.com/user/Cra0Net" title="YouTube" class="last-cell">
+										<span class="contact-icon phpbb_youtube-icon">YouTube</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content91553">
+
+					<h3 >
+						<a href="./viewtopic.php?p=91553#p91553">Re: Thinking about: DRM wrapper for releases</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/91553/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=91553" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post91553' href="./viewtopic.php?f=22&amp;p=91553&amp;thanks=91553&amp;to_id=41388&amp;from_id=123876" title="Say Thanks to the author of the post: cra0"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=91553#p91553" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41388.html" class="username">cra0</a></strong> &raquo; </span><time datetime="2014-01-12T05:17:07+00:00">Sun Jan 12, 2014 6:17 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Neat idea but I don't see it working</div>
+
+			
+			
+									
+						<div id='list_thanks91553'>
+</div>
+<div id='div_post_reput91553'>
+</div>
+
+							<div id="sig91553" class="signature"><ul>
+<li><a href="http://dev.cra0kalo.com" class="postlink"><span style="color:#FF4080"><strong class="text-strong"><span style="text-decoration:underline">Devblog</span></strong></span></a></li>
+</ul>
+<ul><li><a href="https://github.com/cra0" class="postlink"><span style="color:#00BF40"><strong class="text-strong"><span style="text-decoration:underline">Github</span></strong></span></a></li></ul></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=11118" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=22&amp;t=11118&amp;watch=topic&amp;start=0&amp;hash=86682599" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=22&amp;t=11118&amp;unwatch=topic&amp;start=0&amp;hash=86682599" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=11118&amp;bookmark=1&amp;hash=86682599" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=11118" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=11118&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=11118">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			24 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./11118 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./11118 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=22" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Holy Cow!”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

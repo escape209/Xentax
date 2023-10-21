@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Reverse simple decryption. - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=23807">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="29"><a itemprop="item" href="./viewforum.php?f=29"><span itemprop="name">Tutorials</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./23807.html">Reverse simple decryption.</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Read or post any tutorial related to file format analysis for modding purposes.<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=23807" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=23807&amp;watch=topic&amp;start=0&amp;hash=2b0059e7" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=23807&amp;unwatch=topic&amp;start=0&amp;hash=2b0059e7" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=23807&amp;bookmark=1&amp;hash=2b0059e7" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=23807" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=23807&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="23807" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p173784" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile173784">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/4722.html" style="color: #00AA00;" class="username-coloured">chrrox</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=4722&amp;sr=posts">2602</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun May 18, 2008 3:01 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="4722"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/4722/true">57 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="4722"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/4722/false">1422 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact chrrox">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact chrrox</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=173784" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content173784">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=173784#p173784">Reverse simple decryption.</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/173784/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=173784" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post173784' href="./viewtopic.php?f=29&amp;p=173784&amp;thanks=173784&amp;to_id=4722&amp;from_id=123876" title="Say Thanks to the author of the post: chrrox"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=173784#p173784" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/4722.html" style="color: #00AA00;" class="username-coloured">chrrox</a></strong> &raquo; </span><time datetime="2021-04-28T17:53:12+00:00">Wed Apr 28, 2021 6:53 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">We will look at the game Valkyrie Crusade.<br>
+ID com.nubee.valkyriecrusade<br>
+we look at the games files and they are engrypted.<br>
+<img src="https://i.snipboard.io/TYKbUB.jpg" class="postimage" alt="Image"><br>
+<br>
+So 1st step is load it up in IDA pro or ghidra.<br>
+This is a custom game engine so a good place to start is with a file open instruction<br>
+if we search for that we find nb::File::openRead.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>
+/* nb::File::openRead(char const*, unsigned int*, nb::Drive::Base, nb::File::Filter) */
+
+void * nb::File::openRead(char *param_1,uint *param_2,Base param_3,Filter param_4)
+
+{
+  void *pvVar1;
+  int iVar2;
+  void *__ptr;
+  void *local_50;
+  Info aIStack76 [8];
+  void *local_44;
+  File aFStack64 [8];
+  int local_38;
+  void *local_34;
+  
+  local_50 = (void *)0x0;
+  File(aFStack64);
+  open(aFStack64,param_1,1,param_3);
+  if (local_38 == 0) {
+    __ptr = (void *)0x0;
+  }
+  else {
+    local_50 = local_34;
+    pvVar1 = malloc((size_t)local_34);
+    if (pvVar1 == (void *)0x0) {
+      iVar2 = Compress::getInfo((void *)0x0,(uint)local_34,aIStack76);
+    }
+    else {
+      read(aFStack64,pvVar1,(uint)local_34);
+      iVar2 = Compress::getInfo(pvVar1,(uint)local_50,aIStack76);
+    }
+    __ptr = pvVar1;
+    if (iVar2 != 0) {
+      __ptr = (void *)Compress::uncompress(aIStack76);
+      local_50 = local_44;
+      free(pvVar1);
+    }
+    if ((param_4 == 1) || ((param_4 == 2 &amp;&amp; (iVar2 = Coder::isCode(__ptr), iVar2 != 0)))) {
+      pvVar1 = (void *)Coder::decode(__ptr,(uint)local_50,(uint *)&amp;local_50);
+      free(__ptr);
+      __ptr = pvVar1;
+      if (pvVar1 == (void *)0x0) {
+        local_50 = pvVar1;
+      }
+    }
+  }
+  if (param_2 != (uint *)0x0) {
+    *param_2 = (uint)local_50;
+  }
+  ~File(aFStack64);
+  return __ptr;
+}
+</code></pre></div>
+
+So if we look at this we notice something interesting.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>pvVar1 = (void *)Coder::decode(__ptr,(uint)local_50,(uint *)&amp;local_50);</code></pre></div>
+
+So in our decompiler lets look at Coder::decode function.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>
+/* nb::Coder::decode(void const*, unsigned int, unsigned int*) */
+
+int * nb::Coder::decode(void *param_1,uint param_2,uint *param_3)
+
+{
+  uint *puVar1;
+  int iVar2;
+  uint uVar3;
+  uint __size;
+  uint *__src;
+  int *piVar4;
+  uint uVar5;
+  int *local_2c;
+  
+  iVar2 = isCode(param_1);
+  if (iVar2 == 0) {
+    return (int *)0x0;
+  }
+  __size = param_2 - 0x10;
+  local_2c = (int *)malloc(__size);
+  __src = (uint *)((int)param_1 + 0x10);
+  memcpy(local_2c,__src,__size);
+  iVar2 = *(int *)((int)param_1 + 0xc);
+  uVar3 = 4;
+  if (3 &lt; __size) {
+    uVar5 = (param_2 - 0x11) * 0x8000000 &gt;&gt; 0x1d;
+    piVar4 = local_2c;
+    if (uVar5 != 0) {
+      *local_2c = (*__src ^ 0x45af6e5d) - iVar2;
+      piVar4 = local_2c + 1;
+      __src = (uint *)((int)param_1 + 0x14);
+      if ((__size &lt; 5) || (uVar3 = 8, __size &lt; 8)) goto LAB_005fe4fe;
+      if (uVar5 != 1) {
+        if (uVar5 != 2) {
+          if (uVar5 != 3) {
+            if (uVar5 != 4) {
+              if (uVar5 != 5) {
+                if (uVar5 != 6) {
+                  uVar5 = *__src;
+                  __src = (uint *)((int)param_1 + 0x18);
+                  uVar3 = 0xc;
+                  *piVar4 = (uVar5 ^ 0x45af6e5d) - iVar2;
+                  piVar4 = local_2c + 2;
+                  if (__size &lt; 0xc) goto LAB_005fe4fe;
+                }
+                uVar5 = *__src;
+                __src = __src + 1;
+                uVar3 = uVar3 + 4;
+                *piVar4 = (uVar5 ^ 0x45af6e5d) - iVar2;
+                piVar4 = piVar4 + 1;
+                if (__size &lt; uVar3) goto LAB_005fe4fe;
+              }
+              uVar5 = *__src;
+              __src = __src + 1;
+              uVar3 = uVar3 + 4;
+              *piVar4 = (uVar5 ^ 0x45af6e5d) - iVar2;
+              piVar4 = piVar4 + 1;
+              if (__size &lt; uVar3) goto LAB_005fe4fe;
+            }
+            uVar5 = *__src;
+            __src = __src + 1;
+            uVar3 = uVar3 + 4;
+            *piVar4 = (uVar5 ^ 0x45af6e5d) - iVar2;
+            piVar4 = piVar4 + 1;
+            if (__size &lt; uVar3) goto LAB_005fe4fe;
+          }
+          uVar5 = *__src;
+          __src = __src + 1;
+          uVar3 = uVar3 + 4;
+          *piVar4 = (uVar5 ^ 0x45af6e5d) - iVar2;
+          piVar4 = piVar4 + 1;
+          if (__size &lt; uVar3) goto LAB_005fe4fe;
+        }
+        uVar5 = *__src;
+        __src = __src + 1;
+        uVar3 = uVar3 + 4;
+        *piVar4 = (uVar5 ^ 0x45af6e5d) - iVar2;
+        piVar4 = piVar4 + 1;
+        if (__size &lt; uVar3) goto LAB_005fe4fe;
+      }
+    }
+    do {
+      *piVar4 = (*__src ^ 0x45af6e5d) - iVar2;
+      if (((((__size &lt;= uVar3) || (__size &lt; uVar3 + 4)) ||
+           (piVar4[1] = (__src[1] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 8)) ||
+          ((piVar4[2] = (__src[2] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0xc ||
+           (piVar4[3] = (__src[3] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x10)))) ||
+         ((piVar4[4] = (__src[4] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x14 ||
+          ((piVar4[5] = (__src[5] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x18 ||
+           (piVar4[6] = (__src[6] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x1c)))))) break;
+      puVar1 = __src + 7;
+      uVar3 = uVar3 + 0x20;
+      __src = __src + 8;
+      piVar4[7] = (*puVar1 ^ 0x45af6e5d) - iVar2;
+      piVar4 = piVar4 + 8;
+    } while (uVar3 &lt;= __size);
+  }
+LAB_005fe4fe:
+  iVar2 = makeCheckSum((uchar *)local_2c,__size);
+  if (*(int *)((int)param_1 + 8) != iVar2) {
+    free(local_2c);
+    local_2c = (int *)0x0;
+    __size = 0;
+  }
+  if (param_3 != (uint *)0x0) {
+    *param_3 = __size;
+  }
+  return local_2c;
+}
+</code></pre></div>
+
+This look very long and complicated but its not too bad if we break it down.<br>
+<br>
+The start<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>  iVar2 = isCode(param_1);
+  if (iVar2 == 0) {
+    return (int *)0x0;
+  }</code></pre></div>
+the isCode function checks for the valid file header.<br>
+<img src="https://i.snipboard.io/XASltc.jpg" class="postimage" alt="Image"><br>
+So as we can see its checking if it starts with CODE<br>
+then 0x100 as a short.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>43 4F 44 45 00 01</code></pre></div>
+
+Then the next few variables are defined
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>  __size = param_2 - 0x10;</code></pre></div> - sets __size to file size - 16
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>  local_2c = (int *)malloc(__size);</code></pre></div> - creates a buffer with the size of __size
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>  __src = (uint *)((int)param_1 + 0x10);</code></pre></div> sets __src to the input file starting at offset 16
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>  memcpy(local_2c,__src,__size);</code></pre></div> copies __src into local_2c buffer
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>iVar2 = *(int *)((int)param_1 + 0xc);</code></pre></div> read an int from offset 0xC in the file<br>
+<br>
+We can skip all the checks in the middle for file size and just go do the actual decryption portion.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>    do {
+      *piVar4 = (*__src ^ 0x45af6e5d) - iVar2;
+      if (((((__size &lt;= uVar3) || (__size &lt; uVar3 + 4)) ||
+           (piVar4[1] = (__src[1] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 8)) ||
+          ((piVar4[2] = (__src[2] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0xc ||
+           (piVar4[3] = (__src[3] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x10)))) ||
+         ((piVar4[4] = (__src[4] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x14 ||
+          ((piVar4[5] = (__src[5] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x18 ||
+           (piVar4[6] = (__src[6] ^ 0x45af6e5d) - iVar2, __size &lt; uVar3 + 0x1c)))))) break;
+      puVar1 = __src + 7;
+      uVar3 = uVar3 + 0x20;
+      __src = __src + 8;
+      piVar4[7] = (*puVar1 ^ 0x45af6e5d) - iVar2;
+      piVar4 = piVar4 + 8;
+    } while (uVar3 &lt;= __size);</code></pre></div>
+This can be simplified down all this code is doing is xoring 4 bytes with 0x45af6e5d then subtracting the seed value iVar2<br>
+from the result the program is just doing it 0x20 bytes at a time but we can just do it 4 bytes at a time.<br>
+so we only need
+<blockquote class="uncited"><div>*piVar4 = (*__src ^ 0x45af6e5d) - iVar2;</div></blockquote>
+which is basically
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>buffer[i] = (buffer[i] ^ secretKey) - seed;</code></pre></div>
+
+working bms script to show the code in action.<br>
+<a href="https://forum.xentax.com/viewtopic.php?f=10&amp;t=23806" class="postlink">viewtopic.php?f=10&amp;t=23806</a><br>
+<br>
+The file header is.<br>
+magic 4 : CODE<br>
+short 0x100<br>
+short 0x7755<br>
+u32 CRC32<br>
+u32 random seed &amp; 0xFFFF<br>
+<br>
+(obtained with encrypt function that is also in the executable)
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>  puVar1 = (undefined4 *)malloc(param_2 + 0x10);
+  *puVar1 = 0x45444f43;
+  *(undefined2 *)((int)puVar1 + 6) = 0x7755;
+  *(undefined2 *)(puVar1 + 1) = 0x100;
+  __dest = puVar1 + 4;
+  memcpy(__dest,param_1,param_2);
+  lVar2 = lrand48();
+  __aeabi_idivmod(lVar2,0xffff);
+</code></pre></div></div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=19975">18.zip</a></dt>
+						<dd>(397.65 KiB) Downloaded 18 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks173784'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/4722.html" style="color: #00AA00;" class="username-coloured">chrrox</a> for the post (total 7):</dt>
+			<dd><span title="Wed Apr 28, 2021 7:17 pm"><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></span>, <span title="Wed Apr 28, 2021 7:54 pm"><a href="../Users/29146.html" class="username">GDL</a></span>, <span title="Wed Apr 28, 2021 8:32 pm"><a href="../Users/78311.html" class="username">grandshot</a></span>, <span title="Thu Apr 29, 2021 12:20 am"><a href="../Users/82197.html" class="username">Joschka</a></span>, <span title="Sun May 16, 2021 7:13 am"><a href="../Users/91484.html" class="username">th3ru</a></span>, <span title="Wed Jun 09, 2021 11:10 am"><a href="../Users/36239.html" class="username">jayn23</a></span>, <span title="Tue Jun 15, 2021 9:35 pm"><a href="../Users/98509.html" class="username">UuPhan</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput173784'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;12.07%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 12.07%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p175489" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile175489">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/98509.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=98509_1686985476.png" width="97" height="100" alt="User avatar" /></a>														</div>
+								<a href="../Users/98509.html" class="username">UuPhan</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=98509&amp;sr=posts">13</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Apr 21, 2021 7:31 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="98509"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/98509/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="98509"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/98509/false">7 times</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content175489">
+
+					<h3 >
+						<a href="./viewtopic.php?p=175489#p175489">Re: Reverse simple decryption.</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/175489/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=175489" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post175489' href="./viewtopic.php?f=29&amp;p=175489&amp;thanks=175489&amp;to_id=98509&amp;from_id=123876" title="Say Thanks to the author of the post: UuPhan"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=175489#p175489" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/98509.html" class="username">UuPhan</a></strong> &raquo; </span><time datetime="2021-06-15T22:12:30+00:00">Tue Jun 15, 2021 11:12 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">...Try to find and learn some basic stuff before asking. I'm get stuck with "start is with a file open instruction". Don't know how to able to display and read function in Ghidra or IDA properly. Sorry I'm very noobs at this, but want to learn it<br>
+
+<blockquote class="uncited"><div><img src="https://snipboard.io/4N1Wwh.jpg" class="postimage" alt="Image"><br>
+All function just undefined.</div></blockquote>
+
+<blockquote class="uncited"><div><img src="https://i.snipboard.io/XASltc.jpg" class="postimage" alt="Image"><br>
+This have more than <em class="text-italics">008231b3</em>...why attachment <em class="text-italics">18.enc</em> file end with <em class="text-italics">000635ac</em>?</div></blockquote>
+
+.</div>
+
+			
+			
+									
+						<div id='list_thanks175489'>
+</div>
+<div id='div_post_reput175489'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p175550" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile175550">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/4722.html" style="color: #00AA00;" class="username-coloured">chrrox</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=4722&amp;sr=posts">2602</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun May 18, 2008 3:01 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="4722"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/4722/true">57 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="4722"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/4722/false">1422 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact chrrox">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact chrrox</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=175550" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content175550">
+
+					<h3 >
+						<a href="./viewtopic.php?p=175550#p175550">Re: Reverse simple decryption.</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/175550/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=175550" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post175550' href="./viewtopic.php?f=29&amp;p=175550&amp;thanks=175550&amp;to_id=4722&amp;from_id=123876" title="Say Thanks to the author of the post: chrrox"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=175550#p175550" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/4722.html" style="color: #00AA00;" class="username-coloured">chrrox</a></strong> &raquo; </span><time datetime="2021-06-18T03:07:47+00:00">Fri Jun 18, 2021 4:07 am</time>
+			</p>
+			
+			
+			
+			<div class="content">just type open in the filter on the left under symbol tree.<br>
+<br>
+008231AC is just a placeholder value used to reference a file in memory not a size.</div>
+
+			
+			
+									
+						<div id='list_thanks175550'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/4722.html" style="color: #00AA00;" class="username-coloured">chrrox</a> for the post: </dt>
+			<dd><span title="Fri Jun 18, 2021 7:52 am"><a href="../Users/98509.html" class="username">UuPhan</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput175550'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=23807" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=23807&amp;watch=topic&amp;start=0&amp;hash=2b0059e7" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=23807&amp;unwatch=topic&amp;start=0&amp;hash=2b0059e7" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=23807&amp;bookmark=1&amp;hash=2b0059e7" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=23807" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=23807&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=23807">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=29" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Tutorials”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 1 guest</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

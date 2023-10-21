@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Reverse Engineering Tutorials Collection - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=22266">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="29"><a itemprop="item" href="./viewforum.php?f=29"><span itemprop="name">Tutorials</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./22266.html">Reverse Engineering Tutorials Collection</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Read or post any tutorial related to file format analysis for modding purposes.<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=22266" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=22266&amp;watch=topic&amp;start=0&amp;hash=6466c6ea" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=22266&amp;unwatch=topic&amp;start=0&amp;hash=6466c6ea" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=22266&amp;bookmark=1&amp;hash=6466c6ea" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=22266" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=22266&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="22266" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p164078" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile164078">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=164078" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content164078">
+
+					<h3 class="first">
+							<img src="./images/icons/misc/fire.gif" width="16" height="16" alt="" title="">
+						<a href="./viewtopic.php?p=164078#p164078">Reverse Engineering Tutorials Collection</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/164078/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=164078" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post164078' href="./viewtopic.php?f=29&amp;p=164078&amp;thanks=164078&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=164078#p164078" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2020-06-11T22:08:15+00:00">Thu Jun 11, 2020 11:08 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Hello. I would like to share with you my private tutorial links collection. These are <br>
+useful topics from Xentax, Zenhax and any other reverse engineering related sites that<br>
+I was able to find in the Internet. I have put them into categories.<br>
+You may encounter situation when one tutorial fits to few categories, but it is placed<br>
+only in the category that it fits most. Also, you may encounter tutorials with "[PL]" mark,<br>
+these are tuts in Polish language. If you don't understand this language, just skip them.<br>
+<br>
+Also be aware that I haven't read/watch some of these tutorials yet, so I can't recommend you<br>
+which tutorial is the best choice, sometimes I'm still learning new things just like you <br>
+and on this list you may find tuts that are not very useful for you, so don't blame<br>
+me for that.  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile">  Just pick your favourite category and start learning.<br>
+If you are complete newbie, I would recommend to start with tuts from category<br>
+"Basic knowledge".<br>
+<br>
+If you have any other good source of knowledge, you can write a comment below<br>
+and I will update this tutorials collection.<br>
+<br>
+Also remember that those links may be dead some day, so don't blame me for that<br>
+and just make a copy for private use  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"> <br>
+<br>
+<br>
+So that's it. Enjoy.  <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"> <br>
+<br>
+<br>
+<strong class="text-strong">Links to tutorials</strong><br>
+
+<ul>
+    <li><strong class="text-strong">Basic knowledge / Archive extraction</strong><br>
+    - <a href="http://wiki.xentax.com/index.php/DGTEFF" class="postlink">Definitive Guide To Exploring File Formats</a><br>
+    - <a href="http://www.xentax.com/downloads/multiex/MexComManual.pdf" class="postlink">MultiExCommander Manual</a><br>
+    - <a href="https://www.youtube.com/watch?v=VVdmmN0su6E" class="postlink">What is a File Format?</a><br>
+    - <a href="https://www.youtube.com/playlist?list=PLP26ZYnLb5EVqqBHDgltL6oGrVNJ2kS2f" class="postlink">Let's MultiEx</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=5921" class="postlink">MultiEx Commander 4.5 YouTube tutorials</a><br>
+    - <a href="http://wiki.xentax.com/index.php/MexScript" class="postlink">MexScript Documentation</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17891" class="postlink">Analyzing and Reverse Engineering a Game Archive</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=8288" class="postlink">Key points to successful hex reading</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=3434" class="postlink">Running a command-line tool on all the files of a directory and sub-folders (batch)</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=9045" class="postlink">Overview of game file formats and archives</a><br>
+    - <a href="https://web.archive.org/web/20180219030346/http://rewiki.regengedanken.de/wiki/Reverse_engineering_hints" class="postlink">REWiki - Reverse engineering hints</a><br>
+   - <a href="https://web.archive.org/web/20180114112335/http://rewiki.regengedanken.de/wiki/Links_to_reverse_engineering_resources" class="postlink">REWiki - Links to reverse engineering resources</a><br>
+   - <a href="https://wiki.scummvm.org/index.php/HOWTO-Reverse_Engineering" class="postlink">HOWTO-Reverse Engineering</a></li>
+    
+  
+    <li><strong class="text-strong">QuickBMS</strong><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=3525" class="postlink">QUICKBMS GUIDE</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=3528" class="postlink">QUICKBMS GUIDE 2 ZLIB</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=3545" class="postlink">QUICKBMS GUIDE 3 IF ELSE</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17892" class="postlink">Basic BMS Scripting</a><br>
+    - <a href="https://aluigi.altervista.org/papers/quickbms.txt" class="postlink">QuickBMS documentation</a><br>
+    - <a href="https://aluigi.altervista.org/bms/quickbms_crc_engine.txt" class="postlink">QuickBMS crc engine</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=22" class="postlink">QuickBMS - Reimporting files in the archives</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=23" class="postlink">QuickBMS - Scan all the supported compressions</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=72" class="postlink">Example of archive format reversing with QuickBMS (medium)</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=34" class="postlink">Practice with archives and quickbms scripts</a><br>
+    - <a href="https://www.vg-resource.com/thread-28180.html" class="postlink">[TUTORIAL] Making BMS Scripts</a></li>
+
+
+
+
+    <li><strong class="text-strong">Encryption tutorials</strong><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=719" class="postlink">How to guess basic obfuscations: xor and sum/rot</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=23807" class="postlink">Reverse simple decryption</a><br>
+    - <a href="https://blog.jamie.holdings/2019/03/23/reverse-engineering-aes-keys-from-unreal-engine-4-projects/" class="postlink">Reversing AES Keys UE4</a> + <a href="https://cs.rin.ru/forum/viewtopic.php?f=10&amp;t=100672" class="postlink">AES Keys Collection</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=9233" class="postlink">How To Get PAK RSA Key (Wolcen / CryEngine Games)</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=45" class="postlink">Retrieving ZIP passwords from games - the zero skills way</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=59" class="postlink">Retrieving ZIP passwords from games - the debugger way</a><br>
+    - <a href="https://blog.devolutions.net/2020/08/why-you-should-never-use-zipcrypto" class="postlink">Retrieving ZIP passwords from games using plain-text attack</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=3662" class="postlink">Hacking Zip Passwords (C9)</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=137" class="postlink">Checksum / CRC scanning</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=15909" class="postlink">Decrypt any vita game (no custom firmware needed)</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=12953" class="postlink">How Unpack Themida 2.x.x</a> or <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=1051" class="postlink">How Unpack Themida 2.x.x (WXP)</a><br>
+    - <a href="https://github.com/aappleby/smhasher" class="postlink">SM Hasher</a> / <a href="https://github.com/PeterScott/murmur3" class="postlink">Murmur3 hash</a> + <a href="https://en.wikipedia.org/wiki/MurmurHash" class="postlink">Wiki</a> + <a href="https://pypi.org/project/mmh3/" class="postlink">Python implementation</a><br>
+    - <a href="https://en.wikipedia.org/wiki/Linear_congruential_generator" class="postlink">LCG</a> + <a href="https://rosettacode.org/wiki/Linear_congruential_generator#Python" class="postlink">sources</a> + <a href="https://tailcall.net/blog/cracking-randomness-lcgs/" class="postlink">Cracking LCG</a> + <a href="https://forum.xentax.com/viewtopic.php?p=42992#p42992" class="postlink">LCG in VC2</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=23228" class="postlink">Decrypt unity 3d files with Frida</a><br>
+    - <a href="https://ikskoks.pl/tutorial-how-to-get-allegro-passwords/" class="postlink">[Tutorial] How to get Allegro passwords</a></li>
+
+
+    <li><strong class="text-strong">Hash tutorials</strong><br>
+    - <a href="https://ikskoks.pl/tutorial-how-to-restore-hashed-filenames-from-archives/" class="postlink">[Tutorial] How to restore hashed filenames from archives</a></li>
+
+    <li><strong class="text-strong">Compression tutorials</strong><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=27" class="postlink">How to recognize the compression algorithms with your eyes</a><br>
+    - <a href="https://www.7-zip.org/sdk.html" class="postlink">LZMA SDK (binaries + source code + specification)</a> + <a href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm" class="postlink">LZMA Wiki</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=19072" class="postlink">Bc7 and bc5 decompression and compression</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=5" class="postlink">Offzip - deflate/zlib scanning and extraction</a><br>
+    - <a href="http://facebook.github.io/zstd/" class="postlink">ZSTD compression</a> + <a href="https://github.com/facebook/zstd/tree/dev/doc" class="postlink">documentation</a><br>
+    - <a href="https://youtu.be/BwoOB2QFXvw" class="postlink">Reverse Engineered old Compression Algorithm for Frogger</a><br>
+    - <a href="http://www.radgametools.com/oodlecompressors.htm" class="postlink">Oodle Data Compression</a> + <a href="https://github.com/rarten/ooz/" class="postlink">Oodle compressor</a> + <a href="http://fileformats.archiveteam.org/wiki/Oodle_Data_Compression" class="postlink">Oodle wiki page</a><br>
+    - <a href="https://youtu.be/ssn7gjgljXQ" class="postlink">RLE Compression explained</a> + <a href="https://en.wikipedia.org/wiki/Run-length_encoding" class="postlink">RLE Wiki</a> + <a href="https://www.geeksforgeeks.org/run-length-encoding-python/" class="postlink">RLE in Python</a><br>
+    - <a href="https://youtu.be/zev2A2uWYsM" class="postlink">LZ77 explained</a> + <a href="https://youtu.be/l7xeA6py9zM" class="postlink">LZ77 encoding</a> + <a href="https://youtu.be/HQs3uJmxWlU" class="postlink">LZ77 decoding</a> + <a href="https://github.com/manassra/LZ77-Compressor" class="postlink">LZ77 in Python</a><br>
+    - <a href="http://wiki.xentax.com/index.php/LZSS" class="postlink">LZSS Compression</a> + <a href="https://youtu.be/hEy2bvWO6gk" class="postlink">LZSS explained</a><br>
+    - <a href="https://glinscott.github.io/lz/index.html" class="postlink">LZ Compression</a> + <a href="https://github.com/inikep/lzbench" class="postlink">Open-source LZ Compressors</a></li>
+
+  <li><strong class="text-strong">Debugging / Decompilation / Disassembling</strong><br>
+    - <a href="https://forum.tuts4you.com/files/file/1307-lenas-reversing-for-newbies/" class="postlink">Lenas Reversing for Newbies</a><br>
+    - <a href="https://www.youtube.com/watch?v=zjVFud7kc0c&amp;list=PLXvWWSs0haFgaEnG_UTNHl9kgwqbV8Lwo" class="postlink">Reversing Spider-Man 2000</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=84" class="postlink">Real World Decompilation with IDA Pro</a><br>
+    - <a href="https://exploiting.wordpress.com/2010/06/29/idapython-conditional-breakpoints-or-quickhooking-with-idapython/" class="postlink">IDAPython conditional breakpoints</a><br>
+   - <a href="https://leanpub.com/IDAPython-Book" class="postlink">The Beginner's Guide to IDAPython</a><br>
+   - <a href="https://unit42.paloaltonetworks.com/using-idapython-to-make-your-life-easier-part-1/" class="postlink">Using IDAPython to Make Your Life Easier Part1</a> + <a href="http://researchcenter.paloaltonetworks.com/2015/12/using-idapython-to-make-your-life-easier-part-2/" class="postlink">Part 2</a> + <a href="https://unit42.paloaltonetworks.com/using-idapython-to-make-your-life-easier-part-3/" class="postlink">Part 3</a><br>
+   - <a href="https://www.youtube.com/watch?v=d4Pgi5XML8E&amp;list=PL_tws4AXg7auglkFo6ZRoWGXnWL0FHAEi" class="postlink">Reverse Engineering with Ghidra</a><br>
+   - <a href="https://guidedhacking.com/threads/how-to-reverse-engineer-with-ida-pro-disassembler.7914/" class="postlink">How to Reverse Engineer with IDA Pro Disassembler</a><br>
+   - <a href="https://guidedhacking.com/threads/about-reverse-engineering.9165/#post-49181" class="postlink">How to reverse engineer functions</a><br>
+   - <a href="https://mrxstudios.home.blog/2020/08/28/debugging-dust-a-tale-of-the-wired-west/" class="postlink">Debugging “Dust: A Tale of the Wired West”</a><br>
+   - <a href="https://mrxstudios.home.blog/2021/03/05/reverse-engineering-dust-uncovering-game-scripts/" class="postlink">Reverse Engineering Dust: Uncovering Game Scripts</a><br>
+   - <a href="https://youtu.be/___jEOjGCOY" class="postlink">Reverse Engineering an Xbox360 Game</a><br>
+   - <a href="https://youtu.be/vXWHmucgZW0" class="postlink">Reverse engineering C programs - bin 0x10</a><br>
+   - <a href="https://youtu.be/l7SgbLmO0L0" class="postlink">Memory Hacking — External Signature/Pattern Scanning Tutorial</a><br>
+   - <a href="https://dekne.wordpress.com/2010/05/20/remote-debugging-with-ida-pro/" class="postlink">Remote Debugging with IDA Pro (Windows)</a> + <a href="https://serverfault.com/questions/225155/virtualbox-how-to-set-up-networking-so-both-host-and-guest-can-access-internet" class="postlink">Connecting host with VirtualBox</a><br>
+   - <a href="https://eviatargerzi.medium.com/remote-debugging-with-ida-from-windows-to-linux-4a98d7095215" class="postlink">Remote Debugging with IDA Pro (Linux)</a><br>
+   - <a href="https://shakuganz.wordpress.com/2019/08/22/ida-python-scripting/" class="postlink">Basic IDA Python Scripting</a></li>
+
+
+  <li><strong class="text-strong">Hooking / DLL Injection</strong><br>
+    - <a href="https://www.youtube.com/watch?v=PZLhlWUmMs0" class="postlink">Simple C++ DLL Injector Source Code Tutorial - Quick and EZ</a><br>
+    - <a href="https://www.youtube.com/watch?v=IBwoVUR1gt8" class="postlink">Dll Injection Explained (how it works + source code)</a><br>
+    - <a href="https://www.youtube.com/watch?v=qzZTXcBu3cE&amp;list=PLt9cUwGw6CYEX6mVdDAly7oZOgpsZOycp&amp;index=2&amp;t=0s" class="postlink">Manual Mapping DLL Injection Tutorial</a><br>
+    - <a href="https://web.archive.org/web/20180429083223/http://www.blizzhackers.cc/viewtopic.php?p=2483118" class="postlink">Blizzhackers DLL Injection</a><br>
+    - <a href="https://resources.infosecinstitute.com/api-hooking-and-dll-injection-on-windows/" class="postlink">API Hooking and DLL Injection on Windows</a><br>
+    - [PL]<a href="http://re.coldwind.pl/?vart=9" class="postlink">ReverseCraft #7 - Inline hooks, DLL injection</a><br>
+    - [PL]<a href="http://nfsec.pl/hakin9/dllinjection.pdf" class="postlink">DLL INjection by Maciej Pakulski (PDF)</a><br>
+    - <a href="https://www.youtube.com/watch?v=JixHeLgQwHM" class="postlink">C/C++ Memory Hacking — Function Hooking / Detouring</a> + <a href="https://www.youtube.com/watch?v=b1ahj347pDc" class="postlink">How Function Hooking / Detouring Works</a><br>
+    - <a href="https://guidedhacking.com/threads/c-detour-hooking-function-tutorial.7930/" class="postlink">C++ Detour / Hooking Function Tutorial</a><br>
+    - <a href="http://www.rohitab.com/discuss/topic/41855-tutorial-the-different-ways-of-hooking/" class="postlink">[Tutorial] The different ways of hooking </a><br>
+    - <a href="https://www.codeproject.com/Articles/30140/API-Hooking-with-MS-Detours" class="postlink">API Hooking with MS Detours</a> + <a href="https://www.microsoft.com/en-us/research/project/detours/" class="postlink">MS Detours 4.0.1 description + source</a><br>
+    - <a href="https://www.codeproject.com/KB/DLL/#Hooks" class="postlink">Hooking tutorials</a><br>
+    - <a href="https://www.immuniweb.com/publication/inline_hooking_in_windows.pdf" class="postlink">Inline hooking in Windows</a><br>
+    - <a href="https://www.youtube.com/watch?v=HLh_9qOkzy0" class="postlink">C++ Internal Trampoline Hook Tutorial - OpenGL Hook</a><br>
+    - <a href="https://www.codeproject.com/Articles/44326/MinHook-The-Minimalistic-x-x-API-Hooking-Libra" class="postlink">MinHook - The Minimalistic x86/x64 API Hooking Library</a> + <a href="https://github.com/TsudaKageyu/minhook" class="postlink">source on github</a><br>
+    - <a href="https://pentestlab.blog/2017/03/27/dll-hijacking/" class="postlink">DLL Hijacking</a><br>
+    - <a href="https://www.unknowncheats.me/forum/c-and-c-/72416-simplest-function-hooking-ida-detours.html" class="postlink">[Tutorial] Simplest function hooking with IDA, Detours &amp; C++</a><br>
+    - <a href="https://www.unknowncheats.me/forum/c-and-c-/154364-detourfunction-__thiscall.html" class="postlink">[Tutorial] DetourFunction __thiscall</a><br>
+    - <a href="https://guidedhacking.com/threads/how-to-hook-functions-code-detouring-guide.14185/" class="postlink">How to Hook Functions - Code Detouring Guide</a><br>
+    - <a href="https://github.com/alphaSeclab/hooking/blob/master/Readme_en.md" class="postlink">Resources About Hooking</a><br>
+    - <a href="https://www.unknowncheats.me/forum/general-programming-and-reversing/139989-hooking-java-functions.html" class="postlink"> [Tutorial] Hooking Java Functions </a></li>
+
+
+    <li><strong class="text-strong">Console Tutorials</strong><br>
+    - <a href="https://sourceforge.net/projects/kernelloader/files/Sony%20Linux%20Toolkit/Package%20Update%20Files/ezswizzle/" class="postlink"> PS2 Texture Swizzling</a><br>
+    - <a href="https://consolecopyworld.com/psx/psx_libcrypt_tutorial.shtml" class="postlink">PS1 LibCrypt tutorial</a> + <a href="http://redump.org/disc/13389/?fbclid=IwAR1hBF6vRHgZVmjr9rR4fviHNXslGtp8pFnDQ59ZoSQHPFWJx6Gr-R4vxsw" class="postlink">LibCrypt Sectors Mappings</a> + <a href="https://red-j.github.io/Libcrypt-PS1-Protection-bible/index.htm" class="postlink">LibCrypt Bible</a><br>
+    - <a href="http://q-gears.sourceforge.net/gears.pdf" class="postlink">Gears: A look Inside the Final Fantasy VII Game Engine</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=10087" class="postlink">Convert Ps3 to Debug 4.21</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=9880" class="postlink">Extract Samples and MIDI files from Square PS2 Games</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=6803" class="postlink">Extracting Xbox 360 game files</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=85" class="postlink">Reverse Engineering Xbox360 SaveGame (Dead Space)</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=11869" class="postlink">Extract + Decrypt 3ds Roms</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=11735" class="postlink">[HOW-TO] Assembling 3DS Homebrew for Gateway</a><br>
+    - <a href="https://gbatemp.net/threads/tutorial-how-to-decrypt-extract-rebuild-3ds-cia-cxi-files.383055/" class="postlink">[Tutorial] How to Decrypt, Extract &amp; Rebuild 3DS|CIA|CXI Files</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=21&amp;t=13900" class="postlink">PS2 Hidden files</a> + <a href="https://www.romhacking.net/forum/index.php?topic=24797.0" class="postlink">this</a> + <a href="https://forum.xentax.com/viewtopic.php?f=21&amp;t=12957" class="postlink">this</a> + <a href="https://github.com/maikelwever/rac-dvd-toc-parser" class="postlink">this</a> + <a href="https://www.isobuster.com/download.php" class="postlink">IsoBuster</a> + <a href="https://forum.xentax.com/viewtopic.php?t=12941" class="postlink">Ratchet and Clank PS2 discoveries</a> + <a href="https://github.com/maikelwever/rac-dvd-toc-parser" class="postlink">Ratchet and Clank Hidden files extractor</a> + <a href="https://www.ps2-home.com/forum/viewtopic.php?p=15028#p15028" class="postlink">this</a><br>
+- <a href="https://www.ps2-home.com/forum/viewforum.php?f=59" class="postlink">PS2 Modding Tutorials</a> + <a href="https://www.ps2-home.com/forum/viewforum.php?f=58" class="postlink">PS2 Modding Tools</a> + <a href="https://www.psx-place.com/threads/playstation-2-aio-project.10445/" class="postlink">PS2 AIO Project</a><br>
+- <a href="https://www.ps2-home.com/forum/viewtopic.php?t=73" class="postlink">[TUTORIAL] [PS2DEV] An Introduction to PS2DEV and it's History</a><br>
+- <a href="https://www.youtube.com/watch?v=-WkW2jGP538" class="postlink">Racing Lagoon Hacking Deep Dive (Translating PS1 games - tutorial)</a></li>
+
+    <li><strong class="text-strong">DOS Tutorials</strong><br>
+    - <a href="http://www.shikadi.net/moddingwiki/Reverse_engineering_guide" class="postlink">DOS games reverse engineering guide</a><br>
+    - <a href="http://www.shikadi.net/moddingwiki/Category:File_Formats" class="postlink">DOS file formats / encryptions / compressions etc.</a><br>
+    - <a href="https://colinbourassa.github.io/media/nomad/" class="postlink">DOS game "Nomad" (1993) documentation and tools</a></li>
+
+
+    <li><strong class="text-strong">Audio</strong><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=2138" class="postlink">The basics of VGM ripping</a> + <a href="https://www.hcs64.com/vgm_ripping.html" class="postlink">VGM Ripping Tools</a><br>
+    - <a href="https://wiki.vg-resource.com/Ripping_Sounds" class="postlink">Common Sound Formats</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=26" class="postlink">How to scan audio codecs with ffmpeg</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=1787" class="postlink">Tutorial on vg-resource</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=10515" class="postlink">Extract Binary Domain's Music/Sound (CRI .cpk bgm)</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=13000" class="postlink">Batman Arkham Knight - Extract Soundtrack</a><br>
+    - <a href="https://wiki.multimedia.cx/index.php/Main_Page" class="postlink">Multimedia Wiki (Audio, Video, Codecs)</a><br>
+    - <a href="https://github.com/vgmstream/vgmstream/blob/master/doc/TXTH.md" class="postlink">TXTH files documentation</a></li>
+
+
+    <li><strong class="text-strong">Graphics</strong><br>
+    - <a href="https://tcrf.net/Help:Contents/Finding_Content/Finding_graphics" class="postlink">Finding graphics</a><br>
+    - <a href="http://wiki.xentax.com/index.php/Category:Format_Image" class="postlink">Xentax Wiki - Image file formats</a><br>
+    - <a href="https://www.youtube.com/watch?v=re61RdVeepg" class="postlink">Tutorial : How to edit EA's FIFA PS2 TEXTURE</a></li>
+
+
+    <li><strong class="text-strong">Source code + documentation</strong><br>
+    - <a href="https://github.com/OverSurge/PS1-BRender-Reverse" class="postlink">PS1 BRender Engine (Harry Potter 1, Harry Potter 2 etc.)</a><br>
+    - <a href="https://github.com/TheFearsomeDzeraora/BuggyBunny" class="postlink">PS1 BuggyBunny (Bugs Bunny)</a><br>
+    - <a href="https://github.com/bartlomiejduda/Tools" class="postlink">Python Tools Collection</a><br>
+    - <a href="https://github.com/Flower35/KAO2_PAK" class="postlink">KAO2_PAK</a> + <a href="https://drive.google.com/file/d/1jloDqtUak-9OhOQ6Ayflxj2rdGT5HqZq/view" class="postlink">documentation</a><br>
+    - <a href="https://github.com/SerGreen/Stalker-J2ME" class="postlink">J2ME game Stalker</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=22497" class="postlink">Soul Calibur 3 Reversing</a></li>
+
+
+    <li><strong class="text-strong">Books</strong><br>
+    - <a href="https://beginners.re/dl.html" class="postlink">Reverse Engineering for Beginners</a> + <a href="https://challenges.re/" class="postlink">Reverse Engineering challenges</a> + <a href="https://godbolt.org/" class="postlink">Compiler Explorer</a><br>
+    - <a href="https://www.amazon.com/Game-Hacking-Developing-Autonomous-Online-ebook/dp/B01J4NKSRI" class="postlink">Game Hacking: Developing Autonomous Bots for Online Games</a><br>
+    - <a href="https://www.amazon.com/Reversing-Secrets-Engineering-Eldad-Eilam/dp/0764574817" class="postlink">Reversing: Secrets of Reverse Engineering</a><br>
+    - <a href="https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898" class="postlink">The IDA Pro Book, 2nd Edition: The Unofficial Guide to the World's Most Popular Disassembler</a><br>
+    - <a href="https://www.amazon.com/Mastering-Reverse-Engineering-Re-engineer-ethical-ebook/dp/B07BXTBP8W" class="postlink">Mastering Reverse Engineering</a><br>
+    - <a href="https://www.amazon.com/exec/obidos/ASIN/1118787315/helion-20" class="postlink">Practical Reverse Engineering</a><br>
+    - [PL]<a href="https://ksiegarnia.pwn.pl/Praktyczna-inzynieria-wsteczna,622427233,p.html" class="postlink">Gynvael Coldwind Praktyczna inżynieria wsteczna</a><br>
+    - [PL]<a href="https://helion.pl/ksiazki/asembler-sztuka-programowania-wydanie-ii-randall-hyde,asesz2.htm#format/d" class="postlink">Asembler. Sztuka programowania</a></li>
+    
+    <li><strong class="text-strong">3D Models</strong><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=19429" class="postlink">Approaches of Parsing Bone Representations</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=7760" class="postlink">Noesis tutorial Basic Model</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=15687" class="postlink">Video tutorials on model formats reversing</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=15955" class="postlink">Make_obj (C source)</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=10894" class="postlink">Extracting simple models</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17890" class="postlink">Analyzing and Extracting a Game Model</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=6878" class="postlink">[Tutorial] How to extract bones from any games with Noesis</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=6932" class="postlink">Sanae3D - 3D format converter</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=19428" class="postlink">Background Knowledge of Bone Stuffs</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=16543" class="postlink">Extract 3D models from binary files</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=18685" class="postlink">Writing an Obj Convertor in C</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=12756" class="postlink">[crash course] How to get multiple submeshes using Make_H2O</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=3739" class="postlink">Very Basic model format conversion (Shaiya).</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=12262" class="postlink">INTEL GPA mesh ripper tutorial + tool (x32,x64,DX9,10,11)</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=11626" class="postlink">3ds Ram Dump</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=8319" class="postlink">[Tutorial] Exploring model formats: 9 Dragon</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=7813" class="postlink">Noesis tutorial Zlib</a><br>
+    - <a href="https://zenhax.com/viewtopic.php?f=4&amp;t=3638" class="postlink">Video tutorial on full model format reversing (Planetside)</a></li>
+
+
+    <li><strong class="text-strong">krystalgamer's Lair</strong><br>
+    - <a href="http://krystalgamer.github.io/avengers-emulator/" class="postlink">Marvel Avengers - Writing a server emulator</a><br>
+    - <a href="http://krystalgamer.github.io/spidey-save/" class="postlink">Spider-Man 2000 - Save file protection</a><br>
+    - <a href="http://krystalgamer.github.io/spidey-joel/" class="postlink">Spider-Man 2000 - Re-enabling a cheat code</a><br>
+    - <a href="http://krystalgamer.github.io/spidey-save-contents/" class="postlink">Spider-Man 2000 - Save file content exploration</a><br>
+    - <a href="http://krystalgamer.github.io/spidey-pkr/" class="postlink">Spider-Man 2000 - PKR Format</a><br>
+    - <a href="http://krystalgamer.github.io/spidey-file-loader/" class="postlink">Spider-Man 2000 - Custom File Loader</a><br>
+    - <a href="https://krystalgamer.github.io/spidey-apple/" class="postlink">Spider-Man 2000 - Apple to the Rescue!</a></li>
+
+
+    <li><strong class="text-strong">Mobile (Android, iOS, J2ME)</strong><br>
+    - <a href="https://github.com/OWASP/owasp-mastg/tree/master/Document" class="postlink">OWASP guide</a><br>
+    - <a href="https://github.com/OWASP/mas-crackmes" class="postlink">OWASP guide crackmes source code</a> (Warning! Big spoilers!)<br>
+    - <a href="https://www.youtube.com/watch?v=7SRfk321I5o" class="postlink">Beginners Guide to Reverse Engineering Android Apps</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=23228" class="postlink">[Android] Decrypt unity 3d files with Frida</a><br>
+    - <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=16055" class="postlink">Mobile Game Asset Download</a><br>
+    - [PL]<a href="https://niebezpiecznik.pl/post/reverse-engineering-aplikacji-mobilnej-krok-po-kroku/" class="postlink">Reverse engineering mobile app (Niebezpiecznik)</a><br>
+    - <a href="https://xmojmr.cz/en/software/JavaUtils/JavaUtils.htm" class="postlink">J2ME Reverse Engineering</a></li>
+
+
+    <li><strong class="text-strong">Capture The Flag</strong><br>
+   - <a href="https://www.youtube.com/watch?v=ugNTZFnlWLQ" class="postlink">Solving CTF Challenges Part1</a> and <a href="https://www.youtube.com/watch?v=iupUN7jcNq8" class="postlink">Part 2</a><br>
+   - [PL]<a href="https://www.youtube.com/watch?v=hzV2QZANXs4&amp;list=PLOYHgt8dIdowr-LCIN4bqSFmj-FSTG9Qn" class="postlink">Capture the flag Tutorials playlist</a></li>
+
+
+    <li><strong class="text-strong">Other</strong><br>
+   - <a href="https://github.com/dsasmblr/game-hacking" class="postlink">The Ultimate Game Hacking Resource</a><br>
+   - <a href="https://github.com/gurugio/lowlevelprogramming-university" class="postlink">Low-Level Programming University</a><br>
+   - <a href="http://www.mediafire.com/?azao4qdyc4lcvfr" class="postlink">1024bar tutorial</a> <br>
+   - [PL]<a href="http://re.coldwind.pl/" class="postlink">ReverseCraft blog</a> and <a href="https://www.youtube.com/watch?v=3lUDIqOdO4k&amp;list=PL5BE65D0BDC3030F8" class="postlink">ReverseCraft playlist</a><br>
+   - [PL]<a href="https://ikskoks.pl/category/artykuly/poradniki/" class="postlink">Modding tutorials</a><br>
+   - <a href="https://www.youtube.com/watch?v=FJEX0M-0Sw8" class="postlink">UE4 games texture replace</a><br>
+   - <a href="http://nullsecurity.org/" class="postlink">nullsecurity.org</a><br>
+   - <a href="https://crackmes.one/search" class="postlink">crackmes.one</a><br>
+   - <a href="http://www.woodmann.com/collaborative/tools/index.php/Category:RCE_Tools" class="postlink">RCE Tools Library</a><br>
+   - <a href="https://guidedhacking.com/threads/ghb1-start-here-beginner-guide-to-game-hacking.5911/" class="postlink">GHB1 - Start Here Beginner Guide to Game Hacking</a><br>
+   - <a href="https://www.vg-resource.com/thread-28638.html" class="postlink">Ripping Tutorials</a><br>
+   - <a href="https://ikskoks.pl/searching-text-strings-using-total-commander/" class="postlink">Searching text strings using Total Commander</a></li>
+
+</ul></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a> on Wed Sep 23, 2020 9:12 am, edited 3 times in total.
+									</div>
+			
+						<div id='list_thanks164078'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a> for the post (total 22):</dt>
+			<dd><span title="Fri Jun 12, 2020 3:14 am"><a href="../Users/332.html" style="color: #00AA00;" class="username-coloured">Dinoguy1000</a></span>, <span title="Fri Jun 12, 2020 10:09 am"><a href="../Users/41194.html" class="username">shakotay2</a></span>, <span title="Fri Jun 12, 2020 3:53 pm"><a href="../Users/52411.html" class="username">reh</a></span>, <span title="Fri Jun 12, 2020 10:11 pm"><a href="../Users/82197.html" class="username">Joschka</a></span>, <span title="Sun Jun 14, 2020 6:00 am"><a href="../Users/4970.html" class="username">Acewell</a></span>, <span title="Fri Jul 03, 2020 2:09 pm"><a href="../Users/59213.html" class="username">Meth0d</a></span>, <span title="Fri Jul 24, 2020 4:12 pm"><a href="../Users/62148.html" class="username">RedBear</a></span>, <span title="Sun Nov 08, 2020 12:42 pm"><a href="../Users/5099.html" class="username">shekofte</a></span>, <span title="Mon Nov 09, 2020 7:51 pm"><a href="../Users/39480.html" class="username">erik945</a></span>, <span title="Sat Jan 09, 2021 6:08 pm"><a href="../Users/90914.html" class="username">Hitmanhimself</a></span> and 12 more users</dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput164078'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;37.93%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 37.93%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig164078" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p164685" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile164685">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/59213.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=59213_1598550757.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/59213.html" class="username">Meth0d</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=59213&amp;sr=posts">6</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Sep 23, 2016 6:29 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> TheBrazil</dd>
+												    <dd class="profile-posts" data-user-give-id="59213"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59213/true">5 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="59213"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59213/false">4 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Meth0d">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Meth0d</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=164685" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://meth0d.org" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																																																<a href="http://twitter.com/_meth0d" title="Twitter" class="last-cell">
+										<span class="contact-icon phpbb_twitter-icon">Twitter</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content164685">
+
+					<h3 >
+						<a href="./viewtopic.php?p=164685#p164685">Re: Reverse Engineering Tutorials Collection</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/164685/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=164685" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post164685' href="./viewtopic.php?f=29&amp;p=164685&amp;thanks=164685&amp;to_id=59213&amp;from_id=123876" title="Say Thanks to the author of the post: Meth0d"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=164685#p164685" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/59213.html" class="username">Meth0d</a></strong> &raquo; </span><time datetime="2020-07-03T13:10:06+00:00">Fri Jul 03, 2020 2:10 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">That's a great collection, thank you bro. I want to start learning the 3D file formats, this will make things easier.</div>
+
+			
+			
+									
+						<div id='list_thanks164685'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/59213.html" class="username">Meth0d</a> for the post: </dt>
+			<dd><span title="Fri Jul 03, 2020 7:25 pm"><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput164685'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig164685" class="signature"><a href="https://meth0d.org" class="postlink">https://meth0d.org</a> <img class="smilies" src="./images/smilies/bruceleeanim.gif" width="84" height="23" alt="[bruce]" title="hero"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p168546" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile168546">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/5099.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=5099_1251529739.jpg" width="116" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/5099.html" class="username">shekofte</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=5099&amp;sr=posts">221</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Jan 18, 2009 1:45 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Sagittarius</dd>
+							    <dd class="profile-posts" data-user-give-id="5099"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/5099/true">301 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="5099"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/5099/false">20 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact shekofte">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact shekofte</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=168546" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="ymsgr:sendim?square_shekofte@yahoo.com" title="Yahoo Messenger" class="last-cell">
+										<span class="contact-icon phpbb_yahoo-icon">Yahoo Messenger</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content168546">
+
+					<h3 >
+						<a href="./viewtopic.php?p=168546#p168546">Re: Reverse Engineering Tutorials Collection</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/168546/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=168546" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post168546' href="./viewtopic.php?f=29&amp;p=168546&amp;thanks=168546&amp;to_id=5099&amp;from_id=123876" title="Say Thanks to the author of the post: shekofte"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=168546#p168546" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/5099.html" class="username">shekofte</a></strong> &raquo; </span><time datetime="2020-11-08T11:46:47+00:00">Sun Nov 08, 2020 12:46 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">So many thanks dear ikskoks for managing this nice portal</div>
+
+			
+			
+									
+						<div id='list_thanks168546'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/5099.html" class="username">shekofte</a> for the post: </dt>
+			<dd><span title="Sun Nov 08, 2020 10:17 pm"><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput168546'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig168546" class="signature"><em class="text-italics">ILLUSORY</em> <strong class="text-strong">VIDEO GAMES</strong> ARE MORE IMPORTANT THAN <em class="text-italics">PRECIOUS INTERNATIONAL</em> <strong class="text-strong">FOOTBALLs</strong></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p168774" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile168774">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/56239.html" class="username">krystalgamer</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=56239&amp;sr=posts">31</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 02, 2016 11:20 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="56239"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/56239/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="56239"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/56239/false">18 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact krystalgamer">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact krystalgamer</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=168774" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content168774">
+
+					<h3 >
+						<a href="./viewtopic.php?p=168774#p168774">Re: Reverse Engineering Tutorials Collection</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/168774/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=168774" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post168774' href="./viewtopic.php?f=29&amp;p=168774&amp;thanks=168774&amp;to_id=56239&amp;from_id=123876" title="Say Thanks to the author of the post: krystalgamer"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=168774#p168774" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/56239.html" class="username">krystalgamer</a></strong> &raquo; </span><time datetime="2020-11-15T13:12:38+00:00">Sun Nov 15, 2020 2:12 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Thanks for including my livestream there.<br>
+<br>
+Regarding RE I have several posts in my blog that might be useful.<br>
+<br>
+Marvel Avengers:<br>
+<br>
+Writing a server emulator: <a href="http://krystalgamer.github.io/avengers-emulator/" class="postlink">http://krystalgamer.github.io/avengers-emulator/</a><br>
+It covers topics such as code injection, hooking and analyzing binaries and web traffic.<br>
+<br>
+<br>
+Spider-Man 2000:<br>
+<br>
+Save file protection: <a href="http://krystalgamer.github.io/spidey-save/" class="postlink">http://krystalgamer.github.io/spidey-save/</a><br>
+Re-enabling a cheat code: <a href="http://krystalgamer.github.io/spidey-joel/" class="postlink">http://krystalgamer.github.io/spidey-joel/</a><br>
+Save file content exploration: <a href="http://krystalgamer.github.io/spidey-save-contents/" class="postlink">http://krystalgamer.github.io/spidey-save-contents/</a><br>
+PKR Format: <a href="http://krystalgamer.github.io/spidey-pkr/" class="postlink">http://krystalgamer.github.io/spidey-pkr/</a><br>
+Custom File Loader: <a href="http://krystalgamer.github.io/spidey-file-loader/" class="postlink">http://krystalgamer.github.io/spidey-file-loader/</a><br>
+<br>
+<br>
+This one is more a general note for RE: <a href="http://krystalgamer.github.io/spidey-apple/" class="postlink">http://krystalgamer.github.io/spidey-apple/</a><br>
+With many releases of a game there's a chance debug information is not removed which might help giving an insight to inner workings of the target.</div>
+
+			
+			
+									
+						<div id='list_thanks168774'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/56239.html" class="username">krystalgamer</a> for the post: </dt>
+			<dd><span title="Sun Nov 15, 2020 2:24 pm"><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput168774'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p168780" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile168780">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=168780" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content168780">
+
+					<h3 >
+						<a href="./viewtopic.php?p=168780#p168780">Re: Reverse Engineering Tutorials Collection</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/168780/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=168780" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post168780' href="./viewtopic.php?f=29&amp;p=168780&amp;thanks=168780&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=168780#p168780" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2020-11-15T13:43:06+00:00">Sun Nov 15, 2020 2:43 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote class="uncited"><div>Thanks for including my livestream there.<br>
+Regarding RE I have several posts in my blog that might be useful.</div></blockquote>
+
+No problem. I have added links to your posts to the collection. <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></div>
+
+			
+			
+									
+						<div id='list_thanks168780'>
+</div>
+<div id='div_post_reput168780'>
+</div>
+
+							<div id="sig168780" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p181162" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile181162">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=181162" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content181162">
+
+					<h3 >
+						<a href="./viewtopic.php?p=181162#p181162">Re: Reverse Engineering Tutorials Collection</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/181162/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=181162" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post181162' href="./viewtopic.php?f=29&amp;p=181162&amp;thanks=181162&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=181162#p181162" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2022-01-07T13:19:21+00:00">Fri Jan 07, 2022 2:19 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I have added few tutorials to the list.</div>
+
+			
+			
+									
+						<div id='list_thanks181162'>
+</div>
+<div id='div_post_reput181162'>
+</div>
+
+							<div id="sig181162" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=22266" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=22266&amp;watch=topic&amp;start=0&amp;hash=6466c6ea" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=22266&amp;unwatch=topic&amp;start=0&amp;hash=6466c6ea" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=22266&amp;bookmark=1&amp;hash=6466c6ea" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=22266" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=22266&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=22266">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=29" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Tutorials”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 1 guest</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

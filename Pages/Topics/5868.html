@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>UNREAL PSK importer for Blender249 - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=5868">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./5868.html">UNREAL PSK importer for Blender249</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=5868" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=5868&amp;watch=topic&amp;start=0&amp;hash=4603b50a" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=5868&amp;unwatch=topic&amp;start=0&amp;hash=4603b50a" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=5868&amp;bookmark=1&amp;hash=4603b50a" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=5868" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=5868&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="5868" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			14 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p47768" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile47768">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/26056.html" class="username">Szkaradek123</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=26056&amp;sr=posts">292</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 05, 2010 8:21 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland Głogów</dd>
+							    <dd class="profile-posts" data-user-give-id="26056"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/true">21 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="26056"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/false">742 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Szkaradek123">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Szkaradek123</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=47768" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content47768">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=47768#p47768">UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/47768/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=47768" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post47768' href="./viewtopic.php?f=16&amp;p=47768&amp;thanks=47768&amp;to_id=26056&amp;from_id=123876" title="Say Thanks to the author of the post: Szkaradek123"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=47768#p47768" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/26056.html" class="username">Szkaradek123</a></strong> &raquo; </span><time datetime="2011-01-21T21:09:41+00:00">Fri Jan 21, 2011 10:09 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">The contents of this post was deleted because of possible forum rules violation.<br>
+<br>
+<br>
+Update 2014-08-31:<br>
+- import psk - skeleton file <br>
+- unpack psa - animation archive container  (export all animation to single *.action)<br>
+- import action file  - single animation <br>
+<br>
+Link:<br>
+<a href="http://www.mediafire.com/download/uycpz61ag547oh4/Blender249%5BPsk%5D%5BPsa%5D%5B2014-08-31%5D.zip" class="postlink">http://www.mediafire.com/download/uycpz ... -31%5D.zip</a></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/26056.html" class="username">Szkaradek123</a> on Sun Aug 31, 2014 12:44 pm, edited 2 times in total.
+									</div>
+			
+						<div id='list_thanks47768'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/26056.html" class="username">Szkaradek123</a> for the post: </dt>
+			<dd><span title="Mon Dec 12, 2011 2:21 am"><a href="../Users/4970.html" class="username">Acewell</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput47768'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p47951" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile47951">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/15386.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=15386_1624696924.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/15386.html" class="username">Tosyk</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=15386&amp;sr=posts">1027</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Oct 22, 2009 10:24 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Russia, Siberia</dd>
+							    <dd class="profile-posts" data-user-give-id="15386"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/15386/true">269 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="15386"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/15386/false">154 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Tosyk">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Tosyk</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=47951" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://cgig.ru/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content47951">
+
+					<h3 >
+						<a href="./viewtopic.php?p=47951#p47951">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/47951/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=47951" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post47951' href="./viewtopic.php?f=16&amp;p=47951&amp;thanks=47951&amp;to_id=15386&amp;from_id=123876" title="Say Thanks to the author of the post: Tosyk"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=47951#p47951" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/15386.html" class="username">Tosyk</a></strong> &raquo; </span><time datetime="2011-01-24T08:19:25+00:00">Mon Jan 24, 2011 9:19 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><strong class="text-strong">Szkaradek123</strong>, thank you, works great!</div>
+
+			
+			
+									
+						<div id='list_thanks47951'>
+</div>
+<div id='div_post_reput47951'>
+</div>
+
+							<div id="sig47951" class="signature">Thank you for all you do here<br>
+<span style="font-size:85%;line-height:116%"><a href="http://cgig.ru/" class="postlink">my blog</a></span> | <span style="font-size:85%;line-height:116%"><a href="http://cgig.ru/forum/" class="postlink">my forum</a></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p47964" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile47964">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/29306.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=29306_1293425494.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/29306.html" class="username">Mirrorman95</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=29306&amp;sr=posts">355</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 20, 2010 2:08 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="29306"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29306/true">16 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="29306"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29306/false">24 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Mirrorman95">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Mirrorman95</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=47964" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content47964">
+
+					<h3 >
+						<a href="./viewtopic.php?p=47964#p47964">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/47964/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=47964" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post47964' href="./viewtopic.php?f=16&amp;p=47964&amp;thanks=47964&amp;to_id=29306&amp;from_id=123876" title="Say Thanks to the author of the post: Mirrorman95"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=47964#p47964" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/29306.html" class="username">Mirrorman95</a></strong> &raquo; </span><time datetime="2011-01-24T15:20:23+00:00">Mon Jan 24, 2011 4:20 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">How do you fix exported Noesis psk files to map to the correct textures?</div>
+
+			
+			
+									
+						<div id='list_thanks47964'>
+</div>
+<div id='div_post_reput47964'>
+</div>
+
+							<div id="sig47964" class="signature">BBSFM and KH2FM+ saves are compatible with KH2.5. <a href="http://forum.xentax.com/viewtopic.php?t=13424" class="postlink">viewtopic.php?t=13424</a></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p47967" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile47967">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/26056.html" class="username">Szkaradek123</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=26056&amp;sr=posts">292</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 05, 2010 8:21 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland Głogów</dd>
+							    <dd class="profile-posts" data-user-give-id="26056"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/true">21 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="26056"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/false">742 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Szkaradek123">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Szkaradek123</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=47967" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content47967">
+
+					<h3 >
+						<a href="./viewtopic.php?p=47967#p47967">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/47967/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=47967" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post47967' href="./viewtopic.php?f=16&amp;p=47967&amp;thanks=47967&amp;to_id=26056&amp;from_id=123876" title="Say Thanks to the author of the post: Szkaradek123"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=47967#p47967" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/26056.html" class="username">Szkaradek123</a></strong> &raquo; </span><time datetime="2011-01-24T15:56:48+00:00">Mon Jan 24, 2011 4:56 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I exported some files using Noesis and check these in hex editor .There are nothing about names of textures ,<br>
+and Noesis don't create .mat file, which is using for reading textures, so ...i can not fix script. <br>
+Most of games based on Unreal Engine after unpacking using Gildor's umodel, create folder with materials ,<br>
+which are reading by script .<br>
+Noesis - do not. So images must be manual imported.</div>
+
+			
+			
+									
+						<div id='list_thanks47967'>
+</div>
+<div id='div_post_reput47967'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p47987" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile47987">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=6331&amp;sr=posts">1007</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Mar 23, 2009 2:57 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="6331"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/true">44 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="6331"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/6331/false">505 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact MrAdults">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact MrAdults</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=47987" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content47987">
+
+					<h3 >
+						<a href="./viewtopic.php?p=47987#p47987">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/47987/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=47987" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post47987' href="./viewtopic.php?f=16&amp;p=47987&amp;thanks=47987&amp;to_id=6331&amp;from_id=123876" title="Say Thanks to the author of the post: MrAdults"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=47987#p47987" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/6331.html" style="color: #00AA00;" class="username-coloured">MrAdults</a></strong> &raquo; </span><time datetime="2011-01-24T21:57:55+00:00">Mon Jan 24, 2011 10:57 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Szkaradek123 wrote:</cite>I exported some files using Noesis and check these in hex editor .There are nothing about names of textures ,<br>
+and Noesis don't create .mat file, which is using for reading textures, so ...i can not fix script. <br>
+Most of games based on Unreal Engine after unpacking using Gildor's umodel, create folder with materials ,<br>
+which are reading by script .<br>
+Noesis - do not. So images must be manual imported.</div></blockquote>
+This is wrong. Noesis exports PSK materials with pskMaterial_t structures. (MATT0000 chunks)<br>
+<br>
+As shown in this file generated by Noesis: <a href="http://img577.imageshack.us/img577/2889/matt0000.png" class="postlink">http://img577.imageshack.us/img577/2889/matt0000.png</a></div>
+
+			
+			
+									
+						<div id='list_thanks47987'>
+</div>
+<div id='div_post_reput47987'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p48137" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile48137">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/26056.html" class="username">Szkaradek123</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=26056&amp;sr=posts">292</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 05, 2010 8:21 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland Głogów</dd>
+							    <dd class="profile-posts" data-user-give-id="26056"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/true">21 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="26056"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/false">742 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Szkaradek123">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Szkaradek123</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=48137" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content48137">
+
+					<h3 >
+						<a href="./viewtopic.php?p=48137#p48137">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/48137/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=48137" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post48137' href="./viewtopic.php?f=16&amp;p=48137&amp;thanks=48137&amp;to_id=26056&amp;from_id=123876" title="Say Thanks to the author of the post: Szkaradek123"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=48137#p48137" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/26056.html" class="username">Szkaradek123</a></strong> &raquo; </span><time datetime="2011-01-27T15:14:03+00:00">Thu Jan 27, 2011 4:14 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">The contents of this post was deleted because of possible forum rules violation.</div>
+
+			
+			
+									
+						<div id='list_thanks48137'>
+</div>
+<div id='div_post_reput48137'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p48140" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile48140">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/9929.html" class="username">Modman69</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=9929&amp;sr=posts">108</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jun 17, 2009 4:33 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="9929"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/9929/true">21 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="9929"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/9929/false">4 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Modman69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Modman69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=48140" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content48140">
+
+					<h3 >
+						<a href="./viewtopic.php?p=48140#p48140">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/48140/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=48140" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post48140' href="./viewtopic.php?f=16&amp;p=48140&amp;thanks=48140&amp;to_id=9929&amp;from_id=123876" title="Say Thanks to the author of the post: Modman69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=48140#p48140" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/9929.html" class="username">Modman69</a></strong> &raquo; </span><time datetime="2011-01-27T16:52:24+00:00">Thu Jan 27, 2011 5:52 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Szkaradek123,<br>
+<br>
+Your work with blender is fantastic!<br>
+<br>
+But please, please consider switching to the new blender 2.56 <br>
+<br>
+I really think it would be a much greater benefit for now and later <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></div>
+
+			
+			
+									
+						<div id='list_thanks48140'>
+</div>
+<div id='div_post_reput48140'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p48331" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile48331">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/26056.html" class="username">Szkaradek123</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=26056&amp;sr=posts">292</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 05, 2010 8:21 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland Głogów</dd>
+							    <dd class="profile-posts" data-user-give-id="26056"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/true">21 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="26056"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/26056/false">742 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Szkaradek123">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Szkaradek123</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=48331" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content48331">
+
+					<h3 >
+						<a href="./viewtopic.php?p=48331#p48331">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/48331/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=48331" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post48331' href="./viewtopic.php?f=16&amp;p=48331&amp;thanks=48331&amp;to_id=26056&amp;from_id=123876" title="Say Thanks to the author of the post: Szkaradek123"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=48331#p48331" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/26056.html" class="username">Szkaradek123</a></strong> &raquo; </span><time datetime="2011-01-31T18:46:00+00:00">Mon Jan 31, 2011 7:46 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">The contents of this post was deleted because of possible forum rules violation.</div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/26056.html" class="username">Szkaradek123</a> on Thu Apr 28, 2011 5:16 pm, edited 2 times in total.
+									</div>
+			
+						<div id='list_thanks48331'>
+</div>
+<div id='div_post_reput48331'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p48568" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile48568">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/32943.html" class="username">jaden</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=32943&amp;sr=posts">209</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Feb 05, 2011 1:41 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="32943"></dd>
+    <dd class="profile-posts" data-user-receive-id="32943"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/32943/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jaden">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jaden</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=48568" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content48568">
+
+					<h3 >
+						<a href="./viewtopic.php?p=48568#p48568">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/48568/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=48568" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post48568' href="./viewtopic.php?f=16&amp;p=48568&amp;thanks=48568&amp;to_id=32943&amp;from_id=123876" title="Say Thanks to the author of the post: jaden"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=48568#p48568" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/32943.html" class="username">jaden</a></strong> &raquo; </span><time datetime="2011-02-05T00:55:25+00:00">Sat Feb 05, 2011 1:55 am</time>
+			</p>
+			
+			
+			
+			<div class="content">thanks</div>
+
+			
+			
+									
+						<div id='list_thanks48568'>
+</div>
+<div id='div_post_reput48568'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p48586" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile48586">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/24493.html" class="username">jcarl904</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=24493&amp;sr=posts">13</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Apr 12, 2010 4:08 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="24493"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/24493/true">5 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="24493"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jcarl904">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jcarl904</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=48586" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content48586">
+
+					<h3 >
+						<a href="./viewtopic.php?p=48586#p48586">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/48586/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=48586" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post48586' href="./viewtopic.php?f=16&amp;p=48586&amp;thanks=48586&amp;to_id=24493&amp;from_id=123876" title="Say Thanks to the author of the post: jcarl904"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=48586#p48586" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/24493.html" class="username">jcarl904</a></strong> &raquo; </span><time datetime="2011-02-05T04:10:37+00:00">Sat Feb 05, 2011 5:10 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Works beautifully, Thank you!</div>
+
+			
+			
+									
+						<div id='list_thanks48586'>
+</div>
+<div id='div_post_reput48586'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p53795" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile53795">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/18608.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=18608_1304904240.jpg" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/18608.html" class="username">almondega</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=18608&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 02, 2010 11:39 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="18608"></dd>
+    <dd class="profile-posts" data-user-receive-id="18608"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/18608/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact almondega">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact almondega</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=53795" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content53795">
+
+					<h3 >
+							<img src="./images/icons/misc/star.gif" width="16" height="16" alt="" title="">
+						<a href="./viewtopic.php?p=53795#p53795">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/53795/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=53795" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post53795' href="./viewtopic.php?f=16&amp;p=53795&amp;thanks=53795&amp;to_id=18608&amp;from_id=123876" title="Say Thanks to the author of the post: almondega"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=53795#p53795" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/18608.html" class="username">almondega</a></strong> &raquo; </span><time datetime="2011-05-09T01:08:14+00:00">Mon May 09, 2011 2:08 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Amazing!!! Congratz!!!<br>
+<br>
+To be better than Gildors Max Plugin you need to implement multiple animations.<br>
+For example, if a .psa file has 20 animations, your plugin will be able to import only a few of them and separate into strips (NLA Editor).<br>
+(For now all animations are replaced into the "armature" strip, so only one animation per model)<br>
+<br>
+Your script is already faster than Gildors one for 3DS max, congratz.<br>
+<br>
+I'll be waiting for further updates, the world should know there are a good psk/psa importer for Blender now <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"></div>
+
+			
+			
+									
+						<div id='list_thanks53795'>
+</div>
+<div id='div_post_reput53795'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p54068" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile54068">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/27354.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=27354_1274737845.jpg" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="../Users/27354.html" class="username">gildor</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=27354&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 24, 2010 10:15 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> St.Petersburg, Russia</dd>
+							    <dd class="profile-posts" data-user-give-id="27354"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/27354/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="27354"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/27354/false">5 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact gildor">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact gildor</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=54068" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://www.gildor.org" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content54068">
+
+					<h3 >
+						<a href="./viewtopic.php?p=54068#p54068">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/54068/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=54068" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post54068' href="./viewtopic.php?f=16&amp;p=54068&amp;thanks=54068&amp;to_id=27354&amp;from_id=123876" title="Say Thanks to the author of the post: gildor"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=54068#p54068" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/27354.html" class="username">gildor</a></strong> &raquo; </span><time datetime="2011-05-16T13:58:33+00:00">Mon May 16, 2011 2:58 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Szkaradek123 wrote:</cite>
+Most of games based on Unreal Engine after unpacking using Gildor's umodel, create folder with materials ,<br>
+which are reading by script .<br>
+Noesis - do not. So images must be manual imported.</div></blockquote>
+PKS format has support for mapping a <strong class="text-strong">texture</strong> to surface. There is no way to convert UE3 <strong class="text-strong">material</strong> to a single texture - it has diffuse, bump, opacity etc. ".mat file" is my own extension which allows me to load relatively complex materials similar to UE3 into 3ds Max automatically. For PSK files produced by other tools (not umodel) you usually have to create and assign materials by hands.<br>
+
+<blockquote><div><cite>almondega wrote:</cite>
+Your script is already faster than Gildors one for 3DS max, congratz.
+</div></blockquote>
+They are incomparable <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"> Blender uses Python for scripting, which <strong class="text-strong">should be faster</strong> than MaxScript. The slowest thing in PSK mesh loading into Max is assignment of weights to vertices, which is done by simulating GUI clicks (ugly way, it looks like MaxScript API were designed by "strange people"). I hope Blender were designed in a better way.</div>
+
+			
+			
+									
+						<div id='list_thanks54068'>
+</div>
+<div id='div_post_reput54068'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p61890" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile61890">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/10645.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=10645_1452958189.jpg" width="75" height="75" alt="User avatar" /></a>														</div>
+								<a href="../Users/10645.html" class="username">CriticalError</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=10645&amp;sr=posts">678</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Jul 05, 2009 2:03 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="10645"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/10645/true">104 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="10645"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/10645/false">41 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CriticalError">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CriticalError</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=61890" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content61890">
+
+					<h3 >
+						<a href="./viewtopic.php?p=61890#p61890">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/61890/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=61890" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post61890' href="./viewtopic.php?f=16&amp;p=61890&amp;thanks=61890&amp;to_id=10645&amp;from_id=123876" title="Say Thanks to the author of the post: CriticalError"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=61890#p61890" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/10645.html" class="username">CriticalError</a></strong> &raquo; </span><time datetime="2011-11-08T03:31:09+00:00">Tue Nov 08, 2011 4:31 am</time>
+			</p>
+			
+			
+			
+			<div class="content">first of all thanks a lot sakas and gildor for great tools and importers they makes, second I don't know you remember gildor when ask for update actorx importer becuase a game use multi mesh and not load file and give error, the sakas importer load some of them, but not at all, is not posible with information of his script update yours? is just a suggestion thanks a lot.<br>
+<br>
+Here topic: <a href="http://forum.xentax.com/viewtopic.php?f=16&amp;t=7342" class="postlink">Sepiroth 2 PSK Files</a></div>
+
+			
+			
+									
+						<div id='list_thanks61890'>
+</div>
+<div id='div_post_reput61890'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p137106" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile137106">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/68430.html" class="username">marcioalcantara</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=68430&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jan 12, 2018 12:35 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="68430"></dd>
+    <dd class="profile-posts" data-user-receive-id="68430"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact marcioalcantara">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact marcioalcantara</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=137106" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content137106">
+
+					<h3 >
+						<a href="./viewtopic.php?p=137106#p137106">Re: UNREAL PSK importer for Blender249</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/137106/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=137106" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post137106' href="./viewtopic.php?f=16&amp;p=137106&amp;thanks=137106&amp;to_id=68430&amp;from_id=123876" title="Say Thanks to the author of the post: marcioalcantara"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=137106#p137106" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/68430.html" class="username">marcioalcantara</a></strong> &raquo; </span><time datetime="2018-01-13T15:22:25+00:00">Sat Jan 13, 2018 4:22 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Szkaradek123 wrote:</cite>The contents of this post was deleted because of possible forum rules violation.<br>
+<br>
+<br>
+Update 2014-08-31:<br>
+- import psk - skeleton file <br>
+- unpack psa - animation archive container  (export all animation to single *.action)<br>
+- import action file  - single animation <br>
+<br>
+Link:<br>
+<a href="http://www.mediafire.com/download/uycpz61ag547oh4/Blender249%5BPsk%5D%5BPsa%5D%5B2014-08-31%5D.zip" class="postlink">http://www.mediafire.com/download/uycpz ... -31%5D.zip</a></div></blockquote>
+
+help<br>
+<br>
+<img src="https://uploaddeimagens.com.br/images/001/248/667/full/01.png" class="postimage" alt="Image"></div>
+
+			
+			
+									
+						<div id='list_thanks137106'>
+</div>
+<div id='div_post_reput137106'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=5868" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=5868&amp;watch=topic&amp;start=0&amp;hash=4603b50a" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=5868&amp;unwatch=topic&amp;start=0&amp;hash=4603b50a" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=5868&amp;bookmark=1&amp;hash=4603b50a" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=5868" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=5868&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=5868">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			14 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <span style="color: #9E8DA7;" class="username-coloured">Bing [Bot]</span>, <a href="../Users/123876.html" class="username">escape209</a>, <a href="../Users/46975.html" class="username">pao com ovo</a> and 6 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

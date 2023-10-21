@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>writing BRRES importer help (for blender) - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=6999">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./6999.html">writing BRRES importer help (for blender)</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=6999" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=6999&amp;watch=topic&amp;start=0&amp;hash=165c9a0d" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=6999&amp;unwatch=topic&amp;start=0&amp;hash=165c9a0d" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=6999&amp;bookmark=1&amp;hash=165c9a0d" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=6999" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=6999&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="6999" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p56639" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile56639">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36097.html" class="username">Jigglebone</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36097&amp;sr=posts">13</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jul 08, 2011 4:43 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="36097"></dd>
+    <dd class="profile-posts" data-user-receive-id="36097"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36097/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Jigglebone">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Jigglebone</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=56639" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content56639">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=56639#p56639">writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/56639/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=56639" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post56639' href="./viewtopic.php?f=16&amp;p=56639&amp;thanks=56639&amp;to_id=36097&amp;from_id=123876" title="Say Thanks to the author of the post: Jigglebone"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=56639#p56639" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36097.html" class="username">Jigglebone</a></strong> &raquo; </span><time datetime="2011-07-18T05:59:12+00:00">Mon Jul 18, 2011 6:59 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Im using this reference: <a href="http://wiki.tockdom.de/index.php?title=BRRES_%28File_Format%29" class="postlink">http://wiki.tockdom.de/index.php?title= ... _Format%29</a><br>
+<br>
+First could you refresh my memory? I know Type "char" is 1 byte, but whats "uN"? Is it unsigned, N bits of lenght (eg. u32)? Im a Python user and we dont have that syntax here.<br>
+Also, what is "padding"? Should it just be skipped?</div>
+
+			
+			
+									
+						<div id='list_thanks56639'>
+</div>
+<div id='div_post_reput56639'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p56654" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile56654">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/29204.html" class="username">invisghost</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=29204&amp;sr=posts">55</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 13, 2010 7:16 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="29204"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29204/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="29204"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29204/false">11 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact invisghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact invisghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=56654" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content56654">
+
+					<h3 >
+						<a href="./viewtopic.php?p=56654#p56654">Re: writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/56654/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=56654" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post56654' href="./viewtopic.php?f=16&amp;p=56654&amp;thanks=56654&amp;to_id=29204&amp;from_id=123876" title="Say Thanks to the author of the post: invisghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=56654#p56654" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/29204.html" class="username">invisghost</a></strong> &raquo; </span><time datetime="2011-07-18T17:06:00+00:00">Mon Jul 18, 2011 6:06 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Padding is stuff that is presumed to be useless. You can either completely skip it or just put it into a dummy variable.<br>
+<br>
+u32 = unsigned int; 4 bytes<br>
+u16 = unsigned short; 2 bytes<br>
+u8 = byte; 1 byte</div>
+
+			
+			
+									
+						<div id='list_thanks56654'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/29204.html" class="username">invisghost</a> for the post: </dt>
+			<dd><span title="Thu Mar 22, 2012 4:53 am"><a href="../Users/4970.html" class="username">Acewell</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput56654'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p56656" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile56656">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/34492.html" class="username">finale00</a>							</dt>
+
+						<dd class="profile-rank">M-M-M-Monster veteran<br /><img src="./images/ranks/vip-1.png" alt="M-M-M-Monster veteran" title="M-M-M-Monster veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=34492&amp;sr=posts">2382</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 09, 2011 1:22 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="34492"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/34492/true">170 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="34492"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/34492/false">307 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact finale00">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact finale00</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=56656" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content56656">
+
+					<h3 >
+						<a href="./viewtopic.php?p=56656#p56656">Re: writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/56656/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=56656" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post56656' href="./viewtopic.php?f=16&amp;p=56656&amp;thanks=56656&amp;to_id=34492&amp;from_id=123876" title="Say Thanks to the author of the post: finale00"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=56656#p56656" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/34492.html" class="username">finale00</a></strong> &raquo; </span><time datetime="2011-07-18T18:03:13+00:00">Mon Jul 18, 2011 7:03 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">How are signed ints/shorts are usually denoted?<br>
+How is a float usually distinguished from a long or an int?<br>
+Also, for practical purposes, can one simply treat an int as a long?</div>
+
+			
+			
+									
+						<div id='list_thanks56656'>
+</div>
+<div id='div_post_reput56656'>
+</div>
+
+							<div id="sig56656" class="signature"><a href="http://wiki.xentax.com/index.php/Model_Import_Plugins" class="postlink">Model Import Plugins/Scripts</a><br>
+<br>
+<a href="http://www.himeworks.com/noesis-plugins/" class="postlink">Noesis Plugins</a> | <a href="https://www.dropbox.com/s/ekavgz89jgaikzw" class="postlink">Reference files</a><br>
+<br>
+Reference<br>
+<a href="http://wiki.xentax.com/index.php/3D_Model_Guide" class="postlink">Guide to 3D model reversal</a> | <a href="http://wiki.xentax.com/index.php/3D_Model_Glossary" class="postlink">3D glossary</a></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p56661" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile56661">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36097.html" class="username">Jigglebone</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36097&amp;sr=posts">13</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jul 08, 2011 4:43 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="36097"></dd>
+    <dd class="profile-posts" data-user-receive-id="36097"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36097/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Jigglebone">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Jigglebone</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=56661" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content56661">
+
+					<h3 >
+						<a href="./viewtopic.php?p=56661#p56661">Re: writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/56661/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=56661" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post56661' href="./viewtopic.php?f=16&amp;p=56661&amp;thanks=56661&amp;to_id=36097&amp;from_id=123876" title="Say Thanks to the author of the post: Jigglebone"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=56661#p56661" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36097.html" class="username">Jigglebone</a></strong> &raquo; </span><time datetime="2011-07-18T19:09:59+00:00">Mon Jul 18, 2011 8:09 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">OK. Proof of concept
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!BPY
+"""
+Name: 'BRRES (*.brres)...'
+Blender: 249
+Group: 'Import'
+Tooltip: 'Import *.brres files'
+"""
+__author__ = "jigglebone"
+__version__ = '0.0.1'
+__bpydoc__ = """ \
+Import *.brres files
+"""
+
+import Blender
+import struct
+import sys, os
+
+def readFile(filepath):
+	file = open(filepath, 'rb')
+	
+	# char[4] - 'bres' in ASCII; File identifier
+	datachunk = file.read(4)
+	if datachunk != "bres":
+		print "Invalid BRRES file, or file corrupt!"
+		return
+	
+	# u16  - Byte order mark. 0xFEFF is the big endian byte order, 0xFFFE is little endian.
+	endian = None
+	
+	datachunk = file.read(2)
+	endianness = struct.unpack('H', datachunk)[0]
+	
+	if endianness == 0xFEFF:
+		endian = "&gt;"
+	elif endianness == 0xFFFE:
+		endian = "&lt;"
+	else:
+		print "file corrupt"
+		return
+	
+	# u16 - Padding.
+	file.seek(2, 1) # move cursor 2 bytes from current position (set by 1)
+	
+	# u32 - Length of the file in bytes.
+	datachunk = file.read(4)
+	filelenght = struct.unpack(endian + 'I', datachunk)[0]
+	
+	# u16 - Offset to root section relative to start. (0x0010)
+	datachunk = file.read(4)
+	offset = struct.unpack(endian + 'H', datachunk)[0]
+	
+	# u16 -Number of sections (including root).
+	datachunk = file.read(4)
+	sectioncount = struct.unpack(endian + 'H', datachunk)[0]
+	
+	# The root section of the brres file contains all pointers to files and filenames The header of the root is 0x8 in length.
+	# char[4] - 'bres' in ASCII; File identifier
+	datachunk = file.read(4)
+	if datachunk != "root":
+		print "file corrupt!"
+		return
+	
+	# u32 - Length of section in bytes.
+	datachunk = file.read(4)
+	rootlenght = struct.unpack(endian + 'I', datachunk)[0]
+	
+	# BRRES Index Group
+	# u32 - Length of group in bytes.
+	datachunk = file.read(4)
+	grouplenght = struct.unpack(endian + 'I', datachunk)[0]
+	
+	# u32 - Number in group.
+	datachunk = file.read(4)
+	numberingroup = struct.unpack(endian + 'I', datachunk)[0]
+	
+	# Under construction...
+
+def main():
+	def fileSelector(filepath):
+		if filepath and not Blender.sys.exists(filepath):
+			Blender.Draw.PupMenu("Error%%t|The file %s does not exist." % filepath)
+		else:
+			Blender.Window.WaitCursor(1)
+			readFile(filepath)
+			Blender.Window.WaitCursor(0)
+	
+	Blender.Window.FileSelector(fileSelector, 'OK', Blender.sys.makename(ext = '.brres'))
+
+if __name__ == "__main__":
+	main()
+</code></pre></div>
+
+I hope you dont mind more questions.<br>
+Forgive my english, "Offset to root section relative to start." means "location of "root" measured from beginning of file"?<br>
+<br>
+Also, there's "Number of sections (including root). " and then the doc says "This header is then followed by a BRRES Index Group.". There's one index group right? And they entries in that "group" are the sections mentioned earlier?<br>
+<br>
+And in the "BRRES Index Group" page it says "Number in group.". What does that mean?<br>
+<br>
+A lot of questions...</div>
+
+			
+			
+									
+						<div id='list_thanks56661'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/36097.html" class="username">Jigglebone</a> for the post: </dt>
+			<dd><span title="Wed Apr 05, 2017 6:53 am"><a href="../Users/4970.html" class="username">Acewell</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput56661'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p56748" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile56748">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36097.html" class="username">Jigglebone</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36097&amp;sr=posts">13</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jul 08, 2011 4:43 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="36097"></dd>
+    <dd class="profile-posts" data-user-receive-id="36097"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36097/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Jigglebone">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Jigglebone</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=56748" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content56748">
+
+					<h3 >
+						<a href="./viewtopic.php?p=56748#p56748">Re: writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/56748/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=56748" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post56748' href="./viewtopic.php?f=16&amp;p=56748&amp;thanks=56748&amp;to_id=36097&amp;from_id=123876" title="Say Thanks to the author of the post: Jigglebone"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=56748#p56748" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36097.html" class="username">Jigglebone</a></strong> &raquo; </span><time datetime="2011-07-20T11:10:28+00:00">Wed Jul 20, 2011 12:10 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">ahem...</div>
+
+			
+			
+									
+						<div id='list_thanks56748'>
+</div>
+<div id='div_post_reput56748'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p58756" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile58756">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/27555.html" class="username">viperzerofsx</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=27555&amp;sr=posts">95</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu May 27, 2010 5:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="27555"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/27555/true">8 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="27555"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/27555/false">6 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact viperzerofsx">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact viperzerofsx</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=58756" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content58756">
+
+					<h3 >
+						<a href="./viewtopic.php?p=58756#p58756">Re: writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/58756/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=58756" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post58756' href="./viewtopic.php?f=16&amp;p=58756&amp;thanks=58756&amp;to_id=27555&amp;from_id=123876" title="Say Thanks to the author of the post: viperzerofsx"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=58756#p58756" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/27555.html" class="username">viperzerofsx</a></strong> &raquo; </span><time datetime="2011-08-31T20:45:23+00:00">Wed Aug 31, 2011 9:45 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">this would be interesting to have given the pain it is to export somtimes.</div>
+
+			
+			
+									
+						<div id='list_thanks58756'>
+</div>
+<div id='div_post_reput58756'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p69467" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile69467">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/34415.html" class="username">S0UZ</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=34415&amp;sr=posts">40</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 05, 2011 11:46 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="34415"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/34415/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="34415"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/34415/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact S0UZ">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact S0UZ</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=69467" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content69467">
+
+					<h3 >
+						<a href="./viewtopic.php?p=69467#p69467">Re: writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/69467/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=69467" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post69467' href="./viewtopic.php?f=16&amp;p=69467&amp;thanks=69467&amp;to_id=34415&amp;from_id=123876" title="Say Thanks to the author of the post: S0UZ"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=69467#p69467" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/34415.html" class="username">S0UZ</a></strong> &raquo; </span><time datetime="2012-03-17T05:25:28+00:00">Sat Mar 17, 2012 6:25 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I found someone's python script but it won't work.Can u check it for me Jigglebone?
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!BPY
+""" 
+Name: 'BRRES File Import (.brres)'
+Blender: 245
+Group: 'Import'
+Tooltip: 'Import from BRRES file format (.brres)'
+"""
+
+# import needed stuff
+import Blender
+import struct
+from common import Struct
+import os.path
+import math
+from math import *
+from Blender import Mathutils
+from Blender.Mathutils import *
+
+# imports a brres file to the current scene
+def import_brres(path):
+    
+    dataf = open(path,'rb')
+    data = dataf.read()
+    dataf.close()
+    bres = Bres()
+    bres._load(data)
+    return "END"
+
+
+# load the model
+def fileCallback(filename):
+    error = import_brres(filename)
+    if error!="":
+        Blender.Draw.PupMenu("An error occured during import: " + error + "|Not all data might have been imported succesfully.", 2)
+
+Blender.Window.FileSelector(fileCallback, 'Import')
+
+
+
+
+class Bres:
+    class BresHeader(Struct):
+        __endian__ = Struct.BE
+        def __format__(self):
+            self.tag = Struct.string(4)
+            self.version = Struct.uint32
+            self.size = Struct.uint32
+            self.root_offset = Struct.uint16
+            self.num_chunks = Struct.uint16
+    class BresRootHeader(Struct):
+        __endian__ = Struct.BE
+        def __format__(self):
+            self.tag = Struct.string(4)
+            self.size = Struct.uint32
+    class BresCommonHeader(Struct):
+        __endian__ = Struct.BE
+        def __format__(self):
+            self.tag = Struct.string(4)
+            self.size = Struct.uint32
+            self.version = Struct.int32
+            self.bres_offset = Struct.int32
+    class ResDict(Struct):
+        __endian__ = Struct.BE
+        def __format__(self):
+            self.size = Struct.uint32
+            self.count = Struct.uint32
+    class ResEntry(Struct):
+        __endian__ = Struct.BE
+        def __format__(self):
+            self.id = Struct.uint16
+            self.pad = Struct.int16
+            self.left_index = Struct.uint16
+            self.right_index = Struct.uint16
+            self.string_offset = Struct.int32
+            self.data_offset = Struct.int32
+    def __init__(self):
+        self.MDL0Files = []
+    def _load(self, data):
+        offset = 0
+        
+        header = self.BresHeader()
+        blah = len(header)
+        header.unpack(data[offset:offset + len(header)])
+        print "BRRES Header, tag=%s version=%s size=%s root offset=%s chunks=%srn" % (header.tag, header.version, header.size, header.root_offset, header.num_chunks),
+        offset += len(header)
+        if offset != header.root_offset:
+            print "warning: skipping to root offset"
+            offset = header.root_offset
+            
+        root_header = self.BresRootHeader()
+        root_header.unpack(data[offset:offset + len(root_header)])
+        offset += len(root_header)
+        print "BRRES ROOT header, tag=%s size=%srn" % (root_header.tag, root_header.size),
+        print "Root Group:rn"
+        (offset, root_dict) = self._loadDict(data, offset)
+        
+        for e in root_dict.children:
+            if e.id == 0xFFFF:
+                continue
+            print "Child Dict: %srn" % (e.name),
+            offset = e.total_data_offset; 
+            (offset, dict) = self._loadDict(data, offset)
+            for c in dict.children:
+                e.children.append(c)
+            
+        for g in root_dict.children:
+            if g.id == 0xFFFF:
+                continue
+            for e in g.children:
+                if e.id == 0xFFFF:
+                    continue
+                bc = self.BresCommonHeader()
+                bc.unpack(data[e.total_data_offset: e.total_data_offset + len(bc)])
+                bc.name = e.name
+                #print "BRES HEADER, TAG=%s VERSION=%s NAME=%s" % (bc.tag, bc.version, bc.name)
+                if bc.tag == "MDL0":
+                    m = self.MDL0()
+                    m._load(self, data, e.total_data_offset)
+
+    def _loadEntry(self, data, offset, dict):
+        entry = self.ResEntry()
+        entry.unpack(data[offset:offset + len(entry)])
+        entry.total_data_offset = 0 #dict.offset + entry.data_offset
+        entry.total_string_offset = dict.offset + entry.string_offset
+        entry.name = ''
+        entry.children = []
+        if entry.data_offset != 0:
+            entry.total_data_offset = dict.offset + entry.data_offset
+        if entry.string_offset != 0:
+            strlen = struct.unpack_from("B", data[entry.total_string_offset-1])[0]
+            entry.name = data[entry.total_string_offset:entry.total_string_offset+strlen]
+        dict.children.append(entry)
+        entry.dict = dict
+        offset += len(entry)
+        if(entry.id != 0xFFFF):
+            print "E %s: %s so: %s do: %srn" % (entry.id, entry.name, entry.total_string_offset, entry.total_data_offset),
+        return (offset, entry)
+    def _loadDict(self, data, offset):
+        dict = self.ResDict()
+        dict.unpack(data[offset:offset + len(dict)])
+        dict.offset = offset
+        dict.children = []
+        offset += len(dict)
+        print "D %s rn" % (dict.count),
+        for c in xrange(dict.count+1):
+            (offset, entry) = self._loadEntry(data, offset, dict)
+        return (offset, dict)
+    
+    class MDL0:
+        class MDL0Properties(Struct):
+            __endian__ = Struct.BE
+            def __format__(self):
+                self.unk0 = Struct.uint32
+                self.size = Struct.uint32
+                self.mdl0offset = Struct.int32
+                self.unk1 = Struct.int32
+                self.unk2 = Struct.int32
+                self.vertice_count = Struct.uint32
+                self.face_count = Struct.uint32
+                self.unk3 = Struct.int32
+                self.chunk_count = Struct.uint32
+                self.unk4 = Struct.int16
+                self.unk5 = Struct.int16
+                self.dataoffset = Struct.uint32
+                self.box_min_x = Struct.float
+                self.box_min_y = Struct.float
+                self.box_min_z = Struct.float
+                self.box_max_x = Struct.float
+                self.box_max_y = Struct.float
+                self.box_max_z = Struct.float
+            
+        class MDL0Bone(Struct):
+            __endian__ = Struct.BE
+            def __format__(self):
+                self.header_size = Struct.uint32
+                self.mdl0offset = Struct.int32
+                self.string_offset = Struct.int32
+                self.index = Struct.int32
+                self.nodeid = Struct.int32
+                self.flags = Struct.uint32
+                self.pad1 = Struct.uint32
+                self.pad2 = Struct.uint32
+                self.scale_x = Struct.float
+                self.scale_y = Struct.float
+                self.scale_z = Struct.float
+                self.rot_x = Struct.float
+                self.rot_y = Struct.float
+                self.rot_z = Struct.float
+                self.trans_x = Struct.float
+                self.trans_y = Struct.float
+                self.trans_z = Struct.float
+                self.box_min_x = Struct.float
+                self.box_min_y = Struct.float
+                self.box_min_z = Struct.float
+                self.box_max_x = Struct.float
+                self.box_max_y = Struct.float
+                self.box_max_z = Struct.float
+                self.parent_offset = Struct.int32
+                self.next_offset = Struct.int32
+                self.prev_offset = Struct.int32
+                self.add_offset = Struct.int32
+                
+                self.trans0 = Struct.float
+                self.trans1 = Struct.float
+                self.trans2 = Struct.float
+                self.trans3 = Struct.float
+                self.trans4 = Struct.float
+                self.trans5 = Struct.float
+                self.trans6 = Struct.float
+                self.trans7 = Struct.float
+                self.trans8 = Struct.float
+                self.trans9 = Struct.float
+                self.trans10 = Struct.float
+                self.trans11 = Struct.float
+                
+                self.transi0 = Struct.float
+                self.transi1 = Struct.float
+                self.transi2 = Struct.float
+                self.transi3 = Struct.float
+                self.transi4 = Struct.float
+                self.transi5 = Struct.float
+                self.transi6 = Struct.float
+                self.transi7 = Struct.float
+                self.transi8 = Struct.float
+                self.transi9 = Struct.float
+                self.transi10 = Struct.float
+                self.transi11 = Struct.float
+        class MDL0Vertex(Struct):
+            __endian__ = Struct.BE
+            def __format__(self):
+                self.size = Struct.uint32
+                self.mdl0offset = Struct.int32
+                self.data_offset = Struct.int32
+                self.string_offset = Struct.int32
+                self.index = Struct.int32
+                self.isxyz = Struct.int32
+                self.type = Struct.int32
+                self.divisor = Struct.uint8
+                self.stride = Struct.uint8
+                self.vertice_count = Struct.uint16
+                self.box_min_x = Struct.float
+                self.box_min_y = Struct.float
+                self.box_min_z = Struct.float
+                self.box_max_x = Struct.float
+                self.box_max_y = Struct.float
+                self.box_max_z = Struct.float
+                self.pad1 = Struct.int32
+                self.pad2 = Struct.int32
+                
+        def _load(self, bres, data, offset):
+            header = Bres.BresCommonHeader()
+            header.unpack(data[offset:offset+len(header)])
+            if header.tag != "MDL0":
+                print "not a mdl0 file? tag is wrong!"
+            if header.version != 9 and header.version != 11:
+                print "unkown mdl0 version? version is %s" % header.version
+            startoffset = offset
+            
+            
+            offset += len(header)
+            
+            groups = []
+            numgroups = 11
+            
+            if header.version == 11:
+                numgroups = 14 
+            
+            offset_table = {}
+            for c in xrange(numgroups):
+                goffset = struct.unpack("&gt;I", data[offset+c*4:offset+((1+c)*4)])[0]
+                offset_table[c] = goffset
+                
+                #if(goffset != 0):
+                    #group = Bres.ResDict()
+                    #(goffset, group) = bres._loadDict(data, offset + goffset)
+            print "offsets: %s" % offset_table
+            offset += numgroups * 4
+            print "offset: %s" % offset
+            props = self.MDL0Properties()
+            props.unpack(data[offset:offset+len(props)])
+            offset += len(props)
+            print "MDL0 Properties: Vertice %s Face %s Node %s box [%s,%s,%s] box [%s,%s,%s]rn" % (props.vertice_count, props.face_count, props.chunk_count, props.box_min_x, props.box_min_y,props.box_min_z, props.box_max_x,props.box_max_y,props.box_max_z),
+            
+            index_table = {}
+            element_count = struct.unpack("&gt;I", data[offset:offset+4])[0]
+            offset += 4;
+            for c in xrange(element_count):
+                index_table[c] = struct.unpack("&gt;I", data[offset+(c*4):offset+(c*4)+4])[0]
+            offset += element_count * 4;
+            print "Index Table: %srn" % index_table,
+            
+            
+            '''#Definitions
+            (offset, group) = bres._loadDict(data, offset)
+            self.Type2Data = []
+            self.Type3Data = []
+            self.Type4Data = []
+            self.Type5Data = []
+            
+            for c in group.children:
+                if c.id != 0xFFFF:
+                    goffset = c.total_data_offset
+                    type = struct.unpack("B", data[goffset])[0]
+                    
+                    if type == 2:
+                        goffset += 1
+                        print "pos %s" % goffset
+                        boneIndex = struct.unpack("&gt;H", data[goffset:goffset+2])[0]
+                        goffset += 2
+                        parentID = struct.unpack("&gt;H", data[goffset:goffset+2])[0]
+                        goffset += 2
+                        print "type 2 data read. bone Index %s parent ID %srn" % (boneIndex, parentID),
+                        
+                    if type == 4:
+                        goffset += 1;
+                        matID = struct.unpack("&gt;H", data[goffset:goffset+2])[0]
+                        goffset += 2
+                        polyID = struct.unpack("&gt;H", data[goffset:goffset+2])[0]
+                        goffset += 2
+                        boneID = struct.unpack("&gt;H", data[goffset:goffset+2])[0]
+                        goffset += 2
+                        val4 = struct.unpack("B", data[goffset])[0]
+                        print "type 4 data read. mat %s poly %s bone %s val4 %srn" % (matID, polyID, boneID, val4),'''
+            offset = startoffset + offset_table[1] #skip to bones
+            #Bones
+            print "Reading Bone Group... from %s" % offset
+            bones = {}
+            (offset, group) = bres._loadDict(data, offset)
+            for c in group.children:
+                if c.id == 0xFFFF:
+                    continue
+                doffset = c.total_data_offset
+                bone = self.MDL0Bone()
+                bone.unpack(data[doffset:doffset+len(bone)])
+                bone.name = ''
+                bone.offset = doffset
+                if bone.string_offset != 0:
+                    strlen = struct.unpack_from("B", data[doffset+bone.string_offset-1])[0]
+                    bone.name = data[doffset+bone.string_offset:doffset+bone.string_offset+strlen]
+                bone.scale = Vector([bone.scale_x, bone.scale_y, bone.scale_z])
+                bone.rot = Vector([bone.rot_x, bone.rot_y, bone.rot_z])
+                bone.trans = Vector([bone.trans_x, bone.trans_y, bone.trans_z])
+                bones[doffset] = bone #store offset for parent calc.
+                print "load bone: name %s index %s nodeid %s scale [%s]rn rot [%s] trans [%s]rn" % (bone.name, bone.index, bone.nodeid, bone.scale, bone.rot, bone.trans),
+            
+            for b in bones:
+                bone = bones[b]
+                bone.parent = None
+                if bone.parent_offset &lt; 0:
+                    #print bone
+                    bone.parent = bones[bone.offset+bone.parent_offset]
+                    #print "Parent %s Bone %s" % (bone.parent.name, bone.name),
+            
+            scn = Blender.Scene.GetCurrent()        
+            mesh = Blender.Mesh.New("MilkShape3D Mesh"+str(props.vertice_count))
+            meshOb = scn.objects.new(mesh)
+            
+            armOb = Blender.Object.New('Armature', "Skeleton"+str(props.vertice_count))
+            armature = Blender.Armature.New("Skeleton"+str(props.vertice_count))
+            armature.drawType = Blender.Armature.STICK
+            armOb.link(armature)
+            scn.objects.link(armOb)
+            armOb.makeParentDeform([meshOb])
+            armature.makeEditable()
+            armature.restPosition = True
+            
+            for i in bones:
+                b = bones[i]
+                
+                
+                bonex = Blender.Armature.Editbone()
+                bonex.name = b.name
+                armature.bones[b.name] = bonex
+                if(b.parent == None):
+                    
+                    bonex.head = Vector(b.trans)
+                    bonex.matrix = self.RM(b.rot)
+                    bvec = bonex.tail - bonex.head
+                    bvec.normalize()
+                    bonex.tail = bonex.head + 0.1 * bvec
+                
+                
+            for i in bones:
+                b = bones[i]
+                bonex = armature.bones[b.name]
+                if(b.parent != None):
+                    bonex.parent = armature.bones[b.parent.name]
+                    #print "setting parent %srn" % armature.bones[b.parent.name]
+                    bonex.head =  Vector(b.trans) * bonex.parent.matrix + bonex.parent.head
+                    tempM = self.RM(b.rot) * bonex.parent.matrix
+                    tempM.transpose;
+                    bonex.matrix = tempM
+                else:
+                    bonex.head = Vector(b.trans)
+                    bonex.matrix = self.RM(b.rot)
+                    
+                bvec = bonex.tail - bonex.head
+                bvec.normalize()
+                bonex.tail = bonex.head + 0.1 *bvec
+            armature.update();
+            
+            
+            
+            scn = Blender.Scene.GetCurrent()
+            #lets load some vertices
+            offset = startoffset + offset_table[2]
+            print "Reading vert Group... from %srn" % offset
+            (offset, group) = bres._loadDict(data, offset)
+            for c in group.children:
+                if c.id == 0xFFFF:
+                    continue
+                
+                doffset = c.total_data_offset
+                vert = self.MDL0Vertex()
+                vert.unpack(data[doffset:doffset+len(vert)])
+                vert.offset = doffset
+                vert.name = ''
+                
+                if vert.string_offset != 0:
+                    strlen = struct.unpack_from("B", data[doffset+vert.string_offset-1])[0]
+                    vert.name = data[doffset+vert.string_offset:doffset+vert.string_offset+strlen]
+                mesh = Blender.Mesh.New(vert.name)
+                meshOb = scn.objects.new(mesh)
+                #print "group %s stride %s count %s type %s d %s xyz %srn" % (vert.name, vert.stride, vert.vertice_count, vert.type, vert.divisor, vert.isxyz),
+                doffset = c.total_data_offset + vert.data_offset
+                vertices = []
+                for s in xrange(vert.vertice_count):
+                    vertice = []
+                    for c in xrange(3):
+                        if vert.type == 0:
+                            vertice.append(float(struct.unpack_from("&gt;B", data[doffset:doffset+1])[0]) * (1.0 / (1 &lt;&lt; vert.divisor)))
+                            doffset += 1
+                        if vert.type == 1:
+                            vertice.append(float(struct.unpack_from("&gt;b", data[doffset:doffset+1])[0]) * (1.0 / (1 &lt;&lt; vert.divisor)))
+                            doffset += 1
+                        elif vert.type == 2:
+                            vertice.append(float(struct.unpack_from("&gt;H", data[doffset:doffset+2])[0]) * (1.0 / (1 &lt;&lt; vert.divisor)))
+                            doffset += 2
+                        elif vert.type == 3:
+                            vertice.append(float(struct.unpack_from("&gt;h", data[doffset:doffset+2])[0]) * (1.0 / (1 &lt;&lt; vert.divisor)))
+                            doffset += 2
+                        elif vert.type == 4:
+                            vertice.append(float(struct.unpack_from("&gt;f", data[doffset:doffset+4])[0]) * (1.0 / (1 &lt;&lt; vert.divisor)))
+                            doffset += 4
+                        else:
+                            print "unk vert type! %srn" % vert.type
+                    vertices.append(vertice)
+                    
+                    
+                #print "adding %s verticesrn" % len(vertices)
+                #print vertices
+                mesh.verts.extend(vertices)
+                
+            Blender.Redraw()
+            
+        def RM(self,a):
+            sy = sin(a[2])
+            cy = cos(a[2])
+            sp = sin(a[1])
+            cp = cos(a[1])
+            sr = sin(a[0])
+            cr = cos(a[0])
+            return Matrix([cp*cy, cp*sy, -sp], [sr*sp*cy+cr*-sy, sr*sp*sy+cr*cy, sr*cp],[cr*sp*cy+-sr*-sy, cr*sp*sy+-sr*cy, cr*cp])</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks69467'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/34415.html" class="username">S0UZ</a> for the post: </dt>
+			<dd><span title="Wed Apr 05, 2017 6:54 am"><a href="../Users/4970.html" class="username">Acewell</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput69467'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p69778" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile69778">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/34415.html" class="username">S0UZ</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=34415&amp;sr=posts">40</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 05, 2011 11:46 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="34415"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/34415/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="34415"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/34415/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact S0UZ">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact S0UZ</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=69778" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content69778">
+
+					<h3 >
+						<a href="./viewtopic.php?p=69778#p69778">Re: writing BRRES importer help (for blender)</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/69778/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=69778" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post69778' href="./viewtopic.php?f=16&amp;p=69778&amp;thanks=69778&amp;to_id=34415&amp;from_id=123876" title="Say Thanks to the author of the post: S0UZ"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=69778#p69778" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/34415.html" class="username">S0UZ</a></strong> &raquo; </span><time datetime="2012-03-22T03:15:57+00:00">Thu Mar 22, 2012 4:15 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Enyone help me make this script to work?I need it.thank you.</div>
+
+			
+			
+									
+						<div id='list_thanks69778'>
+</div>
+<div id='div_post_reput69778'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=6999" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=6999&amp;watch=topic&amp;start=0&amp;hash=165c9a0d" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=6999&amp;unwatch=topic&amp;start=0&amp;hash=165c9a0d" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=6999&amp;bookmark=1&amp;hash=165c9a0d" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=6999" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=6999&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=6999">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a>, <a href="../Users/122441.html" class="username">Hondapromx</a> and 10 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

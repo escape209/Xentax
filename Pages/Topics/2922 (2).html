@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>TMX file format help - Page 3 - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=2922&amp;start=30">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=9c649842ae48bcd04444257bd025d4a2" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="18"><a itemprop="item" href="./viewforum.php?f=18"><span itemprop="name">Graphic file formats</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./2922 (2).html">TMX file format help</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Get your graphics formats figures out here! Got details for others? Post here!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=2922" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=18&amp;t=2922&amp;watch=topic&amp;start=30&amp;hash=852016d8" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=18&amp;t=2922&amp;unwatch=topic&amp;start=30&amp;hash=852016d8" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=2922&amp;start=30&amp;bookmark=1&amp;hash=852016d8" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=2922" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=2922&amp;start=30&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="2922" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			61 posts
+							<ul>
+			<li class="arrow previous"><a class="button button-icon-only" href="./2922 (1).html" rel="prev" role="button"><i class="icon fa-chevron-left fa-fw" aria-hidden="true"></i><span class="sr-only">Previous</span></a></li>
+				<li><a class="button" href="./2922.html" role="button">1</a></li>
+				<li><a class="button" href="./2922 (1).html" role="button">2</a></li>
+			<li class="active"><span>3</span></li>
+				<li><a class="button" href="./2922 (3).html" role="button">4</a></li>
+				<li><a class="button" href="./2922 (4).html" role="button">5</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./2922 (3).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p31831" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile31831">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/9822.html" class="username">Barubary</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=9822&amp;sr=posts">9</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jun 15, 2009 12:21 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="9822"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/9822/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="9822"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/9822/false">7 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Barubary">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Barubary</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=31831" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content31831">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=31831#p31831">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/31831/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=31831" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post31831' href="./viewtopic.php?f=18&amp;p=31831&amp;thanks=31831&amp;to_id=9822&amp;from_id=123876" title="Say Thanks to the author of the post: Barubary"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=31831#p31831" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/9822.html" class="username">Barubary</a></strong> &raquo; </span><time datetime="2009-09-20T17:19:45+00:00">Sun Sep 20, 2009 6:19 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Although your version of that region looks a bit neater, it is not entirely correct. If the if-statement would read 'if(!BigEndian)', it would have been. (it seems I made the same mistake in another method though)<br>
+The color format of the TMX files is either 'ABGR' in BigEndian format, or 'RGBA' in LittleEndian format (since you read R-&gt;G-&gt;B-&gt;A if you read it per byte).<br>
+<br>
+I've updated the code, but have not yet uploaded a new version of the executable.<br>
+<br>
+<br>
+EDIT: might as well put the adjusted plugin here as well:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--Name this Palette_TMX.lua
+if readDWORD(0x8) == 811093332 then
+   if readWORD(0x16) == 0x14 then
+      format = 7; --graphics is 4 bit
+      palSize = 16;
+      tiled = false;
+   else
+      format = 7;
+      palSize = 256;
+      tiled = true;
+   end
+   
+   paletteOffset = 0x40;   
+   order = 'BGR';
+   bigendian = true;
+   alphaAtStart = true;
+   ignoreAlpha = false;
+   enableAlphaStrech = true;
+   alphaStretch = {};
+   alphaStretch[0] = 0;
+   alphaStretch[1] = 128;
+   tilesize = {};
+   tilesize[0] = 8;
+   tilesize[1] = 2;
+   setData2(paletteOffset,palSize*4);
+else
+   warning = 'File is not TMX: '..readDWORD(0x8)
+end</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks31831'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/9822.html" class="username">Barubary</a> for the post: </dt>
+			<dd><a href="../Users/13211.html" class="username">bbrcher</a></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput31831'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p31834" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile31834">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/13211.html" class="username">bbrcher</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=13211&amp;sr=posts">22</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 07, 2009 7:27 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="13211"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="13211"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bbrcher">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bbrcher</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=31834" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content31834">
+
+					<h3 >
+						<a href="./viewtopic.php?p=31834#p31834">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/31834/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=31834" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post31834' href="./viewtopic.php?f=18&amp;p=31834&amp;thanks=31834&amp;to_id=13211&amp;from_id=123876" title="Say Thanks to the author of the post: bbrcher"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=31834#p31834" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/13211.html" class="username">bbrcher</a></strong> &raquo; </span><time datetime="2009-09-20T18:23:18+00:00">Sun Sep 20, 2009 7:23 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Hah, thanks for that. I was wracking my brain wondering what was up cause I thought, no way he made an endian mistake, but I tried every option of palette order and such EXCEPT alpha at the start, because when I looked at the hex it was at the end... oh so silly of me.  I eventually just figured that instead of grabbing the bytes in chunks you'd just grab them in order since they were just single bytes, not shorts or words or whatever.<br>
+<br>
+I do like your program a lot and it's code it pretty easy to understand so I've been teaching myself C# through emulating your design and making a RMD file inspector (not viewer yet since adding a 3D context seems a little more involved at the moment.).<br>
+<br>
+RMD files from the Persona games have TMX file data embedded into them but they are swizzled.  I hacked in some ugly unswizzle code into TGGD, here it is if you are interested (this is for PS2, and I believe it is slightly different for other systems):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>       #region Swizzle
+                    byte[] d1 = new byte[nNecessBytes];
+                    byte[] d2 = new byte[nNecessBytes];
+                    for (int i = 0; i &lt; nNecessBytes &amp;&amp; !atEnd; i++)
+                    {
+                        d1[i] = Next(out atEnd);
+                        d2[i] = 0;
+                    }
+
+                    uint w = Width;
+                    uint h = Height;
+
+                    for (uint y = 0; y &lt; h; y++)
+                    {
+                        for (uint x = 0; x &lt; w; x++)
+                        {
+                            uint block_location = (uint)((y &amp; (~0xf)) * w + (x &amp; (~0xf)) * 2);
+                            uint swap_selector = (uint)((((y + 2) &gt;&gt; 2) &amp; 0x1) * 4);
+                            uint posY = (uint)((((y &amp; (~3)) &gt;&gt; 1) + (y &amp; 1)) &amp; 0x7);
+                            uint column_location = (uint)(posY * w * 2 + ((x + swap_selector) &amp; 0x7) * 4);
+
+                            uint byte_num = ((y &gt;&gt; 1) &amp; 1) + ((x &gt;&gt; 2) &amp; 2);     // 0,1,2,3
+
+                            d2[y * w + x] = d1[block_location + column_location + byte_num];
+                        }
+                    }
+
+                    for (int i = 0; i &lt; nNecessBytes; i++)
+                    {
+                        *(bmptr++) = palette[d2[i]];
+                    }
+                    #endregion</code></pre></div>
+
+I put this into the linear 8BPP section because that's what I use--also added a bool for swizzling since you can't swizzle non-powers-of-two. (Source is <a href="http://playstation2-linux.com/download/p2lsd/sparkys_swizzle_code.html" class="postlink">Sparky's code</a>)</div>
+
+			
+			
+									
+						<div id='list_thanks31834'>
+</div>
+<div id='div_post_reput31834'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37840" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37840">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/25872.html" class="username">PersonaRipper</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=25872&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 6:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="25872"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="25872"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PersonaRipper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PersonaRipper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37840" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37840">
+
+					<h3 >
+							<img src="./images/icons/smile/question.gif" width="16" height="16" alt="" title="">
+						<a href="./viewtopic.php?p=37840#p37840">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37840/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37840" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37840' href="./viewtopic.php?f=18&amp;p=37840&amp;thanks=37840&amp;to_id=25872&amp;from_id=123876" title="Say Thanks to the author of the post: PersonaRipper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37840#p37840" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/25872.html" class="username">PersonaRipper</a></strong> &raquo; </span><time datetime="2010-05-03T19:16:02+00:00">Mon May 03, 2010 8:16 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">This topic was -extremely- helpful for getting the images out of Persona PS2 games. I am trying to take this one step further, but have hit a brick wall. I am hoping someone here can figure out what to do!<br>
+<br>
+I have found on a Persona game disc, a series of .BIN files. I opened one in a text editor, and discovered the first bit of text says it contains a .TMX file. Using TiledGGD I could not initially make sense of the file. I then opened a .TMX file, and immediately opened a .BIN file in the same window, and got a character image in a somewhat muddled fashion. I didn't load the palette from the .BIN, for the result examples I am posting.<br>
+<br>
+The file header in the .BIN is not exactly like the .TMX, especially given the .BIN specifies a .TMX file name before the TMX data. I have been looking for a way to either extract the file from the BIN, edit the bin to match the TMX format, or formulate a settings combination that will let TiledGGD use the .BIN directly.<br>
+<br>
+Attached are some example files I have been using.<br>
+-The .TMX file, I load before the .BIN, so it carries over the image settings and lets me see what the image roughly is.<br>
+- Target1&amp;2 are .BIN files containing .TMX data.<br>
+- Result1&amp;2 are the muddled images I get out of TiledGGD from the respective .BINs<br>
+<br>
+Here are 2 reference images for the Target .BINs:<br>
+<a href="http://megamitensei.wikia.com/wiki/File:ProtagonistP3.jpg" class="postlink">http://megamitensei.wikia.com/wiki/File ... nistP3.jpg</a><br>
+<a href="http://megamitensei.wikia.com/wiki/File:TheJourney-AegisExpressions.jpg" class="postlink">http://megamitensei.wikia.com/wiki/File ... ssions.jpg</a><br>
+<br>
+I hope someone has some ideas, I'm stumped.</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=3005">Resources.zip</a></dt>
+						<dd>(238.14 KiB) Downloaded 15 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks37840'>
+</div>
+<div id='div_post_reput37840'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37890" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37890">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/13211.html" class="username">bbrcher</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=13211&amp;sr=posts">22</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 07, 2009 7:27 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="13211"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="13211"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bbrcher">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bbrcher</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37890" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37890">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37890#p37890">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37890/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37890" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37890' href="./viewtopic.php?f=18&amp;p=37890&amp;thanks=37890&amp;to_id=13211&amp;from_id=123876" title="Say Thanks to the author of the post: bbrcher"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37890#p37890" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/13211.html" class="username">bbrcher</a></strong> &raquo; </span><time datetime="2010-05-05T02:11:00+00:00">Wed May 05, 2010 3:11 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I didn't look at the bin files yet, but I did look at the tmx you provided.  The first part is the main image of Aigis (512x512) and the seconded small image (512x64) is just her eye's shut for when she blinks.<br>
+<br>
+The format is slightly different than the TMX file in that either your exporter or the file replaces nulls (0x00) with spaces (0x20) and so the GDD won't read it nicely... since it will try to make a huge image.  This screws up the actual image as well because the 0x00's used as indexes into the palette are now 0x20 instead of 0x00. I got some nice pictures from it though, only the alpha channel was confused (never got to full transparency).<br>
+<br>
+Also, some of the TMX header got clipped off--there are 8 bytes before TMX that GDD looks for to know it's a proper TMX file.  Also, the end of the TMX file you gave might be missing too, I'm not sure.<br>
+<br>
+**after looking at the bins<br>
+<br>
+The bins do hold TMX files, in this format: Name of TMX file, padding, size of TMX file, TMX file, Name of next TMX file, ...<br>
+<br>
+Looks like you copied the text side of the HEX viewer maybe to get your TMX file before, make sure to use the binary side (those spaces are what are hurting you).  The TMX file name probably uses the max length char string of 252 so you can use that to find your files better.  BINs can hold other file types as well, so maybe just searching for the TMX header will be enough.</div>
+
+			
+			
+									
+						<div id='list_thanks37890'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/13211.html" class="username">bbrcher</a> for the post: </dt>
+			<dd><a href="../Users/25872.html" class="username">PersonaRipper</a></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput37890'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37914" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37914">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/25872.html" class="username">PersonaRipper</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=25872&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 6:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="25872"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="25872"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PersonaRipper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PersonaRipper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37914" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37914">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37914#p37914">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37914/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37914" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37914' href="./viewtopic.php?f=18&amp;p=37914&amp;thanks=37914&amp;to_id=25872&amp;from_id=123876" title="Say Thanks to the author of the post: PersonaRipper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37914#p37914" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/25872.html" class="username">PersonaRipper</a></strong> &raquo; </span><time datetime="2010-05-06T04:49:48+00:00">Thu May 06, 2010 5:49 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Thank you for the fast reply! <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"> <br>
+<br>
+About the TMX file, I messed up and that wasn't the one I meant to post. I was going to give another clean TMX from the game, but uploaded an edited and renamed BIN instead. Thankfully that mistake lead to additional insight!<br>
+<br>
+With your help I made significant progress. I've been able to pull the main character images from the BINs. I've found that the padding between file name and the start of the TMX proper ends at a hex value of 02 (being the first value of the tmx file.) However, when I apply this rule to the 2nd embedded file (The closed eye portion), it won't work.<br>
+<br>
+What I've done so far:<br>
+- Used a hex editor to delete all the values prior to the 2nd file's file name.<br>
+-- Found 0x02 and removed the padding+filename from before it. Saved as a new .TMX<br>
+-- Loaded new tmx image and found a scattered mess.(A small block of black with red and green dots, most of the palette looks like an old tv test pattern instead of the browns and blacks the character palette should have)<br>
+----Opened the first image from the BIN, then opened the closed-eye TMX, which lets me see the image, but there is a couple rows of non-sense and the image is more pixelated than it should be. I -think- what is happening is the secondary TMX uses the same palette as the first, or my method is somehow corrupting the palette data.<br>
+<br>
+You'd think a degree in programming would be sufficient, but we never really covered graphics.</div>
+
+			
+			
+									
+						<div id='list_thanks37914'>
+</div>
+<div id='div_post_reput37914'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37945" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37945">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/13211.html" class="username">bbrcher</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=13211&amp;sr=posts">22</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 07, 2009 7:27 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="13211"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="13211"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bbrcher">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bbrcher</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37945" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37945">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37945#p37945">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37945/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37945" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37945' href="./viewtopic.php?f=18&amp;p=37945&amp;thanks=37945&amp;to_id=13211&amp;from_id=123876" title="Say Thanks to the author of the post: bbrcher"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37945#p37945" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/13211.html" class="username">bbrcher</a></strong> &raquo; </span><time datetime="2010-05-06T18:19:58+00:00">Thu May 06, 2010 7:19 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Are you talking about the same bin files you linked last time?<br>
+<br>
+I'm pretty sure they are separate files because the 1st palette doesn't work well with the 2nd picture.<br>
+<br>
+Target2.bin :<br>
+<br>
+First TMX starts @ 0x100 (0x100)<br>
+The 2nd int32 into the TMX is the size of the file (0x40440), so 0x100+that number is the 2nd file in the bin location. <br>
+Second TMX starts @ 0x100 + the end of the First (0x40540) = (0x40640)<br>
+<br>
+Something that might be useful would be to make a BIN extractor that would take a bin and pull out all the files in them for you to look at better.  Could have an option to put them in folders as well if ya want. There are a lot of BIN files in the archives and you might find something useful.</div>
+
+			
+			
+									
+						<div id='list_thanks37945'>
+</div>
+<div id='div_post_reput37945'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37947" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37947">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/25872.html" class="username">PersonaRipper</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=25872&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 6:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="25872"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="25872"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PersonaRipper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PersonaRipper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37947" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37947">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37947#p37947">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37947/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37947" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37947' href="./viewtopic.php?f=18&amp;p=37947&amp;thanks=37947&amp;to_id=25872&amp;from_id=123876" title="Say Thanks to the author of the post: PersonaRipper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37947#p37947" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/25872.html" class="username">PersonaRipper</a></strong> &raquo; </span><time datetime="2010-05-06T19:03:33+00:00">Thu May 06, 2010 8:03 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Yeah, it is the same files I am talking about.<br>
+<br>
+One of the issues (the muddled mess with totally incorrect palette), was just a late night oversight. Apparently with the code supplied in this thread, GDD only applies the correct TMX settings if the file extension is in all caps. The files I was generating were lowercase, so I was getting the default settings. Simple enough to solve.<br>
+<br>
+I'm not sure about the other issue, because the nearly correct results I got was from a manually hex-edited file. I was pretty careful about integrity. I probably found some new and impressive way to mess up the file though. I'll try again!<br>
+<br>
+Since there are so many .BINs on the disc, I am writing a small C++ program to extract the files automatically.<br>
+<br>
+How could you tell that the 2nd int was the file length? Does that come with knowing graphic file formats, or well educated guessing, etc?</div>
+
+			
+			
+									
+						<div id='list_thanks37947'>
+</div>
+<div id='div_post_reput37947'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37948" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37948">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/13211.html" class="username">bbrcher</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=13211&amp;sr=posts">22</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 07, 2009 7:27 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="13211"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="13211"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bbrcher">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bbrcher</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37948" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37948">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37948#p37948">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37948/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37948" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37948' href="./viewtopic.php?f=18&amp;p=37948&amp;thanks=37948&amp;to_id=13211&amp;from_id=123876" title="Say Thanks to the author of the post: bbrcher"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37948#p37948" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/13211.html" class="username">bbrcher</a></strong> &raquo; </span><time datetime="2010-05-06T19:19:36+00:00">Thu May 06, 2010 8:19 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I guess it's mostly from experience in looking at files. Most file formats have some sort of data size or file size number included as an integrity check.  I use XVI32 and it has a handy data inspector that tells you what the values at the cursor are in different formats--so I just start at the beginning of the file and move back and forth with the arrow keys to see numbers that make sense. <br>
+<br>
+Yeah, I found the case sensitivity of the bindings to be a little annoying as well.  You can edit the code to not send in the regex string in as case sensitive or just add a new binding with tmx as well as TMX.<br>
+<br>
+Glad you are making progress, let us know what you get and do with all this stuff <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"></div>
+
+			
+			
+									
+						<div id='list_thanks37948'>
+</div>
+<div id='div_post_reput37948'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37956" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37956">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/25872.html" class="username">PersonaRipper</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=25872&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 6:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="25872"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="25872"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PersonaRipper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PersonaRipper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37956" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37956">
+
+					<h3 >
+							<img src="./images/icons/misc/thinking.gif" width="16" height="16" alt="" title="">
+						<a href="./viewtopic.php?p=37956#p37956">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37956/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37956" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37956' href="./viewtopic.php?f=18&amp;p=37956&amp;thanks=37956&amp;to_id=25872&amp;from_id=123876" title="Say Thanks to the author of the post: PersonaRipper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37956#p37956" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/25872.html" class="username">PersonaRipper</a></strong> &raquo; </span><time datetime="2010-05-07T06:50:53+00:00">Fri May 07, 2010 7:50 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Yeah, for now I am using the case sensitivity to my advantage, as any time I have a file I want to test, I do that 'Load a .TMX, then load a .tmx to see if I am roughly on the right track' test. For simplicity sake, I'll refer to .TMX as the files that are properly loaded with settings applied, and .tmx as ones that load, but use a previously loaded .TMX to properly display. Make sense?<br>
+<br>
+With your significant help I've gotten quite close to cracking this thing. I now have a small program that can find and extract TMX files from the .BIN with a fair amount of accuracy. Once it is complete, I will post the source file here for others.<br>
+<br>
+TMX observations:<br>
+File starts with 0x02000000, then the file size, as you stated, such as 0x40840000, the next 4 byte block spells out TMX0.<br>
+After that there are a few bytes I am not sure about. They seem to be a padding of 4 bytes (0x00 each), then two bytes that together equal 1 (possibly the 'Skip Size' as read by GGD?). The following 2 byte group appears to be the width of the image (usually 0x0002 -&gt; 512), followed by another 2 bytes for the height.<br>
+<br>
+Attached is progress I have made with the Target2.BIN of Aigis.<br>
+Inside is:<br>
+- i_bust_03_b2.TMX - Aigis's body shot as ripped by my application.<br>
+- i_me_03_b2.TMX - Aigis's closed eyes frame as ripped by my application.<br>
+- manualEdit.tmx - Aigis's closed eyes file, but I used a hex editor and did it myself. This file is byte for byte the same as the other version, but a bit longer at the end, as my application removes the padding.<br>
+- aigis_head.png - shows the current progress on the eyes closed image, which is nearly correct.<br>
+<br>
+I found that on the full body TMX, the previously mentioned height and width values are both 512. When I looked at the closed eye TMX, they are 512 and 64. However, it does not appear that GGD is reading it right, or respecting the image size. If the closed-eye TMX is loaded first, it is loaded as a 64x64 image, and the palette looks incomplete.<br>
+<br>
+If the eye TMX is loaded, then the body TMX, then the eye tmx, we get the .png I included, which is a 512x512 image with roughly the correct results. Ideally, there must be a way to get the image loaded at first try in the right 512x64 size, but I think I am done for tonight.<br>
+<br>
+As for why I am working so hard to do this, it is for my users!<br>
+I have written a Persona fusion calculator / database / assistant program for Persona 3 and 4 called 'Igor's Index'<br>
+<a href="http://tiredtracks.is-a-geek.com:8080/_Projects/Igor/" class="postlink">The project page is here</a>. <br>
+It lets you look at all the vital info on any persona, predicts fusions, and lets you search for persona based on your specific needs. If you are a player, as I think you are given your knowledge of Aigis, you may want to check it out. Totally free of charge, of course.<br>
+<br>
+By popular demand, I (with the aid of this forum topic) managed to include images of each Persona on their profile. An update I am ever so slowly working on, involves the party members, so I wanted to get clean images of each of them, and found they were trapped in these .BIN files. With your additional help, I've now got the means to extract the profile shots of each party member and social link. Frankly, I could stop right there, but now I am personally curious about getting the closed eye frames, or possibly just doing it for completest sake. Curiosity may have killed the cat, but it just sucks away my spare time. <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"> When I was younger I wanted to be in game design, so seeing how things are packaged on a professional disc like this is also kind of fun.</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=3014">progress_results.zip</a></dt>
+						<dd>(61.46 KiB) Downloaded 18 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks37956'>
+</div>
+<div id='div_post_reput37956'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37974" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37974">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/13211.html" class="username">bbrcher</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=13211&amp;sr=posts">22</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 07, 2009 7:27 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="13211"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="13211"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bbrcher">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bbrcher</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37974" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37974">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37974#p37974">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37974/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37974" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37974' href="./viewtopic.php?f=18&amp;p=37974&amp;thanks=37974&amp;to_id=13211&amp;from_id=123876" title="Say Thanks to the author of the post: bbrcher"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37974#p37974" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/13211.html" class="username">bbrcher</a></strong> &raquo; </span><time datetime="2010-05-07T17:28:25+00:00">Fri May 07, 2010 6:28 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">That's a pretty sweet program you got there <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+<br>
+I'm able to get good pictures from all of your TMX's btw, so I'm not sure what's up with your weird sizes.  Are your plugin files exactly like the ones posted in this thread? Make sure you use the corrected palette lua file that Barubary gave.  The png file looks exactly what I get if I load the 64 pixel tall image in as generic data instead of specific data btw.  The garbage on the top is the palette.<br>
+<br>
+As for the structure of the header, I don't remember all of my work on that but here is the gist:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>struct TMXHeader {
+	int32		startUnknown;	//0x02000000
+	int32		tmxSize; 	 	//size of file including this header
+	char[4] 	magicTag; 		// "TMX0"
+	int32		unknown;  		//padding 0
+	int16		unknown;  		//non zero, may be different version value
+	int16		tmxWidth;
+	int16		tmxHeight;
+	int32		tmxFlags; 		//so far only discerned 2 formats
+	int16		tmxEnd;   		//0x00FF 
+	char[36]	reserved; 		//nulls
+}; //0x40 bytes</code></pre></div>
+
+Somewhere in there is a versioning value--I saw that it was different for P3, FES and P4, but I don't remember what was different anymore.</div>
+
+			
+			
+									
+						<div id='list_thanks37974'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/13211.html" class="username">bbrcher</a> for the post (total 2):</dt>
+			<dd><a href="../Users/25872.html" class="username">PersonaRipper</a>, <a href="../Users/26139.html" class="username">Blyss</a></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput37974'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;3.45%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 3.45%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37975" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37975">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/25872.html" class="username">PersonaRipper</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=25872&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 6:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="25872"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="25872"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PersonaRipper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PersonaRipper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37975" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37975">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37975#p37975">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37975/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37975" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37975' href="./viewtopic.php?f=18&amp;p=37975&amp;thanks=37975&amp;to_id=25872&amp;from_id=123876" title="Say Thanks to the author of the post: PersonaRipper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37975#p37975" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/25872.html" class="username">PersonaRipper</a></strong> &raquo; </span><time datetime="2010-05-07T18:37:04+00:00">Fri May 07, 2010 7:37 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">....... Wow.<br>
+Lessons:<br>
+- Don't work on something like this all night and expect no mistakes.<br>
+- Don't edit files when you have no clue what you are doing.<br>
+<br>
+Thanks again bbarcher. The problem this time was NOT with my application. A few days ago I made a new set of .lua files for .tmx format, thinking I could experiment and tweak settings there if need be (without modifying the .TMX binding). Somehow, I brilliantly managed to edit the Graphics_TMX.lua file to <br>
+width = readWORD(0x14);, where the value is supposed to be 0x12. <img class="smilies" src="./images/smilies/%5Bcolon%5Dconfused.gif" width="15" height="15" alt=":?" title="Confused"> D'oh. No wonder it wasn't reading correctly.<br>
+<br>
+Also, I somehow never thought of making a struct to deal with that data. I guess I've been approaching this problem far too linearly. *kneels* I have much to learn.<br>
+<br>
+Everything is now reading correctly! I will provide the source code soon, once I've cleaned up my comments and such.</div>
+
+			
+			
+									
+						<div id='list_thanks37975'>
+</div>
+<div id='div_post_reput37975'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37982" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37982">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/25872.html" class="username">PersonaRipper</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=25872&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 6:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="25872"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="25872"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PersonaRipper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PersonaRipper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37982" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37982">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37982#p37982">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37982/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37982" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37982' href="./viewtopic.php?f=18&amp;p=37982&amp;thanks=37982&amp;to_id=25872&amp;from_id=123876" title="Say Thanks to the author of the post: PersonaRipper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37982#p37982" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/25872.html" class="username">PersonaRipper</a></strong> &raquo; </span><time datetime="2010-05-08T02:00:31+00:00">Sat May 08, 2010 3:00 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Alright, the code seems to be ready!<br>
+It is a simple batch application via the command line (or drag and drop?). I just compiled it, put it in the directory in question and used the command:<br>
+name_of_executable *.BIN<br>
+, and the program did the rest.<br>
+For ease of use, I made it convert the file extension to all caps, but that is easy enough to comment out if you want otherwise.<br>
+<br>
+This has me wondering, does TiledGGD have a batch mode? Some command line arguments to make it translate a whole directory of .TMX to .png? That would save me a heck of a lot of time and effort. I already played around with it, and googled to no results.</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=3018">convertBin.zip</a></dt>
+						<dd>(825 Bytes) Downloaded 24 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks37982'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/25872.html" class="username">PersonaRipper</a> for the post: </dt>
+			<dd><a href="../Users/26139.html" class="username">Blyss</a></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput37982'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37983" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37983">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/13211.html" class="username">bbrcher</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=13211&amp;sr=posts">22</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 07, 2009 7:27 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="13211"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="13211"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bbrcher">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bbrcher</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37983" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37983">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37983#p37983">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37983/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37983" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37983' href="./viewtopic.php?f=18&amp;p=37983&amp;thanks=37983&amp;to_id=13211&amp;from_id=123876" title="Say Thanks to the author of the post: bbrcher"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37983#p37983" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/13211.html" class="username">bbrcher</a></strong> &raquo; </span><time datetime="2010-05-08T02:26:21+00:00">Sat May 08, 2010 3:26 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Pretty sure it doesn't, but the source is available, I say flex some more of those programming muscles and add it in.  I'm sure the owner (Barubary) would be fine with the addition <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+<br>
+As for the extractor, I've got a request/suggestion: Pull the first 252 bytes for the file name and then the 253-256 bytes for the file size and extract that file instead of going into the TMX header.  This way you can extract any file from a BIN.  There are a lot more files that are stored in BIN's than just TMX's, one of them being a SPR file that you can use to get more image info out of.  Also, I'm currently working on a model extractor and there are plenty of those hanging around in BIN's as well.  Be pretty cool to add to your program an animating persona eh? <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"></div>
+
+			
+			
+									
+						<div id='list_thanks37983'>
+</div>
+<div id='div_post_reput37983'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37985" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37985">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/25872.html" class="username">PersonaRipper</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=25872&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 6:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="25872"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="25872"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/25872/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PersonaRipper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PersonaRipper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37985" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37985">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37985#p37985">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37985/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37985" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37985' href="./viewtopic.php?f=18&amp;p=37985&amp;thanks=37985&amp;to_id=25872&amp;from_id=123876" title="Say Thanks to the author of the post: PersonaRipper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37985#p37985" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/25872.html" class="username">PersonaRipper</a></strong> &raquo; </span><time datetime="2010-05-08T04:23:45+00:00">Sat May 08, 2010 5:23 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Good points!<br>
+<br>
+I was so focused in on the problem that it wasn't generic enough for other possible purposes. I've made the suggested change and tested it on a few tmx-bins. Few issues I found is if the filename is not stated, the extraction probably will fail for that BIN, and if the filename includes a directory path, if the directory doesn't exist the files won't be written. Just to be safe, have a 'data' subdirectory, as thats the only one I've seen. I'd rather not use non-standard libraries to fix the directory issue, and it doesn't appear possible in standard C++ from my quick glance on google.<br>
+<br>
+I guess I will take a look at GGD, see what I can do. The problems just keep stacking up! <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=":wink:" title="Wink"> But it is this, or manually saving some 900 images.<br>
+<br>
+As for the models, I'm not that interested in them....yet, at least. I personally prefer sprites over polygons, and the still images seem to have satisfied my users. It is certainly a possibility for the future though. I wish you luck on the modeling though, and would be interested in seeing the finished app.</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=3019">convertBin2.zip</a></dt>
+						<dd>(785 Bytes) Downloaded 24 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks37985'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/25872.html" class="username">PersonaRipper</a> for the post: </dt>
+			<dd><a href="../Users/26139.html" class="username">Blyss</a></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput37985'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p37988" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile37988">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/13211.html" class="username">bbrcher</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=13211&amp;sr=posts">22</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 07, 2009 7:27 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="13211"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="13211"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/13211/false">9 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bbrcher">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bbrcher</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=37988" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content37988">
+
+					<h3 >
+						<a href="./viewtopic.php?p=37988#p37988">Re: TMX file format help</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/37988/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=37988" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post37988' href="./viewtopic.php?f=18&amp;p=37988&amp;thanks=37988&amp;to_id=13211&amp;from_id=123876" title="Say Thanks to the author of the post: bbrcher"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=37988#p37988" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/13211.html" class="username">bbrcher</a></strong> &raquo; </span><time datetime="2010-05-08T09:47:55+00:00">Sat May 08, 2010 10:47 am</time>
+			</p>
+			
+			
+			
+			<div class="content">OK, you got me off my lazy butt.  I modified your code to just search for the TMX0 string and then pull out the TMX files from any file you give it.  As an added bonus/spammer, it'll convert it to a 32b BMP file as well.  Too bad windows ignores the alpha channel, I had to get a trialware app to view it to make sure it was coming out correctly.  I may change this to output a TGA later, I dunno.<br>
+<br>
+I didn't try this with every file type, but I think it should do the trick.  For kicks I dropped the BTL.CVM (~300MB file) from Persona 4 onto it and got 1713 tmx/bmps.  I think only a few of them are swizzled so they look like junk.<br>
+<br>
+*only supports 4/8bit TMX files atm, and I know there are 1/2/16/24/32bit versions out there somewhere, just have to find them and add a check*<br>
+<br>
+**uses a locally global counter for unknown## filenaming, so after each drag/drop I'd move those files somewhere else or just drag all the files you want to search at the same time**<br>
+<br>
+***related to that, if there are two files with the same name... they will be overwritten by any later extraction***</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=3020">extractTmx.zip</a></dt>
+			<dd><em>drop-on tool to find, extract and convert tmx files from persona3/4</em></dd>			<dd>(2.61 KiB) Downloaded 50 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks37988'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/13211.html" class="username">bbrcher</a> for the post: </dt>
+			<dd><a href="../Users/26139.html" class="username">Blyss</a></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput37988'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=2922" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=18&amp;t=2922&amp;watch=topic&amp;start=30&amp;hash=852016d8" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=18&amp;t=2922&amp;unwatch=topic&amp;start=30&amp;hash=852016d8" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=2922&amp;start=30&amp;bookmark=1&amp;hash=852016d8" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=2922" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=2922&amp;start=30&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=2922&amp;start=30">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			61 posts
+							<ul>
+			<li class="arrow previous"><a class="button button-icon-only" href="./2922 (1).html" rel="prev" role="button"><i class="icon fa-chevron-left fa-fw" aria-hidden="true"></i><span class="sr-only">Previous</span></a></li>
+				<li><a class="button" href="./2922.html" role="button">1</a></li>
+				<li><a class="button" href="./2922 (1).html" role="button">2</a></li>
+			<li class="active"><span>3</span></li>
+				<li><a class="button" href="./2922 (3).html" role="button">4</a></li>
+				<li><a class="button" href="./2922 (4).html" role="button">5</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./2922 (3).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=18" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Graphic file formats”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Custom Reader program needed for FEZ XNB files - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=9624">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="21"><a itemprop="item" href="./viewforum.php?f=21"><span itemprop="name">Compressed files and methods</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./9624.html">Custom Reader program needed for FEZ XNB files</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Read or post about compression. And decompression. Or ask questions how to decompress your files.<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=9624" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=21&amp;t=9624&amp;watch=topic&amp;start=0&amp;hash=afc1399f" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=21&amp;t=9624&amp;unwatch=topic&amp;start=0&amp;hash=afc1399f" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9624&amp;bookmark=1&amp;hash=afc1399f" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9624" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9624&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="9624" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			17 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./9624 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./9624 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p78681" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78681">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44150.html" class="username">Sajextryus</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44150&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 04, 2012 1:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44150"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/44150/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="44150"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sajextryus">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sajextryus</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78681" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78681">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=78681#p78681">Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78681/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78681" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78681' href="./viewtopic.php?f=21&amp;p=78681&amp;thanks=78681&amp;to_id=44150&amp;from_id=123876" title="Say Thanks to the author of the post: Sajextryus"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78681#p78681" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44150.html" class="username">Sajextryus</a></strong> &raquo; </span><time datetime="2012-09-12T00:33:01+00:00">Wed Sep 12, 2012 1:33 am</time>
+			</p>
+			
+			
+			
+			<div class="content">(sorry that this is another thread in the same forum, but the main task in the first thread is over and irrelevant thanks to Vash and I have absolutely no clue if this could fit in any other forum)<br>
+<br>
+Pretty much continuing off my other thread… <a href="http://forum.xentax.com/viewtopic.php?f=21&amp;t=9596" class="postlink">viewtopic.php?f=21&amp;t=9596</a><br>
+<br>
+Click the link to read the full thread with some of my extra posts so you can read some notes I wrote about what I know of the programming of FEZ from the developers blog. I have absolutely no experience with programming yet, but from what I've read, it's certainly possible to do what I'm asking.<br>
+<br>
+<br>
+<br>
+<br>
+I'm trying to view the resource files for FEZ (text, images, audio and models) but all the XNB files seem to be written in a custom format that is included in the game engine files. I've already tried viewing it in GXView, but all it gives me is either "unexpected amount of data was read.", "Can't find type reader 'FezEngine.Readers.AnimatedTextureReader", or it will load up blank. As far as I know, it's written using XNA C#. I need help with figuring out how to read this files, probably with the help of the game engine files, and creating a program that can use these readers to read the contents of all the different resource XNB files.<br>
+<br>
+Renaud Brédard, the programmer of FEZ, actually shared my previous thread on Twitter with positive interest in seeing people get it done, which led to it gaining a massive amount of views when Polytron retweeted it, as well as some little tidbits of information from other people interested with the game's programming. Just search @renaudbredard on Twitter and click All to view his responses and people responding from two days ago. Here's the main tweet: <a href="https://twitter.com/renaudbedard/status/244938135128141825" class="postlink">https://twitter.com/renaudbedard/status ... 5128141825</a><br>
+<br>
+While at one point he said "Opening XNB files without the readers or the classes they represent is pretty much an impossible task though.", he received a reply from @feshz0r "‪@renaudbedard‬ XNBs are pretty easy ‪<a href="http://imgur.com/badv7" class="postlink">http://imgur.com/badv7</a> ‬ <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"> as is getting hold of the reader classes, 360 FXOs suuuuuck though". Renaud replied "‪@fesh0r‬ Hah! Didn't consider you could reverse engineer the readers. Well then." so he's somewhat confident in people being able to do this. I replied "‪@renaudbedard‬ oh wow! Thanks for sharing my thread! That's totally awesome! You think you can help us out?" but he said "‪@samblye1‬ I... don't think I want to! It's cool to just watch these things happen but intervening kills the challenge. Plus it's not legal.". While he can't (and understandably doesn't want to) personally help, he has hinted enough for even me that it's clearly doable.<br>
+<br>
+Here's the FEZ .pak decompiler to unpack the folders containing the resource XNB files if you want to try working with the files if you currently own the game, courtesy of Vash: <a href="http://www.mediafire.com/download.php?0vuf47r2aq1w6fs" class="postlink">http://www.mediafire.com/download.php?0vuf47r2aq1w6fs</a><br>
+<br>
+So… anyone willing to help out or just plain interested?</div>
+
+			
+			
+									
+						<div id='list_thanks78681'>
+</div>
+<div id='div_post_reput78681'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p78684" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78684">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/483.html" class="username">Vash</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=483&amp;sr=posts">183</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 29, 2005 2:39 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="483"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/483/true">5 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="483"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/483/false">26 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Vash">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Vash</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78684" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78684">
+
+					<h3 >
+						<a href="./viewtopic.php?p=78684#p78684">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78684/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78684" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78684' href="./viewtopic.php?f=21&amp;p=78684&amp;thanks=78684&amp;to_id=483&amp;from_id=123876" title="Say Thanks to the author of the post: Vash"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78684#p78684" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/483.html" class="username">Vash</a></strong> &raquo; </span><time datetime="2012-09-12T11:23:42+00:00">Wed Sep 12, 2012 12:23 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I'm onto decompression  <img class="smilies" src="./images/smilies/%5Bcolon%5Ddevil.gif" width="15" height="18" alt=":twisted:" title="Twisted Evil"></div>
+
+			
+			
+									
+						<div id='list_thanks78684'>
+</div>
+<div id='div_post_reput78684'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p78714" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78714">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/16084.html" class="username">WRS</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=16084&amp;sr=posts">603</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 06, 2009 12:13 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="16084"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/true">74 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="16084"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/false">137 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact WRS">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact WRS</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78714" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78714">
+
+					<h3 >
+						<a href="./viewtopic.php?p=78714#p78714">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78714/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78714" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78714' href="./viewtopic.php?f=21&amp;p=78714&amp;thanks=78714&amp;to_id=16084&amp;from_id=123876" title="Say Thanks to the author of the post: WRS"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78714#p78714" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/16084.html" class="username">WRS</a></strong> &raquo; </span><time datetime="2012-09-12T18:57:53+00:00">Wed Sep 12, 2012 7:57 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">around this topic, his blog is really interesting - <a href="http://theinstructionlimit.com/category/fez" class="postlink">http://theinstructionlimit.com/category/fez</a><br>
+he was also interviewed for the indie game movie if you want to know more</div>
+
+			
+			
+									
+						<div id='list_thanks78714'>
+</div>
+<div id='div_post_reput78714'>
+</div>
+
+							<div id="sig78714" class="signature">Useful tool links:
+<ul><li><a href="http://aluigi.altervista.org/quickbms.htm" class="postlink">QuickBMS</a></li>
+<li><a href="http://www.sweetscape.com/010editor/" class="postlink">010 Editor</a> (<a href="https://gist.github.com/x1nixmzeng/3805536" class="postlink">prelen.bt</a>)</li></ul></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p78717" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78717">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44150.html" class="username">Sajextryus</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44150&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 04, 2012 1:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44150"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/44150/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="44150"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sajextryus">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sajextryus</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78717" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78717">
+
+					<h3 >
+						<a href="./viewtopic.php?p=78717#p78717">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78717/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78717" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78717' href="./viewtopic.php?f=21&amp;p=78717&amp;thanks=78717&amp;to_id=44150&amp;from_id=123876" title="Say Thanks to the author of the post: Sajextryus"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78717#p78717" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44150.html" class="username">Sajextryus</a></strong> &raquo; </span><time datetime="2012-09-12T19:55:50+00:00">Wed Sep 12, 2012 8:55 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>WRS wrote:</cite>around this topic, his blog is really interesting - <a href="http://theinstructionlimit.com/category/fez" class="postlink">http://theinstructionlimit.com/category/fez</a><br>
+he was also interviewed for the indie game movie if you want to know more</div></blockquote>
+Ah, yes. I've read his blog quite thoroughly. I posted a couple things I found out about the programming of the game in the old thread. He's been talking a bit about Mono lately, so I'm guessing a PC/Mac/etc port is actually being made, which is awesome.<br>
+I've also seen IGTM and enjoyed it very much (It even inspired me to get started with my own game ideas and pull out an old dumbed down XNA  3.1 book from my shelf I never bothered to read, but that's another thing right now). There wasn't much said about the programming, but it was interesting to hear about the game being made from scratch four different times.<br>
+<br>
+Thanks guys for all the positive responses! I had no idea if anyone even cared other than me, but this is real awesome! Keep us updated!</div>
+
+			
+			
+									
+						<div id='list_thanks78717'>
+</div>
+<div id='div_post_reput78717'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p78720" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78720">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41306.html" class="username">fesh0r</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41306&amp;sr=posts">8</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 24, 2012 8:33 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41306"></dd>
+    <dd class="profile-posts" data-user-receive-id="41306"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41306/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact fesh0r">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact fesh0r</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78720" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78720">
+
+					<h3 >
+						<a href="./viewtopic.php?p=78720#p78720">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78720/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78720" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78720' href="./viewtopic.php?f=21&amp;p=78720&amp;thanks=78720&amp;to_id=41306&amp;from_id=123876" title="Say Thanks to the author of the post: fesh0r"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78720#p78720" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41306.html" class="username">fesh0r</a></strong> &raquo; </span><time datetime="2012-09-12T22:30:54+00:00">Wed Sep 12, 2012 11:30 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I was messing around with this back in june but got sidetracked as i tend to do.<br>
+I've got a generic XNB decompressor that I'll package up shortly, which makes reading the XNBs a bit less annoying.<br>
+also wrote a xnb template for 010 editor which is where the screenshot in my tweet came from.<br>
+<br>
+Also, managed to pull out the .net assemblies which makes figuring out the XNB formats a lot easier as you can run them through reflector.<br>
+<br>
+Been many months since i looked at this so will take a while to dig up everything and get back up to speed.<br>
+<br>
+Wrote most of this stuff when pulling apart terraria and not sure how much they actually spread.<br>
+<br>
+For a start, MS actually released some documentation of the XNB format which may help <a href="http://xbox.create.msdn.com/en-US/sample/xnb_format" class="postlink">http://xbox.create.msdn.com/en-US/sample/xnb_format</a></div>
+
+			
+			
+									
+						<div id='list_thanks78720'>
+</div>
+<div id='div_post_reput78720'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p78723" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78723">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41306.html" class="username">fesh0r</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41306&amp;sr=posts">8</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 24, 2012 8:33 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41306"></dd>
+    <dd class="profile-posts" data-user-receive-id="41306"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41306/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact fesh0r">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact fesh0r</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78723" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78723">
+
+					<h3 >
+						<a href="./viewtopic.php?p=78723#p78723">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78723/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78723" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78723' href="./viewtopic.php?f=21&amp;p=78723&amp;thanks=78723&amp;to_id=41306&amp;from_id=123876" title="Say Thanks to the author of the post: fesh0r"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78723#p78723" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41306.html" class="username">fesh0r</a></strong> &raquo; </span><time datetime="2012-09-13T03:22:16+00:00">Thu Sep 13, 2012 4:22 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Ok cleaned up the initial stuff i did a bit.<br>
+<a href="https://dl.dropbox.com/u/17271122/fez/fez_unpacker.zip" class="postlink">https://dl.dropbox.com/u/17271122/fez/fez_unpacker.zip</a> has a python pak file extractor, a xnb file decompressor, the 010 editor XNB template and a couple of bat files.<br>
+<br>
+Couldn't get the unpacker that Vash posted in other thread to do anything other than crash so not sure where it outputs files, but if you put the pak files in <strong class="text-strong">Content</strong>, and run <strong class="text-strong">unpack.bat</strong> it will write them all into <strong class="text-strong">out</strong>, then <strong class="text-strong">decomp.bat</strong> will uncompress all the XNB files into <strong class="text-strong">out_u</strong>, which makes them much easier to work with.<br>
+<br>
+One annoying thing with these XNBs is that the data in them is written out bigendian rather than little endian due to being intended for the 360 XNA runtime rather than PC so most of the PC XNB utils pack a sad when trying to read them.</div>
+
+			
+			
+									
+						<div id='list_thanks78723'>
+</div>
+<div id='div_post_reput78723'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p78728" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78728">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/483.html" class="username">Vash</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=483&amp;sr=posts">183</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 29, 2005 2:39 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="483"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/483/true">5 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="483"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/483/false">26 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Vash">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Vash</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78728" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78728">
+
+					<h3 >
+						<a href="./viewtopic.php?p=78728#p78728">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78728/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78728" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78728' href="./viewtopic.php?f=21&amp;p=78728&amp;thanks=78728&amp;to_id=483&amp;from_id=123876" title="Say Thanks to the author of the post: Vash"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78728#p78728" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/483.html" class="username">Vash</a></strong> &raquo; </span><time datetime="2012-09-13T08:32:02+00:00">Thu Sep 13, 2012 9:32 am</time>
+			</p>
+			
+			
+			
+			<div class="content">My unpacker is written in Visual Studio 2010, you might need the Redist VC++ 2010 (or update them). It puts the extracted files in a dir called like the file give (Other.pak creates the dir Other) and plus I only have that file, other paks might not have the same structure.<br>
+<br>
+Anyway, I'm adding the decompression to the tool as we speak, then I'll see if in the xbox360 SDK there's something useful</div>
+
+			
+			
+									
+						<div id='list_thanks78728'>
+</div>
+<div id='div_post_reput78728'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p78861" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile78861">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44150.html" class="username">Sajextryus</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44150&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 04, 2012 1:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44150"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/44150/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="44150"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sajextryus">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sajextryus</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=78861" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content78861">
+
+					<h3 >
+						<a href="./viewtopic.php?p=78861#p78861">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/78861/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=78861" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post78861' href="./viewtopic.php?f=21&amp;p=78861&amp;thanks=78861&amp;to_id=44150&amp;from_id=123876" title="Say Thanks to the author of the post: Sajextryus"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=78861#p78861" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44150.html" class="username">Sajextryus</a></strong> &raquo; </span><time datetime="2012-09-17T22:51:21+00:00">Mon Sep 17, 2012 11:51 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Any progress? I've been able to read the gametext file, and even found some neat unused dialog. There's also some files that use the 2DTexture reader built in with XNA, but I have not been able to view them with GXView at all.</div>
+
+			
+			
+									
+						<div id='list_thanks78861'>
+</div>
+<div id='div_post_reput78861'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p79036" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile79036">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44150.html" class="username">Sajextryus</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44150&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 04, 2012 1:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44150"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/44150/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="44150"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sajextryus">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sajextryus</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=79036" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content79036">
+
+					<h3 >
+						<a href="./viewtopic.php?p=79036#p79036">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/79036/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=79036" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post79036' href="./viewtopic.php?f=21&amp;p=79036&amp;thanks=79036&amp;to_id=44150&amp;from_id=123876" title="Say Thanks to the author of the post: Sajextryus"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=79036#p79036" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44150.html" class="username">Sajextryus</a></strong> &raquo; </span><time datetime="2012-09-23T09:39:44+00:00">Sun Sep 23, 2012 10:39 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Has there been any success yet? Or has this just been forgotten amongst something else?<br>
+Just wondering since there hasn't been any posts or anything about any attempts or advancement in this project at all and I'm just itching to hear an update.</div>
+
+			
+			
+									
+						<div id='list_thanks79036'>
+</div>
+<div id='div_post_reput79036'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p79156" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile79156">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44150.html" class="username">Sajextryus</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44150&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 04, 2012 1:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44150"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/44150/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="44150"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sajextryus">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sajextryus</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=79156" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content79156">
+
+					<h3 >
+						<a href="./viewtopic.php?p=79156#p79156">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/79156/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=79156" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post79156' href="./viewtopic.php?f=21&amp;p=79156&amp;thanks=79156&amp;to_id=44150&amp;from_id=123876" title="Say Thanks to the author of the post: Sajextryus"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=79156#p79156" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44150.html" class="username">Sajextryus</a></strong> &raquo; </span><time datetime="2012-09-26T17:53:03+00:00">Wed Sep 26, 2012 6:53 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I've managed to view some of the textures using ICY Hexplorer's pixel view feature, and I've even found some unused (?) level designs and full 2D levels, as well as the fourth set of concentric circles which has yet to be found in the game (there's 8 sets in total, and they can be found on the floor of certain areas of the game when viewed in first person mode) so there may be a level in the level list we haven't seen (a level that no ones figured out how to access ingame but is accessible through some unknown puzzle possibly). While I'm able to match up most of the level names to maps and cutscenes, there are a few that I have no ideas about.<br>
+<br>
+Is there any possibility of getting the reader files extracted and such and put then to use as a full level viewer and proper texture viewer?</div>
+
+			
+			
+									
+						<div id='list_thanks79156'>
+</div>
+<div id='div_post_reput79156'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p79679" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile79679">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44150.html" class="username">Sajextryus</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44150&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 04, 2012 1:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44150"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/44150/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="44150"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sajextryus">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sajextryus</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=79679" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content79679">
+
+					<h3 >
+						<a href="./viewtopic.php?p=79679#p79679">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/79679/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=79679" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post79679' href="./viewtopic.php?f=21&amp;p=79679&amp;thanks=79679&amp;to_id=44150&amp;from_id=123876" title="Say Thanks to the author of the post: Sajextryus"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=79679#p79679" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44150.html" class="username">Sajextryus</a></strong> &raquo; </span><time datetime="2012-10-08T01:26:50+00:00">Mon Oct 08, 2012 2:26 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Vash, fesh0r, are either of you still working on this?<br>
+<br>
+I'm also wondering if it's possible to play some of the sound effect XNBs and possibly "Wave Bank.xwb" which has all the layers of the game's soundtrack.<br>
+<br>
+The level files offer a bit of interesting info what what's being utilized from the engine and resource files, so I've started looking at those with a HEX viewer to see if there's something interesting that comes up.</div>
+
+			
+			
+									
+						<div id='list_thanks79679'>
+</div>
+<div id='div_post_reput79679'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p79689" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile79689">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41306.html" class="username">fesh0r</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41306&amp;sr=posts">8</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 24, 2012 8:33 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41306"></dd>
+    <dd class="profile-posts" data-user-receive-id="41306"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41306/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact fesh0r">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact fesh0r</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=79689" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content79689">
+
+					<h3 >
+						<a href="./viewtopic.php?p=79689#p79689">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/79689/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=79689" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post79689' href="./viewtopic.php?f=21&amp;p=79689&amp;thanks=79689&amp;to_id=41306&amp;from_id=123876" title="Say Thanks to the author of the post: fesh0r"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=79689#p79689" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41306.html" class="username">fesh0r</a></strong> &raquo; </span><time datetime="2012-10-08T04:43:26+00:00">Mon Oct 08, 2012 5:43 am</time>
+			</p>
+			
+			
+			
+			<div class="content">yeah still poking away at it.<br>
+have implemented a full generic xnb parser in python including decompression support, and implemented parsers for all of the custom fez types<br>
+<a href="https://gist.github.com/3831523" class="postlink">https://gist.github.com/3831523</a> is it parsing every byte of every xnb file<br>
+<a href="https://gist.github.com/3831957" class="postlink">https://gist.github.com/3831957</a> is a full dump of a single level file<br>
+<br>
+i've got writing pngs for uncompressed textures and animations done, still working on a dxt decoder to do the spritefonts and faraway_thumbs<br>
+<a href="http://imgur.com/a/Ptdtw" class="postlink">http://imgur.com/a/Ptdtw</a><br>
+<br>
+also adding writing all the other type formats out to xml instead of the fairly raw python output above, along with a wav writer, which is a pain due to the wavformatheader being big-endian on the 360<br>
+had a xwb extractor around but it doesn't work either again due to bigendianess</div>
+
+			
+			
+									
+						<div id='list_thanks79689'>
+</div>
+<div id='div_post_reput79689'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p79696" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile79696">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41306.html" class="username">fesh0r</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41306&amp;sr=posts">8</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 24, 2012 8:33 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41306"></dd>
+    <dd class="profile-posts" data-user-receive-id="41306"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41306/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact fesh0r">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact fesh0r</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=79696" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content79696">
+
+					<h3 >
+						<a href="./viewtopic.php?p=79696#p79696">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/79696/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=79696" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post79696' href="./viewtopic.php?f=21&amp;p=79696&amp;thanks=79696&amp;to_id=41306&amp;from_id=123876" title="Say Thanks to the author of the post: fesh0r"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=79696#p79696" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41306.html" class="username">fesh0r</a></strong> &raquo; </span><time datetime="2012-10-08T07:32:01+00:00">Mon Oct 08, 2012 8:32 am</time>
+			</p>
+			
+			
+			
+			<div class="content">checking twitter, renaud found another bunch of people ripping out the assets, over at gamefaqs<br>
+<a href="http://www.gamefaqs.com/boards/961239-fez/64132270" class="postlink">http://www.gamefaqs.com/boards/961239-fez/64132270</a><br>
+sounds like they are doing it all by hand though</div>
+
+			
+			
+									
+						<div id='list_thanks79696'>
+</div>
+<div id='div_post_reput79696'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p80021" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile80021">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41306.html" class="username">fesh0r</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41306&amp;sr=posts">8</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 24, 2012 8:33 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41306"></dd>
+    <dd class="profile-posts" data-user-receive-id="41306"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41306/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact fesh0r">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact fesh0r</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=80021" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content80021">
+
+					<h3 >
+						<a href="./viewtopic.php?p=80021#p80021">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/80021/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=80021" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post80021' href="./viewtopic.php?f=21&amp;p=80021&amp;thanks=80021&amp;to_id=41306&amp;from_id=123876" title="Say Thanks to the author of the post: fesh0r"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=80021#p80021" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41306.html" class="username">fesh0r</a></strong> &raquo; </span><time datetime="2012-10-17T10:31:52+00:00">Wed Oct 17, 2012 11:31 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Ok, got a reasonably releasable version of my xnb parser/exporter done<br>
+<br>
+<a href="https://dl.dropbox.com/u/17271122/fez/fez_parse_0.5.zip" class="postlink">https://dl.dropbox.com/u/17271122/fez/fez_parse_0.5.zip</a><br>
+<br>
+chuck Essentials.pak and Other.pak then run full_export.bat and it will unpack the pak pack files, decompress the resulting xnb files, and then export the contents as big xml files and pngs<br>
+<br>
+will take a while to run due to generating said large xml files, decompressing the DXT compressed textures manually, and creating pngs manually<br>
+<br>
+includes a copy of the portable python 2.7.3 install I did for the minecraft coder pack, with the python lxml module added also<br>
+<br>
+umm, the xml files generated are basically the full contents of all the custom fez xnb file formats converted to xml, and i'm starting on a opengl viewer for the art objects, trilesets, and levels, but thats going to take a while as my 3d programming skills are currently a bit minimal, the files are a lot easier to understand in xml at least<br>
+<br>
+didn't have much luck with the sound effects and xwb files but will go back to them eventually, feel free to buy the official soundtrack from disasterpiece as its pretty awesome anyway and was cheap when i grabbed it</div>
+
+			
+			
+									
+						<div id='list_thanks80021'>
+</div>
+<div id='div_post_reput80021'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p80043" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile80043">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44150.html" class="username">Sajextryus</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44150&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 04, 2012 1:07 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44150"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/44150/true">1 time</a></dd>
+    <dd class="profile-posts" data-user-receive-id="44150"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sajextryus">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sajextryus</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=80043" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content80043">
+
+					<h3 >
+						<a href="./viewtopic.php?p=80043#p80043">Re: Custom Reader program needed for FEZ XNB files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/80043/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=80043" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post80043' href="./viewtopic.php?f=21&amp;p=80043&amp;thanks=80043&amp;to_id=44150&amp;from_id=123876" title="Say Thanks to the author of the post: Sajextryus"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=80043#p80043" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44150.html" class="username">Sajextryus</a></strong> &raquo; </span><time datetime="2012-10-18T05:13:34+00:00">Thu Oct 18, 2012 6:13 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Thanks for uploading that! I've been looking through the level files in XML format, and haven't found too much we haven't known yet. Code inputs specific to a level are usually included in the level files (at least this goes for the ritual monolith room). The 32 and 64 cube cutscenes are the only things that don't have level files, I believe (they're probably saved as some other kind of file possibly outside of these resource files and somewhere else in the game files, since they seem more like demoscenes rather than something done in level files, but really I have no idea). And CMY_Secret_Cave.png has everything but magenta as alpha, but then again it's something accidentally left in the game files so I'm not really concerned.<br>
+<br>
+<br>
+One odd and intriguing thing: I found one level file I can't match up to any sort of in game level or cutscene. It's titled 'octoheahedron' and the only art object file it seems to be using is NEW_HEXAO. It does look like there are triles set up, here, so it might actually contain something like a working level, which might be a final secret room which <a href="http://www.formspring.me/renaudbedard/q/345199617618495104" class="postlink">Renaud somewhat hinted at (I think)!</a> He said that there are 157 levels and cutscenes total that are part of the normal game that have been discovered. There's 156 actual files (not counting the trial levels folder) in this file, and the two ending cutscenes add 2 more files, making it 158, which means that could be the one secret level not counted.<br>
+<br>
+What I can find out so far is that the sky background is black and it uses the Zu trileset. It also doesn't show up in the game save files whereas most of the other levels are titled somewhere in the save files, so I guess it might not be possible to save here. I haven't found it mentioned in any level files yet, but I hope there's something more to this than just another left-over file!<br>
+<br>
+<br>
+<br>
+Also in the way of Fractal, I haven't really found anything odd with that level file yet, so maybe there might not really be much to do with that level despite it having the fourth concentric square, but I haven't really checked that closely, so feel free to check yourselves.<br>
+<br>
+There still might be something about those concentric circles, though. Maybe they might have something to do with that extra level! I think I may have really stumbled upon something awesome!</div>
+
+			
+			
+									
+						<div id='list_thanks80043'>
+</div>
+<div id='div_post_reput80043'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=9624" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=21&amp;t=9624&amp;watch=topic&amp;start=0&amp;hash=afc1399f" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=21&amp;t=9624&amp;unwatch=topic&amp;start=0&amp;hash=afc1399f" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9624&amp;bookmark=1&amp;hash=afc1399f" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9624" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9624&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=9624">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			17 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./9624 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./9624 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=21" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Compressed files and methods”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 1 guest</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

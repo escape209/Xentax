@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>How do normals work? - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=19218">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./19218.html">How do normals work?</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=19218" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=19218&amp;watch=topic&amp;start=0&amp;hash=60107f85" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=19218&amp;unwatch=topic&amp;start=0&amp;hash=60107f85" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=19218&amp;bookmark=1&amp;hash=60107f85" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=19218" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=19218&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="19218" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			9 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p146870" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146870">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/71854.html" class="username">Repeperilka</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=71854&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 08, 2018 10:36 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="71854"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/true">6 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="71854"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Repeperilka">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Repeperilka</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146870" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146870">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=146870#p146870">How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146870/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146870" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146870' href="./viewtopic.php?f=16&amp;p=146870&amp;thanks=146870&amp;to_id=71854&amp;from_id=123876" title="Say Thanks to the author of the post: Repeperilka"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146870#p146870" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/71854.html" class="username">Repeperilka</a></strong> &raquo; </span><time datetime="2018-12-22T08:41:14+00:00">Sat Dec 22, 2018 9:41 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I mean, I know they usualy weight 3 floats but I have no idea what's their purpose. Actualy I kind of know what they do, but not how they do it, and that's what I need to know. Like whats the purpose of each float that compose the normal.<br>
+<br>
+I'm getting an error in noesis that looks like this:<br>
+WARNING: Size of normal list does not match positions, ignoring normals.</div>
+
+			
+			
+									
+						<div id='list_thanks146870'>
+</div>
+<div id='div_post_reput146870'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146877" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146877">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146877" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146877">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146877#p146877">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146877/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146877" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146877' href="./viewtopic.php?f=16&amp;p=146877&amp;thanks=146877&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146877#p146877" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2018-12-22T12:17:41+00:00">Sat Dec 22, 2018 1:17 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Repeperilka wrote:</cite>I mean, I know they usualy weight 3 floats but I have no idea what's their purpose. Actualy I kind of know what they do, but not how they do it, and that's what I need to know. Like whats the purpose of each float that compose the normal.</div></blockquote>
+Normals are unit vectors of which the square sum of the 3 coords equal to 1.0. And if you treat their coords as the ones of vertexes, you'll see them all distributing on the Unit Ball. Usually the normal vector of a vertex equals to the average of all the normal vectors of the faces this vert belongs to, but that's not always applicable for game models.
+<blockquote><div><cite>Repeperilka wrote:</cite>I'm getting an error in noesis that looks like this:<br>
+WARNING: Size of normal list does not match positions, ignoring normals.</div></blockquote>
+Usually for game models the amount of vertexes of positions will equal to the ones of the normal vectors, and of the texcoords(UVs).<br>
+But you can optimize them by removing the copies of the same object, which'll result in different counts for positions/normals/UVs. Guess that's what your problem is about.</div>
+
+			
+			
+									
+						<div id='list_thanks146877'>
+</div>
+<div id='div_post_reput146877'>
+</div>
+
+							<div id="sig146877" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146879" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146879">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/71854.html" class="username">Repeperilka</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=71854&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 08, 2018 10:36 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="71854"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/true">6 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="71854"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Repeperilka">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Repeperilka</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146879" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146879">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146879#p146879">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146879/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146879" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146879' href="./viewtopic.php?f=16&amp;p=146879&amp;thanks=146879&amp;to_id=71854&amp;from_id=123876" title="Say Thanks to the author of the post: Repeperilka"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146879#p146879" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/71854.html" class="username">Repeperilka</a></strong> &raquo; </span><time datetime="2018-12-22T12:56:32+00:00">Sat Dec 22, 2018 1:56 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Bigchillghost wrote:</cite>Usually for game models the amount of vertexes of positions will equal to the ones of the normal vectors, and of the texcoords(UVs).<br>
+But you can optimize them by removing the copies of the same object, which'll result in different counts for positions/normals/UVs. Guess that's what your problem is about.</div></blockquote>
+Hmm, it is probably a problem with my script because i've just made some debugging and this is what i am facing:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Detected file type: Leisure Suit Larry
+3
+35
+------Object14------
+vertex count = 1668
+face index count = 5325
+normals count = 1668
+uv's count = 1668
+------Object16------
+vertex count = 265
+face index count = 666
+normals count = 265
+uv's count = 265
+------Object17------
+vertex count = 362
+face index count = 777
+normals count = 362
+uv's count = 362
+------Object28------
+vertex count = 891
+face index count = 2742
+normals count = 891
+uv's count = 891
+------Object34------
+vertex count = 274
+face index count = 651
+normals count = 274
+uv's count = 274
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+Generating normals for 1668 vertices...
+Generating normals for 265 vertices...
+Generating normals for 362 vertices...
+Generating normals for 891 vertices...
+Generating normals for 274 vertices...
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\LARRYCOOL\\14'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\LARRYCOOL\\16'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\LARRYCOOL\\17'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\LARRYCOOL\\28'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\LARRYCOOL\\34'...Failed.</code></pre></div>
+
+The uv's, normals and vertex arrays have the same length, and I've checked the uv's with ModelResearcher and they are good.<br>
+
+<blockquote><div><cite>Bigchillghost wrote:</cite>Normals are unit vectors of which the square sum of the 3 coords equal to 1.0. And if you treat their coords as the ones of vertexes, you'll see them all distributing on the Unit Ball. Usually the normal vector of a vertex equals to the average of all the normal vectors of the faces this vert belongs to, but that's not always applicable for game models.</div></blockquote>
+
+So, (vn1 + vn2 + vn3)^2 = 1.0? (I am not very good at math nor english)</div>
+
+			
+			
+									
+						<div id='list_thanks146879'>
+</div>
+<div id='div_post_reput146879'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146881" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146881">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146881" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146881">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146881#p146881">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146881/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146881" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146881' href="./viewtopic.php?f=16&amp;p=146881&amp;thanks=146881&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146881#p146881" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2018-12-22T13:19:00+00:00">Sat Dec 22, 2018 2:19 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Repeperilka wrote:</cite>and I've checked the uv's with ModelResearcher and they are good.</div></blockquote>
+Then you must have made some mistakes with your code. You'll need to post your script to reveal your issues.
+<blockquote><div><cite>Repeperilka wrote:</cite>So, (vn1 + vn2 + vn3)^2 = 1.0?</div></blockquote>
+Nop. It's vnx^2 + vny^2 + vnz^2 = 1.0.</div>
+
+			
+			
+									
+						<div id='list_thanks146881'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Sat Dec 22, 2018 8:31 pm"><a href="../Users/71854.html" class="username">Repeperilka</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput146881'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig146881" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146882" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146882">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/71854.html" class="username">Repeperilka</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=71854&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 08, 2018 10:36 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="71854"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/true">6 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="71854"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Repeperilka">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Repeperilka</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146882" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146882">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146882#p146882">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146882/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146882" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146882' href="./viewtopic.php?f=16&amp;p=146882&amp;thanks=146882&amp;to_id=71854&amp;from_id=123876" title="Say Thanks to the author of the post: Repeperilka"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146882#p146882" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/71854.html" class="username">Repeperilka</a></strong> &raquo; </span><time datetime="2018-12-22T13:34:55+00:00">Sat Dec 22, 2018 2:34 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>from inc_noesis import *
+
+def registerNoesisTypes():
+	handle = noesis.register("Leisure Suit Larry", ".WGG")
+	noesis.setHandlerTypeCheck(handle, noepyCheckType)
+	noesis.setHandlerLoadModel(handle, noepyLoadModel)
+
+	noesis.logPopup()
+	return 1
+	
+def noepyCheckType(data):
+	if len(data) &lt; 8:
+		return 0
+	j = NoeBitStream(data)
+	if j.readUInt() != 0x49535648:
+		return 0
+	return 1
+	
+def noepyLoadModel(data, mdlList):
+	f = NoeBitStream(data)
+	#start positions
+	VertexStart = []
+	f.seek(0x24, NOESEEK_ABS)
+	TableStart = f.readUInt()
+	NumberOfChunks = f.readUInt()
+	StartChunkPos = f.readUInt() + 0x58
+	f.seek(0x4, NOESEEK_REL)
+	FacesStart = f.readUInt() + 0x8
+	StartPosition = 0x58
+	for i in range(0, NumberOfChunks):
+		f.seek(StartChunkPos + 0x4, NOESEEK_ABS)
+		vertCount = f.readUInt()
+		f.seek(0x30, NOESEEK_REL)
+		vertSize = f.readUInt()
+		VertexStart.append(Chunk(vertSize, f.tell()))
+		StartChunkPos = f.tell() + vertCount * vertSize
+	print(len(VertexStart))
+	
+	#objects
+	f.seek(StartPosition + TableStart + 0x8, NOESEEK_ABS)
+	ObjectsCount = f.readUInt()
+	f.seek(StartPosition, NOESEEK_ABS)
+	Objects = []
+	for i in range(0, ObjectsCount):
+		Objects.append(f.readBytes(8).decode("ASCII").rstrip("\0"))
+		f.seek(0x8, NOESEEK_REL)
+	#table
+	f.seek(StartPosition + TableStart, NOESEEK_ABS)
+	NumberOfEntries = f.readUInt()
+	f.seek(0x14, NOESEEK_REL)
+	StartEntries = f.tell()
+	Entries = []
+	for i in range(0, NumberOfEntries):
+		chunk = f.readUShort()
+		f.seek(0xA, NOESEEK_REL)
+		nVert = f.readUShort()
+		f.seek(0x2, NOESEEK_REL)
+		nFac = f.readUShort()
+		f.seek(0x2, NOESEEK_REL)
+		fac = f.readUShort()
+		f.seek(0x4, NOESEEK_REL)
+		vert = f.readUShort()
+		f.seek(0x2, NOESEEK_REL)
+		index = f.readUShort()
+		f.seek(0x8, NOESEEK_REL)
+		Entries.append(Entry(chunk, vert, fac, nVert, nFac, index))
+	print(len(Entries))
+	#objects
+	Meshes = []
+	FinalObjects = 0
+	vertex = []
+	faces = []
+	normals = []
+	uv = []
+	for i in range(0, len(Entries)):
+		LastVert = len(vertex)
+		#Vertices
+		pos = VertexStart[Entries[i].nChunk].startPosition + Entries[i].nVertex * VertexStart[Entries[i].nChunk].entrySize
+		f.seek(pos, NOESEEK_ABS)
+		if VertexStart[Entries[i].nChunk].entrySize == 40:
+			for e in range (0, Entries[i].vertexCount):
+				vertex.append (NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				f.seek(0x8, NOESEEK_REL)
+				normals.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				uv.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				f.seek(-0x4, NOESEEK_REL)
+		elif VertexStart[Entries[i].nChunk].entrySize == 36:
+			for e in range (0, Entries[i].vertexCount):
+				vertex.append (NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				f.seek(0x4, NOESEEK_REL)
+				normals.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				uv.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				f.seek(-0x4, NOESEEK_REL)
+		elif VertexStart[Entries[i].nChunk].entrySize == 32:
+			for e in range (0, Entries[i].vertexCount):
+				vertex.append (NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				normals.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				uv.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))
+				f.seek(-0x4, NOESEEK_REL)
+		#Faces
+		pos = FacesStart + StartPosition + Entries[i].nFaces * 2
+		f.seek(pos, NOESEEK_ABS)
+		for e in range (0, Entries[i].facesCount):
+			faces.append(f.readUShort() + LastVert)
+		#setup1
+		if (FinalObjects &lt; Entries[i].objIndex):
+			Meshes.append(NoeMesh (faces, vertex, str(i), str(i)))
+			Meshes[FinalObjects].normals.append(normals)
+			Meshes[FinalObjects].uvs.append(uv)
+			print("------Object" + str(i) + "------")
+			print("vertex count = " + str(len(vertex)))
+			print ("face index count = " + str(len(faces)))
+			print("normals count = " + str(len(normals)))
+			print("uv's count = " + str(len(uv)))
+			faces = []
+			vertex = []
+			normals = []
+			uv = []
+			FinalObjects = FinalObjects + 1
+		
+		#setup2
+		#print(len(normals))
+		#print(len(vertex))
+		#Meshes.append(NoeMesh (faces, vertex, "Hola" + str(i), ""))
+		#Meshes[i].normals.append(normals)
+		#normals = []
+		#vertex = []
+		#faces = []
+		#uv = []
+	
+	mdlList.append(NoeModel(Meshes, [], []))
+	return 1
+	
+class Entry:
+	nChunk = 0
+	vertexCount = 0
+	facesCount = 0
+	nVertex = 0
+	nFaces = 0
+	objIndex = 0
+	def __init__(self, chunk, vert, fac, nVert, nFac, index):
+		self.nChunk = chunk
+		self.vertexCount = vert
+		self.facesCount = fac
+		self.nVertex = nVert
+		self.nFaces = nFac
+		self.objIndex = index
+
+class Chunk:
+	startPosition = 0
+	entrySize = 0
+	def __init__(self, size, start):
+		self.entrySize = size
+		self.startPosition = start</code></pre></div>
+
+This is a post i made because i did not know how was the information stored in the file, there is a link to the file for if you want to have it: <a href="http://forum.xentax.com/viewtopic.php?f=10&amp;t=19163" class="postlink">viewtopic.php?f=10&amp;t=19163</a></div>
+
+			
+			
+									
+						<div id='list_thanks146882'>
+</div>
+<div id='div_post_reput146882'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146883" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146883">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146883" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146883">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146883#p146883">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146883/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146883" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146883' href="./viewtopic.php?f=16&amp;p=146883&amp;thanks=146883&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146883#p146883" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2018-12-22T13:53:06+00:00">Sat Dec 22, 2018 2:53 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>normals.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))</code></pre></div>
+It should be <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>normals.append(NoeVec3([f.readFloat(), f.readFloat(), f.readFloat()]))</code></pre></div>
+or simply use <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>normals.append(NoeVec3.fromBytes(bs.readBytes(12)))</code></pre></div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>uv.append(NoeVec3((f.readFloat(), f.readFloat(), f.readFloat())))</code></pre></div>
+For most of the cases game models don't have the w component while there's no vec2 concept in Noesis, so you need to do it<br>
+like
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>uv.append(NoeVec3([f.readFloat(), f.readFloat(), 0]))</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks146883'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Sat Dec 22, 2018 8:30 pm"><a href="../Users/71854.html" class="username">Repeperilka</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput146883'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig146883" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146884" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146884">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/71854.html" class="username">Repeperilka</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=71854&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 08, 2018 10:36 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="71854"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/true">6 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="71854"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Repeperilka">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Repeperilka</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146884" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146884">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146884#p146884">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146884/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146884" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146884' href="./viewtopic.php?f=16&amp;p=146884&amp;thanks=146884&amp;to_id=71854&amp;from_id=123876" title="Say Thanks to the author of the post: Repeperilka"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146884#p146884" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/71854.html" class="username">Repeperilka</a></strong> &raquo; </span><time datetime="2018-12-22T14:35:39+00:00">Sat Dec 22, 2018 3:35 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I tried every combination possible with the things you told me, and i still get the same warning prompts.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Detected file type: Leisure Suit Larry
+3
+45
+------Object23------
+vertex count = 2067
+1st vert = (0.07027500867843628, 0.07789701223373413, 0.16757899522781372)
+face index count = 7437
+1st face = 0
+normals count = 2067
+1st normal = (0.6937000751495361, 0.6547720432281494, 0.300091028213501)
+uv's count = 2067
+1st uv = [0.4456320106983185, 0.38781505823135376, 0]
+------Object28------
+vertex count = 407
+1st vert = (0.018630001693964005, 0.05230500549077988, 0.46636101603507996)
+face index count = 1371
+1st face = 0
+normals count = 407
+1st normal = (0.49452102184295654, 0.07861600816249847, 0.865602970123291)
+uv's count = 407
+1st uv = [0.4007430076599121, 0.04190700128674507, 0]
+------Object34------
+vertex count = 326
+1st vert = (0.1076200008392334, -0.1154480054974556, 0.39223504066467285)
+face index count = 1011
+1st face = 0
+normals count = 326
+1st normal = (0.6704729795455933, -0.35633304715156555, 0.6507640480995178)
+uv's count = 326
+1st uv = [0.22328200936317444, 0.4489409923553467, 0]
+------Object36------
+vertex count = 150
+1st vert = (0.02080800198018551, -0.10414400696754456, 0.46253401041030884)
+face index count = 597
+1st face = 0
+normals count = 150
+1st normal = (0.5784180164337158, -0.24716001749038696, 0.777396023273468)
+uv's count = 150
+1st uv = [0.4647040069103241, 0.04448600485920906, 0]
+------Object39------
+vertex count = 121
+1st vert = (-0.08317900449037552, -0.051423002034425735, 0.12147300690412521)
+face index count = 468
+1st face = 0
+normals count = 121
+1st normal = (-0.7651110291481018, -0.15395501255989075, 0.6252229809761047)
+uv's count = 121
+1st uv = [0.9215329885482788, 0.7528210282325745, 0]
+------Object42------
+vertex count = 256
+1st vert = (-0.0910470113158226, -0.02799900248646736, 0.08261200040578842)
+face index count = 801
+1st face = 0
+normals count = 256
+1st normal = (-0.9300490617752075, 0.08480000495910645, 0.35751602053642273)
+uv's count = 256
+1st uv = [0.9501460790634155, 0.07912901043891907, 0]
+------Object44------
+vertex count = 131
+1st vert = (0.06489300727844238, -0.1863820105791092, -0.8974469900131226)
+face index count = 213
+1st face = 0
+normals count = 131
+1st normal = (0.12117300927639008, -0.6720520257949829, 0.730522096157074)
+uv's count = 131
+1st uv = [0.9698180556297302, 0.4650510251522064, 0]
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+WARNING: Size of normal list does not match positions, ignoring normals.
+WARNING: Size of uv list does not match positions, ignoring uv's.
+Generating normals for 2067 vertices...
+Generating normals for 407 vertices...
+Generating normals for 326 vertices...
+Generating normals for 150 vertices...
+Generating normals for 121 vertices...
+Generating normals for 256 vertices...
+Generating normals for 131 vertices...
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\GIRLACTR\\23'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\GIRLACTR\\28'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\GIRLACTR\\34'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\GIRLACTR\\36'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\GIRLACTR\\39'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\GIRLACTR\\42'...Failed.
+Reading 'C:\Users\aleja\OneDrive\Escritorio\Larry Extract\out\GIRL\GIRLACTR\\44'...Failed.</code></pre></div>
+
+It keep saying "Url of the archive...Failed" even though noesis is showing me the 3d model perfectly (with fucked up normals, of course)<br>
+<br>
+Edit: i just aded a print with the first entry of every array</div>
+
+			
+			
+									
+						<div id='list_thanks146884'>
+</div>
+<div id='div_post_reput146884'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146887" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146887">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36086.html" class="username">akderebur</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36086&amp;sr=posts">640</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jul 08, 2011 10:36 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="36086"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36086/true">65 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="36086"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36086/false">898 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact akderebur">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact akderebur</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146887" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146887">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146887#p146887">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146887/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146887" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146887' href="./viewtopic.php?f=16&amp;p=146887&amp;thanks=146887&amp;to_id=36086&amp;from_id=123876" title="Say Thanks to the author of the post: akderebur"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146887#p146887" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36086.html" class="username">akderebur</a></strong> &raquo; </span><time datetime="2018-12-22T17:58:36+00:00">Sat Dec 22, 2018 6:58 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I am not really proficient in Python/Noesis but these lines probably insert the whole normal/uv array as a single object.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Meshes[FinalObjects].normals.append(normals)
+Meshes[FinalObjects].uvs.append(uv)</code></pre></div>
+Try<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Meshes[FinalObjects].setNormals(normals)
+Meshes[FinalObjects].setUVs(uv)</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks146887'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/36086.html" class="username">akderebur</a> for the post: </dt>
+			<dd><span title="Sat Dec 22, 2018 8:30 pm"><a href="../Users/71854.html" class="username">Repeperilka</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput146887'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p146888" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile146888">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/71854.html" class="username">Repeperilka</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=71854&amp;sr=posts">14</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 08, 2018 10:36 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="71854"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/true">6 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="71854"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/71854/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Repeperilka">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Repeperilka</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=146888" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content146888">
+
+					<h3 >
+						<a href="./viewtopic.php?p=146888#p146888">Re: How do normals work?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/146888/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=146888" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post146888' href="./viewtopic.php?f=16&amp;p=146888&amp;thanks=146888&amp;to_id=71854&amp;from_id=123876" title="Say Thanks to the author of the post: Repeperilka"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=146888#p146888" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/71854.html" class="username">Repeperilka</a></strong> &raquo; </span><time datetime="2018-12-22T19:30:27+00:00">Sat Dec 22, 2018 8:30 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">It worked! I have to admit that i did not think this was going to work, but it did!<br>
+<br>
+Thank you both, very much indeed!</div>
+
+			
+			
+									
+						<div id='list_thanks146888'>
+</div>
+<div id='div_post_reput146888'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=19218" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=19218&amp;watch=topic&amp;start=0&amp;hash=60107f85" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=19218&amp;unwatch=topic&amp;start=0&amp;hash=60107f85" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=19218&amp;bookmark=1&amp;hash=60107f85" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=19218" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=19218&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=19218">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			9 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123988.html" class="username">drakum9090</a>, <a href="../Users/123876.html" class="username">escape209</a> and 2 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

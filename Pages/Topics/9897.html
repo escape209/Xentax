@@ -1,0 +1,2808 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Reflections CHUNK File Format - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=9897">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="10"><a itemprop="item" href="./viewforum.php?f=10"><span itemprop="name">Game Archive</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./9897.html">Reflections CHUNK File Format</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">The Original Forum. Game archives, full of resources. How to open them? Get help here.<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=9897" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=10&amp;t=9897&amp;watch=topic&amp;start=0&amp;hash=03e0022a" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=10&amp;t=9897&amp;unwatch=topic&amp;start=0&amp;hash=03e0022a" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9897&amp;bookmark=1&amp;hash=03e0022a" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9897" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9897&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="9897" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			43 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./9897 (1).html" role="button">2</a></li>
+				<li><a class="button" href="./9897 (2).html" role="button">3</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./9897 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p81139" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81139">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81139" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81139">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=81139#p81139">Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81139/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81139" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81139' href="./viewtopic.php?f=10&amp;p=81139&amp;thanks=81139&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81139#p81139" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-21T04:28:08+00:00">Wed Nov 21, 2012 5:28 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Since DRIV3R, Reflections has used a form of this "CHUNK PACKAGE" file format that is basically a unified package containing everything from models to textures, positions in the game world, flags...everything you could possibly think of. It is important to note that the content inside these archives (if they are even archives) are not compressed in any way, shape, or form - one of the major aspects of these files is that there are offsets EVERYWHERE. The very beginning of the files define offsets and block size - there are even sub-chunks inside the big chunk that have offsets as well. Essentially what's going on is each chunk is like a tupperware container with smaller containers inside of it. Once the chunk format is decoded in DRIV3R, we can move onto other games such as DPL or even DSF! The format is exactly the same, the only differences are the new file formats inside of these chunks. Not a big deal, but having chunks out of the way would be nice!<br>
+<br>
+There is no one specific file extension, as it varies depending on what it does. My research here is based on DRIV3R for the PC, and I essentially have no experience in programming myself, which is why I've taken up this project!<br>
+<br>
+Here's some decoding of the CHUNK based file format, using MIAMI_DAY_PC/SuperRegions.pcs as an example:<br>
+<br>
+<img src="https://dl.dropbox.com/u/69162797/CHNKdecode.jpg" class="postimage" alt="Image"><br>
+<br>
+<span style="font-size:150%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">NOTE:</strong></span> This image has outdated information. To be used for reference only!</span><br>
+<br>
+CHUNK files have "PCMP" sections that hold DDS textures. It contains complex offsets (to me, at least) describing where each new DDS begins and how long it is. A good friend of mine helped me decode the headers a bit, here's what we came up with (sorry if it's not very specific, I didn't make this picture but will when further documentation arises):<br>
+<br>
+<img src="https://dl.dropbox.com/u/69162797/pcmp.jpg" class="postimage" alt="Image"><br>
+<br>
+UPDATE 11/22/2012: New organization, more info added.</div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/40346.html" class="username">CarLuver69</a> on Thu Nov 22, 2012 10:38 am, edited 4 times in total.
+									</div>
+			
+						<div id='list_thanks81139'>
+</div>
+<div id='div_post_reput81139'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81140" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81140">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81140" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81140">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81140#p81140">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81140/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81140" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81140' href="./viewtopic.php?f=10&amp;p=81140&amp;thanks=81140&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81140#p81140" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-21T07:56:32+00:00">Wed Nov 21, 2012 8:56 am</time>
+			</p>
+			
+			
+			
+			<div class="content">This post is reserved for an in-depth analysis of each file.<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">CITIES</span></strong></span><br>
+The cities of DRIV3R is basically what makes up the whole game - Miami is 390MB, Istanbul is 319MB, and Nice is 286MB. On average, each city has close to over 3,500 textures and an unknown amount of models. According to older work-in-progress screenshots, a program called "Mr. RoadBuilder" was used to create every aspect of the city itself. Here are the only screenshots ever released:<br>
+<br>
+<img src="http://img716.imageshack.us/img716/295/187nice01.jpg" class="postimage" alt="Image"><br>
+<img src="http://img21.imageshack.us/img21/3616/184miami2.jpg" class="postimage" alt="Image"><br>
+<br>
+This could give potential reverse engineers an insight into how everything works. Note in the upper-right corner there are references to "Global Regions" and "Super Regions" - these are important to take note of, as they play a crucial part in my observations below. Without further ado...<br>
+<br>
+<span style="text-decoration:underline"><strong class="text-strong">Legend:</strong></span><br>
+<br>
+-- = Folder<br>
+---- = Inside Folder<br>
+<br>
+<strong class="text-strong">city</strong> = Name of the city (Miami, Nice, or Istanbul)<br>
+<strong class="text-strong">timeofday</strong> = DAY or NIGHT<br>
+<strong class="text-strong">platform</strong> = I'm assuming what platform it's mean for (in this case, PC = _PC)<br>
+<br>
+<strong class="text-strong">.d3c</strong> = DRIV3R City. These are known as "Global Regions" that basically make up the whole of the city. The .D3C file interacts with the .PCS file somehow, as there are no models or textures inside.<br>
+<strong class="text-strong">.pcs</strong> = Models and textures for the city. How the .D3C files access these is currently unknown.<br>
+<br>
+--city_timeofday_platform<span style="color:#FF0000">*</span><br>
+----Interiors.pcs<span style="color:#FF0000">**</span><br>
+----SuperRegions.pcs<span style="color:#FF0000">***</span><br>
+city_timeofday_platform.d3c<span style="color:#FF0000">****</span><br>
+<br>
+<span style="color:#FF0000">*</span> - By default there are 6 folders - Miami with day textures is called "MIAMI_DAY_PC" and with night textures is "MIAMI_NIGHT_PC". The rest is self-explanatory.<br>
+<span style="color:#FF0000">**</span> - Definitions for interiors are in here.<br>
+<span style="color:#FF0000">***</span> - Definitions for the outside world you drive in.<br>
+<span style="color:#FF0000">****</span> - For each folder, day or night, there is a .D3C file accompanied by it.<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.PCS Files</span></strong></span> - Last Updated 11/22/2012<br>
+.PCS files contain the models and textures that make up the city. The .D3C file uses this file as an index in order to retrieve models amongst other things.<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.D3C Files</span></strong></span> - Last Updated 11/22/2012<br>
+These files are very rich in content - these are the biggest CHUNK based files in the whole game. There's so much to a city it's unbelievable. More information will be put here later on.<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">CONFIGS</span></strong></span><br>
+Vehicle configurations for every vehicle in the game are in here.<br>
+<br>
+----Vehicles<br>
+----BigVO3<br>
+----*.b03<span style="color:#FF0000">*</span><br>
+<br>
+<span style="color:#FF0000">*</span> one for each city<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.B03 Files</span></strong></span> - Last Updated 11/22/2012<br>
+While they're not CHUNK based files, they are still a crucial part of the game that need to be documented more. Vehicle handling, colors, etc. for every vehicle in the game.<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">GUNS</span></strong></span><br>
+Weapons data located in here.<br>
+<br>
+--Guns.cpr<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.CPR Files</span></strong></span> - Last Updated 11/22/2012<br>
+Guess who forgot to document these files? <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"><br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">MISSIONS</span></strong></span><br>
+The mission scripting language related files can be found here.<br>
+<br>
+--Personalities<br>
+----*.acp<br>
+--Recordings<br>
+----*.pad<br>
+*.dam<br>
+*.mpc<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.ACP Files</span></strong></span> - Last Updated 11/22/2012<br>
+AI behavior files. Not much is known.<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.PAD Files</span></strong></span> - Last Updated 11/22/2012<br>
+Vehicle recording files. These were probably made in a special developer mode that records player movement similar to the Film Director.<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.MCP Files</span></strong></span> - Last Updated 11/22/2012<br>
+Exported mission scripts. There was most likely a stage where they were written in a plain-text format and later converted to this special format that uses IDs from locale files.<br>
+<br>
+<span style="font-size:130%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">.DAM Files</span></strong></span> - Last Updated 11/22/2012<br>
+Contains models and textures for each mission. There are a variety of things in here, so its main purpose is unknown. However, it is used to define character models/textures/joints/etc. !<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">OVERLAYS</span></strong></span><br>
+I'll update this section at another time.<br>
+<br>
+*.bin<br>
+*.gfx<br>
+*.map<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">SFX (Sound Effects)</span></strong></span><br>
+I'll update this section at another time.<br>
+<br>
+Sfx.pmu<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">Skies</span></strong></span><br>
+I'll update this section at another time.<br>
+<br>
+*.d3s<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">Sounds</span></strong></span><br>
+I'll update this section at another time.<br>
+<br>
+*.dat<br>
+*.vsb<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">GUI</span></strong></span><br>
+I'll update this section at another time.<br>
+<br>
+*.mec<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong"><span style="text-decoration:underline">Vehicles</span></strong></span><br>
+I'll update this section at another time.<br>
+<br>
+--city<br>
+----CarGlobals[city].vgt<br>
+<br>
+*.VVS<br>
+*.VVV</div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/40346.html" class="username">CarLuver69</a> on Thu Nov 22, 2012 9:26 am, edited 2 times in total.
+									</div>
+			
+						<div id='list_thanks81140'>
+</div>
+<div id='div_post_reput81140'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81153" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81153">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/16084.html" class="username">WRS</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=16084&amp;sr=posts">603</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 06, 2009 12:13 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="16084"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/true">74 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="16084"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/false">137 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact WRS">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact WRS</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81153" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81153">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81153#p81153">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81153/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81153" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81153' href="./viewtopic.php?f=10&amp;p=81153&amp;thanks=81153&amp;to_id=16084&amp;from_id=123876" title="Say Thanks to the author of the post: WRS"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81153#p81153" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/16084.html" class="username">WRS</a></strong> &raquo; </span><time datetime="2012-11-21T20:39:13+00:00">Wed Nov 21, 2012 9:39 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">i found the demo online. there is a description offset in the headers which is most useful .<br>
+<br>
+other notes i made:<br>
+<br>
+Data is chunked with the following header:<br>
+<br>
+uint32 magic ("CHNK")<br>
+uint32 fileSize<br>
+uint32 chunkCount<br>
+uint32 version (3 == Driv3r?)<br>
+<br>
+The minimum size is 16 bytes<br>
+<br>
+Chunks have the following header:<br>
+<br>
+uint32 magic<br>
+uint32 chunkOffset<br>
+uint32 flags (? based on what you found out)<br>
+uint32 descOffset<br>
+<br>
+chunkOffset is relative to the start of the CHNK header<br>
+descOffset is relative to the chunkOffset and CHNK header<br>
+<br>
+<br>
+Chunk data is aligned to 4096 bytes<br>
+So are descriptions<br>
+<br>
+Empty memory is filled using the magic DEC015A1h<br>
+<br>
+This is useful when reading the description info:<br>
+<br>
+You can read 4 bytes at a time and xor until you hit 0<br>
+<br>
+<br>
+Other<br>
+<br>
+Chunks may contain more chunked data (with CHNK magic)<br>
+<br>
+GESR  Super region<br>
+GEGR  Global region<br>
+GEIR  Interior region<br>
+PINF  Mission editor model info<br>
+PCSL  Dummy chunk<br>
+MDPC  Model package<br>
+<br>
+<br>
+Files using this structure:<br>
+<br>
+Overlays/*.map<br>
+Overlaps/*.gfx<br>
+Cities/*.d3c<br>
+Cities/ (see op) /*.pcs</div>
+
+			
+			
+									
+						<div id='list_thanks81153'>
+</div>
+<div id='div_post_reput81153'>
+</div>
+
+							<div id="sig81153" class="signature">Useful tool links:
+<ul><li><a href="http://aluigi.altervista.org/quickbms.htm" class="postlink">QuickBMS</a></li>
+<li><a href="http://www.sweetscape.com/010editor/" class="postlink">010 Editor</a> (<a href="https://gist.github.com/x1nixmzeng/3805536" class="postlink">prelen.bt</a>)</li></ul></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81162" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81162">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81162" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81162">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81162#p81162">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81162/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81162" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81162' href="./viewtopic.php?f=10&amp;p=81162&amp;thanks=81162&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81162#p81162" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-22T03:34:19+00:00">Thu Nov 22, 2012 4:34 am</time>
+			</p>
+			
+			
+			
+			<div class="content">UPDATE 11/22/2012:<br>
+<br>
+Lots of new info today. Wrote a small BMS script (see below) and took the time to document every single file type in the game. Without further ado, here are my huge ass research documents!<br>
+<br>
+I'm not quite sure what I was going for with this one, but it seems to be useless since the one below this one is almost the exact same.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CHNK (Reflections CHUNK Container)
+	- Archive-like tendencies:
+		- Defines size of chunk
+		- Defines # of packages inside
+	- Always has an unknown LONG at the end; "03 00 00 00" (3 in little endian)
+		- Possibly version number (credits go to user WRS)
+	- Package offsets begin on the line of the CHNK header:
+		- For example, let's say "BLAH" has offset of "00 10 00 00" (or 1000). This means the beginning of "BLAH" is offset 1000 from the CHNK header. Got all that?
+		- Offsets are 4096 byte-aligned (credits go to XeNTaX)
+	- Files inside CHUNK's are uncompressed ASCII format, however they are not common file formats and are not meant to be used as external files. Files inside chunks need to be extracted, modified, and have offsets/checksums recalculated - a relatively easy process once everything is totally understood.
+	- Acts as a container
+		- Nesting capabilities:
+	
+			CHNK
+			[parent]
+				CHNK
+				[child/parent]
+					CHNK
+					[child/parent]
+						CHNK
+						[child/parent]
+						...
+				[child]
+				[child]
+			[parent]
+			
+		- Think of the chunk as a big tupperware container; You can put other smaller containers inside, as well as a couple of other things on the side.
+
+"Unified Package"
+	- The result of a package having no specific name assigned (all 00's)
+	- Acts as a container that holds another chunk inside of it, most likely so the main chunk itself can access it and then start doing sub-routines. Why this is necessary is unknown, maybe just for organization.
+	- No further information.
+	
+-------------------------
+%CITY%.D3C
+------------------------- 
+GESR (Global Region)
+----GEPM (Building Physics Data)
+----PMLD (Building Physics Lookup Data)
+----GWTR (Water Instance Data)
+----GEBI (Global Building Instance Data)
+----GERD (Spline Road Data)
+--------AIEX (AIExport)
+----ANOD (Animated Object Data)
+----SCND (Global Scene Data)
+----GEPD (Prop Data Container)
+--------HRDT (Prop Hiearchy Information)
+
+GEIR (Region %0d)
+----GWRD (Water Region Data)
+----GEBI (Building Instance Data)
+----GRTD (Region Terrain)
+----GEBR (Building Routefind Data)
+----JNR! (Broadphase Data)
+----ATRD (Attractor Data)
+----SCND (Region SceneData Data ?)
+----OCGD (Occluder Game Data)
+
+IRCT (External file link + External?)
+----ATRD (Interior Attractor Object Data)
+----ANOD (Interior Animated Object Data)
+----GEBI (Interior Instance Data)
+----IRDT (Interior Scene Data )
+----GEPM (Interior Physics Model Data)
+----PMLD (Interior Physics Lookup Data)
+----JNR! (Interior Broadphase Data)
+----ISHM (Interior Lighting Data)
+--------PROBv1.0 (unknown format - unused?)
+GESR (again?) (External file link + Internal?)
+----GEPD (Prop Data Container)
+--------HRDT (Internal Interior Prop Hierarchy Prop-Data Container)
+
+PINF (Model Information for Mission Editor)
+----PIND (Model Data for Mission Editor)
+----PINS (Model Strings for Mission Editor)
+
+GEGL (Grandiose Lookup?)
+----GESI (Super Region Info)
+----GILH (Lookup Header)
+----GSIL (Super Region Lookup )
+----GRIL (Region Lookup)
+----IRLU (Interior Lookup Info)
+
+PCSL (Specific Region? "NORTH DOWNTOWN")
+----GEPM (Building Physics Data)
+----PMLD (Building Lookup Physics Data)
+----ANOD (Animated Object Data)
+	
+-------------------------
+MISSION%0d.MPC
+------------------------- 
+"Exported Mission Root"
+Description: Basically a "shrink wrap" for the exported mission data.
+
+----EM__ (Exported Mission)
+	Description: Holds all mission-related data. Nested multiple times (rare).
+	
+--------EMOB (Exported Mission Objects)
+--------EMPR (Exported Mission Prop Handles)
+
+--------LELD (Logic Export Data)
+------------LESC (String Collection)
+------------LESB (Sound Bank)
+
+------------LEAC (Actors)
+--------------------LEAD (Actor Definitions)
+--------------------LEPR (Actor Properties Table)
+
+------------LENC (Logic Nodes)
+--------------------LEND (Logic Node Definitions Table)
+--------------------LEPR (Logic Node Properties Table)
+
+------------LEAS (Actor Set Table)
+------------LEWC (Wire Collection)
+------------LECO (Script Counter)
+
+-------------------------
+MISSION%0d.DAM
+------------------------- 
+"Unified Packager"
+Description: Presumably stuff related to models and characters for each specific mission.
+
+----MDPC (Renderer Model Package)
+----UPXD (Extra Character Data Package)
+----UPCB (Skelton Package)
+
+EMMS (Mission Summary)
+Description: Probably used for locale purposes.
+
+-------------------------
+%CITY%.MAP
+------------------------- 
+"Unified Packager"
+Description: The HUD map.
+
+----MDPC (Renderer Model Package)
+
+-------------------------
+*.GFX
+-------------------------
+"Unified Packager"
+Description: Packaged graphics, each with a different purpose.
+
+----UPST (Standalone Textures)
+----MDPC (Renderer Model Package)
+
+-------------------------
+SFX.PMU
+-------------------------
+"Unified Packager"
+Description: No idea what these are for...sound effects need textures?
+
+----UPST (Standalone Textures)
+----MDPC (Renderer Model Package)
+
+-------------------------
+*.MEC
+-------------------------
+RDMP (Reflections Menu Data Package)
+Description: Contains menu data chunks
+
+----RMDL (Reflections Menu Data Chunk)
+----MDPC (Reflections Menu Material Chunk)
+
+-------------------------
+FONT.BNK
+-------------------------
+FONT (Font Container)
+Description: Holds information regarding fonts for DRIV3R. Universal.
+
+----UPST (Standalone Textures [lContainerPa?])
+----MDPC (Renderer Model Package)
+----FBNK (Font Data)
+
+-------------------------
+CARGLOBALS%CITY%.VGT
+-------------------------
+"Unified Packager"
+Description: Contains global content used for vehicles, such as interiors, brakelights, etc.
+
+----UPST (Standalone Textures)
+----MDPC (Renderer Model Package)
+
+-------------------------
+%CITY%.VVS
+-------------------------
+"Individual Model"
+Description: Each individual car model, along with textures, is contained in here. UPVH has an unknown LONG at the beginning in place of the usual magic numbers - this should be noted.
+
+----UPVH (Vehicle Hiearchy)*
+--------AWHF (Unknown Format)
+
+MDPC (Renderer Model Package)*
+
+-------------------------
+%CITY%.VVV
+%CITY%_ARTIC_TRUCK.VVV
+%CITY%_BOAT.VVV
+%CITY%_BIKE.VVV
+MISSION%0d.VVV
+-------------------------
+"Unified Packager"
+Description: This is an interesting one. There's a .VVV file for the city, the semi truck, boats, motorcycles, and individual missions. Could this be vehicle selection?
+
+----UPVH (Vehicle Hiearchy)*
+--------AWHF (Unknown Format)
+----MDPC (Renderer Model Package)*
+
+* means multiple instances</code></pre></div>
+
+This one is similar to above, but it mimics the exact format of the files:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/CITIES
+
+	../[CITY]_[TIMEOFDAY]_[PLATFORM]
+	*.PCS
+	
+	CHNK
+	MDPC - ModelPackage_PC
+
+*.D3C
+
+CHNK
+GESR - Global Region
+	CHNK
+	GEPM - Building Physics Data
+	PMLD - Building Physics Lookup Data
+	GWTR - Water Instance Data
+	GEBI - Global Building Instance Data 
+	GERD - Spline Road Data
+		CHNK
+		AIEX - AIExport
+	ANOD - Animated Object Data
+	SCND - Global Scene Data
+	GEPD - Prop Data Container
+		HRDT - Prop Hiearchy Information
+GEIR - Region
+	CHNK
+	GWRD - Water Region Data
+	GEBI - Building Instance Data
+	GRTD - Region Terrain
+	GEBR - Building Routefind Data
+	JNR! - Broadphase Data
+	ATRD - Attractor Data
+	SCND - Region SceneData Data ?
+	OCGD - Occluder Game Data
+IRCT - External file link + External?
+	CHNK
+	ATRD - Interior Attractor Object Data
+	ANOD - Interior Animated Object Data
+	GEBI - Interior Instance Data
+	IRDT - Interior Scene Data 
+	GEPM - Interior Physics Model Data
+	PMLD - Interior Physics Lookup Data
+	JNR! - Interior Broadphase Data
+	ISHM - Interior Lighting Data
+		PROBv1.0 (unknown format - unused?)
+GESR (again?) - External file link + Internal?
+	CHNK
+	GEPD - Prop Data Container
+		CHNK
+		HRDT - Internal Interior Prop Hierarchy Prop-Data Container
+		
+PINF - Model Information for Mission Editor
+	CHNK
+	PIND - Model Data for Mission Editor
+	PINS - Model Strings for Mission Editor
+GEGL - Grandiose Lookup?
+	CHNK
+	GESI - Super Region Info
+	GILH - Lookup Header
+	GSIL - Super Region Lookup 
+	GRIL - Region Lookup
+	IRLU - Interior Lookup Info
+PCSL - "NORTH DOWNTOWN" ?
+	CHNK
+	GEPM - Building Physics Data
+	PMLD - Building Lookup Physics Data
+	ANOD - Animated Object Data
+
+/MISSIONS
+*.MPC
+
+CHNK
+[blank] - Exported Mission Root
+	CHNK
+	EM__ - Exported Mission
+		CHNK
+		EMOB - Exported Mission Objects
+		EMPR - Exported Mission Prop Handles
+		LELD - Logic Export Data
+			CHNK
+			LESC - String Collection
+			LESB - Sound Bank
+			LEAC - Actors
+				CHNK
+				LEAD - Actor Definitions
+				LEPR - Actor Properties Table
+			LENC - Logic Nodes
+				CHNK
+				LEND - Logic Node Definitions Table
+				LEPR - Logic Node Properties Table
+			LEAS - Actor Set Table
+			LEWC - Wire Collection
+			LECO - Script Counters
+EMMS - Mission Summary
+	
+*.DAM
+
+CHNK
+[blank] - Unified Packager
+	CHNK
+	MDPC - Renderer Model Package
+	UPXD - Extra Character Data Package
+	UPCB - Skelton Package
+	
+/OVERLAYS
+*.MAP
+
+CHNK
+[blank] - Unified Packager
+	CHNK
+	MDPC
+
+*.GFX
+
+CHNK
+[blank] - Unified Packager
+	CHNK
+	UPST - Standalone Textures
+	MDPC - Renderer Model Package
+	
+/SFX
+
+*.PMU
+
+CHNK
+[blank] - Unified Packager
+	UPST - Standalone Textures
+	MDPC - Renderer Model Package
+	
+/TERRITORY/[LOCALE]
+
+	../GUI
+	*.MEC
+	
+	CHNK
+	RDMP - Reflections Menu Data Package
+		CHNK
+		RMDL - Reflections Menu Data Chunk
+		MDPC - Reflections Menu Material Chunk
+	
+	../LOCALE/[LANGUAGE]..
+
+		../FONTS
+		*.BNK
+		
+		CHNK
+		FONT - Font Container
+			CHNK
+			UPST - Standalone Textures (lContainerPa?)
+			MDPC - Renderer Model Package
+			FBNK - Font Data
+		
+/VEHICLES
+
+	../[CITYNAME]
+	*.VGT
+	
+	CHNK
+	[blank] - Unified Packager
+		CHNK
+		UPST - Standalone Textures
+		MDPC - Renderer Model Package
+	
+*.VVS
+
+CHNK
+[UNKNOWN long] - Individual Model
+	CHNK
+	UPVH - Vehicle Hiearchy
+		AWHF (Unknown Format)
+MDPC - Renderer Model Package
+
+*.VVV
+
+CHNK
+[blank] - Unified Packager
+	CHNK
+	UPVH - Vehicle Hiearchy
+		AWHF (Unknown Format)
+	MDPC - Renderer Model Package
+</code></pre></div></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/40346.html" class="username">CarLuver69</a> on Thu Nov 22, 2012 8:54 am, edited 2 times in total.
+									</div>
+			
+						<div id='list_thanks81162'>
+</div>
+<div id='div_post_reput81162'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81164" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81164">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/16084.html" class="username">WRS</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=16084&amp;sr=posts">603</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 06, 2009 12:13 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="16084"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/true">74 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="16084"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/false">137 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact WRS">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact WRS</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81164" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81164">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81164#p81164">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81164/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81164" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81164' href="./viewtopic.php?f=10&amp;p=81164&amp;thanks=81164&amp;to_id=16084&amp;from_id=123876" title="Say Thanks to the author of the post: WRS"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81164#p81164" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/16084.html" class="username">WRS</a></strong> &raquo; </span><time datetime="2012-11-22T03:35:49+00:00">Thu Nov 22, 2012 4:35 am</time>
+			</p>
+			
+			
+			
+			<div class="content">alright, my turn to bump<br>
+<br>
+i've written a rough bms script to dump the dds textures from the GFX files (for now)<br>
+<br>
+overlays.gfx - gui stuff; weapon highlights<br>
+loading.gfx - the spinning disk icon and the driv3r logo (attached)<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Driv3r (PC) *.gfx
+# v0.01 - rough recursive script based on demo filedata
+# WRS (xentax.com)
+
+set OFFSET long 0
+callfunction ParseChunk 1
+cleanexit
+
+
+startfunction ParseChunk
+  getdstring BLOCKTYPE 4
+  get BLOCKSIZE long
+  get CHUNKS long
+  get VERSION long
+
+  if BLOCKTYPE != "CHNK"
+    print "Unknown chunk header"
+    cleanexit
+  endif
+
+  if VERSION != 3
+    print "Unknown version"
+    cleanexit
+  endif
+
+  for CHUNK = 1 to CHUNKS
+    getdstring CHUNKTYPE 4
+    get CHUNKOFF long
+    get CHUNKUNKNOWN long
+    get CHUNKSIZE long
+
+    if CHUNKTYPE = "MDPC"
+      print "Found info header"
+      math LOCALOFF = CHUNKOFF
+      math LOCALOFF += OFFSET
+      math LOCALOFF += 4096  ## unknown heading
+      goto LOCALOFF
+      idstring "PCMP"
+      get VER long # 3 again
+      get FILES long
+      getdstring IGNORE 32
+      get HEADERINFO long
+      math HEADERINFO -= 48 # we read 4+4+4+32+4 bytes
+      savepos POS
+      math POS += HEADERINFO
+      goto pos
+      ## now we have our headers
+      math LOCALOFF += 4096 # again, assumptions
+      for F = 1 to FILES 
+        get FUNKNOWN long # 01010101h (no idea)
+        get FCHECKSUM long # CRC32 of the DDS data
+        get FOFFSET long # relative to LOCALOFF for now
+        get FSIZE long
+        getdstring FIGNORED 16 # ignorable data
+
+        math FOFFSET += LOCALOFF
+        string FNAME p= "%i_%08X.dds" F FCHECKSUM
+        log FNAME FOFFSET FSIZE
+
+      next F
+      print "Done!"
+      cleanexit
+    endif
+
+  next CHUNK
+
+  if CHUNKTYPE = "" and CHUNKS = 1
+    math LOCALOFF = CHUNKOFF
+    math LOCALOFF += OFFSET
+    math OFFSET = LOCALOFF
+    #save CURPOS
+    goto OFFSET
+    print "Next level down.."
+    callfunction ParseChunk 1
+  endif
+
+endfunction
+</code></pre></div>
+
+more to come   <img class="smilies" src="./images/smilies/%28%5Bcolon%5D.gif" width="15" height="15" alt="(:" title="reverse smiley"></div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="./download/file.php?id=6020" class="postimage" alt="converted 1_EF493C16.dds output" onclick="viewableArea(this);" /></dt>
+			<dd><em>converted 1_EF493C16.dds output</em></dd>			<dd>savedas.png (9.42 KiB) Viewed 359 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks81164'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/16084.html" class="username">WRS</a> for the post: </dt>
+			<dd><span title="Thu Nov 22, 2012 5:18 am"><a href="../Users/40346.html" class="username">CarLuver69</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput81164'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig81164" class="signature">Useful tool links:
+<ul><li><a href="http://aluigi.altervista.org/quickbms.htm" class="postlink">QuickBMS</a></li>
+<li><a href="http://www.sweetscape.com/010editor/" class="postlink">010 Editor</a> (<a href="https://gist.github.com/x1nixmzeng/3805536" class="postlink">prelen.bt</a>)</li></ul></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81166" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81166">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81166" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81166">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81166#p81166">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81166/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81166" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81166' href="./viewtopic.php?f=10&amp;p=81166&amp;thanks=81166&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81166#p81166" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-22T03:41:15+00:00">Thu Nov 22, 2012 4:41 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I actually wasn't expecting anyone to try and help out, this is quite unexpected. Here's a BMS script of my own (my very first one, I'm working on a more advanced one)<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Reflections CHUNK File Format Scanner V0.1.1121.12 alpha
+# © CarLuver69
+# This code is experimental and may not even work properly in some case.
+# Use at your own discretion.
+
+	#Define what a CHUNK is, duh
+	set EDMONDSON "Reflections CHUNK"
+
+# CHUNK loading
+	
+	getdstring CHNKNM 0x04
+	
+#If it's not a Reflections CHUNK, don't load it!	
+	if CHNKNM = CHNK
+		set TYPE 0
+	else
+		print "\nERROR: Not a %EDMONDSON% File!\nHeader is %CHNKNM%, please correct this."
+		cleanexit
+	endif
+	
+#If it's a Reflections CHUNK, go ahead and load it!
+	if TYPE = 0
+			get CHNKSZ long
+			get NUMPAKS long
+			get DUMMY long
+			print "\nType: 	%EDMONDSON%\nSize: 	%CHNKSZ%kb\n# Packages: 	%NUMPAKS%\n"
+	endif
+
+# Load the packages
+
+goto 0x10
+		
+for i = 0 &lt; NUMPAKS
+
+	getdstring PAKNAME 0x04
+	get PAKOFFSET long
+	get PAKTYPE short
+	get DUMMY short
+	get PAKSIZE long
+	
+	# Files need a unique identifier and extension
+
+	set DOMATH long
+	set SUFFIX ".CHUNK" #Assign .CHUNK as file extension
+	
+	math DOMATH += PAKOFFSET #get offset
+	string PAKNAME += DOMATH #assign offset to filename
+	string PAKNAME += SUFFIX #assign .CHUNK to end of file ;)
+	
+	log PAKNAME PAKOFFSET PAKSIZE
+	
+next i
+</code></pre></div>
+
+It lists all of the primary "packages" inside of the CHUNK. The new one will be able to dig deeper down into the files, and be able to expose parents and children - still working on my research document(s) so I'll hold off on that.</div>
+
+			
+			
+									
+						<div id='list_thanks81166'>
+</div>
+<div id='div_post_reput81166'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81167" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81167">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/16084.html" class="username">WRS</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=16084&amp;sr=posts">603</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 06, 2009 12:13 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="16084"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/true">74 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="16084"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/false">137 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact WRS">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact WRS</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81167" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81167">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81167#p81167">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81167/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81167" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81167' href="./viewtopic.php?f=10&amp;p=81167&amp;thanks=81167&amp;to_id=16084&amp;from_id=123876" title="Say Thanks to the author of the post: WRS"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81167#p81167" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/16084.html" class="username">WRS</a></strong> &raquo; </span><time datetime="2012-11-22T03:46:48+00:00">Thu Nov 22, 2012 4:46 am</time>
+			</p>
+			
+			
+			
+			<div class="content">if you're just posting a work-in-progress of your own i will leave you to it  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile">  if you need a hand send me a pm or something</div>
+
+			
+			
+									
+						<div id='list_thanks81167'>
+</div>
+<div id='div_post_reput81167'>
+</div>
+
+							<div id="sig81167" class="signature">Useful tool links:
+<ul><li><a href="http://aluigi.altervista.org/quickbms.htm" class="postlink">QuickBMS</a></li>
+<li><a href="http://www.sweetscape.com/010editor/" class="postlink">010 Editor</a> (<a href="https://gist.github.com/x1nixmzeng/3805536" class="postlink">prelen.bt</a>)</li></ul></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81168" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81168">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81168" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81168">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81168#p81168">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81168/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81168" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81168' href="./viewtopic.php?f=10&amp;p=81168&amp;thanks=81168&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81168#p81168" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-22T04:16:37+00:00">Thu Nov 22, 2012 5:16 am</time>
+			</p>
+			
+			
+			
+			<div class="content">No no WRS, I'm actually quite excited you're looking into this stuff. I'm working on research and practicing BMS because I want to take up programming and stuff, so I gotta start somewhere. You're more than welcome to post research here, it'll help get the format cracked faster! <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"><br>
+<br>
+I didn't mean "quite unexpected" in a bad way now that I read it again. I just meant that it came to me as a shock that people were actually willing to help out, which is pretty neat.<br>
+<br>
+Maybe you could take a stab at the more complex files? The most I can do is decode how everything is stored, cracking the formats is nearly impossible for someone like me. For example, open one of the .VVS files inside the "Vehicles" folder and look for "AWHF" - this is all the data for an individual vehicle, stored in some type of .X file format that's been modified to work differently.</div>
+
+			
+			
+									
+						<div id='list_thanks81168'>
+</div>
+<div id='div_post_reput81168'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81225" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81225">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/16084.html" class="username">WRS</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=16084&amp;sr=posts">603</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 06, 2009 12:13 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="16084"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/true">74 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="16084"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/false">137 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact WRS">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact WRS</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81225" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81225">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81225#p81225">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81225/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81225" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81225' href="./viewtopic.php?f=10&amp;p=81225&amp;thanks=81225&amp;to_id=16084&amp;from_id=123876" title="Say Thanks to the author of the post: WRS"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81225#p81225" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/16084.html" class="username">WRS</a></strong> &raquo; </span><time datetime="2012-11-24T01:30:30+00:00">Sat Nov 24, 2012 2:30 am</time>
+			</p>
+			
+			
+			
+			<div class="content">i started writing a small program to explore the chunks a little better - <a href="https://github.com/x1nixmzeng/Explor3r" class="postlink">https://github.com/x1nixmzeng/Explor3r</a><br>
+<br>
+it essentially does what you documented here: <a href="http://forum.xentax.com/viewtopic.php?p=81162#p81162" class="postlink">viewtopic.php?p=81162#p81162</a> using recursion to identify which CHNK blocks are themselves CHNK blocks</div>
+
+			
+			
+									
+						<div id='list_thanks81225'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/16084.html" class="username">WRS</a> for the post: </dt>
+			<dd><span title="Tue Nov 27, 2012 8:52 am"><a href="../Users/33096.html" class="username">RacingFreak</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput81225'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig81225" class="signature">Useful tool links:
+<ul><li><a href="http://aluigi.altervista.org/quickbms.htm" class="postlink">QuickBMS</a></li>
+<li><a href="http://www.sweetscape.com/010editor/" class="postlink">010 Editor</a> (<a href="https://gist.github.com/x1nixmzeng/3805536" class="postlink">prelen.bt</a>)</li></ul></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81230" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81230">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81230" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81230">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81230#p81230">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81230/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81230" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81230' href="./viewtopic.php?f=10&amp;p=81230&amp;thanks=81230&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81230#p81230" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-24T07:15:02+00:00">Sat Nov 24, 2012 8:15 am</time>
+			</p>
+			
+			
+			
+			<div class="content">This program is pretty much exactly what I had in mind! Excellent work!<br>
+<br>
+Just a quick note, that unknown long that's at the end of the "CHNK" line isn't the version number - it's the same in Parallel Lines and San Francisco. I wonder what it's meant for.</div>
+
+			
+			
+									
+						<div id='list_thanks81230'>
+</div>
+<div id='div_post_reput81230'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81307" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81307">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/16084.html" class="username">WRS</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=16084&amp;sr=posts">603</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 06, 2009 12:13 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="16084"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/true">74 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="16084"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/16084/false">137 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact WRS">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact WRS</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81307" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81307">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81307#p81307">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81307/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81307" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81307' href="./viewtopic.php?f=10&amp;p=81307&amp;thanks=81307&amp;to_id=16084&amp;from_id=123876" title="Say Thanks to the author of the post: WRS"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81307#p81307" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/16084.html" class="username">WRS</a></strong> &raquo; </span><time datetime="2012-11-27T00:43:00+00:00">Tue Nov 27, 2012 1:43 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><strong class="text-strong">minor update</strong><br>
+<br>
+slow progress with the model data<br>
+<br>
+the renderer model package chunks (MDPC) contain the models (faces indices, vertex data and textures) but i'm stuck on reconstructing them. all i think i've found is the normal data:<br>
+<br>
+<img src="http://imgur.com/1MJUH.png" class="postimage" alt="Image"></div>
+
+			
+			
+									
+						<div id='list_thanks81307'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/16084.html" class="username">WRS</a> for the post (total 2):</dt>
+			<dd><span title="Tue Nov 27, 2012 8:52 am"><a href="../Users/33096.html" class="username">RacingFreak</a></span>, <span title="Tue Nov 27, 2012 7:21 pm"><a href="../Users/40346.html" class="username">CarLuver69</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput81307'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;3.45%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 3.45%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig81307" class="signature">Useful tool links:
+<ul><li><a href="http://aluigi.altervista.org/quickbms.htm" class="postlink">QuickBMS</a></li>
+<li><a href="http://www.sweetscape.com/010editor/" class="postlink">010 Editor</a> (<a href="https://gist.github.com/x1nixmzeng/3805536" class="postlink">prelen.bt</a>)</li></ul></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81308" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81308">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81308" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81308">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81308#p81308">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81308/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81308" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81308' href="./viewtopic.php?f=10&amp;p=81308&amp;thanks=81308&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81308#p81308" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-27T02:36:09+00:00">Tue Nov 27, 2012 3:36 am</time>
+			</p>
+			
+			
+			
+			<div class="content">That's definitely impressive. I think it may help to know that the model format is very similar to an .X file.</div>
+
+			
+			
+									
+						<div id='list_thanks81308'>
+</div>
+<div id='div_post_reput81308'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81309" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81309">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/33096.html" class="username">RacingFreak</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=33096&amp;sr=posts">136</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 11, 2011 10:44 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Bulgaria</dd>
+							    <dd class="profile-posts" data-user-give-id="33096"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/33096/true">50 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="33096"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/33096/false">19 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact RacingFreak">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact RacingFreak</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81309" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81309">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81309#p81309">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81309/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81309" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81309' href="./viewtopic.php?f=10&amp;p=81309&amp;thanks=81309&amp;to_id=33096&amp;from_id=123876" title="Say Thanks to the author of the post: RacingFreak"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81309#p81309" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/33096.html" class="username">RacingFreak</a></strong> &raquo; </span><time datetime="2012-11-27T07:52:34+00:00">Tue Nov 27, 2012 8:52 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Awesome! It will be simply awesome if there would be an import function aswell. Explor3r works perfect, kudos <strong class="text-strong">WRS</strong> <img class="smilies" src="./images/smilies/%5Bcolon%5Dup.gif" width="18" height="21" alt=":up:" title="Thumbs up"><br>
+<br>
+PS<br>
+Just one thing - can you rather make it extract to <strong class="text-strong">.DDS</strong> or <strong class="text-strong">.TGA</strong> format which is more comfortable for us modders?</div>
+
+			
+			
+									
+						<div id='list_thanks81309'>
+</div>
+<div id='div_post_reput81309'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81317" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81317">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/32902.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=32902_1388630423.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/32902.html" class="username">Chipicao</a>							</dt>
+
+						<dd class="profile-rank">ultra-veteran<br /><img src="./images/ranks/vip-1.png" alt="ultra-veteran" title="ultra-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=32902&amp;sr=posts">476</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Feb 03, 2011 11:18 am</dd>		
+		
+											    <dd class="profile-posts" data-user-give-id="32902"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/32902/true">42 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="32902"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/32902/false">305 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Chipicao">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Chipicao</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81317" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://github.com/RaduMC?tab=repositories" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81317">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81317#p81317">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81317/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81317" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81317' href="./viewtopic.php?f=10&amp;p=81317&amp;thanks=81317&amp;to_id=32902&amp;from_id=123876" title="Say Thanks to the author of the post: Chipicao"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81317#p81317" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/32902.html" class="username">Chipicao</a></strong> &raquo; </span><time datetime="2012-11-27T17:31:17+00:00">Tue Nov 27, 2012 6:31 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">@WRS is that from Driv3r or DriverSF?</div>
+
+			
+			
+									
+						<div id='list_thanks81317'>
+</div>
+<div id='div_post_reput81317'>
+</div>
+
+							<div id="sig81317" class="signature">Please post any requests or issues with my tools in the appropriate topics.<br>
+I'm sorry if I don't reply or if I ignore PMs. My time is very limited.</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81318" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81318">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81318" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81318">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81318#p81318">Re: Reflections CHUNK File Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81318/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81318" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81318' href="./viewtopic.php?f=10&amp;p=81318&amp;thanks=81318&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81318#p81318" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-11-27T18:21:21+00:00">Tue Nov 27, 2012 7:21 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Chipicao it's pretty obvious it's from DRIV3R, since he has no access to a copy of Driver: San Francisco (as far as I'm aware of).</div>
+
+			
+			
+									
+						<div id='list_thanks81318'>
+</div>
+<div id='div_post_reput81318'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=9897" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=10&amp;t=9897&amp;watch=topic&amp;start=0&amp;hash=03e0022a" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=10&amp;t=9897&amp;unwatch=topic&amp;start=0&amp;hash=03e0022a" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9897&amp;bookmark=1&amp;hash=03e0022a" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9897" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9897&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=9897">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			43 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./9897 (1).html" role="button">2</a></li>
+				<li><a class="button" href="./9897 (2).html" role="button">3</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./9897 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=10" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Game Archive”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <span style="color: #9E8DA7;" class="username-coloured">Ahrefs [Bot]</span>, <a href="../Users/123876.html" class="username">escape209</a> and 3 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

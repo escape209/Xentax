@@ -1,0 +1,2896 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Approaches of Parsing Bone Representations - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=19429">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="29"><a itemprop="item" href="./viewforum.php?f=29"><span itemprop="name">Tutorials</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./19429.html">Approaches of Parsing Bone Representations</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Read or post any tutorial related to file format analysis for modding purposes.<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=19429" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=19429&amp;watch=topic&amp;start=0&amp;hash=08a771a3" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=19429&amp;unwatch=topic&amp;start=0&amp;hash=08a771a3" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=19429&amp;bookmark=1&amp;hash=08a771a3" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=19429" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=19429&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="19429" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			28 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./19429 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./19429 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p148197" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148197">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148197" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148197">
+
+					<h3 class="first">
+							<img src="./images/icons/smile/alert.gif" width="16" height="16" alt="" title="">
+						<a href="./viewtopic.php?p=148197#p148197">Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148197/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148197" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148197' href="./viewtopic.php?f=29&amp;p=148197&amp;thanks=148197&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148197#p148197" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-01T06:46:08+00:00">Fri Feb 01, 2019 7:46 am</time>
+			</p>
+			
+			
+			
+			<div class="content">As far as I know, bones are a set of linked nodes with transformation info includes translation, rotation and scaling, and due to the various representations of rotation, there're mostly 3 forms of representing a bone: Euler angle, rotation matrix and quaternion combined with the rest transformation. <br>
+<br>
+Recognizing these forms is not a big deal, but parsing them correctly is. Therefore I decided to create a thread for an in-depth discussion of the common approaches of parsing different forms of bone representations, hopefully to give those who have only a scanty knowledge to this topic, me included, a hint of parsing a specific bone format.<br>
+<br>
+For those who're completely new to these stuffs, you can refer to the <a href="http://forum.xentax.com/viewtopic.php?f=29&amp;t=19428" class="postlink">Background/Basic Knowledge</a> for a rough understanding.<br>
+<br>
+Since I'd like to focus on parsing bones correctly, I will use minimum dumps of bone data only as samples, and a quick approach to build the skeleton, which in my case would be SkelBuilder — a lightweight ASCII FBX creator I made for constructing skeleton only, after countless failures with Noesis. Guess I may also post the Noesis python code to see if someone could spot the issues. But any other approaches are fine, so long as it's easy for understanding the process. <br>
+<br>
+Source of SkelBuilder(Bone data not included).
+<ul><li><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=16879">SkelBuilder_VS2015.zip</a></dt>
+			<dd><em>v0.3.1</em></dd>			<dd>(14.66 KiB) Downloaded 135 times</dd>
+		</dl>
+		
+			</div></li></ul>
+
+There're several working demonstrations in the source so I'm not exploring the usage here.<br>
+<br>
+<strong class="text-strong">Quick entrance</strong>:
+<ul><li><strong class="text-strong">Right-Handed System</strong>
+<ul><li>Quaternion Rotation<ul>
+<li><a href="viewtopic.php?p=148198#p148198" class="postlink">Asphalt 8: Airborne (Android)</a></li>
+<li><a href="viewtopic.php?p=148199#p148199" class="postlink">Asphalt 9: Legends (Android)</a></li>
+<li><a href="viewtopic.php?p=148525#p148525" class="postlink">GuJian3 (PC)</a></li>
+<li><a href="viewtopic.php?p=156897#p156897" class="postlink">Ben 10 Ultimate Alien: Cosmic Destruction (Xbox 360)</a></li>
+</ul></li></ul>
+<ul><li>3x3 Matrices<ul>
+<li><a href="viewtopic.php?p=148201#p148201" class="postlink">Ben 10 Omniverse (Xbox 360)</a></li>
+</ul></li></ul>
+<ul><li>3x4 Matrices<ul>
+<li><a href="viewtopic.php?p=148524#p148524" class="postlink">Ben 10 Omniverse 2 (3DS)</a></li>
+</ul></li></ul>
+<ul><li>4x4 Matrices<ul>
+</ul></li></ul></li></ul>
+<ul><li><strong class="text-strong">Left-Handed System</strong>
+<ul><li>Quaternion Rotation<ul>
+<li><a href="viewtopic.php?p=148200#p148200" class="postlink">Assalt Fire (PC)</a></li>
+<li><a href="viewtopic.php?p=148523#p148523" class="postlink">James Cameron's AVATAR THE GAME (PC)</a></li>
+<li><a href="viewtopic.php?p=174620#p174620" class="postlink">League of Angels III (Browser)</a></li>
+</ul></li></ul>
+<ul><li>3x3 Matrices<ul>
+<li><a href="viewtopic.php?p=163558#p163558" class="postlink">Star Wars: Episode III – Revenge of the Sith (Xbox)</a></li>
+</ul></li></ul>
+<ul><li>4x4 Matrices<ul>
+<li><a href="viewtopic.php?p=148203#p148203" class="postlink">Iron Man 2 (PS3)</a></li>
+<li><a href="viewtopic.php?p=153657#p153657" class="postlink">Cyber Hunter (Android)</a></li>
+<li><a href="viewtopic.php?p=156835#p156835" class="postlink">IDOLM@STER One For All (PS3)</a></li>
+</ul></li></ul></li></ul>
+
+<strong class="text-strong">Conclusion</strong>:<br>
+So far, seems there's no extra things needed to do for right-handed formats. For left-handed formats, you'll need to convert the transformation in world space of every node to right-handed one. In some circumstances, swapping the x-z axis can do the trick.</div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Fri Dec 24, 2021 6:51 am, edited 13 times in total.
+									</div>
+			
+						<div id='list_thanks148197'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 10):</dt>
+			<dd><span title="Sun Feb 03, 2019 1:44 pm"><a href="../Users/41194.html" class="username">shakotay2</a></span>, <span title="Thu Feb 28, 2019 8:54 am"><a href="../Users/58569.html" class="username">majidemo</a></span>, <span title="Sun Mar 17, 2019 11:47 pm"><a href="../Users/31577.html" class="username">zaykho</a></span>, <span title="Thu Jun 13, 2019 11:16 pm"><a href="../Users/16084.html" class="username">WRS</a></span>, <span title="Sun Oct 06, 2019 9:27 am"><a href="../Users/83419.html" class="username">srbvn</a></span>, <span title="Mon Oct 07, 2019 11:34 am"><a href="../Users/76371.html" class="username">shenglong</a></span>, <span title="Wed Sep 23, 2020 8:00 am"><a href="../Users/79876.html" class="username">TakeAaron</a></span>, <span title="Sun Dec 05, 2021 5:34 am"><a href="../Users/103826.html" class="username">ptg1121</a></span>, <span title="Thu Mar 31, 2022 1:09 pm"><a href="../Users/103422.html" class="username">ChunYu</a></span>, <span title="Sun Jun 12, 2022 3:24 am"><a href="../Users/69057.html" class="username">StraightArrow</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148197'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;17.24%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 17.24%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148197" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148198" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148198">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148198" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148198">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148198#p148198">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148198/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148198" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148198' href="./viewtopic.php?f=29&amp;p=148198&amp;thanks=148198&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148198#p148198" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-01T06:54:47+00:00">Fri Feb 01, 2019 7:54 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Think I'll start with a few working examples first. <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"> 
+<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15629">car_pagani_huayra.zip</a></dt>
+						<dd>(1.11 KiB) Downloaded 64 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: car_pagani_huayra.pig
+# From Game: Asphalt 8: Airborne
+# Platform: Android
+# Bone Format: Quaternion Rotation, Translation
+# Coordinate System: Right-Hand
+# Endian: Little
+</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>long	Signature
+word	boneCount
+for i = 0 &lt; boneCount
+	long	Signature
+	word	nameLen
+	char	boneName[nameLen]
+	char	Zero
+	short	parentID
+	float	Translation[3]
+	float	Rotation[4] // Quaternion Rotation
+	float	Scaling[3]
+	char	NULL[6]</code></pre></div>
+Very simple format and since it's already in right-handed system, you don't even need to worry about the convertion between different coordinate systems. <br>
+Transformation is referenced to parent space so just need to convert quaternion to Euler angle. It's even working with Noesis.<br>
+<br>
+<img src="https://i.imgur.com/v73y94x.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis python code:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data)
+	boneCount = bs.readUShort()
+	bones = []
+	for i in range(0, boneCount):
+		bs.seek(4, NOESEEK_REL)
+		NameLen = bs.readUShort()
+		boneName = noeStrFromBytes(bs.readBytes(NameLen), "ASCII")
+		bs.seek(1, NOESEEK_REL)
+		bonePIndex = bs.readShort()
+		Tran = NoeVec3.fromBytes(bs.readBytes(12))
+		Rot = NoeQuat.fromBytes(bs.readBytes(16))
+		Scal = NoeVec3.fromBytes(bs.readBytes(12))
+		bs.seek(6, NOESEEK_REL)
+		boneMat = Rot.toMat43(transposed = 1)
+		boneMat[3] = Tran
+		bones.append( NoeBone(i, boneName, boneMat, None, bonePIndex) )
+	# Converting local matrix to world space
+	for i in range(0, boneCount):
+		j = bones[i].parentIndex
+		if j != -1:
+			bones[i].setMatrix( bones[i].getMatrix() * bones[j].getMatrix() )
+			
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	rapi.setPreviewOption("setAngOfs", "-90 0 0")
+	return 1</code></pre></div></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Wed Oct 09, 2019 9:24 am, edited 3 times in total.
+									</div>
+			
+						<div id='list_thanks148198'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Thu Feb 07, 2019 11:24 am"><a href="../Users/41194.html" class="username">shakotay2</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148198'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148198" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148199" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148199">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148199" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148199">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148199#p148199">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148199/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148199" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148199' href="./viewtopic.php?f=29&amp;p=148199&amp;thanks=148199&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148199#p148199" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-01T07:01:06+00:00">Fri Feb 01, 2019 8:01 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Similiar format like Asphalt 8. 
+<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15630">Genty_Akylone_car.json.zip</a></dt>
+						<dd>(1.42 KiB) Downloaded 34 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: Genty_Akylone_car.jmodel
+# From Game: Asphalt 9: Legends
+# Platform: Android
+# Bone Format: Quaternion Rotation, Translation
+# Coordinate System: Right-Hand
+# Engine: Jet Engine
+# Endian: Little</code></pre></div>
+Bone data format:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>byte	Skip1[0x11]
+long	boneDataOffset
+word	boneCount
+byte	Skip2[0x1C]
+for i = 0 &lt; boneCount
+	word	nameLen
+	char	boneName[nameLen]
+	short	parentID
+	float	Translation[3]
+	float	Rotation[4] // Quaternion Rotation
+	float	Scaling[3]
+	word	NULL</code></pre></div>
+<img src="https://i.imgur.com/nwyrJzZ.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis python code:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data)
+	bs.seek(0x11, NOESEEK_ABS)
+	boneOffset = bs.readUInt()
+	boneCount = bs.readUShort()
+	bs.seek(boneOffset, NOESEEK_ABS)
+	bones = []
+	for i in range(0, boneCount):
+		NameLen = bs.readUShort()
+		boneName = noeStrFromBytes(bs.readBytes(NameLen), "ASCII")
+		bonePIndex = bs.readShort()
+		Tran = NoeVec3.fromBytes(bs.readBytes(12))
+		Rot = NoeQuat.fromBytes(bs.readBytes(16))
+		Scal = NoeVec3.fromBytes(bs.readBytes(12))
+		bs.seek(2, NOESEEK_REL)
+		boneMat = Rot.toMat43(transposed = 0)
+		boneMat[3] = Tran
+		bones.append( NoeBone(i, boneName, boneMat, None, bonePIndex) )
+	# Converting local matrix to world space
+	for i in range(0, boneCount):
+		j = bones[i].parentIndex
+		if j != -1:
+			bones[i].setMatrix( bones[i].getMatrix() * bones[j].getMatrix() )
+			
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	rapi.setPreviewOption("setAngOfs", "0 0 180")
+	return 1</code></pre></div></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Wed Oct 09, 2019 9:24 am, edited 3 times in total.
+									</div>
+			
+						<div id='list_thanks148199'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Thu Feb 07, 2019 11:25 am"><a href="../Users/41194.html" class="username">shakotay2</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148199'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148199" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148200" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148200">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148200" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148200">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148200#p148200">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148200/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148200" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148200' href="./viewtopic.php?f=29&amp;p=148200&amp;thanks=148200&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148200#p148200" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-01T07:06:18+00:00">Fri Feb 01, 2019 8:06 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15631">VenomSkel.zip</a></dt>
+						<dd>(2.28 KiB) Downloaded 43 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: VenomSkel.AFM
+# From Game: Assalt Fire
+# Platform: PC
+# Bone Format: Quaternion Rotation, Translation
+# Coordinate System: Left-Hand
+# Engine: Unreal Engine
+# Endian: Little</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>long	boneCount
+for i = 0 &lt; boneCount
+	long	boneNameIdx // Indexing to original string buffer
+	long	NULL
+	long	NULL
+	float	Rotation[4] // Quaternion Rotation
+	float	Translation[3]
+	long	Unknown
+	long	parentID
+	long	Marker // FFFFFFFF
+for i = 0 &lt; boneCount
+	string	boneName	// Mapping to bone[i]</code></pre></div>
+Unreal Engine use left-handed system so need to flip the XZ-axis to fit with right-handed system. Transformation is also in parent space.<br>
+<br>
+<img src="https://i.imgur.com/eXOahlH.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis code works now thanks to shakotay2's correction(lack convertion to right-handed though):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data)
+	boneCount = bs.readUInt()
+	bs.seek(boneCount * 0x34, NOESEEK_REL)
+	boneNames = []
+	for i in range(0, boneCount):
+		boneNames.append(bs.readString())
+	bs.seek(0x4, NOESEEK_ABS)
+	bones = []
+	for i in range(0, boneCount):
+		bs.seek(12, NOESEEK_REL)
+		Rot = NoeQuat.fromBytes(bs.readBytes(16))
+		Tran = NoeVec3.fromBytes(bs.readBytes(12))
+		bs.seek(4, NOESEEK_REL)
+		bonePIndex = bs.readInt()
+		if bonePIndex == i:
+			bonePIndex = -1
+		bs.seek(4, NOESEEK_REL)
+		boneMat = Rot.toMat43(1)
+		boneMat[3] = Tran
+		bones.append(NoeBone(i, boneNames[i], boneMat, None, bonePIndex))
+	# Converting local matrix to world space
+	for i in range(0, boneCount):
+		j = bones[i].parentIndex
+		if j != -1:
+			bones[i].setMatrix( bones[i].getMatrix() * bones[j].getMatrix() )
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	rapi.setPreviewOption("setAngOfs", "0 90 0")
+	return 1
+</code></pre></div>
+<img src="https://i.imgur.com/02MS9Se.jpg" class="postimage" alt="Image"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Wed Oct 09, 2019 9:25 am, edited 3 times in total.
+									</div>
+			
+						<div id='list_thanks148200'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Thu Feb 07, 2019 11:25 am"><a href="../Users/41194.html" class="username">shakotay2</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148200'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148200" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148201" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148201">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148201" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148201">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148201#p148201">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148201/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148201" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148201' href="./viewtopic.php?f=29&amp;p=148201&amp;thanks=148201&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148201#p148201" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-01T07:12:23+00:00">Fri Feb 01, 2019 8:12 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15632">CHAR_Bloxx.zip</a></dt>
+						<dd>(1.55 KiB) Downloaded 65 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: CHAR_Bloxx.ve2
+# From Game: Ben 10 Omniverse
+# Platform: Xbox 360
+# Bone Format: 3x3 Matrices, Translations
+# Coordinate System: Right-Hand
+# Engine: Vicious Engine 2
+# Endian: Big</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>long	boneCount
+for i = 0 &lt; boneCount
+	long	parentID
+	float	Translation[3]
+	float	Rotation[3][3]
+	long	nameLen
+	char	boneName[nameLen]
+	long	Unknown
+</code></pre></div>
+The 3x3 rotation matries are in column-major order so need to transpose them before converting to Euler angles.<br>
+<br>
+<img src="https://i.imgur.com/lwwPbXm.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis code works now thanks to shakotay2's correction:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data, NOE_BIGENDIAN)
+	boneCount = bs.readUInt()
+	bones = []
+	for i in range(0, boneCount):
+		bonePIndex = bs.readInt()
+		Matrix = []
+		for j in range(0, 12):
+			Matrix.append(bs.readFloat())
+		boneMat = NoeMat43( [(Matrix[3],Matrix[4],Matrix[5]), 
+								 (Matrix[6],Matrix[7],Matrix[8]), 
+								 (Matrix[9],Matrix[10],Matrix[11]), 
+								 (Matrix[0],Matrix[1],Matrix[2])] ).transpose()
+		NameLen = bs.readInt()
+		boneName = noeStrFromBytes(bs.readBytes(NameLen), "ASCII")
+		bs.seek(4, NOESEEK_REL)
+		bones.append( NoeBone(i, boneName, boneMat, None, bonePIndex) )
+	# Converting local matrix to world space
+	for i in range(0, boneCount):
+		j = bones[i].parentIndex
+		if j != -1:
+			bones[i].setMatrix( bones[i].getMatrix() * bones[j].getMatrix() )
+	
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	rapi.setPreviewOption("setAngOfs", "0 90 0")
+	return 1
+</code></pre></div>
+<img src="https://i.imgur.com/pMoMk9v.jpg" class="postimage" alt="Image"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Fri Dec 24, 2021 6:44 am, edited 4 times in total.
+									</div>
+			
+						<div id='list_thanks148201'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Thu Feb 07, 2019 11:26 am"><a href="../Users/41194.html" class="username">shakotay2</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148201'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148201" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148203" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148203">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148203" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148203">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148203#p148203">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148203/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148203" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148203' href="./viewtopic.php?f=29&amp;p=148203&amp;thanks=148203&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148203#p148203" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-01T07:19:45+00:00">Fri Feb 01, 2019 8:19 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15633">suitUpTony.zip</a></dt>
+						<dd>(4.03 KiB) Downloaded 40 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: suitUpTony.SKELETON
+# From Game: Iron Man 2
+# Platform: PS3
+# Bone Format: 4x4 Matrices
+# Coordinate System: Left-Hand
+# Endian: Big</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>long64	unknown
+long	indexOffset // Relative from 0x10
+long	boneNameOffset // Relative from 0x10
+long	boneCount
+for i = 0 &lt; boneCount
+	long	boneID
+	long	parentID
+	long	RelBoneNameOffset // Relative from boneNameOffset
+	float	boneMat[4][4]
+long	boneIdx[boneCount]
+for i = 0 &lt; boneCount
+	string	boneName</code></pre></div>
+
+If you'd tried loading the data as ordinary matrices but seen something like this:<br>
+<br>
+<img src="https://i.imgur.com/RUByPTQ.jpg" class="postimage" alt="Image"><br>
+<br>
+then the matries should probably have been inversed.<br>
+<br>
+Also the transformation is in world space so altogether you need to inverse the matrices first, then convert them to right-handed system and finally, to parent space for FBX format.<br>
+<br>
+<img src="https://i.imgur.com/Aopfvlm.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis code (lack convertion to right-handed):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data, NOE_BIGENDIAN)
+	bs.seek(8, NOESEEK_ABS)
+	indexOffset = bs.readUInt() + 0x10
+	boneNameOffset = bs.readUInt() + 0x10
+	boneCount = bs.readUInt()
+	boneIDs=[]
+	boneNames = []
+	bs.seek(indexOffset, NOESEEK_ABS)
+	for i in range(0, boneCount):
+		boneIDs.append(bs.readUInt())
+	for i in range(0, boneCount):
+		boneNames.append(bs.readString())
+	bs.seek(0x14, NOESEEK_ABS)
+	bones = []
+	for i in range(0, boneCount):
+		boneIndex = bs.readInt()
+		bonePIndex = bs.readInt()
+		RelBoneNameOffset = bs.readInt()
+		if boneIndex == bonePIndex:
+			bonePIndex = -1
+		Mat44 = NoeMat44.fromBytes( bs.readBytes(0x40), NOE_BIGENDIAN )
+		boneMat = Mat44.toMat43().inverse()
+		bones.append( NoeBone(boneIndex, boneNames[boneIndex], boneMat, None, bonePIndex) )#boneIDs[i]
+	
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	#rapi.setPreviewOption("setAngOfs", "0 0 0")
+	return 1
+</code></pre></div>
+
+<img src="https://i.imgur.com/UPCNwnH.jpg" class="postimage" alt="Image"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Tue May 26, 2020 3:10 pm, edited 3 times in total.
+									</div>
+			
+						<div id='list_thanks148203'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 2):</dt>
+			<dd><span title="Thu Feb 07, 2019 11:26 am"><a href="../Users/41194.html" class="username">shakotay2</a></span>, <span title="Wed Sep 30, 2020 3:28 pm"><a href="../Users/90914.html" class="username">Hitmanhimself</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148203'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;3.45%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 3.45%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148203" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148269" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148269">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41194.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41194_1430129462.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/41194.html" class="username">shakotay2</a>							</dt>
+
+						<dd class="profile-rank">MEGAVETERAN<br /><img src="./images/ranks/vip-2.png" alt="MEGAVETERAN" title="MEGAVETERAN" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41194&amp;sr=posts">4293</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 20, 2012 9:24 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Nexus, searching for Jim Kirk</dd>
+							    <dd class="profile-posts" data-user-give-id="41194"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/true">1152 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41194"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/false">2245 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact shakotay2">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact shakotay2</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148269" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148269">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148269#p148269">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148269/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148269" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148269' href="./viewtopic.php?f=29&amp;p=148269&amp;thanks=148269&amp;to_id=41194&amp;from_id=123876" title="Say Thanks to the author of the post: shakotay2"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148269#p148269" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41194.html" class="username">shakotay2</a></strong> &raquo; </span><time datetime="2019-02-03T20:40:46+00:00">Sun Feb 03, 2019 9:40 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">(pmed you) seems you need to replace "while" like such for .ve2/.AFM:<br>
+      j = bones<em class="text-italics">.parentIndex<br>
+      if j != -1:</em></div>
+
+			
+			
+									
+						<div id='list_thanks148269'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/41194.html" class="username">shakotay2</a> for the post: </dt>
+			<dd><span title="Mon Feb 04, 2019 6:56 am"><a href="../Users/57570.html" class="username">Bigchillghost</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148269'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148269" class="signature">Tuts: a) Bigchillghost, <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17889" class="postlink">viewtopic.php?f=29&amp;t=17889</a><br>
+b) Extracting simple models: <a href="http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894" class="postlink">http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894</a><br>
+"Quoting the whole thing. Would u ever stop this nonsense?"</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148523" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148523">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148523" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148523">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148523#p148523">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148523/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148523" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148523' href="./viewtopic.php?f=29&amp;p=148523&amp;thanks=148523&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148523#p148523" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-12T05:02:22+00:00">Tue Feb 12, 2019 6:02 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15707">leonopteryx.zip</a></dt>
+						<dd>(5.37 KiB) Downloaded 28 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: leonopteryx.xbg
+# From Game: James Cameron's AVATAR THE GAME
+# Platform: PC
+# Bone Format: Quaternion Rotation, Translation
+# Coordinate System: Left-Hand
+# Engine: Dunia Engine
+# Endian: Little
+</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>long	boneCount
+for i = 0 &lt; boneCount	
+	long 	CRC?
+	long 	boneIndex // sometimes -1
+	long 	Unknown
+	long 	parentIndex
+	float	Rotation[4] // Quaternion
+	float	Tanslation[3]
+	float	Scaling[3]
+	long 	Unknown[3]
+	long 	boneNameLen
+	char 	boneName[boneNameLen + 1] // null-terminated
+</code></pre></div>
+Same procedure as for Assalt Fire.	<br>
+<br>
+<img src="https://i.imgur.com/EZQaUiz.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis code(lack convertion to right-handed):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data)
+	boneCount = bs.readUInt()
+	bones = []
+	for i in range(0, boneCount):
+		bs.seek(0xC, NOESEEK_REL)
+		bonePIndex = bs.readInt()
+		Rot = NoeQuat.fromBytes(bs.readBytes(16))
+		Tran = NoeVec3.fromBytes(bs.readBytes(12))
+		bs.seek(0x18, NOESEEK_REL)
+		NameLen = bs.readUInt() + 1
+		boneName = noeStrFromBytes(bs.readBytes(NameLen), "ASCII")
+		boneMat = Rot.toMat43(transposed = 1)
+		boneMat[3] = Tran
+		bones.append( NoeBone(i, boneName, boneMat, None, bonePIndex) )
+	# Converting local matrix to world space
+	for i in range(0, boneCount):
+		j = bones[i].parentIndex
+		if j != -1:
+			bones[i].setMatrix( bones[i].getMatrix() * bones[j].getMatrix() )
+			
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	rapi.setPreviewOption("setAngOfs", "0 -90 0")
+	return 1
+</code></pre></div>
+<img src="https://i.imgur.com/aDQWqyy.jpg" class="postimage" alt="Image"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Wed Oct 09, 2019 9:27 am, edited 2 times in total.
+									</div>
+			
+						<div id='list_thanks148523'>
+</div>
+<div id='div_post_reput148523'>
+</div>
+
+							<div id="sig148523" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148524" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148524">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148524" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148524">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148524#p148524">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148524/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148524" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148524' href="./viewtopic.php?f=29&amp;p=148524&amp;thanks=148524&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148524#p148524" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-12T05:09:06+00:00">Tue Feb 12, 2019 6:09 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15708">Rath.zip</a></dt>
+						<dd>(4.56 KiB) Downloaded 50 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: Rath.rn
+# From Game: Ben 10 Omniverse 2
+# Platform: 3DS
+# Bone Format: 3x4 Matrix
+# Coordinate System: Right-Hand
+# Endian: Little
+</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>long	Magic
+long	boneDataOffset // Absolute
+long	boneCount
+long	Skip[4]
+
+for i = 0 &lt; boneCount
+	long 	Unknown
+	short	UnknownID1
+	short	UnknownID2
+	long 	UnknownOffset // useless
+	long 	boneDataOffset // relative from this field
+		
+for i = 0 &lt; boneCount	
+	long 	Ignore[2]
+	long 	boneIndex
+	long 	parentIndex?
+	long 	Ignore[4]
+	float	Scaling[3]
+	float	Rotation[3] // Euler, in radian
+	float	Translation[3]
+	
+	float	Mat34[12] // row-major
+	float	identityMatrix[12] // row-major
+	float	Mat34Reverse[12] // row-major
+	
+	float	Null[3]
+</code></pre></div>
+Similar to Ben 10 Omniverse on Xbox 360 except the matries are packed. Guess the tricky part would be identifying the parent IDs and the required matries.<br>
+<br>
+<img src="https://i.imgur.com/1LO7jpX.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis code:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data)
+	bs.seek(8, NOESEEK_REL)
+	boneCount = bs.readUInt()
+	bs.seek(boneCount * 0x10 + 0x10, NOESEEK_REL)
+	bones = []
+	#noesis.logPopup()
+	for i in range(0, boneCount):
+		bs.seek(8, NOESEEK_REL)
+		boneIndex = bs.readInt()
+		bonePIndex = bs.readInt()
+		bs.seek(0x34, NOESEEK_REL)
+		Matrix = []
+		for j in range(0, 12):
+			Matrix.append(bs.readFloat())
+		boneMat = NoeMat43( [(Matrix[0],Matrix[1],Matrix[2]), 
+							 (Matrix[4],Matrix[5],Matrix[6]), 
+							 (Matrix[8],Matrix[9],Matrix[10]), 
+							 (Matrix[3],Matrix[7],Matrix[11])] )#.transpose()
+		bs.seek(0x6C, NOESEEK_REL)
+		bones.append( NoeBone(boneIndex, 'bone%02d'%i, boneMat, None, bonePIndex) )
+	# Converting local matrix to world space
+	for i in range(0, boneCount):
+		j = bones[i].parentIndex
+		if j != -1:
+			bones[i].setMatrix( bones[i].getMatrix() * bones[j].getMatrix() )
+	
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	return 1
+</code></pre></div>
+<img src="https://i.imgur.com/5BnVezb.jpg" class="postimage" alt="Image"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Fri Dec 24, 2021 6:47 am, edited 4 times in total.
+									</div>
+			
+						<div id='list_thanks148524'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Tue Feb 12, 2019 1:19 pm"><a href="../Users/41194.html" class="username">shakotay2</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148524'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148524" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p148525" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile148525">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=148525" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content148525">
+
+					<h3 >
+						<a href="./viewtopic.php?p=148525#p148525">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/148525/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=148525" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post148525' href="./viewtopic.php?f=29&amp;p=148525&amp;thanks=148525&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=148525#p148525" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-02-12T05:12:20+00:00">Tue Feb 12, 2019 6:12 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=15709">mermaid_normal.zip</a></dt>
+						<dd>(6.29 KiB) Downloaded 24 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: mermaid_normal.model
+# From Game: GuJian3
+# Platform: PC
+# Bone Format: Translation, Quaternion
+# Coordinate System: Right-Hand
+# Engine: Vision Engine
+# Endian: Little
+</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>word	boneCount
+for i = 0 &lt; boneCount	
+	long 	nameLen
+	char 	Name[nameLen]
+	short	parentID
+	
+	float	UnknownTranslation[3]
+	float	UnknownRotation[4] // Quaternion
+	
+	float	Translation[3]
+	float	Rotation[4] // Quaternion
+</code></pre></div>
+Similiar to previous examples.<br>
+<br>
+<img src="https://i.imgur.com/D8SzaNu.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis code:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data)
+	boneCount = bs.readUShort()
+	bones = []
+	for i in range(0, boneCount):
+		NameLen = bs.readInt()
+		boneName = noeStrFromBytes(bs.readBytes(NameLen), "ASCII")
+		bonePIndex = bs.readShort()
+		bs.seek(28, NOESEEK_REL)
+		Tran = NoeVec3.fromBytes(bs.readBytes(12))
+		Rot = NoeQuat.fromBytes(bs.readBytes(16))
+		boneMat = Rot.toMat43(transposed = 0)
+		boneMat[3] = Tran
+		bones.append( NoeBone(i, boneName, boneMat, None, bonePIndex) )
+	# Converting local matrix to world space
+	for i in range(0, boneCount):
+		j = bones[i].parentIndex
+		if j != -1:
+			bones[i].setMatrix( bones[i].getMatrix() * bones[j].getMatrix() )
+			
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	rapi.setPreviewOption("setAngOfs", "0 -90 0")
+	return 1
+</code></pre></div>
+<img src="https://i.imgur.com/vgoCuyh.jpg" class="postimage" alt="Image"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/57570.html" class="username">Bigchillghost</a> on Wed Oct 09, 2019 9:28 am, edited 1 time in total.
+									</div>
+			
+						<div id='list_thanks148525'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 2):</dt>
+			<dd><span title="Tue Feb 12, 2019 1:19 pm"><a href="../Users/41194.html" class="username">shakotay2</a></span>, <span title="Mon Jun 03, 2019 11:40 am"><a href="../Users/79876.html" class="username">TakeAaron</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput148525'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;3.45%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 3.45%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig148525" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p153657" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile153657">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=153657" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content153657">
+
+					<h3 >
+						<a href="./viewtopic.php?p=153657#p153657">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/153657/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=153657" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post153657' href="./viewtopic.php?f=29&amp;p=153657&amp;thanks=153657&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=153657#p153657" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-06-11T13:41:22+00:00">Tue Jun 11, 2019 2:41 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=16339">base02.zip</a></dt>
+						<dd>(9.4 KiB) Downloaded 27 times</dd>
+		</dl>
+		
+			</div>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Dump Name: base02.mesh
+# From Game: Cyber Hunter
+# Platform: Android
+# Bone Format: 4x4 Matrices
+# Coordinate System: Left-Hand
+# Endian: Little
+</code></pre></div>
+Bone data structure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>short	boneCount
+for i = 0 &lt; boneCount
+	BYTE	parentID // 0xFF means parentless
+for i = 0 &lt; boneCount
+	char	boneName[32]
+for i = 0 &lt; boneCount
+	float	boneMatrix[16] // Column-major</code></pre></div>
+The matrices are in world space while FBX parenting is in parent space. So they need to be converted to parent space by premultiply the inverse<br>
+of world matrix of their parents'. This format uses DirectX axis system, and swapping the X-Z axis simply won't work. So you need to convert the world space matrix of each node to right-handed before the premultiplication.<br>
+Check the code in the source for details.<br>
+<br>
+<img src="https://i.imgur.com/UyB7jKv.jpg" class="postimage" alt="Image"><br>
+<br>
+Noesis python code(lack convertion to right-handed):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#load the model
+def noepyLoadModel(data, mdlList):
+	bs = NoeBitStream(data)
+	boneCount = bs.readShort()
+	pIDs= []
+	for i in range(0, boneCount):
+		aByte = bs.readUByte()
+		if aByte != 0xFF:
+			pIDs.append(aByte &amp; 0xFF)
+		else:
+			pIDs.append(-1)
+	
+	nameList = []
+	for i in range(0, boneCount):
+		boneName = noeStrFromBytes(bs.readBytes(32), "ASCII")
+		nameList.append(boneName)
+	
+	bones = []
+	for i in range(0, boneCount):
+		Matrix = []
+		for j in range(0, 16):
+			Matrix.append(bs.readFloat())
+		boneMat = NoeMat43( [(Matrix[0],Matrix[4],Matrix[8]), 
+				(Matrix[1],Matrix[5],Matrix[9]), 
+				(Matrix[2],Matrix[6],Matrix[10]), 
+				(Matrix[12],Matrix[13],Matrix[14])] )
+		bones.append( NoeBone(i, nameList[i], boneMat, None, pIDs[i]) )
+	
+	mdl = NoeModel()
+	mdl.setBones(bones)
+	mdlList.append(mdl)
+	return 1</code></pre></div>
+<img src="https://i.imgur.com/W0pOIzP.png" class="postimage" alt="Image"></div>
+
+			
+			
+									
+						<div id='list_thanks153657'>
+</div>
+<div id='div_post_reput153657'>
+</div>
+
+							<div id="sig153657" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p155524" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile155524">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36239.html" class="username">jayn23</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36239&amp;sr=posts">250</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Jul 17, 2011 9:30 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="36239"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36239/true">61 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="36239"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36239/false">241 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jayn23">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jayn23</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=155524" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content155524">
+
+					<h3 >
+						<a href="./viewtopic.php?p=155524#p155524">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/155524/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=155524" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post155524' href="./viewtopic.php?f=29&amp;p=155524&amp;thanks=155524&amp;to_id=36239&amp;from_id=123876" title="Say Thanks to the author of the post: jayn23"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=155524#p155524" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36239.html" class="username">jayn23</a></strong> &raquo; </span><time datetime="2019-08-17T22:01:16+00:00">Sat Aug 17, 2019 11:01 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Hi Bigchillghost,<br>
+<br>
+first id like to thank you for this great tutorial, its the only tutorial i found online i could actually understand regarding bone data <br>
+iv been trying to follow all of your examples and can reproduce all the results until i get to the following line in noesis:<br>
+<br>
+bones<em class="text-italics">.setMatrix(bones<em class="text-italics">.getMatrix().__mul__(bones[j].getMatrix()))<br>
+<br>
+could you please explain what it does?<br>
+<br>
+iv also went over you C code, but it seems there you <br>
+1. read the translation vector, <br>
+2. read rotation 3x3 matrix then transpose the 3x3<br>
+3. then in function (Matrix33ToRS) calculate what i am assuming is in world coordinates scaling vector and rotation vector - but not sure what to do with this<br>
+i would be happy for a small explanation <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+<br>
+Thanks allot <br>
+  <br>
+<br>
+at the moment i am trying to work on the following model:<br>
+# Dump Name: CHAR_Bloxx.ve2<br>
+# From Game: Ben 10 Omniverse<br>
+# Platform: Xbox 360</em></em>[/i]</div>
+
+			
+			
+									
+						<div id='list_thanks155524'>
+</div>
+<div id='div_post_reput155524'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p155529" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile155529">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=155529" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content155529">
+
+					<h3 >
+						<a href="./viewtopic.php?p=155529#p155529">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/155529/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=155529" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post155529' href="./viewtopic.php?f=29&amp;p=155529&amp;thanks=155529&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=155529#p155529" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-08-18T01:32:01+00:00">Sun Aug 18, 2019 2:32 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=155524#p155524"><div><cite><a href="../Users/36239.html">jayn23</a> wrote: <a href="./viewtopic.php?p=155524#p155524" data-post-id="155524" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sat Aug 17, 2019 11:01 pm</span></cite>bones<em class="text-italics">.setMatrix(bones<em class="text-italics">.getMatrix().__mul__(bones[j].getMatrix()))<br>
+<br>
+could you please explain what it does?</em></em></div></blockquote><em class="text-italics"><em class="text-italics"><br>
+To multiply the node's local matrix with the one of its parent so as to obtain its world transformation. Technically you need to do it recursively for a node in a tree structure untill you reach the root, but in Noesis for some unknown reasons you just need to do it once. So you might just consider that as a fixed routine to convert a local bone tree to world space.</em></em>
+<blockquote cite="./viewtopic.php?p=155524#p155524"><div><cite><a href="../Users/36239.html">jayn23</a> wrote: <a href="./viewtopic.php?p=155524#p155524" data-post-id="155524" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sat Aug 17, 2019 11:01 pm</span></cite><em class="text-italics"><em class="text-italics">then in function (Matrix33ToRS) calculate what i am assuming is in world coordinates scaling vector and rotation vector - but not sure what to do with this</em></em>
+</div></blockquote><em class="text-italics"><em class="text-italics"><br>
+You should probably know that FBX nodes are in parent space, which is opposite to Noesis. And what Matrix33ToRS does is to extract the Euler rotation and scaling vectors from a 3x3 row-major matrix, regardless whether it's in parent space or world space. In this case, you got parent space transformation. That's what's required for an FBX node.</em></em></div>
+
+			
+			
+									
+						<div id='list_thanks155529'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Sun Aug 18, 2019 12:32 pm"><a href="../Users/36239.html" class="username">jayn23</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput155529'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig155529" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p155544" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile155544">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36239.html" class="username">jayn23</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36239&amp;sr=posts">250</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Jul 17, 2011 9:30 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="36239"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36239/true">61 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="36239"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36239/false">241 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jayn23">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jayn23</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=155544" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content155544">
+
+					<h3 >
+						<a href="./viewtopic.php?p=155544#p155544">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/155544/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=155544" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post155544' href="./viewtopic.php?f=29&amp;p=155544&amp;thanks=155544&amp;to_id=36239&amp;from_id=123876" title="Say Thanks to the author of the post: jayn23"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=155544#p155544" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36239.html" class="username">jayn23</a></strong> &raquo; </span><time datetime="2019-08-18T11:48:35+00:00">Sun Aug 18, 2019 12:48 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Thanks for the fast reply, i guess i should read about FBX format now <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"> <br>
+
+<blockquote cite="./viewtopic.php?p=155529#p155529"><div><cite><a href="../Users/57570.html">Bigchillghost</a> wrote: <a href="./viewtopic.php?p=155529#p155529" data-post-id="155529" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sun Aug 18, 2019 2:32 am</span></cite>
+multiply the node's local matrix with the one of its parent so as to obtain its world transformation.
+</div></blockquote>
+ the problem with this, is since you read the translation matrix with 3x3 matrix you get a 4x3 matrix, and you cant multiply 4x3 by 4x3 since num of columns on matrix1 should equal num of rows on matrix2.<br>
+it seems like a i am missing something here.<br>
+<br>
+Until now iv just been studying the diffrent forms bones can appear in 3d files, and the code needed to extract them.<br>
+any tips on recognizing the kind of bone data: Quaternion  left or right, Row-major or columns-major. etc.. or is it just experience?<br>
+<br>
+thnaks for all your help</div>
+
+			
+			
+									
+						<div id='list_thanks155544'>
+</div>
+<div id='div_post_reput155544'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p155550" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile155550">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=155550" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content155550">
+
+					<h3 >
+						<a href="./viewtopic.php?p=155550#p155550">Re: Approaches of Parsing Bone Representations</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/155550/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=155550" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post155550' href="./viewtopic.php?f=29&amp;p=155550&amp;thanks=155550&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=155550#p155550" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2019-08-18T13:59:53+00:00">Sun Aug 18, 2019 2:59 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=155544#p155544"><div><cite><a href="../Users/36239.html">jayn23</a> wrote: <a href="./viewtopic.php?p=155544#p155544" data-post-id="155544" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sun Aug 18, 2019 12:48 pm</span></cite>
+the problem with this, is since you read the translation matrix with 3x3 matrix you get a 4x3 matrix,</div></blockquote>
+First of all, it's not a "translation matrix", but a translation "vector". Be careful using proper terms to avoid confusion.
+<blockquote cite="./viewtopic.php?p=155544#p155544"><div><cite><a href="../Users/36239.html">jayn23</a> wrote: <a href="./viewtopic.php?p=155544#p155544" data-post-id="155544" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sun Aug 18, 2019 12:48 pm</span></cite>and you cant multiply 4x3 by 4x3 since num of columns on matrix1 should equal num of rows on matrix2.</div></blockquote>
+Mathmatically, you can't. In programing it's not necessarily to store the matrix as a 4x4 one since the last row is constant.
+<blockquote cite="./viewtopic.php?p=155544#p155544"><div><cite><a href="../Users/36239.html">jayn23</a> wrote: <a href="./viewtopic.php?p=155544#p155544" data-post-id="155544" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sun Aug 18, 2019 12:48 pm</span></cite>
+any tips on recognizing the kind of bone data: Quaternion  left or right, Row-major or columns-major. etc.. or is it just experience?
+</div></blockquote>
+For recognition of handedness, just load a mesh into a 3D app and see if it's mirrored compared with its in-game look or if the face normals are inverted. To distinguish the matrix storage, first you need to determine whether it's a 4x4 matrix, or a 3x3 one. You can easily tell by looking for the (0 0 0 1) vector. For a 4x4 matrix, it's easy once you find the translation vector, which could contain values out of the range of -1.0 to +1.0. For a 4x3 matrix, since it can also be a 3x3 matrix followed by a translation vector, there's no universal recipe. Just try to parse them respectively and see which one reveals the correct result. So yes it requires experience, but also knowledge. <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"></div>
+
+			
+			
+									
+						<div id='list_thanks155550'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post: </dt>
+			<dd><span title="Sun Aug 18, 2019 9:32 pm"><a href="../Users/36239.html" class="username">jayn23</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput155550'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig155550" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=19429" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=19429&amp;watch=topic&amp;start=0&amp;hash=08a771a3" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=19429&amp;unwatch=topic&amp;start=0&amp;hash=08a771a3" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=19429&amp;bookmark=1&amp;hash=08a771a3" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=19429" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=19429&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=19429">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			28 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./19429 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./19429 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=29" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Tutorials”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 1 guest</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

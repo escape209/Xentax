@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Mabinogi File Formats[PMG &amp; FRM] - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=8946">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./8946.html">Mabinogi File Formats[PMG &amp; FRM]</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=8946" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=8946&amp;watch=topic&amp;start=0&amp;hash=eb7699b2" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=8946&amp;unwatch=topic&amp;start=0&amp;hash=eb7699b2" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=8946&amp;bookmark=1&amp;hash=eb7699b2" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=8946" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=8946&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="8946" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p73207" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile73207">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41877.html" class="username">Adamj</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41877&amp;sr=posts">11</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 16, 2012 10:20 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41877"></dd>
+    <dd class="profile-posts" data-user-receive-id="41877"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41877/false">1 time</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content73207">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=73207#p73207">Mabinogi File Formats[PMG &amp; FRM]</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/73207/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=73207" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post73207' href="./viewtopic.php?f=16&amp;p=73207&amp;thanks=73207&amp;to_id=41877&amp;from_id=123876" title="Say Thanks to the author of the post: Adamj"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=73207#p73207" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41877.html" class="username">Adamj</a></strong> &raquo; </span><time datetime="2012-05-18T05:36:03+00:00">Fri May 18, 2012 6:36 am</time>
+			</p>
+			
+			
+			
+			<div class="content">So, I've been staring at Mabi's files in hex for a week now, and examining source/output of various converters, and this is what I have so far, on PMG files: (There's more, but I've literally only just finished typing the PMG section so far, which is by <span style="text-decoration:underline"><strong class="text-strong">-FAR-</strong></span> the section I know most about)<br>
+<br>
+All files formats start with some sort of definition in the first 3 bytes, take a look, you'll see what I mean.  <a href="http://puu.sh/vhRk" class="postlink">http://puu.sh/vhRk</a><br>
+<br>
+I used male_cloth01_bss.pmg for the example below, which you can find by directing the unpacker to (at the bottom of the post, there's a link to it):<br>
+data\gfx\char\human\male\wear<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>File start:
+0x00 - 0x02: the type of file
+0x04 &amp; 0x05: the version of the file
+0x06 &amp; 0x07: Offset to where the visual information starts.
+0x0A - 0x89: The name of the file
+0x8A - 0x8D: Information relevant to displaying the mesh correctly (not sure what)
+0xCE - 0xD1: Same as above.
+----
+0xD2 - 0xD5: Appears to be a reference to the number of bytes the visual data for this part of the mesh contains
+0xD6 - 0xF5: Name of the body part.
+0xF6 - 0x0175: Name of the mesh.
+0x0176 - 0x0195: Body part name repeated.
+0x0196: Number of parts to this mesh.
+-----
+This appears to be the end of the definition for that particular mesh part.
+
+0x019A - 0x01A1: Not sure what the first 4 bytes are, but the last two are a reference to the number of bytes for the visual data.
+
+
+
+At this point, the data repeats exactly as outlined in the above mesh part, so I'll continue on to the visual data, however, as each PMG will have a different offset to where the visual data starts, and each mesh is different, there will be different sizes in the actual mesh information.
+
+The actual structuring will remain the same in every file, which is why I chose to use an example.
+
+
+*0x11D2 - 0x11D4: States there is a Pleione Mesh here.
+*0x11D6 &amp; 0x11D7: The Pleione Mesh version, 1.7 in this case.
+*0x11D8 - 0x11DB: The number of bytes in this section
+*0x11DC - 0x11FB: The body part name.
+*0x11FC - 0x127B: The mesh name.
+*0x127C - 0x129B: The body part name, again.
+*0x129C - 0x12BB: Empty section which the converter source I've read (included in the attached archive for anyone who is interested) seems to imply that there might be data in these segments in other files. I've not seen it myself.
+*0x12BC - 0x12DB: As above.
+*0x12DC - 0x12FA: Colour channel.
+*0x12FB - 0x133B: Frame transform matrix, I'm not sure what it's for, but the converter source calls it the "Minor Matrix". It's commented out in the .X file output.
+*0x133C - 0x137B: Another frame transform matrix, which the source calls the "Major Matrix", and is relevant enough to not be commented out in the .X file output.
+*0x133D - 0x1346: The number of parts in this mesh.
+*0x1347 - 0x13A7: The texture name for this mesh.
+*0x13A8 - 0x141F: Contains information, the number of parts in the mesh, the number of face vertexes, face count, "xxxxVertex", "xxxxCount", mesh count, and skin count.
+Spoiler: 
+
+*0x1420 - 0x145F: Frame transform matrix, the converter calls it the "WhatMatrix", and says that it only has 15 values. I personally suspect that the 40 00 00 00 is actually a part of this matrix. Not sure what it's for.
+0x1460 - 0x15A5: The face information, the last 134 bytes of which get commented out by the converter.
+0x15A6 - 0x1995: The first three 4 byte values are Mesh Vertices, the next 3 are the Mesh Normals, followed by the mesh vertex colour. The next two 4 byte floats are Mesh texture co-ordinates. This sequence is repeated, 28 times.
+0x1996 - 0x1A55: I have no idea what these bytes signify, but they appear to almost certainly be float values. Some kind of joint data for clothes?
+
+That's the end of that portion of visual data, and the same sectioning applies to the other visual data following it.
+
+Certain sections are always the same size, which I marked with a bold asterisk. The first part certainly has parts always the same size (Namely the name definitions), but I've not checked enough of these sections to be certain of that.</code></pre></div>
+
+PMG related converters are attached (No actual PMG data included, as per the rules)<br>
+The game can be downloaded from any of the following links:<br>
+<br>
+Full client: <a href="http://download3.nexon.net/Game/Mabinogi/FullVersion/MabinogiSetup101R.exe" class="postlink">http://download3.nexon.net/Game/Mabinog ... up101R.exe</a><br>
+Client without NPC music files: <a href="http://download2.nexon.net/Game/Mabinogi/LightVersion/MabinogiSetupLight101R.exe" class="postlink">http://download2.nexon.net/Game/Mabinog ... ht101R.exe</a><br>
+Horrible Pando Downloader: <a href="http://download2.nexon.net/Game/Mabinogi/Downloader/MabinogiDownloaderV101R.exe" class="postlink">http://download2.nexon.net/Game/Mabinog ... rV101R.exe</a><br>
+<br>
+<br>
+I'm hoping to gain enough knowledge about the Mabinogi file formats, that we can actually start making items with joint data; currently all converters break joint data upon converting between formats, clothes, pets, monsters, etc.<br>
+I was also hoping to get some help with .frm format, as I'm dying to construct my own pets +_+<br>
+<br>
+Also, I'm a complete novice with 3D formats, and reversing files, so please excuse the mess, and inevitable use of incorrect terms ^^;<br>
+<br>
+I also have a variety of converters for this format, along with partial source for one, but I couldn't attach the archive, so I sent it to Puu.sh, and added the link below, I hope that's okay.<br>
+(There's no copyrighted material, and all tools are publicly available, as is the partial source)<br>
+<br>
+Archive containing tools: <a href="http://puu.sh/vlIV" class="postlink">http://puu.sh/vlIV</a></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/41877.html" class="username">Adamj</a> on Wed Jun 20, 2012 5:15 pm, edited 3 times in total.
+									</div>
+			
+						<div id='list_thanks73207'>
+</div>
+<div id='div_post_reput73207'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p73352" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile73352">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41877.html" class="username">Adamj</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41877&amp;sr=posts">11</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 16, 2012 10:20 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41877"></dd>
+    <dd class="profile-posts" data-user-receive-id="41877"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41877/false">1 time</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content73352">
+
+					<h3 >
+						<a href="./viewtopic.php?p=73352#p73352">Re: Mabinogi File Formats</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/73352/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=73352" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post73352' href="./viewtopic.php?f=16&amp;p=73352&amp;thanks=73352&amp;to_id=41877&amp;from_id=123876" title="Say Thanks to the author of the post: Adamj"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=73352#p73352" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41877.html" class="username">Adamj</a></strong> &raquo; </span><time datetime="2012-05-21T11:38:55+00:00">Mon May 21, 2012 12:38 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Frm files:<br>
+<br>
+<img src="http://puu.sh/vQ09" class="postimage" alt="Image"><br>
+<br>
+The first 3 bytes tell you that the file is a Pleione framework, and that apparently is exciting, due to the the exclamation mark xD;<br>
+<br>
+Bytes 5 and 6 tell you that the frame is version 1.0, and byte 7 tells you that there are 26 bones in this frame.<br>
+<br>
+<br>
+The blueish/purple line outlines the location data for the "com" bone (this bone is the root, basically), with all values being float points. I'm not really sure what the values do, as of yet, as I have yet to experiment with them all. This section is 192 bytes, so, possibly 3 transform matrixes?<br>
+<br>
+The green line outlines the bone's name, which is 32 bytes in size.<br>
+<br>
+The red line shows the bone's assigned number, and what it's connected to. Com is bone 00, and is connected to FF. The following 2 bytes are simply empty.<br>
+<br>
+The light blue line outlines 32 bytes of data that the client doesn't care about. At all. I deleted all 26 sections, the client doesn't appear to even notice.<br>
+<br>
+That's the format for the bone information, which is simply repeated 25 more times, with different information in the sections ^^<br>
+<br>
+<br>
+Now, the part I don't understand about this file is the remaining 50%:<br>
+<img src="http://puu.sh/vWxk" class="postimage" alt="Image"><br>
+<br>
+Red outline: number of bytes in this section. (9348, not including itself. Always tells you the number of bytes.)<br>
+<br>
+Green outline: Number of bones in the frame (Always.)<br>
+<br>
+Light blue: 2x the number of bones in the frame (Always.)<br>
+<br>
+Orange: 18? 4608? A floating point? I have no idea (Not always 18. Also not sure if the yellow section following is a part of it.)<br>
+<br>
+Purple: Again, not sure what this is, or what it does, or even if the yellow outlined parts that follow are a part of it. (I assume that they are, though.)<br>
+<br>
+Pink: The number of visible equipment slots. A (human/elf) character has 9 visible pieces of equipment, altering that to 08 made all equipment in my hands invisible (Which was pretty amusing.)<br>
+<br>
+Grey: The client just doesn't seem to care about these bytes. I filled them in with random junk data, client didn't even notice. The other values are essential though.<br>
+<br>
+Everything else: Data involving the display of the body parts. I've tried filling bytes in with zeros, it takes a LOT of zeros to make a difference, and as such, I've not worked out any sectioning to this data.<br>
+<br>
+Perhaps someone here would be able to shed some light on what this data could mean?<br>
+Also, do the pictures help, or not?<br>
+If so, I could do the same for the .pmg post.</div>
+
+			
+			
+									
+						<div id='list_thanks73352'>
+</div>
+<div id='div_post_reput73352'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p73701" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile73701">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41877.html" class="username">Adamj</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41877&amp;sr=posts">11</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 16, 2012 10:20 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41877"></dd>
+    <dd class="profile-posts" data-user-receive-id="41877"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41877/false">1 time</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content73701">
+
+					<h3 >
+						<a href="./viewtopic.php?p=73701#p73701">Re: Mabinogi File Formats[PMG &amp; FRM]</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/73701/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=73701" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post73701' href="./viewtopic.php?f=16&amp;p=73701&amp;thanks=73701&amp;to_id=41877&amp;from_id=123876" title="Say Thanks to the author of the post: Adamj"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=73701#p73701" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41877.html" class="username">Adamj</a></strong> &raquo; </span><time datetime="2012-05-29T22:04:04+00:00">Tue May 29, 2012 11:04 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">In an effort to unravel the mysteries of the second part of the human male.frm, I set a script to zero a byte of the file, launch a client, take a snapshot of the character, and then return the original value of the byte.<br>
+<br>
+It repeated this for that entire section, starting from 0x1A90, all the way to the very end of the file, and this archive contains the pictures that show parts of the character vanishing, in the hopes that they would expose a pattern of some kind.<br>
+<br>
+<a href="http://www.mediafire.com/?b4p8txnlos24kaq" class="postlink">http://www.mediafire.com/?b4p8txnlos24kaq</a><br>
+(There are only pictures in the archive)<br>
+<br>
+The pictures are named with the location of the byte they represent.<br>
+The character looks that way because I edited the PMG to make it easier to see differences, as clavicles are almost invisible, and hands come in two versions, palms and fists. I wasn't sure if editing the Frm would cause a replacement, or both to appear, so I moved the palms to one side.<br>
+<br>
+On a side note, I believe that all these files are handled by the Pleione.dll, which I have an older version of (I think this one isn't packed, which the later versions are), if you happen to be interested in simply reversing the functionality, let me know ^^</div>
+
+			
+			
+									
+						<div id='list_thanks73701'>
+</div>
+<div id='div_post_reput73701'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p73803" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile73803">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/41877.html" class="username">Adamj</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41877&amp;sr=posts">11</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed May 16, 2012 10:20 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="41877"></dd>
+    <dd class="profile-posts" data-user-receive-id="41877"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41877/false">1 time</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content73803">
+
+					<h3 >
+						<a href="./viewtopic.php?p=73803#p73803">Re: Mabinogi File Formats[PMG &amp; FRM]</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/73803/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=73803" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post73803' href="./viewtopic.php?f=16&amp;p=73803&amp;thanks=73803&amp;to_id=41877&amp;from_id=123876" title="Say Thanks to the author of the post: Adamj"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=73803#p73803" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41877.html" class="username">Adamj</a></strong> &raquo; </span><time datetime="2012-06-01T15:21:11+00:00">Fri Jun 01, 2012 4:21 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Out of curiosity, I had a quick experiment with the frame data, and zeroed all bytes that had no effect on the client's visual display of the character model, and the client still shows the frame normally, I went in game, killed some monsters, the client literally didn't care about what I'd done.<br>
+<br>
+I then tried zeroing EVERY byte, that didn't cause a crash (3 bytes), ending up with:<br>
+<img src="http://puu.sh/y6OE" class="postimage" alt="Image"><br>
+<br>
+<br>
+As you can see, the client states on the right that there is a character there, and announced the character's name normally, but displays nothing.<br>
+The main server has just had an update, so I need to update my client to get on and test whether this frame actually works, but, seeing as the last one did, I see no reason (lol, unintentional) that this wouldn't work.<br>
+<br>
+So, the questions I'm left with are:<br>
+What ARE the other 9200+ bytes for, if they have apparently NO effect on the visual data?<br>
+<br>
+What do the remaining bytes, that actually affect what is shown mean?<br>
+<br>
+I'm currently working on identifying the bytes that affect held equipment, as I forgot to test those at the same time previously ^^;</div>
+
+			
+			
+									
+						<div id='list_thanks73803'>
+</div>
+<div id='div_post_reput73803'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=8946" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=8946&amp;watch=topic&amp;start=0&amp;hash=eb7699b2" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=8946&amp;unwatch=topic&amp;start=0&amp;hash=eb7699b2" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=8946&amp;bookmark=1&amp;hash=eb7699b2" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=8946" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=8946&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=8946">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a>, <a href="../Users/57855.html" class="username">muserigtc</a> and 6 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

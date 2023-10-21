@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>A Static Hook Technique for Android Game Resources Dumping - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=26100">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="29"><a itemprop="item" href="./viewforum.php?f=29"><span itemprop="name">Tutorials</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./26100.html">A Static Hook Technique for Android Game Resources Dumping</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Read or post any tutorial related to file format analysis for modding purposes.<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=26100" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=26100&amp;watch=topic&amp;start=0&amp;hash=6d44d3d2" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=26100&amp;unwatch=topic&amp;start=0&amp;hash=6d44d3d2" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=26100&amp;bookmark=1&amp;hash=6d44d3d2" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=26100" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=26100&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="26100" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			5 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p188855" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile188855">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=188855" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content188855">
+
+					<h3 class="first">
+							<img src="./images/icons/misc/star.gif" width="16" height="16" alt="" title="">
+						<a href="./viewtopic.php?p=188855#p188855">A Static Hook Technique for Android Game Resources Dumping</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/188855/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=188855" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post188855' href="./viewtopic.php?f=29&amp;p=188855&amp;thanks=188855&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=188855#p188855" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2022-12-20T09:27:18+00:00">Tue Dec 20, 2022 10:27 am</time>
+			</p>
+			
+			
+			
+			<div class="content">It’s not rare to encounter circumstances for Android games where the asset files are encrypted. If it’ll take too much work to reverse engineering the algorithm from the .so library, while we only need certain files to be decrypted, a relatively easier way is to hook the call of a function of which the arguments contain the data we need, and dump the data to local files directly.<br>
+<br>
+Unlike known methods, in this article we'll modify the assembly code in the .so library file directly, hence avoiding the routines of writing additional hooking program, which however brings some restrictions to the applicability of this method:<br>
+<br>
+1. the standard library functions we need must have been imported by the .so library already. Since dumping mostly involves fundamental functions like malloc, free, fopen, fwrite, etc., it’s not difficult to meet this condition;<br>
+<br>
+2. there must be enough room to place the assembly code of our dump routine. We need to write our code in the .text section which inevitably will occupy and break existing sub-routine. Therefore, we need to find a "victim" sub-routine which is long enough to accommodate all of our assembly code, while destroying it won't damage the game's logic and crash it. A second choice is to adapt the part of code of a sub-routine which handles an exception that is unlikely to happen in actual run-time. A last choice would be locating a sub-routine that is called only after the function to be hooked has been called, so that you can get the data dumped before the game crashes. But you might only be able to dump one asset this way.<br>
+<br>
+Apart from dumping assets, this method might also be used for debugging purpose such as revealing the actual address of a dynamically calculated function call, if the game has used anti-debugging techniques.<br>
+<br>
+To demonstrate this trick, I'll show you how to dump the manifest list of Asphalt 9: Legends. Here're a few facts about this game that you need to know:<br>
+1. the game packages use hashes for asset names, while for earlier versions of the game they came with an unencrypted manifest file called "__manifest_NX_100__", which contains the mapping info of the original names to the hashes. This manifest file has been encrypted in later versions of the game.<br>
+2. the game uses split apk packages and each package comes with a corresponding encrypted manifest file.<br>
+<br>
+The benefits of using this technique for the task would be that we don't need to care for the complicated decryption routine, and that we can dump each manifest to the same file in append mode to get the complete list, assuming the function is called by a single thread. <br>
+<br>
+The applications and knowledge required for the task are:<br>
+1. an Android emulator. For this demonstration it's Nox.<br>
+2. a Disassembler with the ability to patch assembly code. For this demonstration it's IDA Pro;<br>
+3. basic knowledge about ARM assembly. Here's a good tutorial to start with for the basics (credit to @azeria_labs): <a href="https://azeria-labs.com/writing-arm-assembly-part-1/" class="postlink">https://azeria-labs.com/writing-arm-assembly-part-1/</a> .</div>
+
+			
+			
+									
+						<div id='list_thanks188855'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 7):</dt>
+			<dd><span title="Thu Dec 22, 2022 12:36 am"><a href="../Users/82197.html" class="username">Joschka</a></span>, <span title="Sun Dec 25, 2022 4:09 pm"><a href="../Users/41194.html" class="username">shakotay2</a></span>, <span title="Mon Dec 26, 2022 4:07 am"><a href="../Users/31087.html" class="username">mono24</a></span>, <span title="Tue Dec 27, 2022 6:09 am"><a href="../Users/77967.html" class="username">moonpaladin</a></span>, <span title="Sun Feb 12, 2023 5:12 am"><a href="../Users/110331.html" class="username">ZirixStarstrider</a></span>, <span title="Mon Sep 11, 2023 12:33 pm"><a href="../Users/83419.html" class="username">srbvn</a></span>, <span title="Sun Oct 01, 2023 9:28 pm"><a href="../Users/36052.html" class="username">Andrakann</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput188855'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;12.07%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 12.07%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig188855" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p188856" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile188856">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=188856" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content188856">
+
+					<h3 >
+						<a href="./viewtopic.php?p=188856#p188856">Re: A Static Hook Technique for Android Game Resources Dumping</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/188856/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=188856" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post188856' href="./viewtopic.php?f=29&amp;p=188856&amp;thanks=188856&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=188856#p188856" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2022-12-20T09:33:10+00:00">Tue Dec 20, 2022 10:33 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Now let's begin. Install the game in the emulator and get the main .so library named " libAsphalt9.so". You can pull it from the emulator after installation or just unpack the corresponding split apk to get it. <br>
+<br>
+Once we have the library file, we can load it in IDA, and wait for the analyze process to complete. When it's done, navigate to the menu "View", "Open subviews", "Strings", and wait for the generation of string list to complete. When that's finished, search for the string "manifest" in the Strings View, as shown below:<br>
+<img src="https://i.ibb.co/X2v3vHz/1-mani-str.png" class="postimage" alt="Image"><br>
+<br>
+Double-click on the string "__manifest_{}_{}__" and press the "X" key when the cursor is on the variable to reveal where it's been referenced, as shown below:<br>
+<img src="https://i.ibb.co/RHtp3k1/2.png" class="postimage" alt="Image"><br>
+<br>
+As you can see, it's been referenced once only by a sub-routine. Double-click on the entry to jump to its address, where it's like:<br>
+<img src="https://i.ibb.co/SnNhgP1/3.png" class="postimage" alt="Image"><br>
+<br>
+Press the "F5" key to decompile the assembly into pseudo code:<br>
+<img src="https://i.ibb.co/Lz17p24/4.png" class="postimage" alt="Image"><br>
+<br>
+Here in the "do ... while" loop beginning from line 72, it constructs the manifest name and iteratively check if the file exists. Collapse parts of the code and it'll reveal some overall logics of this sub-routine:<br>
+<img src="https://i.ibb.co/FHhN6dW/6.png" class="postimage" alt="Image"><br>
+<br>
+We notice that at line 97 and line 112, it called the same function with an error message string as one of the arguments, so we can just assume that function merely inform the game of an error message. Basically we can draw some conclusions:<br>
+1. if the condition at line 95 meet, the manifest file is not found;<br>
+2. if the condition at line 110 meet, it means the "manifest key is not valid".<br>
+<br>
+Base on that we can tell that the function will load the file after line 123. Scroll down and we can see:<br>
+<img src="https://i.ibb.co/K7CBpd9/7.png" class="postimage" alt="Image"><br>
+<br>
+We can tell that the codes between line 128 and line 132 are possibly in charge of reading the manifest file. Especially the function call at line 131, where the address of the variable v63 is passed into the function while it's also been used in the following condition. But we don't need to care for the details of that. What we need is to find the variable that holds the decrypted manifest data. Keep scrolling down from line 159:<br>
+<img src="https://i.ibb.co/19Bfc5v/8.png" class="postimage" alt="Image"><br>
+<img src="https://i.ibb.co/qp7QFpp/9.png" class="postimage" alt="Image"><br>
+<br>
+It seems that the manifest is parsed in this piece of code. We noticed that at line 187 the variable v61 and a linefeed character is passed into the sub-routine, and at line 217, v61 is fed into the std::string destructor. That means v61 is a pointer to a std::string object. Let's dive into the function at line 187:<br>
+<img src="https://i.ibb.co/g9BW0bn/10-str-construct1.png" class="postimage" alt="Image"><br>
+<br>
+We see that the pointer to the character and a local variable of its length is passed into the sub-routine at line 6, as the 2nd and the 3rd arguments, while a1 is still the first argument. Look into the function at line 6:<br>
+<img src="https://i.ibb.co/Mh7Fsfd/10-str-construct2.png" class="postimage" alt="Image"><br>
+<br>
+It's not hard to understand what it's doing here. It checks the length of the string and if it's larger than 0xB (11 in decimal), it'll allocate a piece of memory to hold the string, and the size of the buffer is aligned to 0x10 bytes. In this case, the layout of the class std::string is as:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>struct std::string
+{
+	long	bufferSize; // or capacity, value = (actual bufferSize) | 1
+	long	stringLength;
+	char*	stringBuffer;
+}
+</code></pre></div>
+And if the string length is smaller than 11, the string is store on the stack, and the layout of the class std::string would be:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>struct std::string
+{
+	byte	stringLength; // value = (actual stringLength) * 2
+	char	stringBuffer[11];
+}
+</code></pre></div>
+Either way, the size of the struct std::string is 12 bytes fixed. The trick to determine which layout it belongs to, is to check the zero bit of the first byte, and if it's zero, then the string is stored on the stack, otherwise it's stored on the heap.</div>
+
+			
+			
+									
+						<div id='list_thanks188856'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 3):</dt>
+			<dd><span title="Mon Dec 26, 2022 4:07 am"><a href="../Users/31087.html" class="username">mono24</a></span>, <span title="Tue Dec 27, 2022 6:09 am"><a href="../Users/77967.html" class="username">moonpaladin</a></span>, <span title="Sun Oct 01, 2023 9:28 pm"><a href="../Users/36052.html" class="username">Andrakann</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput188856'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;5.17%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 5.17%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig188856" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p188857" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile188857">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=188857" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content188857">
+
+					<h3 >
+						<a href="./viewtopic.php?p=188857#p188857">Re: A Static Hook Technique for Android Game Resources Dumping</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/188857/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=188857" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post188857' href="./viewtopic.php?f=29&amp;p=188857&amp;thanks=188857&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=188857#p188857" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2022-12-20T09:43:22+00:00">Tue Dec 20, 2022 10:43 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Back to the routine where this string constructor is called, it seems the codes below are splitting the manifest string by the linefeed and processing each line accordingly:<br>
+<img src="https://i.ibb.co/qp7QFpp/9.png" class="postimage" alt="Image"><br>
+<br>
+And at line 195 in the above screenshot, the variable v56, and the linefeed string, and an index of the loop is passed into the function. Then at line 196 it checks the return value and break the loop if it's -1. Naturally we can tell that the function at line 195 must be looking for the i-th occurrence of the linefeed character in the manifest string buffer. So, we know that v56 should be the string object that hold the manifest data.<br>
+Scroll down to the end of the pseudo code and base on line 237 we can confirm that the data type of v56 is also a std::string.<br>
+<img src="https://i.ibb.co/RY21GWD/11.png" class="postimage" alt="Image"><br>
+<br>
+Place the cursor at line 237, then switch to the IDA View, right-click and navigate to the "Synchronize with" entry, and select the corresponding pseudo code view:<br>
+<img src="https://i.ibb.co/z41QN8D/12.png" class="postimage" alt="Image"><br>
+<br>
+Then we'll be directed to the assembly code where the string destructor is called:<br>
+<img src="https://i.ibb.co/YcMtgBJ/13.png" class="postimage" alt="Image"><br>
+<br>
+The function call at address 0x02715570 is what we're going to hook. We'll change this instruction and make it call our dump routine instead, and we can place this original call in our dump routine to avoid memory leak if necessary.<br>
+The pseudo code of the dump routine is simple, we just open a file and save the data to it, and destroy the string at the end. Since we know that the string for the manifest definitely contains more than 11 characters, we can just simplify the routine and skip the check of whether it's stored on heap or on stack.<br>
+The overall pseudo code is as following:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>void dump_manifest(std::string *str)
+{
+	fp = fopen("filepath", "ab");
+	if (fp != NULL)
+	{
+		fwrite(str-&gt;stringBuffer, str-&gt;stringLength, 1, fp);
+		fclose(fp);
+	}
+	std::string::~string(str);
+}
+</code></pre></div>
+Now let's translate it into assembly:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>PUSH    {R4,R5,R11,LR} ; backup registers and return address
+ADD     R11, SP, #0 ; backup current stack pointer
+SUB     SP, SP, #0x80 ; allocate some space on the stack, though no local variables are used here
+MOV     R4, R0 ; backup the string * pointer
+
+ADR     R1, .+0x44 ; mode, "ab", which is 0x44 bytes below current address
+ADR     R0, .+0x44 ; filename, which is 0x44 bytes below current address
+BL      fopen ; call fopen
+
+CMP     R0, #0 ; check if the return FILE * pointer is null
+BEQ     .+36 ; jump to dump_open_failed if failed open file
+
+MOV     R5, R0 ; backup FILE * pointer
+MOV     R3, R0 ; FILE *
+MOV     R2, #1 ; count
+LDR     R1, [R4,#4] ; size
+LDR     R0, [R4,#8] ; buffer
+
+BL      fwrite ; fwrite(buffer, size, 1, fp)
+
+MOV     R0, R5 ; FILE *
+BL      fclose ; close the file
+
+; label dump_open_failed
+MOV     R0, R4 ; string *
+BL      _ZNSt6__ndk112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev ; original call of std::string::~string()
+SUB     SP, R11, #0 ; restore current stack pointer
+POP    {R4,R5,R11,PC} ; restore registers and return to the call
+
+mode DCB "ab\0\0" ; mode
+filename DCB "/data/data/com.gameloft.android.ANMP.GloftA9HM/manifest.dump\0" ; filename
+</code></pre></div>
+The output filename I used is "/data/data/com.gameloft.android.ANMP.GloftA9HM/manifest.dump", the path "/data/data/com.gameloft.android.ANMP.GloftA9HM/" is created once the game is installed so the path existed and the game has the write permission to this path. You can choose a filename as you like as long as there's enough room to hold the string. If there's no enough room even for a shortest path, then you'll have to pick an existing string that's long enough and which is referenced as is, i.e., it must not be served as a format string. Then you place a pointer to this string, at the end of the dump routine, and reference it like:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>LDR     R1, [PC, #0x44] ; get the pointer's value. the offset to the pointer is relative to current PC register 
+ADD     R1, PC, R1 ; get the absolute address of the string. value in R1 is the address of the string relative to PC
+</code></pre></div>
+The complete assembly code is as following:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>PUSH    {R4,R5,R11,LR} ; backup registers and return address
+ADD     R11, SP, #0 ; backup current stack pointer
+SUB     SP, SP, #0x80 ; allocate some space on the stack, though no local variables are used here
+MOV     R4, R0 ; backup the string * pointer
+
+LDR     R1, [PC, #0x44] ; mode, "ab"
+ADD     R1, PC, R1
+LDR     R0, [PC, #0x40] ; filename
+ADD     R0, PC, R0
+BL      fopen ; call fopen
+
+CMP     R0, #0 ; check if the return FILE * pointer is null
+BEQ     .+36 ; jump to dump_open_failed if failed open file
+
+MOV     R5, R0 ; backup FILE * pointer
+MOV     R3, R0 ; FILE *
+MOV     R2, #1 ; count
+LDR     R1, [R4,#4] ; size
+LDR     R0, [R4,#8] ; buffer
+
+BL      fwrite ; fwrite(buffer, size, 1, fp)
+
+MOV     R0, R5 ; FILE *
+BL      fclose ; close the file
+
+; label dump_open_failed
+MOV     R0, R4 ; string *
+BL      _ZNSt6__ndk112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev ; original call of std::string::~string()
+SUB     SP, R11, #0 ; restore current stack pointer
+POP    {R4,R5,R11,PC} ; restore registers and return to the call
+
+; mode
+00 00 00 00 ; =( (address of mode string) - (value of the PC register when it's is dereferenced) )
+; filename
+00 00 00 00 ; =( (address of filename string) - (value of the PC register when it's is dereferenced) )
+</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks188857'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 3):</dt>
+			<dd><span title="Mon Dec 26, 2022 4:07 am"><a href="../Users/31087.html" class="username">mono24</a></span>, <span title="Tue Dec 27, 2022 6:09 am"><a href="../Users/77967.html" class="username">moonpaladin</a></span>, <span title="Sun Oct 01, 2023 9:29 pm"><a href="../Users/36052.html" class="username">Andrakann</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput188857'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;5.17%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 5.17%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig188857" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p188858" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile188858">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=188858" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content188858">
+
+					<h3 >
+						<a href="./viewtopic.php?p=188858#p188858">Re: A Static Hook Technique for Android Game Resources Dumping</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/188858/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=188858" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post188858' href="./viewtopic.php?f=29&amp;p=188858&amp;thanks=188858&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=188858#p188858" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2022-12-20T09:53:05+00:00">Tue Dec 20, 2022 10:53 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Now we need to find our "victim" function to place the code. I found one by looking for the reference of the string " /system/app/Superuser.apk":<br>
+<img src="https://i.ibb.co/PhfCbRW/14-victim-fun.png" class="postimage" alt="Image"><br>
+<img src="https://i.ibb.co/Z6VmFmy/15-vic-fun-pseudo.png" class="postimage" alt="Image"><img src="https://i.ibb.co/LCkDLNq/15-vic-fun-pseudo2.png" class="postimage" alt="Image"><br>
+<br>
+We can tell from the pseudo code that this function merely checks whether the "su" command is available and return the result as a Boolean value. The result is stored in a global variable and accessed directly for later calls. It's surely long enough to hold our codes.<br>
+<br>
+Switch to the IDA View, and place the cursor at the symbol of this function, then navigate to the "Edit" menu, then select "Functions", "Delete function". Then right-click to use the Assemble tool, or the Patcher utility of the Keypatch tool, to modify the 2nd and the 3rd instructions, and NOP the rest of the instructions like this:<br>
+<img src="https://i.ibb.co/hXm8HDH/16-mod1.png" class="postimage" alt="Image"><br>
+<br>
+<img src="https://i.ibb.co/h1jTTqB/16-mod2.png" class="postimage" alt="Image"><br>
+<br>
+Then place the cursor at the label "loc_3CA551C", and press the "P" key to create a function as below:<br>
+<img src="https://i.ibb.co/yym8dzV/17.png" class="postimage" alt="Image"><br>
+<br>
+Press F5 on the code and we can see the pseudo code like this:<br>
+<img src="https://i.ibb.co/jgYZBvW/18.png" class="postimage" alt="Image"><br>
+<br>
+Now we can write our code on the NOP area:<br>
+<img src="https://i.ibb.co/MckrkC4/19-1.png" class="postimage" alt="Image"><br>
+<br>
+<img src="https://i.ibb.co/LY71qMP/19-2.png" class="postimage" alt="Image"><br>
+<br>
+<img src="https://i.ibb.co/gW0mcmG/19-3.png" class="postimage" alt="Image"><br>
+<br>
+We can adjust the form of the constants to make it look closer to our original code.<br>
+<br>
+Place the cursor at the first remaining NOP instruction, then switch to the Hex View, and "Synchronize with" the IDA view, as shown below:<br>
+<img src="https://i.ibb.co/80Rbx23/19-4.png" class="postimage" alt="Image"><br>
+<br>
+Press F2 when the cursor is placed on the data, then we can modify the binary directly. On the left side you can only type in hex value while on the right side it allows input of characters. Modified the hex data like this:<br>
+<img src="https://i.ibb.co/8m0Bqyc/19-5.png" class="postimage" alt="Image"><br>
+<br>
+Note that I merely fill the rest of the space with the same character to reveal that there're more room we can use. You don't have to do that as long as your string terminates with a null character. Press F2 again to apply the changes.<br>
+<br>
+Now switch back to the IDA View and undefine the two symbols at 0x3CA557C and 0x3CA5580, then re-define them as constant char arrays:<br>
+<img src="https://i.ibb.co/94BXGZ5/19-6.png" class="postimage" alt="Image"><br>
+<br>
+<img src="https://i.ibb.co/n642Gq1/19-7.png" class="postimage" alt="Image"><br>
+<br>
+Now go to the beginning of this function and press "P" to create a function in IDA:<br>
+<img src="https://i.ibb.co/yVdQGLc/19-8.png" class="postimage" alt="Image"><br>
+<br>
+The adjusted codes are as following:<br>
+<img src="https://i.ibb.co/HrvGQQ5/19-9.png" class="postimage" alt="Image"><br>
+<br>
+Now let's press the F5 key and see how the pseudo code look like:<br>
+<img src="https://i.ibb.co/HCm7Wrm/19-10.png" class="postimage" alt="Image"><br>
+<br>
+The mode string "ab" doesn't show as a literal string as it's shorter than 4 characters. Not really a problem though.</div>
+
+			
+			
+									
+						<div id='list_thanks188858'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 3):</dt>
+			<dd><span title="Mon Dec 26, 2022 4:07 am"><a href="../Users/31087.html" class="username">mono24</a></span>, <span title="Tue Dec 27, 2022 6:09 am"><a href="../Users/77967.html" class="username">moonpaladin</a></span>, <span title="Sun Oct 01, 2023 9:29 pm"><a href="../Users/36052.html" class="username">Andrakann</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput188858'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;5.17%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 5.17%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig188858" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p188859" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile188859">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/57570.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=57570_1576893318.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/57570.html" class="username">Bigchillghost</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=57570&amp;sr=posts">1030</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jul 05, 2016 9:37 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="57570"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/true">32 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="57570"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/57570/false">1215 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Bigchillghost">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Bigchillghost</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=188859" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content188859">
+
+					<h3 >
+						<a href="./viewtopic.php?p=188859#p188859">Re: A Static Hook Technique for Android Game Resources Dumping</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/188859/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=188859" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post188859' href="./viewtopic.php?f=29&amp;p=188859&amp;thanks=188859&amp;to_id=57570&amp;from_id=123876" title="Say Thanks to the author of the post: Bigchillghost"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=188859#p188859" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/57570.html" class="username">Bigchillghost</a></strong> &raquo; </span><time datetime="2022-12-20T09:55:36+00:00">Tue Dec 20, 2022 10:55 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Finally, we can now hook the function call. Place the cursor at the call of the string destructor in pseudo code view, and "Synchronize with" it under the IDA view:<br>
+<img src="https://i.ibb.co/MR6VGvJ/19-11.png" class="postimage" alt="Image"><br>
+<br>
+<img src="https://i.ibb.co/0Y65htK/19-12.png" class="postimage" alt="Image"><br>
+<br>
+Then patch the BL instruction to call our dump routine like this:<br>
+<img src="https://i.ibb.co/D4CC480/19-13.png" class="postimage" alt="Image"><br>
+<br>
+<img src="https://i.ibb.co/ThCFJSZ/19-14.png" class="postimage" alt="Image"><br>
+<br>
+As a final step, navigate to the "Edit" menu, select "Patch program", then "Apply patches to...", and save the patched .so file to an individual path.<br>
+Now we can examine if this will work. Launch the Nox emulator, open a cmd window from where it's installed, and use the adb tool to connect to the emulator. <br>
+Then we need to push the modified .so to the game's lib path. For this game it's "/data/app/com.gameloft.android.ANMP.GloftA9HM-1/lib/arm/":<br>
+<img src="https://i.ibb.co/QvHg9Xx/20-1.png" class="postimage" alt="Image"><br>
+<br>
+When it's done, run the game in the emulator, and check if the dump file has been generated:<br>
+<img src="https://i.ibb.co/Phy2h32/20-2.png" class="postimage" alt="Image"><br>
+<br>
+Make sure to check if the file size stop growing so that we get a complete manifest list.<br>
+<br>
+Check the first 5 lines of the file and we can confirm that it worked as expected:<br>
+<img src="https://i.ibb.co/p4zLVNc/20-3.png" class="postimage" alt="Image"><br>
+<br>
+Pull the dump file from the emulator and we can do some further procession with it.</div>
+
+			
+			
+									
+						<div id='list_thanks188859'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/57570.html" class="username">Bigchillghost</a> for the post (total 3):</dt>
+			<dd><span title="Mon Dec 26, 2022 4:08 am"><a href="../Users/31087.html" class="username">mono24</a></span>, <span title="Tue Dec 27, 2022 6:09 am"><a href="../Users/77967.html" class="username">moonpaladin</a></span>, <span title="Sun Oct 01, 2023 9:29 pm"><a href="../Users/36052.html" class="username">Andrakann</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput188859'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;5.17%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 5.17%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig188859" class="signature"><span style="color:#0080BF"><span style="font-size:130%;line-height:116%"><strong class="text-strong">May you find peace in this puzzle-solving game.</strong></span></span>
+<ul><li><em class="text-italics"><a href="viewtopic.php?f=29&amp;t=17889" class="postlink">An Imitable Workflow for Reverse Engineering a Game Model</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=23963" class="postlink">Advanced Mesh Reaper</a></em></li><li><em class="text-italics"><a href="viewtopic.php?f=16&amp;t=18005" class="postlink">Reverse Model Wireframe</a></em></li></ul>
+
+<span style="font-size:130%;line-height:116%"><span style="color:#FF0000"><strong class="text-strong">Say it with action: click the <img src="https://i.ibb.co/9thLJf8/i.png" class="postimage" alt="Image"> when you get helped.<img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></strong></span></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=26100" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=29&amp;t=26100&amp;watch=topic&amp;start=0&amp;hash=6d44d3d2" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=29&amp;t=26100&amp;unwatch=topic&amp;start=0&amp;hash=6d44d3d2" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=26100&amp;bookmark=1&amp;hash=6d44d3d2" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=26100" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=26100&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=26100">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			5 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=29" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Tutorials”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

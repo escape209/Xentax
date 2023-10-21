@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>[MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot; - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=9977">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./9977.html">[MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=9977" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=9977&amp;watch=topic&amp;start=0&amp;hash=025fb260" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=9977&amp;unwatch=topic&amp;start=0&amp;hash=025fb260" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9977&amp;bookmark=1&amp;hash=025fb260" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9977" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9977&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="9977" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			9 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p81847" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81847">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81847" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81847">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=81847#p81847">[MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81847/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81847" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81847' href="./viewtopic.php?f=16&amp;p=81847&amp;thanks=81847&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81847#p81847" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-12-25T06:12:07+00:00">Tue Dec 25, 2012 7:12 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I'll try to make a long story short here. I'm practicing using MAXScript to import binary 3D models, and my game of choice for testing is Midtown Madness 2. <a href="http://mm2kiwi.apan.is-a-geek.com/index.php?title=PKG" class="postlink">It's well documented</a> - no big deal, right? Actually, it is. Here's my script so far:<br>
+<br>
+<span style="font-size:150%;line-height:116%"><strong class="text-strong">Code updated 12/26/12: Recursive file searching, loads shaders information, lots of cleaning up</strong></span>
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>fPKG = getOpenFileName caption:"Choose Geometry File:" \
+types:"Midtown Madness 2 (*.pkg)|*.pkg|"
+
+if fPKG != undefined then (
+	
+	f = fopen fPKG "rb"
+	clearlistener()
+
+	fn readFixedStr bstream fixedLen =
+	(
+		local str = ""
+		for i = 1 to fixedLen do
+		(
+		str+= bit.intAsChar (ReadByte bstream #unsigned)
+		)
+		str
+	)
+
+	fn getPos name: =
+	(
+		if name != unsupplied  then (
+			Print ((name)+": 0x"+((bit.intAsHex(ftell f))as string))
+		) else (
+			Print ("Current position: 0x"+((bit.intAsHex(ftell f))as string))
+		)
+	)
+
+	pkgTyp=readFixedStr f 4
+
+	-- Must be PKG3 file, otherwise terminate
+	if ((pkgTyp.count != 0) and (pkgTyp == "PKG3")) then (
+	   
+		struct pkgDat (nSections, nVerticesTot, nIndiciesTot, nSections2, fFVF)
+		struct pkgSec (nStrips, nFlags, shaderOffset)
+		struct pVertex (x, y, z, nx, ny, nz, u, v)
+	   
+		print "Angel Studios PacKaGe File Format V3"
+		messageBox ("PKG3 file ("+(fPKG)+") loaded") title:"File type"
+		
+		-- PKG files begin at offset 4
+		fseek f 4 #seek_set
+		
+		-- We need to determine how many occurances of FILE there are
+		-- So recursively read each FILE (this method will not work for PKG2)
+		-- Ignore shaders and offset!
+		
+		DAVE0=true
+		hitOffset=false
+		parse=true
+		numFiles = 0
+		filePosition=0
+		
+		do (
+			
+			getPos name:"FILE"
+			idf=readFixedStr f 4
+			fln=ReadByte f
+			fls=readFixedStr f fln
+			print fls
+			
+			if fls == "shaders" then (
+				
+				print ((numFiles as string)+" Geometry files found!")
+				
+				print "End of geometry."
+				print "-------------------------"
+				
+				shadersLength=ReadLong f
+				shadersPosition=ftell f
+				shadersOffset=shadersLength+shadersPosition
+				shadersType=ReadLong f
+				shadersPerPaintjob=ReadLong f
+				
+				DAVE0=false
+				
+				fseek f 0 #seek_set
+				
+				print ("Shaders type: "+(shadersType as string))
+				print ("Shaders per paintjob: "+(shadersPerPaintjob as string))
+				print "End of shaders."
+				print "-------------------------"
+				
+			) else (
+				
+				numFiles += 1
+				fileLength=ReadLong f
+				filePosition=ftell f
+					
+				fileOffset=fileLength+filePosition
+				fseek f 0 #seek_set
+				
+				fseek f fileOffset #seek_cur
+				getPos name:"OFFSET"
+				
+			) 
+				
+		) while DAVE0 == true
+		
+if parse == true do (
+	
+	fseek f 4 #seek_set
+	
+	for q = 1 to numFiles do (
+		
+		idFILE=readFixedStr f 4 -- "FILE"
+		fLenName=ReadByte f #unsigned
+		fStrName=readFixedStr f fLenName
+
+		fFileLen=ReadLong f
+
+		-- PKG File Data
+		dataOffset = ftell f
+		Print ("pkgDAT: "+fStrName+" @ 0x"+((bit.intAsHex(dataOffset))as string))
+		fData = pkgDat nSections: (ReadLong f) nVerticesTot: (ReadLong f) nIndiciesTot: (ReadLong f) nSections2: (ReadLong f) fFVF: (ReadLong f)
+
+		for pd = 1 to fData.nSections do (
+
+			sectionOffset = ftell f
+			fSection = pkgSec nStrips: (ReadShort f #unsigned) nFlags: (ReadShort f #unsigned) shaderOffset: (ReadLong f)
+		
+			fseek f sectionOffset #seek_set
+			Print ("pkgSEC: "+fStrName+" @ 0x"+((bit.intAsHex(sectionOffset))as string))
+		
+			curVerts=#()
+			curFaces=#()
+			curUVs=#()
+				
+			for s = 1 to fSection.nStrips do (
+		
+				fNStrips=ReadShort f #unsigned -- Number of strips in this section
+				fUnkFlags=ReadShort f #unsigned -- Flags (unused in MM2)
+				fToShaders=ReadLong f -- Offset to assigned shader in list
+		
+				-- PKG Strip
+				fPrimType=ReadLong f -- Primitive type for this strip (triangle)
+				fNVertices=ReadLong f
+				
+				-- PKG Vertex
+				for  v = 1 to fNVertices do (
+
+					vert = pVertex x: (ReadFloat f) y: (ReadFloat f) z: (ReadFloat f) nx: (ReadFloat f) ny: (ReadFloat f) nz: (ReadFloat f) u: (ReadFloat f) v: (ReadFloat f)
+
+					append curVerts[-vert.x,vert.z,vert.y]
+					append curUVs[vert.u,-vert.v,0]
+					
+				)
+		
+				fNIndicies=ReadLong f
+		
+				for x = 1 to fNIndicies/3 do (
+					fa=ReadShort f #unsigned+1
+					fb=ReadShort f #unsigned+1
+					fc=ReadShort f #unsigned+1
+					append curFaces[fa,fb,fc]	
+				)
+		
+			)
+
+			pkg = mesh vertices:curVerts faces:curFaces
+			pkg.numTVerts = curUVs.count
+			buildTVFaces pkg
+			pkg.name=fStrName
+			for j = 1 to curUVs.count do setTVert pkg j curUVs[j]
+			for j = 1 to curFaces.count do setTVFace pkg j curFaces[j]
+
+			convertTo pkg PolyMeshObject
+
+		)
+	)
+	
+	Print ("Last Read @ 0x"+((bit.intAsHex(ftell f))as string))
+	
+)
+
+	) else (
+			clearlistener()
+			messageBox "Unsupported file type, terminating!" title:"PKG Tool"
+	)
+	
+gc()
+fclose f
+	
+) else (
+	clearlistener()
+	messageBox "No file was selected." title:"PKG Tool"
+)</code></pre></div>
+
+It loads models perfectly:<br>
+<br>
+<img src="https://dl.dropbox.com/u/69162797/vp4x4.jpg" class="postimage" alt="Image"><br>
+<br>
+UVs are loaded perfectly as well:<br>
+<br>
+<img src="https://dl.dropbox.com/u/69162797/4x4uvs.jpg" class="postimage" alt="Image"><br>
+<br>
+My only problem is that each time it recursively searches each "Strip" from a section, it builds an entirely separate mesh based off of the information it was given. The reason the meshes get split is because the PKG file format has to offset to an entry in a shaders list, so it splits each "strip" into a separate object based on what material is assigned to it and how it corresponds to a shader entry.<br>
+<br>
+ I have tried EVERYTHING to solve this problem, but it just completely screws up the face order. Vertices are loaded, but faces are in the wrong order. If I could have it build a separate mesh each time then just attach them into one object, would the export process get screwed up? Or would I still be able to write in a [Vertex, Faces..Vertex, Faces...Vertex, Faces..] order? If that's all I have to do, great, someone please tell me!<br>
+<br>
+All help is appreciated! Happy holidays and Merry christmas!</div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/40346.html" class="username">CarLuver69</a> on Wed Dec 26, 2012 11:32 am, edited 2 times in total.
+									</div>
+			
+						<div id='list_thanks81847'>
+</div>
+<div id='div_post_reput81847'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81848" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81848">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36087.html" class="username">howfie</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36087&amp;sr=posts">929</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jul 08, 2011 12:06 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Torrance, CA</dd>
+							    <dd class="profile-posts" data-user-give-id="36087"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36087/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="36087"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36087/false">274 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact howfie">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact howfie</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81848" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81848">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81848#p81848">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81848/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81848" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81848' href="./viewtopic.php?f=16&amp;p=81848&amp;thanks=81848&amp;to_id=36087&amp;from_id=123876" title="Say Thanks to the author of the post: howfie"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81848#p81848" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36087.html" class="username">howfie</a></strong> &raquo; </span><time datetime="2012-12-25T08:07:12+00:00">Tue Dec 25, 2012 9:07 am</time>
+			</p>
+			
+			
+			
+			<div class="content">sounds like you just need to keep track of how many vertices you processed so far and add or subtract that number from the indices of the current index buffer you are processing. without looking at the data I can't tell but this problem you are describing is fairly common (needing to adjust the indices by a certain offset).<br>
+<br>
+An example would help... like<br>
+<br>
+PKGStrip #1 has 100 vertices and 200 indices. indices range from 0 to 99.<br>
+PKGStrip #2 has 200 vertices and 300 indices. indices range from 100 to 299.</div>
+
+			
+			
+									
+						<div id='list_thanks81848'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/36087.html" class="username">howfie</a> for the post: </dt>
+			<dd><span title="Tue Dec 25, 2012 9:48 am"><a href="../Users/40346.html" class="username">CarLuver69</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput81848'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81849" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81849">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81849" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81849">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81849#p81849">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81849/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81849" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81849' href="./viewtopic.php?f=16&amp;p=81849&amp;thanks=81849&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81849#p81849" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-12-25T08:47:06+00:00">Tue Dec 25, 2012 9:47 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Here's a part from the PKG file that my script is reading: <a href="https://dl.dropbox.com/u/69162797/partial_vp4x4.pkg" class="postlink">https://dl.dropbox.com/u/69162797/partial_vp4x4.pkg</a><br>
+<br>
+You can load it with the script provided in my original post.<br>
+<br>
+Immediately after the end of the partial file, another "FILE" is defined (in this case, BODY_M). I'm still fairly new to MS and I need help understanding how to keep track of vertices, faces, that kind of stuff. The only references I have is some Visual C++ code from the ZModeler 1.07 SDK, which can be very loosely translated into MaxScript, but not much.</div>
+
+			
+			
+									
+						<div id='list_thanks81849'>
+</div>
+<div id='div_post_reput81849'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81850" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81850">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36087.html" class="username">howfie</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36087&amp;sr=posts">929</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jul 08, 2011 12:06 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Torrance, CA</dd>
+							    <dd class="profile-posts" data-user-give-id="36087"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36087/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="36087"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36087/false">274 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact howfie">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact howfie</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81850" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81850">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81850#p81850">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81850/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81850" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81850' href="./viewtopic.php?f=16&amp;p=81850&amp;thanks=81850&amp;to_id=36087&amp;from_id=123876" title="Say Thanks to the author of the post: howfie"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81850#p81850" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36087.html" class="username">howfie</a></strong> &raquo; </span><time datetime="2012-12-25T09:44:15+00:00">Tue Dec 25, 2012 10:44 am</time>
+			</p>
+			
+			
+			
+			<div class="content">that's an easy format, it's just:<br>
+<br>
+vertex buffer #1 (m vertices)<br>
+index buffer #1 (ranges from 0 to m - 1)<br>
+<br>
+vertex buffer #2 (n vertices)<br>
+index buffer #2 (ranges from 0 to n - 1)<br>
+<br>
+etc.<br>
+<br>
+you are building only one mesh object after the loop. you must either:<br>
+<br>
+#1 create multiple mesh objects (one for each vertex-index buffer pair)<br>
+or<br>
+#2 in the example above, because index buffer #2 ranges from 0 to n - 1, you have to add m to each index in the index buffer.<br>
+<br>
+that's why only the first mesh is coming out correctly. i would prefer #1; it's easier.<br>
+<br>
+btw, you are doing nothing recursively, kind of threw me off looking at your code expecting to find something recursive where there wasn't. sorry to nitpick he he he <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz">.</div>
+
+			
+			
+									
+						<div id='list_thanks81850'>
+</div>
+<div id='div_post_reput81850'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81851" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81851">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81851" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81851">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81851#p81851">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81851/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81851" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81851' href="./viewtopic.php?f=16&amp;p=81851&amp;thanks=81851&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81851#p81851" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-12-25T10:00:40+00:00">Tue Dec 25, 2012 11:00 am</time>
+			</p>
+			
+			
+			
+			<div class="content">It recursively searches each pkgStrip as defined in the link found in the OP. I don't think I quite get what you want me to do with the buffers, maybe a sample if possible? I'm also very tired so maybe that's why <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"><br>
+<br>
+Script updated in original post to fix a couple things and also add an open file dialog <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"></div>
+
+			
+			
+									
+						<div id='list_thanks81851'>
+</div>
+<div id='div_post_reput81851'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81853" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81853">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/36087.html" class="username">howfie</a>							</dt>
+
+						<dd class="profile-rank">double-veteran<br /><img src="./images/ranks/vip-1.png" alt="double-veteran" title="double-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=36087&amp;sr=posts">929</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jul 08, 2011 12:06 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Torrance, CA</dd>
+							    <dd class="profile-posts" data-user-give-id="36087"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36087/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="36087"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/36087/false">274 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact howfie">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact howfie</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81853" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81853">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81853#p81853">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81853/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81853" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81853' href="./viewtopic.php?f=16&amp;p=81853&amp;thanks=81853&amp;to_id=36087&amp;from_id=123876" title="Say Thanks to the author of the post: howfie"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81853#p81853" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/36087.html" class="username">howfie</a></strong> &raquo; </span><time datetime="2012-12-25T10:20:11+00:00">Tue Dec 25, 2012 11:20 am</time>
+			</p>
+			
+			
+			
+			<div class="content">actually i ran your script and it seems fine, as you are doing what I mentioned in #1 already. that's just the way the data is in the game. so if i get you correctly you want to merge meshes that use the same materials so that there aren't so many mesh objects? how many textures are there per "FILE" section? if it is only one texture per "FILE" section, the problem is easy; if more than one it's a bit more complex (requires bookkeeping in multidimensional arrays lol).</div>
+
+			
+			
+									
+						<div id='list_thanks81853'>
+</div>
+<div id='div_post_reput81853'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81854" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81854">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/1673.html" class="username">fatduck</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=1673&amp;sr=posts">315</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 02, 2006 10:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="1673"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/1673/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="1673"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/1673/false">94 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact fatduck">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact fatduck</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81854" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81854">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81854#p81854">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81854/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81854" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81854' href="./viewtopic.php?f=16&amp;p=81854&amp;thanks=81854&amp;to_id=1673&amp;from_id=123876" title="Say Thanks to the author of the post: fatduck"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81854#p81854" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/1673.html" class="username">fatduck</a></strong> &raquo; </span><time datetime="2012-12-25T11:51:35+00:00">Tue Dec 25, 2012 12:51 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">In your example there are 7 parts. And each part contain their own Verts , faces number and Shader ID (In 3dsmax, we call it materialIDs).<br>
+so by a simple math you can add the verts and faces together and then create the final mesh at the end of prasing.<br>
+<br>
+method: (remember all index here are 0 base, and max are 1 base)<br>
+total_vert  = #()<br>
+total_face = #()<br>
+total_shaderID = #()<br>
+<br>
+@0x28<br>
+you have <br>
+total_vert = 0, and 108 new_verts<br>
+total_face = 0, and 171 new_indices (57 new_faces)<br>
+total_shaderID = 0, 57 new_ID<br>
+here the offset of face index = 0, since total_vert = 0<br>
+<br>
+0xF12<br>
+total_vert = 108, and 28 new_verts<br>
+total_face = 57, and 87 new_indices (29 new_faces)<br>
+total_shaderID = 57, 29 new_ID<br>
+offset of face index = 108<br>
+<br>
+@0x1354<br>
+total_vert = 136, and 84 new_verts<br>
+total_face = 86, and 108 new_indices (36 new_faces)<br>
+total_shaderID = 86, 36 new_ID<br>
+offset of face index = 136<br>
+<br>
+@0x1EC0<br>
+total_vert = 220, and 86 new_verts<br>
+total_face = 122, and 168 new_indices (56 new_faces)<br>
+total_shaderID = 122, 56 new_ID<br>
+offset of face index = 220<br>
+<br>
+@0x2AE4<br>
+total_vert = 306, and 47 new_verts<br>
+total_face = 178, and 126 new_indices (42 new_faces)<br>
+total_shaderID = 178, 42 new_ID<br>
+offset of face index = 306<br>
+<br>
+@0x31D4<br>
+total_vert = 353, and 30 new_verts<br>
+total_face = 220, and 90 new_indices (30 new_faces)<br>
+total_shaderID = 220, 30 new_ID<br>
+offset of face index = 353<br>
+<br>
+@0x365C<br>
+total_vert = 383, and 128 new_verts<br>
+total_face = 250, and 228 new_indices (76 new_faces)<br>
+total_shaderID = 250, 76 new_ID<br>
+offset of face index = 383<br>
+<br>
+end <br>
+total_vert = 511<br>
+total_face = 326 (978 face indices)<br>
+<br>
+now create your mesh with:<br>
+mesh vertices:total_vert faces:total_face materialIDs:total_shaderID</div>
+
+			
+			
+									
+						<div id='list_thanks81854'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/1673.html" class="username">fatduck</a> for the post: </dt>
+			<dd><span title="Wed Dec 26, 2012 12:56 am"><a href="../Users/40346.html" class="username">CarLuver69</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput81854'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig81854" class="signature"><strong class="text-strong">No more Fatduck, no more FatImporter, Byebye everyone!</strong></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81867" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81867">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81867" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81867">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81867#p81867">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81867/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81867" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81867' href="./viewtopic.php?f=16&amp;p=81867&amp;thanks=81867&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81867#p81867" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-12-25T22:21:17+00:00">Tue Dec 25, 2012 11:21 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">So I need to create a variable that starts at zero, read the data, and for each vertice/face/materialID, add 1 to the total count? I'm trying to grasp this as much as possible and I do get the idea, now I just need to express it using MAXScript. I need something that will make my pea-brain click and go "OHHH I get it now", which is how I fixed my recursive "strip" finder that wasn't working and just skipped to the end of the file. Thanks for all of the help, I very much appreciate it. How would I go about adding a count to the "totals" based on information being put forth into an array?</div>
+
+			
+			
+									
+						<div id='list_thanks81867'>
+</div>
+<div id='div_post_reput81867'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81880" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81880">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/40346.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=40346_1510043917.gif" width="119" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/40346.html" class="username">CarLuver69</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=40346&amp;sr=posts">50</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 08, 2012 6:17 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> California, USA</dd>
+							    <dd class="profile-posts" data-user-give-id="40346"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="40346"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/40346/false">21 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact CarLuver69">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact CarLuver69</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81880" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://drivermadness.net" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81880">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81880#p81880">Re: [MAXSCRIPT] Binary 3D model with multiple &quot;strips&quot;</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81880/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81880" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81880' href="./viewtopic.php?f=16&amp;p=81880&amp;thanks=81880&amp;to_id=40346&amp;from_id=123876" title="Say Thanks to the author of the post: CarLuver69"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81880#p81880" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/40346.html" class="username">CarLuver69</a></strong> &raquo; </span><time datetime="2012-12-26T10:33:36+00:00">Wed Dec 26, 2012 11:33 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Tomorrow I will try and focus on getting everything into one mesh using your guys' advice. I've posted my most recent code just in case it affects anything, but very slowly I'm getting the hang of it.</div>
+
+			
+			
+									
+						<div id='list_thanks81880'>
+</div>
+<div id='div_post_reput81880'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=9977" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=9977&amp;watch=topic&amp;start=0&amp;hash=025fb260" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=9977&amp;unwatch=topic&amp;start=0&amp;hash=025fb260" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9977&amp;bookmark=1&amp;hash=025fb260" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9977" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9977&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=9977">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			9 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <span style="color: #9E8DA7;" class="username-coloured">Bing [Bot]</span>, <a href="../Users/123876.html" class="username">escape209</a>, <a href="../Users/77967.html" class="username">moonpaladin</a> and 11 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

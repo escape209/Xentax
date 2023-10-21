@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>VAG audio format  Unpacker/Packer - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=2059">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=9c649842ae48bcd04444257bd025d4a2" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="17"><a itemprop="item" href="./viewforum.php?f=17"><span itemprop="name">Audio file formats</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./2059.html">VAG audio format  Unpacker/Packer</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Get help on any and all audio formats, or chip in and help others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=2059" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=17&amp;t=2059&amp;watch=topic&amp;start=0&amp;hash=3fc20714" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=17&amp;t=2059&amp;unwatch=topic&amp;start=0&amp;hash=3fc20714" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=2059&amp;bookmark=1&amp;hash=3fc20714" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=2059" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=2059&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="2059" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p16636" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile16636">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/471.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=471.png" width="45" height="67" alt="User avatar" /></a>														</div>
+								<a href="../Users/471.html" class="username">Savage</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=471&amp;sr=posts">559</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Apr 17, 2005 11:00 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="471"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/471/true">16 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="471"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/471/false">18 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Savage">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Savage</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=16636" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content16636">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=16636#p16636">VAG audio format  Unpacker/Packer</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/16636/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=16636" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post16636' href="./viewtopic.php?f=17&amp;p=16636&amp;thanks=16636&amp;to_id=471&amp;from_id=123876" title="Say Thanks to the author of the post: Savage"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=16636#p16636" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/471.html" class="username">Savage</a></strong> &raquo; </span><time datetime="2006-08-26T13:43:01+00:00">Sat Aug 26, 2006 2:43 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I found this sources how to pack/unpack a VAG audio format, maybe helps <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"><br>
+<br>
+The unpacker:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/*
+
+    VAG-Depack, hacked by bITmASTER@bigfoot.com
+    V0.1
+*/
+
+
+
+
+#ifdef _mam
+extern "C"
+{
+#endif /* _mam */
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+double f[5][2] = { { 0.0, 0.0 },
+                    {  60.0 / 64.0,  0.0 },
+                    {  115.0 / 64.0, -52.0 / 64.0 },
+                    {  98.0 / 64.0, -55.0 / 64.0 },
+                    {  122.0 / 64.0, -60.0 / 64.0 } };
+
+double samples[28];
+
+int main( int argc, char *argv[] )
+{
+    FILE *vag, *pcm;
+    char fname[128];
+    char *p;
+    int predict_nr, shift_factor, flags;
+    int i;
+    int d, s;
+    static double s_1 = 0.0;
+    static double s_2 = 0.0;
+        
+    if ( argc != 2 ) {
+        printf( "usage: depack *.vag\n" );
+        return( -1 );
+    }
+    
+    vag = fopen( argv[1], "rb" );
+    fseek( vag, 64, SEEK_SET );
+
+    strcpy( fname, argv[1] );
+    p = strrchr( fname, '.' );
+    p++;
+    strcpy( p, "PCM" );
+    pcm = fopen( fname, "wb" );
+    if ( vag == NULL ) {
+        printf( "canï½´t write output file\n" );
+        return( -8 );
+    }
+
+
+
+
+    while( 1 ) {
+        predict_nr = fgetc( vag );
+        shift_factor = predict_nr &amp; 0xf;
+        predict_nr &gt;&gt;= 4;
+        flags = fgetc( vag );                          // flags
+        if ( flags == 7 )
+            break;              
+        for ( i = 0; i &lt; 28; i += 2 ) {
+            d = fgetc( vag );
+            s = ( d &amp; 0xf ) &lt;&lt; 12;
+            if ( s &amp; 0x8000 )
+                s |= 0xffff0000;
+            samples[i] = (double) ( s &gt;&gt; shift_factor  );
+            s = ( d &amp; 0xf0 ) &lt;&lt; 8;
+            if ( s &amp; 0x8000 )
+                s |= 0xffff0000;
+            samples[i+1] = (double) ( s &gt;&gt; shift_factor  );
+        }
+    
+        for ( i = 0; i &lt; 28; i++ ) {
+            samples[i] = samples[i] + s_1 * f[predict_nr][0] + s_2 * f[predict_nr][1];
+            s_2 = s_1;
+            s_1 = samples[i];
+            d = (int) ( samples[i] + 0.5 );
+            fputc( d &amp; 0xff, pcm );
+            fputc( d &gt;&gt; 8, pcm );
+        }
+    }
+    
+    fclose( pcm );
+    fclose( vag );
+    return( 0 );
+}
+</code></pre></div>
+
+The Packer:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/*
+
+    PSX VAG-Packer, hacked by bITmASTER@bigfoot.com
+    v0.1                              
+*/
+
+
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;math.h&gt;
+#include &lt;conio.h&gt;
+
+#define BUFFER_SIZE 128*28
+
+short wave[BUFFER_SIZE];
+
+void find_predict( short *samples, double *d_samples, int *predict_nr, int *shift_factor );
+void pack( double *d_samples, short *four_bit, int predict_nr, int shift_factor );
+void fputi( int d, FILE *fp );
+
+int main( int argc, char *argv[] )
+{
+    FILE *fp, *vag;
+    char fname[128];
+    char *p;
+    short *ptr;
+    double d_samples[28];
+    short four_bit[28];
+    int predict_nr;
+    int shift_factor;
+    int flags;
+    int size;
+    int i, j, k;    
+    unsigned char d;
+    char s[4];
+    int chunk_data;
+    short e;
+    int sample_freq, sample_len;
+    
+    if ( argc != 2 ) {
+        printf( "usage: vag-pack *.wav\n" );
+        return( -1 );
+    }
+            
+    fp = fopen( argv[1], "rb" );
+    if ( fp == NULL ) {
+        printf( "canï½´t open %s\n", argv[1] );
+        return( -2 );
+    }
+
+    fread( s, 1, 4, fp );
+    if ( strncmp( s, "RIFF", 4 ) ) {
+        printf( "not a wav-file\n" );
+        return( -3 );
+    }
+
+    fseek( fp, 8, SEEK_SET );
+    fread( s, 1, 4, fp );
+    if ( strncmp( s, "WAVE", 4 ) ) {
+        printf( "not a wav-file\n" );
+        return( -3 );
+    }
+
+    fseek( fp, 8 + 4, SEEK_SET );
+    fread( s, 1, 4, fp );
+    if ( strncmp( s, "fmt", 3 ) ) {
+        printf( "not a wav-file\n" );
+        return( -3 );
+    }
+    
+    fread( &amp;chunk_data, 4, 1, fp ); 
+    chunk_data += ftell( fp );
+    
+    fread( &amp;e, 2, 1, fp );
+    if ( e != 1 ) {
+        printf( "no PCM\n" );
+        return( -4 );
+    }  
+
+    fread( &amp;e, 2, 1, fp );
+    if ( e != 1 ) {
+        printf( "must be MONO\n" );
+        return( -5 );
+    }
+
+    fread( &amp;sample_freq, 4, 1, fp );
+    fseek( fp, 4 + 2, SEEK_CUR );
+
+    fread( &amp;e, 2, 1, fp );
+    if ( e != 16 ) {
+        printf( "only 16 bit samples\n" );
+        return( -6 );
+    }      
+        
+    fseek( fp, chunk_data, SEEK_SET );
+    
+    fread( s, 1, 4, fp );
+    if ( strncmp( s, "data", 4 ) ) {
+        printf( "no data chunk \n" );
+        return( -7 );
+    }
+
+    fread( &amp;sample_len, 4, 1, fp );
+    sample_len /= 2;
+
+    strcpy( fname, argv[1] );
+    p = strrchr( fname, '.' );
+    p++;
+    strcpy( p, "VAG" );
+    vag = fopen( fname, "wb" );
+    if ( vag == NULL ) {
+        printf( "canï½´t write output file\n" );
+        return( -8 );
+    }
+
+    fprintf( vag, "VAGp" );            // ID
+    fputi( 0x20, vag );                // Version
+    fputi( 0x00, vag );                // Reserved
+    size = sample_len / 28;
+    if( sample_len % 28 )
+        size++;
+    fputi( 16 * ( size + 2 ), vag );    // Data size
+    fputi( sample_freq, vag );          // Sampling frequency
+    
+    for ( i = 0; i &lt; 12; i++ )          // Reserved
+        fputc( 0, vag );
+
+    p -= 2;
+    i = 0;
+    while( isalnum( *p ) ) {
+        i++;
+        p--;
+    }
+    p++;
+    for ( j = 0; j &lt; i; j++ )          // Name
+        fputc( *p++, vag );
+    for( j = 0; j &lt; 16-i; j++ )
+        fputc( 0, vag );
+        
+    for( i = 0; i &lt; 16; i++ )
+        fputc( 0, vag );                // ???
+
+    flags = 0;  
+    while( sample_len &gt; 0 ) {
+        size = ( sample_len &gt;= BUFFER_SIZE ) ? BUFFER_SIZE : sample_len; 
+        fread( wave, sizeof( short ), size, fp );
+        i = size / 28;
+        if ( size % 28 ) {
+            for ( j = size % 28; j &lt; 28; j++ )
+                wave[28*i+j] = 0;
+            i++;
+        }
+        
+        for ( j = 0; j &lt; i; j++ ) {                                    // pack 28 samples
+            ptr = wave + j * 28;
+            find_predict( ptr, d_samples, &amp;predict_nr, &amp;shift_factor );
+            pack( d_samples, four_bit, predict_nr, shift_factor );
+            d = ( predict_nr &lt;&lt; 4 ) | shift_factor;
+            fputc( d, vag );
+            fputc( flags, vag );
+            for ( k = 0; k &lt; 28; k += 2 ) {
+                d = ( ( four_bit[k+1] &gt;&gt; 8 ) &amp; 0xf0 ) | ( ( four_bit[k] &gt;&gt; 12 ) &amp; 0xf );
+                fputc( d, vag );
+            }
+            sample_len -= 28;
+            if ( sample_len &lt; 28 )
+                flags = 1;
+        }
+    }
+    
+    fputc( ( predict_nr &lt;&lt; 4 ) | shift_factor, vag );
+    fputc( 7, vag );            // end flag
+    for ( i = 0; i &lt; 14; i++ )
+        fputc( 0, vag );
+
+    
+    fclose( fp );
+    fclose( vag );  
+//    getch(); 
+    return( 0 );
+}
+
+
+static double f[5][2] = { { 0.0, 0.0 },
+                            {  -60.0 / 64.0, 0.0 },
+                            { -115.0 / 64.0, 52.0 / 64.0 },
+                            {  -98.0 / 64.0, 55.0 / 64.0 },
+                            { -122.0 / 64.0, 60.0 / 64.0 } };
+                  
+
+
+void find_predict( short *samples, double *d_samples, int *predict_nr, int *shift_factor )
+{
+    int i, j;
+    double buffer[28][5];
+    double min = 1e10;
+    double max[5];
+    double ds;
+    int min2;
+    int shift_mask;
+    static double _s_1 = 0.0;                            // s[t-1]
+    static double _s_2 = 0.0;                            // s[t-2]
+    double s_0, s_1, s_2;
+
+    for ( i = 0; i &lt; 5; i++ ) {
+        max[i] = 0.0;
+        s_1 = _s_1;
+        s_2 = _s_2;
+        for ( j = 0; j &lt; 28; j ++ ) {
+            s_0 = (double) samples[j];                      // s[t-0]
+            if ( s_0 &gt; 30719.0 )
+                s_0 = 30719.0;
+            if ( s_0 &lt; - 30720.0 )
+                s_0 = -30720.0;
+            ds = s_0 + s_1 * f[i][0] + s_2 * f[i][1];
+            buffer[j][i] = ds;
+            if ( fabs( ds ) &gt; max[i] )
+                max[i] = fabs( ds );
+//                printf( "%+5.2f\n", s2 );
+                s_2 = s_1;                                  // new s[t-2]
+                s_1 = s_0;                                  // new s[t-1]
+        }
+        
+        if ( max[i] &lt; min ) {
+            min = max[i];
+            *predict_nr = i;
+        }
+        if ( min &lt;= 7 ) {
+            *predict_nr = 0;
+            break;
+        }
+        
+    }
+
+// store s[t-2] and s[t-1] in a static variable
+// these than used in the next function call
+
+    _s_1 = s_1;
+    _s_2 = s_2;
+    
+    for ( i = 0; i &lt; 28; i++ )
+        d_samples[i] = buffer[i][*predict_nr];
+
+//  if ( min &gt; 32767.0 )
+//      min = 32767.0;
+        
+    min2 = ( int ) min;
+    shift_mask = 0x4000;
+    *shift_factor = 0;
+    
+    while( *shift_factor &lt; 12 ) {
+        if ( shift_mask  &amp; ( min2 + ( shift_mask &gt;&gt; 3 ) ) )
+            break;
+        (*shift_factor)++;
+        shift_mask = shift_mask &gt;&gt; 1;
+    }
+      
+}
+
+void pack( double *d_samples, short *four_bit, int predict_nr, int shift_factor )
+{
+    double ds;
+    int di;
+    double s_0;
+    static double s_1 = 0.0;
+    static double s_2 = 0.0;
+    int i;
+
+    for ( i = 0; i &lt; 28; i++ ) {
+        s_0 = d_samples[i] + s_1 * f[predict_nr][0] + s_2 * f[predict_nr][1];
+        ds = s_0 * (double) ( 1 &lt;&lt; shift_factor );
+
+        di = ( (int) ds + 0x800 ) &amp; 0xfffff000;
+
+        if ( di &gt; 32767 )
+            di = 32767;
+        if ( di &lt; -32768 )
+            di = -32768;
+            
+        four_bit[i] = (short) di;
+
+        di = di &gt;&gt; shift_factor;
+        s_2 = s_1;
+        s_1 = (double) di - s_0;
+
+    }
+}
+
+void fputi( int d, FILE *fp )
+{
+    fputc( d &gt;&gt; 24, fp );
+    fputc( d &gt;&gt; 16, fp );  
+    fputc( d &gt;&gt; 8,  fp );
+    fputc( d,      fp );
+}
+</code></pre></div>
+ <img class="smilies" src="./images/smilies/8D.gif" width="15" height="15" alt="8D" title="Crazy Smile"><br>
+<br>
+Well i compiled with Gcc the packer and unpacker and works greats!!<br>
+<br>
+PS: The decoder creates a RAW audio file, maybe somebody can modify the source to create a riff wave, anyway you can encode it with --raw of any audio compressor <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"></div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=827">vags.zip</a></dt>
+			<dd><em>Here you cand found the packer and unpacker of VAG audio format</em></dd>			<dd>(12.26 KiB) Downloaded 435 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+													<div class="notice">
+					Last edited by <a href="../Users/471.html" class="username">Savage</a> on Sat Aug 26, 2006 3:07 pm, edited 2 times in total.
+									</div>
+			
+						<div id='list_thanks16636'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/471.html" class="username">Savage</a> for the post (total 2):</dt>
+			<dd><span title="Mon Jul 23, 2012 12:04 pm"><a href="../Users/4970.html" class="username">Acewell</a></span>, <span title="Wed Oct 12, 2016 7:29 pm"><a href="../Users/27966.html" class="username">herbert3000</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput16636'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;3.45%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 3.45%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p16637" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile16637">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/816.html" class="username">Strobe</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=816&amp;sr=posts">411</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Oct 24, 2005 8:52 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Sweden</dd>
+							    <dd class="profile-posts" data-user-give-id="816"></dd>
+    <dd class="profile-posts" data-user-receive-id="816"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/816/false">16 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Strobe">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Strobe</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=16637" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://www.jaedernaub.com" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content16637">
+
+					<h3 >
+						<a href="./viewtopic.php?p=16637#p16637">=DD</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/16637/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=16637" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post16637' href="./viewtopic.php?f=17&amp;p=16637&amp;thanks=16637&amp;to_id=816&amp;from_id=123876" title="Say Thanks to the author of the post: Strobe"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=16637#p16637" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/816.html" class="username">Strobe</a></strong> &raquo; </span><time datetime="2006-08-26T13:48:40+00:00">Sat Aug 26, 2006 2:48 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Now gimme a source in VB to! <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"></div>
+
+			
+			
+									
+						<div id='list_thanks16637'>
+</div>
+<div id='div_post_reput16637'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p16643" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile16643">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/471.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=471.png" width="45" height="67" alt="User avatar" /></a>														</div>
+								<a href="../Users/471.html" class="username">Savage</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=471&amp;sr=posts">559</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Apr 17, 2005 11:00 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="471"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/471/true">16 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="471"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/471/false">18 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Savage">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Savage</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=16643" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content16643">
+
+					<h3 >
+						<a href="./viewtopic.php?p=16643#p16643"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/16643/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=16643" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post16643' href="./viewtopic.php?f=17&amp;p=16643&amp;thanks=16643&amp;to_id=471&amp;from_id=123876" title="Say Thanks to the author of the post: Savage"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=16643#p16643" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/471.html" class="username">Savage</a></strong> &raquo; </span><time datetime="2006-08-26T14:35:38+00:00">Sat Aug 26, 2006 3:35 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Have a look here:<br>
+<a href="http://www.daniweb.com/techtalkforums/thread52807.html" class="postlink">http://www.daniweb.com/techtalkforums/thread52807.html</a><br>
+ <img class="smilies" src="./images/smilies/8D.gif" width="15" height="15" alt="8D" title="Crazy Smile"></div>
+
+			
+			
+									
+						<div id='list_thanks16643'>
+</div>
+<div id='div_post_reput16643'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p16668" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile16668">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/129.html" class="username">mambox</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=129&amp;sr=posts">190</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 24, 2004 2:06 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="129"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/129/true">5 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="129"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/129/false">4 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact mambox">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact mambox</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=16668" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content16668">
+
+					<h3 >
+						<a href="./viewtopic.php?p=16668#p16668"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/16668/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=16668" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post16668' href="./viewtopic.php?f=17&amp;p=16668&amp;thanks=16668&amp;to_id=129&amp;from_id=123876" title="Say Thanks to the author of the post: mambox"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=16668#p16668" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/129.html" class="username">mambox</a></strong> &raquo; </span><time datetime="2006-08-27T15:43:02+00:00">Sun Aug 27, 2006 4:43 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">thanks to share the compiled with us <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"></div>
+
+			
+			
+									
+						<div id='list_thanks16668'>
+</div>
+<div id='div_post_reput16668'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p55590" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile55590">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/35716.html" class="username">pezhvak</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=35716&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Jun 19, 2011 8:01 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="35716"></dd>
+    <dd class="profile-posts" data-user-receive-id="35716"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact pezhvak">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact pezhvak</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=55590" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content55590">
+
+					<h3 >
+						<a href="./viewtopic.php?p=55590#p55590">Re: VAG audio format  Unpacker/Packer</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/55590/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=55590" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post55590' href="./viewtopic.php?f=17&amp;p=55590&amp;thanks=55590&amp;to_id=35716&amp;from_id=123876" title="Say Thanks to the author of the post: pezhvak"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=55590#p55590" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/35716.html" class="username">pezhvak</a></strong> &raquo; </span><time datetime="2011-06-19T11:28:45+00:00">Sun Jun 19, 2011 12:28 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Thank you, the encoder works great, but about decoder.. i tried to decode a VAG file, but process won't finish, it makes a PCM file and keeps writing data in it..</div>
+
+			
+			
+									
+						<div id='list_thanks55590'>
+</div>
+<div id='div_post_reput55590'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p123467" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile123467">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/27966.html" class="username">herbert3000</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=27966&amp;sr=posts">145</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jun 02, 2010 4:53 am</dd>		
+		
+											    <dd class="profile-posts" data-user-give-id="27966"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/27966/true">20 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="27966"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/27966/false">149 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact herbert3000">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact herbert3000</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=123467" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://sites.google.com/site/commandosmod/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content123467">
+
+					<h3 >
+						<a href="./viewtopic.php?p=123467#p123467">Re: VAG audio format  Unpacker/Packer</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/123467/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=123467" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post123467' href="./viewtopic.php?f=17&amp;p=123467&amp;thanks=123467&amp;to_id=27966&amp;from_id=123876" title="Say Thanks to the author of the post: herbert3000"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=123467#p123467" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/27966.html" class="username">herbert3000</a></strong> &raquo; </span><time datetime="2016-10-12T18:29:13+00:00">Wed Oct 12, 2016 7:29 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">10 years later: Thanks for the code! <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"><br>
+I added a wave header but I think that different games use different formats. Maybe we should pass numChannels, sampleRate, bitsPerSample as arguments?<br>
+The unpacker didn't terminate when I fed it with my files so I also added an extra EOF check. I noticed that (flags == 7) was never true, but flags == 1 was, so I also added this check.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/*
+
+    VAG-Depack, hacked by bITmASTER@bigfoot.com
+    V0.1
+    
+    Changes:
+    12Oct2016, herbert3000, WAVE header added
+*/
+
+#ifdef _mam
+extern "C"
+{
+#endif /* _mam */
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+double f[5][2] = { { 0.0, 0.0 },
+                    {  60.0 / 64.0,  0.0 },
+                    {  115.0 / 64.0, -52.0 / 64.0 },
+                    {  98.0 / 64.0, -55.0 / 64.0 },
+                    {  122.0 / 64.0, -60.0 / 64.0 } };
+
+double samples[28];
+
+struct {
+   char  chunkId[4];
+   int   chunkSize;
+   char  format[4];
+   char  subchunk1Id[4];
+   int   subchunk1Size;
+   short audioFormat;
+   short numChannels;
+   int   sampleRate;
+   int   byteRate;
+   short blockAlign;
+   short bitsPerSample;
+   char  subchunk2Id[4];
+   int   subchunk2Size;
+} waveHeader;
+
+int main( int argc, char *argv[] )
+{
+    FILE *vag, *pcm, *wav;
+    char fname[128];
+    char *p;
+    int predict_nr, shift_factor, flags;
+    int i;
+    int d, s;
+    static double s_1 = 0.0;
+    static double s_2 = 0.0;
+    
+    if ( argc != 2 ) {
+        printf( "Usage: %s *.vag\n", argv[0] );
+        return( -1 );
+    }
+   
+    vag = fopen( argv[1], "rb" );
+    if ( vag == NULL ) {
+        printf( "cannot open input file\n" );
+        return( -8 );
+    }
+    
+    fseek( vag, 64, SEEK_SET );
+    
+    strcpy( fname, argv[1] );
+    p = strrchr( fname, '.' );
+    p++;
+    strcpy( p, "PCM" );
+    pcm = fopen( fname, "wb" );
+    if ( pcm == NULL ) {
+        printf( "cannot open output file\n" );
+        return( -8 );
+    }
+    
+    while( 1 ) {
+        predict_nr = fgetc( vag );
+        shift_factor = predict_nr &amp; 0xf;
+        predict_nr &gt;&gt;= 4;
+        if ((flags = fgetc( vag )) == EOF) {
+            break;
+        }
+        if ( flags == 7 )
+            break;             
+        for ( i = 0; i &lt; 28; i += 2 ) {
+            d = fgetc( vag );
+            s = ( d &amp; 0xf ) &lt;&lt; 12;
+            if ( s &amp; 0x8000 )
+                s |= 0xffff0000;
+            samples[i] = (double) ( s &gt;&gt; shift_factor  );
+            s = ( d &amp; 0xf0 ) &lt;&lt; 8;
+            if ( s &amp; 0x8000 )
+                s |= 0xffff0000;
+            samples[i+1] = (double) ( s &gt;&gt; shift_factor  );
+        }
+        
+        for ( i = 0; i &lt; 28; i++ ) {
+            samples[i] = samples[i] + s_1 * f[predict_nr][0] + s_2 * f[predict_nr][1];
+            s_2 = s_1;
+            s_1 = samples[i];
+            d = (int) ( samples[i] + 0.5 );
+            fputc( d &amp; 0xff, pcm );
+            fputc( d &gt;&gt; 8, pcm );
+        }
+        if ( flags == 1 )
+            break;
+    }
+    
+    fclose( pcm );
+    fclose( vag );
+    
+    // create WAV file
+    
+    pcm = fopen( fname, "rb" );
+    if ( pcm == NULL ) {
+        printf( "cannot open PCM file\n" );
+        return( -8 );
+    }
+    
+    strcpy( fname, argv[1] );
+    p = strrchr( fname, '.' );
+    p++;
+    strcpy( p, "WAV" );
+    wav = fopen( fname, "wb" );
+    if ( wav == NULL ) {
+        printf( "cannot open WAV file\n" );
+        return( -8 );
+    }
+    
+    fseek( pcm, 0, SEEK_END );
+    int filesize = ftell( pcm );
+    fseek( pcm, 0, SEEK_SET );
+    
+    // set WAVE header
+    
+    strcpy( waveHeader.chunkId, "RIFF" );
+    strcpy( waveHeader.format, "WAVE" );
+    strcpy( waveHeader.subchunk1Id, "fmt " );
+    strcpy( waveHeader.subchunk2Id, "data" );
+    
+    waveHeader.audioFormat = 1; // PCM
+    waveHeader.numChannels = 1; // mono = 1, stereo = 2
+    waveHeader.sampleRate = 44100;
+    waveHeader.bitsPerSample = 16;
+    waveHeader.byteRate = waveHeader.sampleRate * waveHeader.numChannels * waveHeader.bitsPerSample / 8;
+    waveHeader.blockAlign = waveHeader.numChannels * waveHeader.bitsPerSample / 8;
+    waveHeader.subchunk1Size = 16;
+    waveHeader.subchunk2Size = filesize;
+    waveHeader.chunkSize = filesize + 36;
+    
+    
+    // write WAVE header
+    
+    fwrite( &amp;waveHeader, sizeof(waveHeader), 1, wav );
+    
+    // copy PCM file to WAV file
+    
+    char buffer[1024];
+    size_t n;
+    
+    n = fread( buffer, 1, sizeof buffer, pcm );
+    fwrite( buffer, 1, n, wav );
+    
+    while ( n == sizeof buffer ) {
+        n = fread( buffer, 1, sizeof buffer, pcm );
+        fwrite( buffer, 1, n, wav );
+    }
+    
+    fclose( wav );
+    fclose( pcm );
+    
+    return( 0 );
+}</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks123467'>
+</div>
+<div id='div_post_reput123467'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=2059" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=17&amp;t=2059&amp;watch=topic&amp;start=0&amp;hash=3fc20714" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=17&amp;t=2059&amp;unwatch=topic&amp;start=0&amp;hash=3fc20714" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=2059&amp;bookmark=1&amp;hash=3fc20714" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=2059" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=2059&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=2059">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=17" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Audio file formats”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

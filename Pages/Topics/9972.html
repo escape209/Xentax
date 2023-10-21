@@ -1,0 +1,2600 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Yukes PAC Extractor And BPE Tutorials - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=9972">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="31"><a itemprop="item" href="./viewforum.php?f=31"><span itemprop="name">Tools &amp; Programs</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="32"><a itemprop="item" href="./viewforum.php?f=32"><span itemprop="name">Game specific tools</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./9972.html">Yukes PAC Extractor And BPE Tutorials</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Programs that are related to this or that game.<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=9972" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=32&amp;t=9972&amp;watch=topic&amp;start=0&amp;hash=edefe85b" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=32&amp;t=9972&amp;unwatch=topic&amp;start=0&amp;hash=edefe85b" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9972&amp;bookmark=1&amp;hash=edefe85b" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9972" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9972&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="9972" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			16 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./9972 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./9972 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p81801" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81801">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/488.html" class="username">brienj</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=488&amp;sr=posts">288</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 02, 2005 1:48 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Louisville, KY</dd>
+							    <dd class="profile-posts" data-user-give-id="488"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/488/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="488"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/488/false">70 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact brienj">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact brienj</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81801" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://twitter.com/xhp_creations" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81801">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=81801#p81801">Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81801/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81801" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81801' href="./viewtopic.php?f=32&amp;p=81801&amp;thanks=81801&amp;to_id=488&amp;from_id=123876" title="Say Thanks to the author of the post: brienj"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81801#p81801" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/488.html" class="username">brienj</a></strong> &raquo; </span><time datetime="2012-12-23T22:35:35+00:00">Sun Dec 23, 2012 11:35 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="./download/file.php?id=6095" class="postimage" alt="WWEGamesPACExtractor.jpg" onclick="viewableArea(this);" /></dt>
+						<dd>WWEGamesPACExtractor.jpg (45.64 KiB) Viewed 1052 times</dd>
+		</dl>
+		
+		
+			</div>
+
+<span style="font-size:100%;line-height:116%">This file is only allowed to be hosted at XeNTaX.com or 360Haven.com unless you give a link back.  Posting this readme unedited with the download is sufficient enough. </span><br>
+<br>
+<span style="font-size:100%;line-height:116%">Download it from XeNTaX here:</span> <div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=6096">Yukes PAC Extractor And BPE Tutorials.rar</a></dt>
+						<dd>(1.28 MiB) Downloaded 915 times</dd>
+		</dl>
+		
+			</div>[/size]<br>
+<br>
+Here is the README file -
+<blockquote class="uncited"><div>WWE GAMES / YUKES PAC Extractor v1.0 by Brien L. Johnson AKA brienj, President and Owner of XHP Creations<br>
+<br>
+This file is only allowed to be hosted at XeNTaX.com or 360Haven.com unless you give a link back.  Posting this readme unedited with the download is sufficient enough.  Requests to host elsewhere can be made to <a href="mailto:brienj@insightbb.com">brienj@insightbb.com</a><br>
+<br>
+<br>
+First of all, I want to give full credit and thanks to Luigi Auriemma for his source code to decompress Yukes BPE files.<br>
+<br>
+<br>
+This program opens PAC files from the Yukes wrestling games (Xbox versions), including the WWE13 PAC files which are compressed.<br>
+<br>
+<br>
+Prerequisites:<br>
+<br>
+You MUST have plenty of space on your HD to extract all the files.  Expect anywhere from 4 to 5 times the size of the initial PAC file size.<br>
+<br>
+<br>
+Changelog:<br>
+<br>
+v1.0 - Initial Release<br>
+<br>
+<br>
+To Do List:<br>
+<br>
+Use some of the code from this project to make a PAC file extractor/rebuilder.<br>
+<br>
+<br>
+Instructions:<br>
+<br>
+Just start the program and open a PAC file, then choose the directory where you want the files extracted to.  If the program says it completed, but only extracted 0 files, check the box to force the newer EPK8 format.  The difference between the older and newer formats, is the length of the names in the header.  In the older ones, the name is 4 bytes long, in the newer ones, the name is 8 bytes long.  The only ones it can not auto-detect, are the newer PAC files with only one entry.  There have been checks put in the auto-detector to prevent trying to extract a very large file if it is read incorrectly, and then it will re-run it as the newer style.  On PAC files with only one entry though, it can't auto-detect it correctly.  It shouldn't lock-up if it reads an older PAC file as a newer one, but there is the slight possibility that it could hang, and why it always tries the old format first.  I've figured out some more info on how to detect the different formats, but haven't recoded the program with the detection, because this program will be replaced with a PAC file extractor/rebuilder in the near future, so this program is just to hold you over until that gets released, so you can start exploring what is contained in the PAC files.<br>
+<br>
+<br>
+Extra Instructions:<br>
+<br>
+The program will overwrite all files with the same name, so if you extract the PAC file a second time, it will overwrite the files it exracted the first time.  Since the program can extract THOUSANDS of files, it's ridiculous for it to ask if it can overwrite anything, so it does it by default.  After the files are extracted, wait until the program tells you it is completely done processing the files before you start opening files in a hex editor or whatever.  It goes through and renames files appropriately and cleans-up some left over files from the extracton process.<br>
+<br>
+This comes with additional source code with comments for a "decompressBPE" program and a "YukesBPE.dll" file to use in your own programs.  For people that do not know C++ and program in .NET, I've also included a "SampleYukesBPEProgram" with source code that shows you how to use the "YukesBPE.dll" file with your .NET program.  People that program in C/C++ should not need any help, although they can use the pre-compiled "YukesBPE.dll" file if they wanted, the exports are listed in the "SampleYukesBPEProgram".<br>
+<br>
+<br>
+If you need any help with this program, just go to <a href="http://www.xhpcreations.com" class="postlink">http://www.xhpcreations.com</a> and there are links to the XHP Creations Twitter and Facebook page where I can help if needed or post your questions in the topic for the program at XeNTaX.com or 360Haven.com.  If you like this work and feel like donating anything, my PayPal email is <a href="mailto:brienj@insightbb.com">brienj@insightbb.com</a><br>
+<br>
+Hope you enjoy!</div></blockquote>
+
+The Source Code from the "decompressBPE" program -
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>// not needed for ports to other systems
+#include &lt;stdafx.h&gt;
+#include &lt;windows.h&gt;
+
+// include all of the following in all target environments
+// using &lt;cstring&gt; instead of &lt;string&gt; to be compatible with newer g++
+#include &lt;cstring&gt;
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+
+// if this isn't included, you would have to type 'std::ifstream' instead of just 'ifstream' for example
+// lazy way to do it, but it's a small program
+using namespace std;
+
+// declare constant variables
+const char *MAGIC_HEADER = "BPE ";
+
+// function prototypes
+static int xgetc(unsigned char **in, unsigned char *inl);
+int yukes_bpe(unsigned char *in, int insz, unsigned char *out, int outsz, int fill_outsz);
+
+// only include for windows versions to use the function that most computer geeks that use the console HATE :)
+void ClearScreen();
+
+// program start function
+int main(int argc, char* argv[])
+{
+	// declare and initialize the variables used in this function
+	// will be used to make sure it has the 'magic' of a BPE file
+	char *magic = new char[4];
+	// our input buffer
+	char *inbuffer;
+	// our output buffer
+	char *outbuffer;
+	// used to calculate the compressed size
+	char *readzsize = new char[4];
+	// used to calculate the uncompressed size
+	char *readsize = new char[4];
+	// compressed size
+	int zsize;
+	// uncompressed size
+	int size;
+	// difference between size and zsize or (size - zsize)
+	int fillsize;
+
+	// make sure that there are three arguments passed to the program, which are:
+	// the program name, the input file name, and the output filename
+	if (argc != 3)
+	{
+		// comes here if there are not three arguments
+
+		// only include this function call on Windows, to make geeks mad that you cleared out the console contents :)
+		ClearScreen();
+
+		// obligatory fancy ASCII art to show what a geek you are
+		cout &lt;&lt; "\n================================================================";
+		cout &lt;&lt; "\n+++++++++++++====   ==   ==  ====  ==       ==++++++++++++++====";
+		cout &lt;&lt; "\n==================  ==  ===  ====  ==  ====  ===================";
+		cout &lt;&lt; "\n=+++++++++++++====  ==  ===  ====  ==  ====  ==++++++++++++++===";
+		cout &lt;&lt; "\n===================    ====  ====  ==  ====  ===================";
+		cout &lt;&lt; "\n==+++++++++++++=====  =====        ==       ====++++++++++++++==";
+		cout &lt;&lt; "\n===================    ====  ====  ==  =========================";
+		cout &lt;&lt; "\n===+++++++++++++==  ==  ===  ====  ==  ==========++++++++++++++=";
+		cout &lt;&lt; "\n==================  ==  ===  ====  ==  =========================";
+		cout &lt;&lt; "\n===     =========  ====  ==  ====  ==  ===========++++++++++++++";
+		cout &lt;&lt; "\n==  ===  =======================================================";
+		cout &lt;&lt; "\n=  ================================  ===========================";
+		cout &lt;&lt; "\n=  ========  =   ====   ====   ===    ==  ===   ===  = ====   ==";
+		cout &lt;&lt; "\n=  ========    =  ==  =  ==  =  ===  =======     ==     ==  =  =";
+		cout &lt;&lt; "\n=  ========  =======     =====  ===  ===  ==  =  ==  =  ===  ===";
+		cout &lt;&lt; "\n=  ========  =======  ======    ===  ===  ==  =  ==  =  ====  ==";
+		cout &lt;&lt; "\n==  ===  ==  =======  =  ==  =  ===  ===  ==  =  ==  =  ==  =  =";
+		cout &lt;&lt; "\n===     ===  ========   ====    ===   ==  ===   ===  =  ===   ==";
+		cout &lt;&lt; "\n================================================================";
+
+		// gives program info and usage instructions
+		cout &lt;&lt; "\n\nYukes BPE Decompress example program";
+		cout &lt;&lt; "\nby Brien L. Johnson of XHP Creations";
+
+		// 'argv[0]' is the first argument, which is the name of the program
+		cout &lt;&lt; "\n\nUsage: " &lt;&lt; argv[0] &lt;&lt; " &lt;inputfile&gt; &lt;outputfile&gt;";
+		cout &lt;&lt; "\n\nWebsite: ";
+		cout &lt;&lt; "\nhttp://www.xhpcreations.com";
+		cout &lt;&lt; "\n\nSpecial thanks to Luigi Auriemmma for yuke_bpe.c source code!\n\n";
+
+		// return any code that says it didn't complete the task, in this case we use -1 to show an error
+		return -1;
+	}
+	else
+	{
+		// comes here if there are three arguments
+
+		// open an input filestream named 'file' in binary mode with the second argument value 'argv[1]'
+		ifstream file(argv[1], ios::in|ios::binary);
+
+		// checks if the file is open
+		if (file.is_open())
+		{
+			// make sure the starting file position is at the beginning of file
+			file.seekg(0, ios::beg);
+
+			// read the contents of the first four bytes into 'magic'
+			file.read(magic, 4);
+
+			// use a compare to make sure the first four bytes (char*) of 'magic' match our constant 'MAGIC_HEADER'			
+			if (memcmp(magic, MAGIC_HEADER, 4) != 0)
+			{
+				// if they don't match, insult the user for opening a file that isn't a BPE file
+				cout &lt;&lt; "Open a BPE file, you numbskull!";
+
+				// return error code
+				return -1;
+			}
+			// continue code since they opened a BPE file
+
+			// set the file position to the 8th byte
+			file.seekg(8, ios::beg);
+
+			// read the contents of the next four bytes into 'readzsize'
+			file.read(readzsize, 4);
+
+			// set the file position to the 12th byte
+			file.seekg(12, ios::beg);
+
+			// read the contents of the next four bytes into 'readsize'
+			file.read(readsize, 4);
+
+			// set the value of 'zsize' using the four bytes in 'readzsize'
+			memcpy(&amp;zsize, readzsize, sizeof(long));
+
+			// set the value of 'size' using the four bytes in 'readsize'
+			memcpy(&amp;size, readsize, sizeof(long));
+
+			// they are only four bytes in size, but we can delete 'readzsize' and 'readsize'
+			// and free the HUGE amount of memory they are using :)
+			delete[] readzsize;
+			delete[] readsize;
+
+			// initialize input buffer 'inbuffer' to the size of 'zsize', our compressed size
+			inbuffer = new char[zsize];
+
+			// set the file position to the 16th byte
+			file.seekg(16, ios::beg);
+
+			// read the contents of the file of 'zsize' number of bytes into the input buffer 'inbuffer'
+			file.read(inbuffer, zsize);
+
+			// calculate the fillsize
+			fillsize = size - zsize;
+
+			// the all important closing of the file
+			file.close();		
+		}	
+		else
+		{
+			// if the file can't open, we of course assume they are an idiot and insult them again
+			cout &lt;&lt; "\nUnable to open " &lt;&lt; argv[1] &lt;&lt; " you numbskull.  Does the file exist?\n";
+
+			// return error code
+			return -1;
+		}
+
+		// initialize output buffer 'outbuffer' to the size of 'size', our uncompressed size
+		outbuffer = new char[size];
+
+		// call the function which uncompresses the input buffer to the output buffer
+		// 'inbuffer' and 'outbuffer' are not unsigned, which the function requires, so we cast them correctly
+		// with 'reinterpret_cast&lt;unsigned char*&gt;'
+		int x = yukes_bpe((reinterpret_cast&lt;unsigned char*&gt;(inbuffer)), zsize, (reinterpret_cast&lt;unsigned char*&gt;(outbuffer)), size, fillsize);
+
+		// open an output filestream named 'file2' in binary mode with the third argument value 'argv[2]'
+		ofstream file2(argv[2], ios_base::out|ios_base::binary);
+
+		// checks if the file is open
+		if (file2.is_open())
+		{
+			// if the file opened, write the changed contents of the output buffer 'outbuffer' to disk
+			file2.write(outbuffer, size);
+
+			// let the person know the file saved correctly
+			cout &lt;&lt; "\nSuccessfully saved " &lt;&lt; argv[2] &lt;&lt; " to disk.\n";
+
+			// return successful code
+			return 0;
+		}
+		else
+		{
+			// let the person know that the file couldn't be saved and they were probably an idiot again
+			cout &lt;&lt; "\nCannot write " &lt;&lt; argv[2] &lt;&lt; " to disk, you knucklehead.  Do you have the file opened in your hex editor?\n";
+
+			// return an error code
+			return -1;
+		}
+	}
+}
+
+// the following two functions for Yukes BPE decompression were written by Luigi Auriemma
+
+static int xgetc(unsigned char **in, unsigned char *inl) {
+	int     ret;
+	if(*in &gt;= inl) return(-1);
+	ret = **in;
+	(*in)++;
+	return(ret);
+}
+
+int yukes_bpe(unsigned char *in, int insz, unsigned char *out, int outsz, int fill_outsz) {
+	unsigned char   stack[512 + 4096];
+	int             c,
+		count,
+		i,
+		size,
+		n;
+
+	unsigned char   *inl,
+		*o,
+		*outl;
+
+	inl  = in + insz;
+	o    = out;
+	outl = out + outsz;
+
+	count = 0;
+	for(;;) {
+		i = 0;
+		do {
+			if((c = xgetc(&amp;in, inl)) &lt; 0) break;
+			if(c &gt; 127) {
+				c -= 127;
+				while((c &gt; 0) &amp;&amp; (i &lt; 256)) {
+					stack[i * 2] = i;
+					c--;
+					i++;
+				}
+			}
+			c++;
+			while((c &gt; 0) &amp;&amp; (i &lt; 256)) {
+				if((n = xgetc(&amp;in, inl)) &lt; 0) break;
+				stack[i * 2] = n;
+				if(i != n) {
+					if((n = xgetc(&amp;in, inl)) &lt; 0) break;
+					stack[(i * 2) + 1] = n;
+				}
+				c--;
+				i++;
+			}
+		} while(i &lt; 256);
+
+		if((n = xgetc(&amp;in, inl)) &lt; 0) break;
+		size = n;
+		if((n = xgetc(&amp;in, inl)) &lt; 0) break;
+		size |= (n &lt;&lt; 8);
+
+		while(size || count) {
+			if(count) {
+				count--;
+				n = stack[count + 512];
+			} else {
+				if((n = xgetc(&amp;in, inl)) &lt; 0) break;
+				size--;
+			}
+			c = stack[n * 2];
+			if(n == c) {
+				if(o &gt;= outl) return(-1);
+				*o++ = n;
+			} else {
+				if((count + 512 + 2) &gt; sizeof(stack)) return(-1);
+				stack[count + 512] = stack[(n * 2) + 1];
+				stack[count + 512 + 1] = c;
+				count += 2;
+			}
+		}
+	}
+	if(fill_outsz) {    // this is what is wanted by the format
+		memset(o, 0, outl - o);
+		o = outl;
+	}
+	return(o - out);
+}
+
+// the dreaded ClearScreen function which clears all the contents out of the console window, and
+// of course it must be included in my program :)
+void ClearScreen()
+{
+	HANDLE                     hStdOut;
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	DWORD                      count;
+	DWORD                      cellCount;
+	COORD                      homeCoords = { 0, 0 };
+
+	hStdOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	if (hStdOut == INVALID_HANDLE_VALUE) return;
+
+	// get the number of cells in the current buffer
+	if (!GetConsoleScreenBufferInfo( hStdOut, &amp;csbi )) return;
+	cellCount = csbi.dwSize.X *csbi.dwSize.Y;
+
+	// fill the entire buffer with spaces
+	if (!FillConsoleOutputCharacter(
+		hStdOut,
+		(TCHAR) ' ',
+		cellCount,
+		homeCoords,
+		&amp;count
+		)) return;
+
+	// fill the entire buffer with the current colors and attributes
+	if (!FillConsoleOutputAttribute(
+		hStdOut,
+		csbi.wAttributes,
+		cellCount,
+		homeCoords,
+		&amp;count
+		)) return;
+
+	// move the cursor home
+	SetConsoleCursorPosition( hStdOut, homeCoords );
+}
+</code></pre></div>
+
+The Source Code from the "SampleYukesBPEProgram" program -
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>using System;
+using System.IO;
+using System.Text;
+using System.Windows.Forms;
+// this is needed to use DLLImport
+using System.Runtime.InteropServices;
+
+namespace SampleYukesBPEProgram
+{
+    public partial class Form1 : Form
+    {
+        // this is where we load the functions from our unmanaged dll
+        [DllImport("YukesBPE.dll")]
+        public static extern int yukes_bpe(byte[] input, int insz, byte[] ouput, int outsz, int fill_outsz);
+        [DllImport("YukesBPE.dll")]
+        public static extern int bpefile_open_save(string filename1, string filename2);
+
+        // setup a constant string equal to the 'magic' of a BPE file
+        public const string magicString = "BPE ";
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        // event handler for button1 being clicked
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // check that the open and save dialogs were not cancelled and the user selected some filenames
+            if (openFileDialog1.ShowDialog() == DialogResult.OK &amp;&amp; saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // read the file into byte array 'conts'
+                byte[] conts = ReadFile(openFileDialog1.FileName);
+
+                // setup a buffer that will be used to find some values from the file
+                byte[] buff = new byte[4];
+
+                // copy first four bytes of the file to the buffer
+                Array.Copy(conts, 0, buff, 0, 4);
+
+                // checks that the four bytes are equal to the magic string "BPE "
+                if (Encoding.ASCII.GetString(buff) == magicString)
+                {
+                    // copy four bytes from the 8th offset to our buffer
+                    Array.Copy(conts, 8, buff, 0, 4);
+
+                    // makes sure the system BitConverter is Little Endian and reverses the bytes if it isn't
+                    if (!BitConverter.IsLittleEndian)
+                        Array.Reverse(buff);
+
+                    // get the value of the compressed size from the buffer
+                    int zsize = BitConverter.ToInt32(buff, 0);
+
+                    // copy four bytes from the 12th offset to our buffer
+                    Array.Copy(conts, 12, buff, 0, 4);
+
+                    // makes sure the system BitConverter is Little Endian and reverses the bytes if it isn't
+                    if (!BitConverter.IsLittleEndian)
+                        Array.Reverse(buff);
+
+                    // get the value of the uncompressed size from the buffer
+                    int size = BitConverter.ToInt32(buff, 0);
+
+                    // reset the buffer to the uncompressed size, this buffer will be changed by the function in the dll
+                    buff = new byte[size];
+
+                    // compute the fillsize
+                    int fillsize = size - zsize;
+
+                    // create a new byte array to hold the remainder of the file, which is what we want to actually decompress
+                    byte[] contents = new byte[zsize];
+
+                    // copy the file contents starting at the 16th byte, where the actual BPE data is contained
+                    Array.Copy(conts, 16, contents, 0, zsize);
+
+                    // call the 'yukes_bpe' function in the dll which will change the contents of our buffer to the decompressed bytes
+                    // and make sure the function returns the decompressed size, which means it finished successfully
+                    if (yukes_bpe(contents, zsize, buff, size, fillsize) == size)
+                    {
+                        // you should always use a try block when dealing with file I/O
+                        try
+                        {
+                            // write the buffer contents to the name the person chose in the saveFileDialog
+                            WriteFile(buff, saveFileDialog1.FileName);
+
+                            // tell them it worked
+                            MessageBox.Show("Successfully saved uncompressed file " + saveFileDialog1.FileName);
+                        }
+                        catch
+                        {
+                            // it will come here if the try block failed, meaning there was a problem with the file I/O
+                            MessageBox.Show("There was an error saving " + saveFileDialog1.FileName);
+                        }
+                    }
+                    else
+                    {
+                        // comes here if the yukes_bpe function did not return the decompressed size
+                        MessageBox.Show("There was an error decompressing " + saveFileDialog1.FileName);
+                    }
+                }
+                else
+                {
+                    // displays that the file does not have the correct BPE magic if it failed the check earlier
+                    MessageBox.Show("Not a BPE file!");
+                }
+            }
+        }
+
+        // event handler for button2 being clicked
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // check that the open and save dialogs were not cancelled and the user selected some filenames
+            if (openFileDialog1.ShowDialog() == DialogResult.OK &amp;&amp; saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // call the 'bpefile_open_save' function in the dll and make sure it returns 0, which means it worked
+                if (bpefile_open_save(openFileDialog1.FileName, saveFileDialog1.FileName) == 0)
+                {
+                    // if the function returns that it worked, tell the user it was successful
+                    MessageBox.Show("Successfully saved uncompressed file " + saveFileDialog1.FileName);
+                }
+                else
+                {
+                    // if the function returns anything but 0, tell the user it didn't work
+                    MessageBox.Show("There was an error saving " + saveFileDialog1.FileName);
+                }
+            }
+        }
+
+        // function to read the file contents into a byte array
+        private byte[] ReadFile(string fileName)
+        {
+            // create a buffer
+            byte[] buff = null;
+
+            // create a FileStream 'fs' with the correct parameters
+            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite);
+
+            // create a BinaryReader 'br' with 'fs'
+            BinaryReader br = new BinaryReader(fs);
+
+            // determine the length of the file, so we can set the buffer to accept it
+            long numBytes = new FileInfo(fileName).Length;
+
+            // set the buffer length to the file length
+            buff = br.ReadBytes((int)numBytes);
+
+            // close the BinaryReader and FileStream
+            br.Close();
+            fs.Close();
+
+            // return the buffer contents
+            return buff;
+        }
+
+        // function to write a byte array to a file
+        private void WriteFile(byte[] buff, string fileName)
+        {
+            // this is a check to make sure the file is not a read-only file, and if it is, remove the read-only property
+            System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+            if (fi.IsReadOnly &amp;&amp; File.Exists(fileName))
+            {
+                fi.IsReadOnly = false;
+            }
+
+            // create a FileStream 'fs' with the correct parameters
+            FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
+
+            // create a BinaryWriter 'bw' with 'fs'
+            BinaryWriter bw = new BinaryWriter(fs);
+
+            // write the buffer contents
+            bw.Write(buff);
+
+            // close the BinaryWriter and FileStream
+            bw.Close();
+            fs.Close();
+        }
+    }
+}
+</code></pre></div>
+
+Enjoy!</div>
+
+			
+			
+									
+						<div id='list_thanks81801'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/488.html" class="username">brienj</a> for the post (total 3):</dt>
+			<dd><span title="Mon Dec 24, 2012 12:32 am"><a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a></span>, <span title="Mon Dec 24, 2012 1:40 am"><a href="../Users/24814.html" class="username">OverTheEdge</a></span>, <span title="Thu Oct 30, 2014 10:31 am"><a href="../Users/24769.html" class="username">HotavioH</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput81801'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;5.17%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 5.17%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig81801" class="signature"><a href="https://twitter.com/xhp_creations" class="postlink">XHP Creations Twitter</a><br>
+<a href="https://github.com/xhp-creations" class="postlink">XHP Creations GitHub</a><br>
+<a href="http://www.youtube.com/xboxhackingportal" class="postlink">XHP YouTube Page (no longer maintained)</a><br>
+<a href="https://www.facebook.com/XHPCreations" class="postlink">XHP Creations Facebook Page (no longer maintained)</a></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81802" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81802">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a>							</dt>
+
+						<dd class="profile-rank">Site Admin</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=3&amp;sr=posts">4073</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jan 15, 2003 6:45 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Dungeons of Doom</dd>
+							    <dd class="profile-posts" data-user-give-id="3"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/3/true">450 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="3"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/3/false">682 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Mr.Mouse">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Mr.Mouse</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81802" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://www.xentax.com" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81802">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81802#p81802">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81802/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81802" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81802' href="./viewtopic.php?f=32&amp;p=81802&amp;thanks=81802&amp;to_id=3&amp;from_id=123876" title="Say Thanks to the author of the post: Mr.Mouse"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81802#p81802" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/3.html" style="color: #AA0000;" class="username-coloured">Mr.Mouse</a></strong> &raquo; </span><time datetime="2012-12-23T23:33:19+00:00">Mon Dec 24, 2012 12:33 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance">  <img class="smilies" src="./images/smilies/%5Bcolon%5Dclasdance.gif" width="25" height="32" alt=":clasdance" title="Dance"></div>
+
+			
+			
+									
+						<div id='list_thanks81802'>
+</div>
+<div id='div_post_reput81802'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81805" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81805">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/24814.html" class="username">OverTheEdge</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=24814&amp;sr=posts">4</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 17, 2010 9:24 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="24814"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/24814/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="24814"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact OverTheEdge">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact OverTheEdge</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81805" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81805">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81805#p81805">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81805/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81805" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81805' href="./viewtopic.php?f=32&amp;p=81805&amp;thanks=81805&amp;to_id=24814&amp;from_id=123876" title="Say Thanks to the author of the post: OverTheEdge"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81805#p81805" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/24814.html" class="username">OverTheEdge</a></strong> &raquo; </span><time datetime="2012-12-24T01:02:06+00:00">Mon Dec 24, 2012 2:02 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Playing around with this now, dude. This thing is incredible. Thanks so much, brienj. Definitely looking forward to the rebuilder so I can put this thing to use.</div>
+
+			
+			
+									
+						<div id='list_thanks81805'>
+</div>
+<div id='div_post_reput81805'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81860" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81860">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/37340.html" class="username">nsieniski</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=37340&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 12, 2011 3:46 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="37340"></dd>
+    <dd class="profile-posts" data-user-receive-id="37340"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact nsieniski">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact nsieniski</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81860" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81860">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81860#p81860">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81860/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81860" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81860' href="./viewtopic.php?f=32&amp;p=81860&amp;thanks=81860&amp;to_id=37340&amp;from_id=123876" title="Say Thanks to the author of the post: nsieniski"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81860#p81860" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/37340.html" class="username">nsieniski</a></strong> &raquo; </span><time datetime="2012-12-25T19:13:18+00:00">Tue Dec 25, 2012 8:13 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">whatever pac i try i get the message error : Error Parsing!<br>
+<br>
+Anyone?</div>
+
+			
+			
+									
+						<div id='list_thanks81860'>
+</div>
+<div id='div_post_reput81860'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81861" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81861">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/37340.html" class="username">nsieniski</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=37340&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 12, 2011 3:46 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="37340"></dd>
+    <dd class="profile-posts" data-user-receive-id="37340"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact nsieniski">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact nsieniski</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81861" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81861">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81861#p81861">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81861/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81861" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81861' href="./viewtopic.php?f=32&amp;p=81861&amp;thanks=81861&amp;to_id=37340&amp;from_id=123876" title="Say Thanks to the author of the post: nsieniski"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81861#p81861" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/37340.html" class="username">nsieniski</a></strong> &raquo; </span><time datetime="2012-12-25T19:18:57+00:00">Tue Dec 25, 2012 8:18 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Ok, my bad, I was using a folder on my desktop</div>
+
+			
+			
+									
+						<div id='list_thanks81861'>
+</div>
+<div id='div_post_reput81861'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81862" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81862">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/37340.html" class="username">nsieniski</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=37340&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 12, 2011 3:46 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="37340"></dd>
+    <dd class="profile-posts" data-user-receive-id="37340"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact nsieniski">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact nsieniski</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81862" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81862">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81862#p81862">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81862/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81862" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81862' href="./viewtopic.php?f=32&amp;p=81862&amp;thanks=81862&amp;to_id=37340&amp;from_id=123876" title="Say Thanks to the author of the post: nsieniski"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81862#p81862" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/37340.html" class="username">nsieniski</a></strong> &raquo; </span><time datetime="2012-12-25T19:32:05+00:00">Tue Dec 25, 2012 8:32 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">So we can unpack/open compressed pac files.<br>
+But it seem that we can't modify nor reinject anything.<br>
+<br>
+I used the extractor on the MenuHD and got all the subfolders unpacked (cool, selection pictures <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"><br>
+But when I open the uncompressed MenuHD pac in Xpacker, is shows nothing.<br>
+So how can we modifiy and re-inject anything back in the pac?</div>
+
+			
+			
+									
+						<div id='list_thanks81862'>
+</div>
+<div id='div_post_reput81862'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81863" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81863">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/37340.html" class="username">nsieniski</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=37340&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 12, 2011 3:46 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="37340"></dd>
+    <dd class="profile-posts" data-user-receive-id="37340"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact nsieniski">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact nsieniski</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81863" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81863">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81863#p81863">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81863/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81863" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81863' href="./viewtopic.php?f=32&amp;p=81863&amp;thanks=81863&amp;to_id=37340&amp;from_id=123876" title="Say Thanks to the author of the post: nsieniski"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81863#p81863" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/37340.html" class="username">nsieniski</a></strong> &raquo; </span><time datetime="2012-12-25T19:34:34+00:00">Tue Dec 25, 2012 8:34 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">sorry, I red again what Brienj said... the extractor/injector will come in a near futur <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+For the moment we can explore the files.<br>
+Thanks Brienj!  You still got it bro!  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></div>
+
+			
+			
+									
+						<div id='list_thanks81863'>
+</div>
+<div id='div_post_reput81863'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81866" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81866">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/488.html" class="username">brienj</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=488&amp;sr=posts">288</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 02, 2005 1:48 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Louisville, KY</dd>
+							    <dd class="profile-posts" data-user-give-id="488"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/488/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="488"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/488/false">70 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact brienj">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact brienj</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81866" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://twitter.com/xhp_creations" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81866">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81866#p81866">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81866/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81866" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81866' href="./viewtopic.php?f=32&amp;p=81866&amp;thanks=81866&amp;to_id=488&amp;from_id=123876" title="Say Thanks to the author of the post: brienj"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81866#p81866" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/488.html" class="username">brienj</a></strong> &raquo; </span><time datetime="2012-12-25T22:16:22+00:00">Tue Dec 25, 2012 11:16 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>nsieniski wrote:</cite>So we can unpack/open compressed pac files.<br>
+But it seem that we can't modify nor reinject anything.<br>
+<br>
+I used the extractor on the MenuHD and got all the subfolders unpacked (cool, selection pictures <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"><br>
+But when I open the uncompressed MenuHD pac in Xpacker, is shows nothing.<br>
+So how can we modifiy and re-inject anything back in the pac?</div></blockquote>
+And this is why I am making a PAC file extractor/rebuilder.  <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"></div>
+
+			
+			
+									
+						<div id='list_thanks81866'>
+</div>
+<div id='div_post_reput81866'>
+</div>
+
+							<div id="sig81866" class="signature"><a href="https://twitter.com/xhp_creations" class="postlink">XHP Creations Twitter</a><br>
+<a href="https://github.com/xhp-creations" class="postlink">XHP Creations GitHub</a><br>
+<a href="http://www.youtube.com/xboxhackingportal" class="postlink">XHP YouTube Page (no longer maintained)</a><br>
+<a href="https://www.facebook.com/XHPCreations" class="postlink">XHP Creations Facebook Page (no longer maintained)</a></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81941" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81941">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/488.html" class="username">brienj</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=488&amp;sr=posts">288</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 02, 2005 1:48 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Louisville, KY</dd>
+							    <dd class="profile-posts" data-user-give-id="488"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/488/true">10 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="488"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/488/false">70 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact brienj">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact brienj</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81941" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="https://twitter.com/xhp_creations" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81941">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81941#p81941">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81941/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81941" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81941' href="./viewtopic.php?f=32&amp;p=81941&amp;thanks=81941&amp;to_id=488&amp;from_id=123876" title="Say Thanks to the author of the post: brienj"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81941#p81941" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/488.html" class="username">brienj</a></strong> &raquo; </span><time datetime="2012-12-29T09:21:36+00:00">Sat Dec 29, 2012 10:21 am</time>
+			</p>
+			
+			
+			
+			<div class="content">The evolution to the next step -<br>
+<br>
+<a href="http://www.facebook.com/photo.php?fbid=458715654164947&amp;set=a.439192356117277.90677.323600111009836&amp;type=1&amp;relevant_count=1" class="postlink"><img src="http://sphotos-a.xx.fbcdn.net/hphotos-prn1/58613_458715654164947_617140246_n.jpg" class="postimage" alt="Image"></a></div>
+
+			
+			
+									
+						<div id='list_thanks81941'>
+</div>
+<div id='div_post_reput81941'>
+</div>
+
+							<div id="sig81941" class="signature"><a href="https://twitter.com/xhp_creations" class="postlink">XHP Creations Twitter</a><br>
+<a href="https://github.com/xhp-creations" class="postlink">XHP Creations GitHub</a><br>
+<a href="http://www.youtube.com/xboxhackingportal" class="postlink">XHP YouTube Page (no longer maintained)</a><br>
+<a href="https://www.facebook.com/XHPCreations" class="postlink">XHP Creations Facebook Page (no longer maintained)</a></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p81952" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile81952">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/37340.html" class="username">nsieniski</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=37340&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 12, 2011 3:46 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="37340"></dd>
+    <dd class="profile-posts" data-user-receive-id="37340"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact nsieniski">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact nsieniski</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=81952" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content81952">
+
+					<h3 >
+						<a href="./viewtopic.php?p=81952#p81952">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/81952/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=81952" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post81952' href="./viewtopic.php?f=32&amp;p=81952&amp;thanks=81952&amp;to_id=37340&amp;from_id=123876" title="Say Thanks to the author of the post: nsieniski"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=81952#p81952" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/37340.html" class="username">nsieniski</a></strong> &raquo; </span><time datetime="2012-12-29T16:56:28+00:00">Sat Dec 29, 2012 5:56 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">That is very impressive Brienj.<br>
+Thank you from all of us who really care about your work bro.<br>
+Can't wait!  <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"></div>
+
+			
+			
+									
+						<div id='list_thanks81952'>
+</div>
+<div id='div_post_reput81952'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p89655" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile89655">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/38580.html" class="username">dantheman9856</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=38580&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Nov 27, 2011 5:21 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="38580"></dd>
+    <dd class="profile-posts" data-user-receive-id="38580"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact dantheman9856">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact dantheman9856</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=89655" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content89655">
+
+					<h3 >
+						<a href="./viewtopic.php?p=89655#p89655">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/89655/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=89655" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post89655' href="./viewtopic.php?f=32&amp;p=89655&amp;thanks=89655&amp;to_id=38580&amp;from_id=123876" title="Say Thanks to the author of the post: dantheman9856"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=89655#p89655" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/38580.html" class="username">dantheman9856</a></strong> &raquo; </span><time datetime="2013-10-28T08:23:12+00:00">Mon Oct 28, 2013 9:23 am</time>
+			</p>
+			
+			
+			
+			<div class="content">I looked for an answer but couldn't find one...Error parsing?  No matter where I put the destination it always says this.</div>
+
+			
+			
+									
+						<div id='list_thanks89655'>
+</div>
+<div id='div_post_reput89655'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p101126" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile101126">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/48066.html" class="username">GameElite</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=48066&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Nov 30, 2014 5:13 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="48066"></dd>
+    <dd class="profile-posts" data-user-receive-id="48066"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact GameElite">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact GameElite</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=101126" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content101126">
+
+					<h3 >
+						<a href="./viewtopic.php?p=101126#p101126">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/101126/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=101126" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post101126' href="./viewtopic.php?f=32&amp;p=101126&amp;thanks=101126&amp;to_id=48066&amp;from_id=123876" title="Say Thanks to the author of the post: GameElite"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=101126#p101126" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/48066.html" class="username">GameElite</a></strong> &raquo; </span><time datetime="2014-11-30T16:16:15+00:00">Sun Nov 30, 2014 5:16 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Awesome thanks for this Brienji! <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"></div>
+
+			
+			
+									
+						<div id='list_thanks101126'>
+</div>
+<div id='div_post_reput101126'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p181940" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile181940">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/81114.html" class="username">redman4356</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=81114&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jun 26, 2019 9:10 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="81114"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/81114/true">6 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="81114"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/81114/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact redman4356">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact redman4356</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=181940" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content181940">
+
+					<h3 >
+						<a href="./viewtopic.php?p=181940#p181940">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/181940/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=181940" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post181940' href="./viewtopic.php?f=32&amp;p=181940&amp;thanks=181940&amp;to_id=81114&amp;from_id=123876" title="Say Thanks to the author of the post: redman4356"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=181940#p181940" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/81114.html" class="username">redman4356</a></strong> &raquo; </span><time datetime="2022-02-06T11:03:43+00:00">Sun Feb 06, 2022 12:03 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">ehh<br>
+am havin some trouble overhere, the program wouldn't start<br>
+I'd click on WWE PAC Extractor.exe and it just doesn't open</div>
+
+			
+			
+									
+						<div id='list_thanks181940'>
+</div>
+<div id='div_post_reput181940'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p181942" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile181942">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=181942" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content181942">
+
+					<h3 >
+						<a href="./viewtopic.php?p=181942#p181942">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/181942/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=181942" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post181942' href="./viewtopic.php?f=32&amp;p=181942&amp;thanks=181942&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=181942#p181942" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2022-02-06T11:35:30+00:00">Sun Feb 06, 2022 12:35 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=181940#p181940"><div><cite><a href="../Users/81114.html">redman4356</a> wrote: <a href="./viewtopic.php?p=181940#p181940" data-post-id="181940" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sun Feb 06, 2022 12:03 pm</span></cite>
+ehh<br>
+am havin some trouble overhere, the program wouldn't start<br>
+I'd click on WWE PAC Extractor.exe and it just doesn't open
+</div></blockquote>
+
+It works fine for me. <br>
+<br>
+Maybe try to run with compatibility mode<br>
+or move the EXE file to your desktop.</div>
+
+			
+			
+									
+						<div id='list_thanks181942'>
+</div>
+<div id='div_post_reput181942'>
+</div>
+
+							<div id="sig181942" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p185263" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile185263">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/81114.html" class="username">redman4356</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=81114&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jun 26, 2019 9:10 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="81114"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/81114/true">6 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="81114"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/81114/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact redman4356">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact redman4356</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=185263" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content185263">
+
+					<h3 >
+						<a href="./viewtopic.php?p=185263#p185263">Re: Yukes PAC Extractor And BPE Tutorials</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/185263/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=185263" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post185263' href="./viewtopic.php?f=32&amp;p=185263&amp;thanks=185263&amp;to_id=81114&amp;from_id=123876" title="Say Thanks to the author of the post: redman4356"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=185263#p185263" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/81114.html" class="username">redman4356</a></strong> &raquo; </span><time datetime="2022-06-14T12:16:49+00:00">Tue Jun 14, 2022 1:16 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">uhh heyy sorry for responding so late<br>
+i tried using the compatability thing back then n it didnt work for me<br>
+anyways all i wanted to do was to extract the main menu of some wwe svr games and use it as a animated wallpaper<br>
+i found a way around it with other softwares and all and was able to get the job done</div>
+
+			
+			
+									
+						<div id='list_thanks185263'>
+</div>
+<div id='div_post_reput185263'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=9972" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=32&amp;t=9972&amp;watch=topic&amp;start=0&amp;hash=edefe85b" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=32&amp;t=9972&amp;unwatch=topic&amp;start=0&amp;hash=edefe85b" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=9972&amp;bookmark=1&amp;hash=edefe85b" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=9972" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=9972&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=9972">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			16 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./9972 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./9972 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=32" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Game specific tools”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Compiling .ssh Files - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=25287">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="18"><a itemprop="item" href="./viewforum.php?f=18"><span itemprop="name">Graphic file formats</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./25287.html">Compiling .ssh Files</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Get your graphics formats figures out here! Got details for others? Post here!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=25287" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=18&amp;t=25287&amp;watch=topic&amp;start=0&amp;hash=2fa97c1b" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=18&amp;t=25287&amp;unwatch=topic&amp;start=0&amp;hash=2fa97c1b" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=25287&amp;bookmark=1&amp;hash=2fa97c1b" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=25287" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=25287&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="25287" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			11 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p184051" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184051">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/107653.html" class="username">jacksonlowry</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=107653&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Mar 25, 2022 9:14 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="107653"></dd>
+    <dd class="profile-posts" data-user-receive-id="107653"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jacksonlowry">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jacksonlowry</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184051" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184051">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=184051#p184051">Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184051/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184051" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184051' href="./viewtopic.php?f=18&amp;p=184051&amp;thanks=184051&amp;to_id=107653&amp;from_id=123876" title="Say Thanks to the author of the post: jacksonlowry"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184051#p184051" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/107653.html" class="username">jacksonlowry</a></strong> &raquo; </span><time datetime="2022-04-23T19:24:27+00:00">Sat Apr 23, 2022 8:24 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I've managed to open and view some .ssh files using programs here: <a href="http://wiki.xentax.com/index.php/EA_SSH_FSH_Image" class="postlink">http://wiki.xentax.com/index.php/EA_SSH_FSH_Image</a>. The one problem is, some .ssh files give the message in EA Graphics Manager "Preview for this image type is not supported", and those same .ssh files crash EA Graphics Tools with the error "481 Invalid Image". Some however can be viewed and edited. All of these programs just have export features, is there anything that can import and repackage a .ssh file? And what could be different about some particular .ssh files to make them give such errors and crashes in every program?</div>
+
+			
+			
+									
+						<div id='list_thanks184051'>
+</div>
+<div id='div_post_reput184051'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184054" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184054">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184054" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184054">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184054#p184054">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184054/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184054" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184054' href="./viewtopic.php?f=18&amp;p=184054&amp;thanks=184054&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184054#p184054" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2022-04-23T20:17:18+00:00">Sat Apr 23, 2022 9:17 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote class="uncited"><div>The one problem is, some .ssh files give the message in EA Graphics Manager "Preview for this image type is not supported"</div></blockquote>
+
+I'm the main developer of EA Graphics Manager and I can only tell you that it is still in development and many things needs to be fixed or updated.  <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"><br>
+
+<blockquote class="uncited"><div>what could be different about some particular .ssh files to make them give such errors and crashes in every program?</div></blockquote>
+
+That's because there are many image types to support (see "Entry Types" table on the wiki). <br>
+And most of the listed tools were made for PC games (for FSH files), while SSH files are used only on PS2 console, so they have different signatures, endianess etc.<br>
+
+<blockquote class="uncited"><div>is there anything that can import and repackage a .ssh file?</div></blockquote>
+I'm not sure. All the tools and scripts I know are listed on the wiki. If they don't support it, then you are out of luck.</div>
+
+			
+			
+									
+						<div id='list_thanks184054'>
+</div>
+<div id='div_post_reput184054'>
+</div>
+
+							<div id="sig184054" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184232" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184232">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/108817.html" class="username">tetsuro1</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=108817&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 30, 2022 8:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="108817"></dd>
+    <dd class="profile-posts" data-user-receive-id="108817"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact tetsuro1">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact tetsuro1</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184232" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184232">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184232#p184232">How to open/extract PS2 SSH files?</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184232/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184232" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184232' href="./viewtopic.php?f=18&amp;p=184232&amp;thanks=184232&amp;to_id=108817&amp;from_id=123876" title="Say Thanks to the author of the post: tetsuro1"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184232#p184232" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/108817.html" class="username">tetsuro1</a></strong> &raquo; </span><time datetime="2022-04-30T20:52:44+00:00">Sat Apr 30, 2022 9:52 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Hello, everyone!<br>
+<br>
+I recently started getting interested in modding EA's MVP Baseball 2005 after I recently got back into playing the game.<br>
+<br>
+What I want to do is to make a mod that will turn default controller button icons into PlayStation icons.<br>
+<br>
+So, instead of it looking like <a href="https://i.imgur.com/I9asgfv.png" class="postlink">this</a>, I want it to look like <a href="https://i.imgur.com/AZHHWfa.png" class="postlink">this</a>.<br>
+<br>
+One way to do this is by manually editing the images extracted from the game files, and replacing those button icons with PS icons, however, since I've never done graphics editing before, and I'm pretty sure it's a complicated process, I thought of a simpler method, and that is, I take the same files from the PS2 version of the game and replace them with the PC version, simple right?<br>
+<br>
+Unfortunately, when I try to do this I stumble upon a problem where the files extracted from the PS2 game that contain the images I want, come with a different extension called <strong class="text-strong">SSH</strong>, which is something I wasn't able to find out how to open or extract them, no matter how much Googling I do.<br>
+<br>
+On the PC port of the game, the same files that I'm looking for come with a <strong class="text-strong">FSH</strong> file extension, which can be simply extracted with tools like <strong class="text-strong">nfshtool</strong>, <strong class="text-strong">EA Graphics Editor</strong>, etc. These tools extract these files, and then give me proper images to work with.<br>
+<br>
+On the other hand, if I try to use the same tools on the PS2 SSH files, I get an error or weird "pixelated"/corrupted rendering.<br>
+<br>
+For example, <a href="https://i.imgur.com/34i6r7x.png" class="postlink">here is how the PC FSH file contents look when viewed with EAGE</a><br>
+<br>
+And here is <a href="https://i.imgur.com/ZrnHGUH.png" class="postlink">how they look when I try to do it with SSH files</a> while at the same time comparing the same file to the PC version.<br>
+<br>
+Notice how as I said before the PS2 image files look "pixelated"/corrupted, whereas the PC file looks normal.<br>
+<br>
+Does anyone know what these SSH files are, and how would someone be able to extract them and have normal looking files which I could use?<br>
+<br>
+I've uploaded these files which I'm working with along with EAGE <a href="https://drive.google.com/file/d/1YbJGstGfCWDZC_pV_s-GsjXmoD7zT1aV/view?usp=sharing" class="postlink">to Google Drive</a> if anyone is curious, and wants to take a look at it themselves.<br>
+<br>
+You can use EAGE to extract and preview files from the .BIG files provided. The files I'm looking to edit are within the "pitchslc.fsh/ssh" file.<br>
+<br>
+Apologies for the long post, and thank you for reading this far.</div>
+
+			
+			
+									
+						<div id='list_thanks184232'>
+</div>
+<div id='div_post_reput184232'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184244" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184244">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184244" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184244">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184244#p184244">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184244/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184244" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184244' href="./viewtopic.php?f=18&amp;p=184244&amp;thanks=184244&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184244#p184244" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2022-05-01T10:09:54+00:00">Sun May 01, 2022 11:09 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><strong class="text-strong">@tetsuro1</strong>, similar question was asked few days ago, so I've moved your post to this topic.<br>
+<br>
+If you look for specification or some scripts, tools, you can go here <a href="http://wiki.xentax.com/index.php/EA_SSH_FSH_Image" class="postlink">http://wiki.xentax.com/index.php/EA_SSH_FSH_Image</a><br>
+<br>
+But currently support for SSH files is limited (some tools are in development, some don't recognize SSH files at all).</div>
+
+			
+			
+									
+						<div id='list_thanks184244'>
+</div>
+<div id='div_post_reput184244'>
+</div>
+
+							<div id="sig184244" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184254" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184254">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/108817.html" class="username">tetsuro1</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=108817&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 30, 2022 8:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="108817"></dd>
+    <dd class="profile-posts" data-user-receive-id="108817"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact tetsuro1">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact tetsuro1</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184254" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184254">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184254#p184254">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184254/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184254" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184254' href="./viewtopic.php?f=18&amp;p=184254&amp;thanks=184254&amp;to_id=108817&amp;from_id=123876" title="Say Thanks to the author of the post: tetsuro1"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184254#p184254" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/108817.html" class="username">tetsuro1</a></strong> &raquo; </span><time datetime="2022-05-01T23:50:15+00:00">Mon May 02, 2022 12:50 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=184244#p184244"><div><cite><a href="../Users/43476.html">ikskoks</a> wrote: <a href="./viewtopic.php?p=184244#p184244" data-post-id="184244" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Sun May 01, 2022 11:09 am</span></cite>
+<strong class="text-strong">@tetsuro1</strong>, similar question was asked few days ago, so I've moved your post to this topic.<br>
+<br>
+If you look for specification or some scripts, tools, you can go here <a href="http://wiki.xentax.com/index.php/EA_SSH_FSH_Image" class="postlink">http://wiki.xentax.com/index.php/EA_SSH_FSH_Image</a><br>
+<br>
+But currently support for SSH files is limited (some tools are in development, some don't recognize SSH files at all).
+</div></blockquote>
+
+Hi, @iksoks ! Thank you for the reply and the information you gave from that link. I also didn't even know you were the one who created EA Graphics Manager <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"><br>
+<br>
+Unfortunately, all the tools and scripts listed within that link did not work in my case, however, I did find out something while meddling with <strong class="text-strong">COOPOV.BIG</strong> file, which is the main file I'm working with right now.<br>
+<br>
+So far, most of the programs that I've used to extract files from the BIG archives like <strong class="text-strong">FinalBIG</strong>, <strong class="text-strong">EAGC</strong>, etc. all unpack those files as compressed files. But recently, I tried another program called <strong class="text-strong">BigGUI</strong>, and it first decompresses the files within the BIG archives before extracting them.<br>
+<br>
+The reason I say this is because, when I try to load the <strong class="text-strong">compressed</strong> SSH with EA Graphics Manager, I receive an error <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>File not supported!</code></pre></div> whereas if I try to load that same file, but only this time it's <strong class="text-strong">decompressed</strong> (as a result of extracting it via BigGUI), it manages to load the file just fine, the only problem is that there are no image previews for some images within it, and when I try to export the files from that SSH file, I get a BIN file instead of an image file.<br>
+<br>
+I'll post all the files I work with to <a href="https://drive.google.com/file/d/10Alw5plq2HTc2IiXaLnTZHkXooAbtXAe/view?usp=sharing" class="postlink">this Google Drive link</a> (since I get messages by the forum saying that the file is too large -_-) as I would like it if you can take a look at it yourself, especially the "<strong class="text-strong">File Header</strong>" and "<strong class="text-strong">Entry Header</strong>" sections of your program since I don't understand any of that information, it might give you a clue on whether or not it's possible to extract the content from these SSH files or not.<br>
+<br>
+Also, what happened to your <strong class="text-strong">NHL_2002_PS2_Tool.py</strong> python script that you posted in <a href="https://forum.xentax.com/viewtopic.php?f=18&amp;t=23145" class="postlink">this thread</a>? At this point, I'd like to try every tool/script I can to see if I'll be able to extract the files that I need, so I'm wondering if you removed that file, or moved it someplace else?<br>
+<br>
+One more thing that I think is worth mentioning is that aside from all of those tools and scripts not working from the link you sent, one more tool that I managed to make somehow work was <a href="https://forums.nba-live.com/downloads.php?view=detail&amp;df_id=3215" class="postlink">EA Graphics Tools</a>, but unfortunately, that tool came with its own problems as well.<br>
+<br>
+When I tried to open the compressed SSH file, I get this error <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Run-time error '7': Out of memory</code></pre></div> which is also what I get when I use the "<strong class="text-strong">Unpack a single SSH</strong>" option. When I try to open the decompressed SSH file, I get this error instead <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Run-time error '481': Invalid picture</code></pre></div> however, if I try to unpack that decompressed file, it does it successfully, but I get corrupted or barely readable image files, which I'll upload within the attachments of this post.<br>
+<br>
+<br>
+I apologize for the long post again, I hope you'll be able to help me figure out how to extract the images from these files to be able to use them for the PC port of the game.<br>
+<br>
+Also, unlike OP, I would like to mention that I would just like to extract the contents of the SSH file and get the images I need without them being corrupted or unreadable, I don't need to recompile the SSH file or import anything into it, so any tool or script that has an export feature is good enough for me.</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=22181">Images.zip</a></dt>
+						<dd>(40.88 KiB) Downloaded 5 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks184254'>
+</div>
+<div id='div_post_reput184254'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184263" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184263">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184263" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184263">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184263#p184263">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184263/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184263" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184263' href="./viewtopic.php?f=18&amp;p=184263&amp;thanks=184263&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184263#p184263" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2022-05-02T17:45:19+00:00">Mon May 02, 2022 6:45 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote class="uncited"><div>The reason I say this is because, when I try to load the compressed SSH with EA Graphics Manager, I receive an error</div></blockquote>
+Yeah, compressed files are not supported right now. I need to write custom decompressor in the future or find one that can be integrated into my code.<br>
+
+<blockquote class="uncited"><div>and when I try to export the files from that SSH file, I get a BIN file instead of an image file.</div></blockquote>
+This BIN file is raw image data. It can be used for research or for manual conversion.<br>
+For example, you can extract BIN file and then try to preview it with <strong class="text-strong">TextureFinder</strong> or <strong class="text-strong">RawTex</strong>.<br>
+More info here <a href="https://forum.xentax.com/viewtopic.php?t=15540" class="postlink">viewtopic.php?t=15540</a><br>
+
+<blockquote class="uncited"><div>as I would like it if you can take a look at it yourself, especially the "File Header" and "Entry Header" sections of your program since I don't understand any of that information, it might give you a clue on whether or not it's possible to extract the content from these SSH files or not.</div></blockquote>
+
+I''ve checked your samples. Thy are using <strong class="text-strong">entry types 2 and 14</strong>. <br>
+(see this table for reference <a href="http://wiki.xentax.com/index.php/EA_SSH_FSH_Image#Entry_Types" class="postlink">http://wiki.xentax.com/index.php/EA_SSH ... ntry_Types</a>)<br>
+So my tool currently supports type 2 from some games, but the preview is buggy and needs to be fixed in the future.<br>
+Type 14 is currently a complete mystery for me and I don't know how to process it.  <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"> <br>
+<br>
+As for File Header / Entry Header info, it always contains the same fields as described in file format specification on the wiki.<br>
+First is the file header section, then entry header, then directory, then data.<br>
+I'm using this info in my tool to parse file, but converting image data to normal image file (e.g. raw to bmp) is another story.<br>
+
+<blockquote class="uncited"><div>Also, what happened to your NHL_2002_PS2_Tool.py python script that you posted in this thread?</div></blockquote>
+It was completely removed from repository, because I've rewritten the code to create EA Graphics Manager.<br>
+You can say that this Python script was <strong class="text-strong">very early version</strong> of EA Graphics Manager.  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+<br>
+But if you really want to check it, you can still view it in Github commit history:<br>
+<a href="https://github.com/bartlomiejduda/Tools/blob/9a515df948b25754606bbe697593f27fa934b2e0/NEW%20Tools/NHL%202002%20PS2/NHL_2002_PS2_Tool.py" class="postlink">https://github.com/bartlomiejduda/Tools ... S2_Tool.py</a><br>
+
+<blockquote class="uncited"><div>one more tool that I managed to make somehow work was EA Graphics Tools, but unfortunately, that tool came with its own problems as well.</div></blockquote>
+
+Unfortunately I can't help with any issues with EA Graphics Tools, because I don't have access to the source code.<br>
+But I can tell you that it is caused by the same thing - image types for this game (2 and 14) are not correctly supported by the tool.</div>
+
+			
+			
+									
+						<div id='list_thanks184263'>
+</div>
+<div id='div_post_reput184263'>
+</div>
+
+							<div id="sig184263" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184268" class="post has-profile bg2 online">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184268">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/49207.html" class="username">BloodRaynare</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=49207&amp;sr=posts">46</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 25, 2015 6:14 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="49207"></dd>
+    <dd class="profile-posts" data-user-receive-id="49207"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/49207/false">18 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact BloodRaynare">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact BloodRaynare</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184268" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184268">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184268#p184268">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184268/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184268" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184268' href="./viewtopic.php?f=18&amp;p=184268&amp;thanks=184268&amp;to_id=49207&amp;from_id=123876" title="Say Thanks to the author of the post: BloodRaynare"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184268#p184268" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/49207.html" class="username">BloodRaynare</a></strong> &raquo; </span><time datetime="2022-05-02T21:29:59+00:00">Mon May 02, 2022 10:29 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I saw your thread over at zenhax, anyway what I can say about the type 14 textures is they are swizzled, but using a non-standard one (Might be even using Xbox-style swizzle or own EA implementation of the swizzle algorithm I don't know). As an alternative workaround for now, you can try use latest 1.7.0 beta of PCSX2 <a href="https://github.com/PCSX2/pcsx2/releases" class="postlink">(here)</a> which has the texture dumping feature (Though, you may want to fix the transparency level first as the full transparency on PS2 is different from the PC ones).</div>
+
+			
+			
+									
+						<div id='list_thanks184268'>
+</div>
+<div id='div_post_reput184268'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184273" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184273">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/108817.html" class="username">tetsuro1</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=108817&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 30, 2022 8:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="108817"></dd>
+    <dd class="profile-posts" data-user-receive-id="108817"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact tetsuro1">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact tetsuro1</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184273" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184273">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184273#p184273">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184273/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184273" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184273' href="./viewtopic.php?f=18&amp;p=184273&amp;thanks=184273&amp;to_id=108817&amp;from_id=123876" title="Say Thanks to the author of the post: tetsuro1"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184273#p184273" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/108817.html" class="username">tetsuro1</a></strong> &raquo; </span><time datetime="2022-05-03T06:05:51+00:00">Tue May 03, 2022 7:05 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=184268#p184268"><div><cite><a href="../Users/49207.html">BloodRaynare</a> wrote: <a href="./viewtopic.php?p=184268#p184268" data-post-id="184268" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Mon May 02, 2022 10:29 pm</span></cite>
+I saw your thread over at zenhax, anyway what I can say about the type 14 textures is they are swizzled, but using a non-standard one (Might be even using Xbox-style swizzle or own EA implementation of the swizzle algorithm I don't know). As an alternative workaround for now, you can try use latest 1.7.0 beta of PCSX2 <a href="https://github.com/PCSX2/pcsx2/releases" class="postlink">(here)</a> which has the texture dumping feature (Though, you may want to fix the transparency level first as the full transparency on PS2 is different from the PC ones).
+</div></blockquote>
+
+Honestly, I have no idea what does "swizzle algorithm" mean or anything like, because, as I said, I have zero experience in image editing and all of these things basically fall on deaf ears when someone says it to me <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"><br>
+<br>
+Anyway, I have PCSX2 1.6.0 so I would prefer not to use a beta version instead of the stable one which I have now, as I still use PCSX2 from time to time.<br>
+<br>
+If there is a way to set up PCSX2 1.7.0 without installing it, and better yet, just for using that texture dumping feature you mentioned, then I might give it a shot, otherwise, I'm going to ignore that as I'm starting to think, dealing with SSH files is too much of a hassle just for creating a simple mod.<br>
+<br>
+
+<blockquote cite="./viewtopic.php?p=184263#p184263"><div><cite><a href="../Users/43476.html">ikskoks</a> wrote: <a href="./viewtopic.php?p=184263#p184263" data-post-id="184263" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Mon May 02, 2022 6:45 pm</span></cite>
+This BIN file is raw image data. It can be used for research or for manual conversion.<br>
+For example, you can extract BIN file and then try to preview it with <strong class="text-strong">TextureFinder</strong> or <strong class="text-strong">RawTex</strong>.<br>
+More info here <a href="https://forum.xentax.com/viewtopic.php?t=15540" class="postlink">viewtopic.php?t=15540</a><br>
+
+<blockquote class="uncited"><div>as I would like it if you can take a look at it yourself, especially the "File Header" and "Entry Header" sections of your program since I don't understand any of that information, it might give you a clue on whether or not it's possible to extract the content from these SSH files or not.</div></blockquote>
+
+I''ve checked your samples. Thy are using <strong class="text-strong">entry types 2 and 14</strong>. <br>
+(see this table for reference <a href="http://wiki.xentax.com/index.php/EA_SSH_FSH_Image#Entry_Types" class="postlink">http://wiki.xentax.com/index.php/EA_SSH ... ntry_Types</a>)<br>
+So my tool currently supports type 2 from some games, but the preview is buggy and needs to be fixed in the future.<br>
+Type 14 is currently a complete mystery for me and I don't know how to process it.  <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"> 
+</div></blockquote>
+
+Thanks for such an informative reply, but unfortunately, as I said to the previous user, it's pointless to try to explain it to me, as I have never dabbled in image/graphics editing before, so all this information goes over my head because I have no idea what's being talked about here <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"><br>
+<br>
+I've tried using the <strong class="text-strong">TextureFinder</strong> and <strong class="text-strong">RawTex</strong>, but I have no idea what any information within those programs means, nor how would I be able to convert the exported raw image data that your program creates (those BIN files).<br>
+<br>
+I've uploaded a ZIP file containing all of the exported raw image data from that SSH file within the attachments. I hope you can take a look at them yourself and try to convert them with <strong class="text-strong">TextureFinder</strong> or <strong class="text-strong">RawTex</strong> because I had no luck so far, and this is the last option I'm willing to try, because as I said in my comment to the previous user, I think meddling with SSH files is too much of a hassle just for trying to create a simple mod.<br>
+<br>
+I hope you have better chances at converting those BIN files to actual image files than I had since you know more about this than me, but other than that, thanks for all the help so far, it was really useful <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+<br>
+Good luck, and if this doesn't work, then I guess I'll have to try to manually edit these files.</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=22184">files.zip</a></dt>
+						<dd>(25.65 KiB) Downloaded 3 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks184273'>
+</div>
+<div id='div_post_reput184273'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184278" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184278">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/43476.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=43476_1450396086.png" width="80" height="80" alt="User avatar" /></a>														</div>
+								<a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43476&amp;sr=posts">1668</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jul 26, 2012 5:06 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Poland, Łódź</dd>
+							    <dd class="profile-posts" data-user-give-id="43476"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/true">648 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="43476"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43476/false">432 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ikskoks">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ikskoks</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184278" title="Send private message">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																																																<a href="http://ikskoks.pl/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184278">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184278#p184278">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184278/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184278" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184278' href="./viewtopic.php?f=18&amp;p=184278&amp;thanks=184278&amp;to_id=43476&amp;from_id=123876" title="Say Thanks to the author of the post: ikskoks"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184278#p184278" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43476.html" style="color: #00AA00;" class="username-coloured">ikskoks</a></strong> &raquo; </span><time datetime="2022-05-03T10:46:14+00:00">Tue May 03, 2022 11:46 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote class="uncited"><div>what I can say about the type 14 textures is they are swizzled</div></blockquote>
+<blockquote class="uncited"><div>I hope you have better chances at converting those BIN files to actual image files than I had since you know more about this than me, but other than that, thanks for all the help so far, it was really useful</div></blockquote>
+
+If the info that @BloodRaynare told us about swizzling is true, then we won't be able to convert it manually<br>
+without <strong class="text-strong">unswizzling them first</strong>.<br>
+Read more here: <a href="https://www.google.com/search?client=firefox-b-d&amp;q=unswizzling+texture" class="postlink">https://www.google.com/search?client=fi ... ng+texture</a><br>
+<br>
+(I'm not an expert with swizzling, I have to learn it as well  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"> )</div>
+
+			
+			
+									
+						<div id='list_thanks184278'>
+</div>
+<div id='div_post_reput184278'>
+</div>
+
+							<div id="sig184278" class="signature"><a href="http://ikskoks.pl/" class="postlink">http://ikskoks.pl/</a><br>
+<a href="https://www.facebook.com/ikskoks" class="postlink">https://www.facebook.com/ikskoks</a><br>
+<img src="http://i.iplsc.com/flaga-polski/000540UYV3RNYWMH-C122-F4.gif" class="postimage" alt="Image"></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184284" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184284">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/108817.html" class="username">tetsuro1</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=108817&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 30, 2022 8:07 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="108817"></dd>
+    <dd class="profile-posts" data-user-receive-id="108817"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact tetsuro1">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact tetsuro1</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184284" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184284">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184284#p184284">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184284/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184284" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184284' href="./viewtopic.php?f=18&amp;p=184284&amp;thanks=184284&amp;to_id=108817&amp;from_id=123876" title="Say Thanks to the author of the post: tetsuro1"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184284#p184284" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/108817.html" class="username">tetsuro1</a></strong> &raquo; </span><time datetime="2022-05-03T18:23:37+00:00">Tue May 03, 2022 7:23 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=184278#p184278"><div><cite><a href="../Users/43476.html">ikskoks</a> wrote: <a href="./viewtopic.php?p=184278#p184278" data-post-id="184278" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Tue May 03, 2022 11:46 am</span></cite>
+<blockquote class="uncited"><div>what I can say about the type 14 textures is they are swizzled</div></blockquote>
+<blockquote class="uncited"><div>I hope you have better chances at converting those BIN files to actual image files than I had since you know more about this than me, but other than that, thanks for all the help so far, it was really useful</div></blockquote>
+
+If the info that @BloodRaynare told us about swizzling is true, then we won't be able to convert it manually<br>
+without <strong class="text-strong">unswizzling them first</strong>.<br>
+Read more here: <a href="https://www.google.com/search?client=firefox-b-d&amp;q=unswizzling+texture" class="postlink">https://www.google.com/search?client=fi ... ng+texture</a><br>
+<br>
+(I'm not an expert with swizzling, I have to learn it as well  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"> )
+</div></blockquote>
+
+Wow, who knew that a 15+ year old image format would be such a pain in the ass to convert nowadays, lol.<br>
+<br>
+Not sure who should gain credit for this, EA or Sony, haha.<br>
+<br>
+Anyway, I contacted @BloodRaynare , hopefully, he'll be able to tell us if there's anything possible to be done with these files, or not.</div>
+
+			
+			
+									
+						<div id='list_thanks184284'>
+</div>
+<div id='div_post_reput184284'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p184318" class="post has-profile bg2 online">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile184318">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/49207.html" class="username">BloodRaynare</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=49207&amp;sr=posts">46</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 25, 2015 6:14 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="49207"></dd>
+    <dd class="profile-posts" data-user-receive-id="49207"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/49207/false">18 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact BloodRaynare">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact BloodRaynare</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=184318" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content184318">
+
+					<h3 >
+						<a href="./viewtopic.php?p=184318#p184318">Re: Compiling .ssh Files</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/184318/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=184318" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post184318' href="./viewtopic.php?f=18&amp;p=184318&amp;thanks=184318&amp;to_id=49207&amp;from_id=123876" title="Say Thanks to the author of the post: BloodRaynare"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=184318#p184318" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/49207.html" class="username">BloodRaynare</a></strong> &raquo; </span><time datetime="2022-05-06T02:16:32+00:00">Fri May 06, 2022 3:16 am</time>
+			</p>
+			
+			
+			
+			<div class="content">However, swizzling stuff is beyond my abilities as well.</div>
+
+			
+			
+									
+						<div id='list_thanks184318'>
+</div>
+<div id='div_post_reput184318'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=25287" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=18&amp;t=25287&amp;watch=topic&amp;start=0&amp;hash=2fa97c1b" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=18&amp;t=25287&amp;unwatch=topic&amp;start=0&amp;hash=2fa97c1b" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=25287&amp;bookmark=1&amp;hash=2fa97c1b" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=25287" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=25287&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=25287">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			11 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=18" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Graphic file formats”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 1 guest</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

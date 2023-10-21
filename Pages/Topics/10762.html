@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>YOBJ to OBJ convert algorithm - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=10762">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./10762.html">YOBJ to OBJ convert algorithm</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=10762" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=10762&amp;watch=topic&amp;start=0&amp;hash=9cd396f1" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=10762&amp;unwatch=topic&amp;start=0&amp;hash=9cd396f1" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=10762&amp;bookmark=1&amp;hash=9cd396f1" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=10762" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=10762&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="10762" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p87972" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile87972">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/44377.html" class="username">Prinsto</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=44377&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Feb 16, 2013 6:16 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="44377"></dd>
+    <dd class="profile-posts" data-user-receive-id="44377"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Prinsto">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Prinsto</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=87972" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content87972">
+
+					<h3 class="first">
+							<img src="./images/icons/smile/question.gif" width="16" height="16" alt="" title="">
+						<a href="./viewtopic.php?p=87972#p87972">YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/87972/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=87972" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post87972' href="./viewtopic.php?f=16&amp;p=87972&amp;thanks=87972&amp;to_id=44377&amp;from_id=123876" title="Say Thanks to the author of the post: Prinsto"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=87972#p87972" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/44377.html" class="username">Prinsto</a></strong> &raquo; </span><time datetime="2013-09-08T12:35:57+00:00">Sun Sep 08, 2013 1:35 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Hey guys,<br>
+<br>
+here in the board you can find the tool "RR OBJ Exporter" by Mike. Unfortunately he seems to be inactive for quite some time now. So I would like to ask for some help to find out the convert algorithm for converting .yobj models (from PS2 games by Yukes) to .obj models. I'm quite new in this kind of stuff. Anyway, I attached 2 small files. Both contain the same model, just in a different format.<br>
+<br>
+I would really appreciate it, if you know how to do this and reply to this topic or if you have contact to Mike and give me contact information.<br>
+<br>
+Thanks in advance <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+Franz Wegner from Germany</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="./download/file.php?id=6603">Models.zip</a></dt>
+						<dd>(6.75 KiB) Downloaded 48 times</dd>
+		</dl>
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks87972'>
+</div>
+<div id='div_post_reput87972'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p88006" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile88006">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41194.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41194_1430129462.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/41194.html" class="username">shakotay2</a>							</dt>
+
+						<dd class="profile-rank">MEGAVETERAN<br /><img src="./images/ranks/vip-2.png" alt="MEGAVETERAN" title="MEGAVETERAN" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41194&amp;sr=posts">4291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 20, 2012 9:24 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Nexus, searching for Jim Kirk</dd>
+							    <dd class="profile-posts" data-user-give-id="41194"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/true">1151 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41194"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/false">2244 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact shakotay2">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact shakotay2</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=88006" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content88006">
+
+					<h3 >
+						<a href="./viewtopic.php?p=88006#p88006">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/88006/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=88006" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post88006' href="./viewtopic.php?f=16&amp;p=88006&amp;thanks=88006&amp;to_id=41194&amp;from_id=123876" title="Say Thanks to the author of the post: shakotay2"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=88006#p88006" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41194.html" class="username">shakotay2</a></strong> &raquo; </span><time datetime="2013-09-09T23:16:47+00:00">Tue Sep 10, 2013 12:16 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Prinsto wrote:</cite>So I would like to ask for some help to find out the convert algorithm for converting .yobj models (from PS2 games by Yukes) to .obj models. I'm quite new in this kind of stuff.</div></blockquote>"quite new" means what exactly?<br>
+In this blend file from Szkaradek a python script is contained:<br>
+<br>
+import-rumble-roses-ps2-2011-11-06.blend<br>
+<a href="http://www.mediafire.com/?vtixhvkhtjklci7" class="postlink">http://www.mediafire.com/?vtixhvkhtjklci7</a><br>
+<br>
+And this is the 'magic' code snippet where the face data being created:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>        face_data = []
+        for n in range(data[3]):
+            f(8)
+            i(40)
+            var = i(4)#;print var
+            face_data.append(var)
+            #print plik.tell()</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks88006'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/41194.html" class="username">shakotay2</a> for the post: </dt>
+			<dd><span title="Mon Aug 29, 2016 4:50 am"><a href="../Users/4970.html" class="username">Acewell</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput88006'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig88006" class="signature">Tuts: a) Bigchillghost, <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17889" class="postlink">viewtopic.php?f=29&amp;t=17889</a><br>
+b) Extracting simple models: <a href="http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894" class="postlink">http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894</a><br>
+"Quoting the whole thing. Would u ever stop this nonsense?"</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p90846" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile90846">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/30098.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=30098_1424800859.jpg" width="45" height="45" alt="User avatar" /></a>														</div>
+								<a href="../Users/30098.html" class="username">porimac</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=30098&amp;sr=posts">109</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Sep 08, 2010 4:46 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Japan,Kanagawa</dd>
+							    <dd class="profile-posts" data-user-give-id="30098"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/30098/true">63 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="30098"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/30098/false">14 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact porimac">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact porimac</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=90846" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content90846">
+
+					<h3 >
+						<a href="./viewtopic.php?p=90846#p90846">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/90846/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=90846" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post90846' href="./viewtopic.php?f=16&amp;p=90846&amp;thanks=90846&amp;to_id=30098&amp;from_id=123876" title="Say Thanks to the author of the post: porimac"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=90846#p90846" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/30098.html" class="username">porimac</a></strong> &raquo; </span><time datetime="2013-12-14T16:21:00+00:00">Sat Dec 14, 2013 5:21 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>shakotay2 wrote:</cite>
+import-rumble-roses-ps2-2011-11-06.blend<br>
+<a href="http://www.mediafire.com/?vtixhvkhtjklci7" class="postlink">http://www.mediafire.com/?vtixhvkhtjklci7</a>
+</div></blockquote>
+
+Aww, Could you tell me how to use the script?<br>
+When I press alt+P, error occurred.<br>
+need anything else?  <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"><br>
+<br>
+And, where should the follows be added? 
+<blockquote><div><cite>shakotay2 wrote:</cite>
+And this is the 'magic' code snippet where the face data being created:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>        face_data = []
+        for n in range(data[3]):
+            f(8)
+            i(40)
+            var = i(4)#;print var
+            face_data.append(var)
+            #print plik.tell()</code></pre></div></div></blockquote></div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="./download/file.php?id=6840" class="postimage" alt="Image1.jpg" onclick="viewableArea(this);" /></dt>
+						<dd>Image1.jpg (69.35 KiB) Viewed 372 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks90846'>
+</div>
+<div id='div_post_reput90846'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p90849" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile90849">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41194.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41194_1430129462.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/41194.html" class="username">shakotay2</a>							</dt>
+
+						<dd class="profile-rank">MEGAVETERAN<br /><img src="./images/ranks/vip-2.png" alt="MEGAVETERAN" title="MEGAVETERAN" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41194&amp;sr=posts">4291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 20, 2012 9:24 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Nexus, searching for Jim Kirk</dd>
+							    <dd class="profile-posts" data-user-give-id="41194"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/true">1151 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41194"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/false">2244 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact shakotay2">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact shakotay2</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=90849" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content90849">
+
+					<h3 >
+						<a href="./viewtopic.php?p=90849#p90849">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/90849/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=90849" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post90849' href="./viewtopic.php?f=16&amp;p=90849&amp;thanks=90849&amp;to_id=41194&amp;from_id=123876" title="Say Thanks to the author of the post: shakotay2"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=90849#p90849" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41194.html" class="username">shakotay2</a></strong> &raquo; </span><time datetime="2013-12-14T20:10:50+00:00">Sat Dec 14, 2013 9:10 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>porimac wrote:</cite>When I press alt+P, error occurred.<br>
+need anything else?  <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"></div></blockquote>Most (if not all) blender scripts of Mariusz Szkaradek were written for <br>
+<strong class="text-strong">Blender 2.49 using Python 2.6</strong><br>
+Blender versions &gt;=2.50 are using Python 3.0.<br>
+
+<blockquote class="uncited"><div>And, where should the follows be added? </div></blockquote>?? It's an excerpt from the parser() function in the script.<br>
+<br>
+Import of sample <em class="text-italics">Model.yobj</em> from the start post.<br>
+<a href="http://www.pic-upload.de/view-21626738/import_yobt.jpg.html" class="postlink"><img src="http://www7.pic-upload.de/thumb/14.12.13/mzl5abqwxr3r.jpg" class="postimage" alt="Image"></a></div>
+
+			
+			
+									
+						<div id='list_thanks90849'>
+</div>
+<div id='div_post_reput90849'>
+</div>
+
+							<div id="sig90849" class="signature">Tuts: a) Bigchillghost, <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17889" class="postlink">viewtopic.php?f=29&amp;t=17889</a><br>
+b) Extracting simple models: <a href="http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894" class="postlink">http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894</a><br>
+"Quoting the whole thing. Would u ever stop this nonsense?"</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p90850" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile90850">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/30098.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=30098_1424800859.jpg" width="45" height="45" alt="User avatar" /></a>														</div>
+								<a href="../Users/30098.html" class="username">porimac</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=30098&amp;sr=posts">109</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Sep 08, 2010 4:46 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Japan,Kanagawa</dd>
+							    <dd class="profile-posts" data-user-give-id="30098"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/30098/true">63 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="30098"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/30098/false">14 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact porimac">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact porimac</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=90850" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content90850">
+
+					<h3 >
+						<a href="./viewtopic.php?p=90850#p90850">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/90850/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=90850" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post90850' href="./viewtopic.php?f=16&amp;p=90850&amp;thanks=90850&amp;to_id=30098&amp;from_id=123876" title="Say Thanks to the author of the post: porimac"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=90850#p90850" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/30098.html" class="username">porimac</a></strong> &raquo; </span><time datetime="2013-12-14T20:40:01+00:00">Sat Dec 14, 2013 9:40 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>shakotay2 wrote:</cite>
+Most (if not all) blender scripts of Mariusz Szkaradek were written for <br>
+<strong class="text-strong">Blender 2.49 using Python 2.6</strong><br>
+Blender versions &gt;=2.50 are using Python 3.0.
+</div></blockquote>
+strange. I think so,too...<br>
+Please point out if I am something wrong.</div>
+
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="./download/file.php?id=6842" class="postimage" alt="Image3.jpg" onclick="viewableArea(this);" /></dt>
+						<dd>Image3.jpg (44.28 KiB) Viewed 357 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+						<div id='list_thanks90850'>
+</div>
+<div id='div_post_reput90850'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p90851" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile90851">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41194.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41194_1430129462.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/41194.html" class="username">shakotay2</a>							</dt>
+
+						<dd class="profile-rank">MEGAVETERAN<br /><img src="./images/ranks/vip-2.png" alt="MEGAVETERAN" title="MEGAVETERAN" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41194&amp;sr=posts">4291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 20, 2012 9:24 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Nexus, searching for Jim Kirk</dd>
+							    <dd class="profile-posts" data-user-give-id="41194"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/true">1151 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41194"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/false">2244 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact shakotay2">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact shakotay2</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=90851" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content90851">
+
+					<h3 >
+						<a href="./viewtopic.php?p=90851#p90851">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/90851/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=90851" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post90851' href="./viewtopic.php?f=16&amp;p=90851&amp;thanks=90851&amp;to_id=41194&amp;from_id=123876" title="Say Thanks to the author of the post: shakotay2"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=90851#p90851" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41194.html" class="username">shakotay2</a></strong> &raquo; </span><time datetime="2013-12-14T21:33:17+00:00">Sat Dec 14, 2013 10:33 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>porimac wrote:</cite>strange. I think so,too...<br>
+Please point out if I am something wrong.</div></blockquote>Sry, didn't see you're using the correct version.<br>
+<br>
+The "invalid syntax" error in your previous pic mislead me.<br>
+I'm not sure what's your fault. I'm using XP,<br>
+this is blender's console output on loading the <em class="text-italics">Model.yobj</em>:<br>
+<br>
+Compiled with Python version 2.6.2.<br>
+Checking for installed Python... got it!<br>
+Model.yobj<br>
+YOBJ<br>
+(3424, 0, 3424, 0, 0, 1, 0, 2, 64, 0, 3360, 3392, 1, 0, 0, 0, 0, 12)<br>
+64<br>
+0 (0, 0, 12, 1, 128, 1440, 0, 1, 512, 1296, 48, 9, 23)<br>
+object- 0<br>
+920<br>
+(0, 0, 0, 1813446816)<br>
+1304<br>
+(0, 0, 0, 1812071040)<br>
+0 (0.5, 0.5, 0.0, 0.0)<br>
+1 (0.80000001192092896, 0.20000000298023224, 0.0, 0.0)<br>
+2 (0.0, 0.0, 0.0, 6.2868983045605658e+26)<br>
+3 (0.5, 0.5, 0.0, 0.0)<br>
+4 (0.80000001192092896, 0.20000000298023224, 0.0, 0.0)<br>
+5 (0.0, 0.0, 0.0, 6.2869019939093806e+26)<br>
+6 (0.66666668653488159, 0.3333333432674408, 0.0, 0.0)<br>
+7 (0.5, 0.5, 0.0, 0.0)<br>
+8 (1.0, 1.0, 1.0, 1.0)<br>
+1464<br>
+1448<br>
+3352<br>
+<br>
+and this is Mariusz' python script:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#2011-11-06 Glogow Poland Mariusz Szkaradek
+#Rumble Roses(PS2) yobj importer
+#press alt+p and select folder with yobj files (example: '...\1200.pac')
+#IMPORT:
+#-geometry with uv split per material
+#-bones
+import bpy,struct,os
+import Blender
+from Blender import *
+from struct import *
+import math
+from math import *
+from Blender.Mathutils import *
+
+
+def create_object_name():
+    global model_id
+    ids = []
+    scene = bpy.data.scenes.active
+    for mat in Material.Get():
+        #print mat.name
+        try:
+            model_id = int(mat.name.split('-')[0])
+            ids.append(model_id)
+        except:pass
+    try:
+        model_id = max(ids)+1
+    except:
+        model_id = 0
+
+def find_0(): 
+    s=''
+    while(True):
+        litera =  struct.unpack('c',plik.read(1))[0]
+        if  litera=='\x00':
+            break
+        else:
+            s+=litera
+    return s 
+
+
+def word(long): 
+   s=''
+   for j in range(0,long): 
+       lit =  struct.unpack('c',plik.read(1))[0]
+       if ord(lit)!=0:
+           s+=lit
+           if len(s)&gt;100000:
+               break
+   return s
+
+def b(n):
+    return struct.unpack(n*'b', plik.read(n))
+def B(n):
+    return struct.unpack(n*'B', plik.read(n))
+def h(n):
+    return struct.unpack(n*'h', plik.read(n*2))
+def H(n):
+    return struct.unpack(n*'H', plik.read(n*2))
+def i(n):
+    return struct.unpack(n*'i', plik.read(n*4))
+def f(n):
+    return struct.unpack(n*'f', plik.read(n*4))
+
+
+def vertexuv():
+    for m in range(nMat):
+    #for m in range(nParts):
+        mesh.materials+=[Material.New()]
+    mesh.vertexUV = 1
+    mesh.faceUV = 1
+    for m in range(len(faceslist)):
+        for n in range(3):
+            uv_data = uvlist[m][n]
+            v_id = faceslist[m][n]
+            mesh.verts[v_id].uvco = Vector(uv_data) 
+        f = mesh.faces[m] 
+        f.uv = [v.uvco for v in f.verts]
+        f.mat = uvlist[m][3] 
+        
+    mesh.update()   
+
+def drawmesh(name): 
+    global obj,mesh,scene
+    mesh = bpy.data.meshes.new(name)
+    mesh.verts.extend(vertexlist)
+    mesh.faces.extend(faceslist,ignoreDups=True,smooth =1)
+    scene = bpy.data.scenes.active
+    obj = scene.objects.new(mesh,name)
+    mesh.recalcNormals()
+    mesh.update()
+    Redraw()
+
+
+
+def check_armature():
+    global armobj,newarm
+    armobj=None
+    newarm=None
+    scn = Scene.GetCurrent()
+    scene = bpy.data.scenes.active
+    for object in scene.objects:
+        if object.getType()=='Armature':
+            if object.name == 'armature':
+                scene.objects.unlink(object)
+    for object in bpy.data.objects:
+        if object.name == 'armature':
+            armobj = Blender.Object.Get('armature')
+            newarm = armobj.getData()
+            newarm.makeEditable()   
+            for bone in newarm.bones.values():
+                del newarm.bones[bone.name]
+            newarm.update()
+    if armobj==None: 
+        armobj = Blender.Object.New('Armature','armature')
+    if newarm==None: 
+        newarm = Armature.New('armature')
+        armobj.link(newarm)
+    scn.link(armobj)
+    newarm.drawType = Armature.STICK
+    armobj.drawMode = Blender.Object.DrawModes.XRAY
+
+def make_bone(): 
+    newarm.makeEditable()
+    for bone_id in range(len(bones)):
+        bonedata = bones[bone_id]
+        #bonename = str(bonedata[1][0])
+        bonename = bonedata[0]
+        eb = Armature.Editbone() 
+        newarm.bones[bonename] = eb
+    newarm.update()
+
+def make_bone_parent():
+    newarm.makeEditable()
+    for bone_id in range(len(bones)):
+        bonedata = bones[bone_id]
+        parent_id = bonedata[1]
+        bonename = bonedata[0]
+        if parent_id!=-1:
+            bone = newarm.bones[bonename]  
+            #boneparent = newarm.bones[str(parent_id)]
+            boneparent = newarm.bones[bones[parent_id][0]] 
+            bone.parent = boneparent
+    newarm.update()
+
+def make_bone_position():
+    newarm.makeEditable()
+    for bone_id in range(len(bones)):
+        bonedata = bones[bone_id]
+        #bonename = str(bonedata[1][0])
+        bonename = bonedata[0]
+        pos = bonedata[2] 
+        rot = bonedata[3] 
+        rot = Euler(rot).toMatrix()
+        bone = newarm.bones[bonename]
+        if bone.parent:
+           bone.head =   bone.parent.head+Vector(pos) * bone.parent.matrix
+           tempM = rot*bone.parent.matrix
+           bone.matrix = tempM
+        else:
+            bone.head = Vector(pos)
+            bone.matrix = rot
+        bvec = bone.tail- bone.head
+        bvec.normalize()
+        bone.tail = bone.head + 0.01 * bvec
+    newarm.update()
+
+def skeleton():
+    check_armature()
+    make_bone()
+    make_bone_parent()
+    make_bone_position()
+
+def parser():
+    global bones,vertexlist,faceslist,uvlist,nMat,nParts
+    print word(4)
+    offs = i(18);print offs
+    
+    bones = []
+
+    plik.seek(offs[9]+8)
+    for a in range(offs[6]):
+        BoneName = word(16);print BoneName
+        tx = f(1)[0]
+        ty = f(1)[0]
+        tz = f(1)[0]
+        tw = f(1)[0]
+        rx = (f(1)[0] * 180) / pi
+        ry = (f(1)[0] * 180) / pi
+        rz = (f(1)[0] * 180) / pi
+        rw = f(1)[0]
+        parent = i(1)[0]
+        plik.seek(0xC,1)#seek_cur
+        qx = f(1)[0]
+        qy = f(1)[0]
+        qz = f(1)[0]
+        qw = f(1)[0]
+        bones.append([BoneName,parent,[tx,ty,tz],[rx,ry,rz]])
+        #tfm = (eulerangles rx ry rz) as matrix3
+        #append tarr [tx,ty,tz]
+        #append rarr tfm
+        #append qarr [qx,qy,qz,qw]
+        #append Barr BoneName
+        #append Parr parent
+    skeleton()
+
+
+    plik.seek(offs[8])
+    print plik.tell()
+    meshdata = []
+    for m in range(offs[5]):
+        back = plik.tell()
+        data = i(13);print m,data
+        pos = f(3)
+        meshdata.append([data,pos])
+        plik.seek(back+64)
+        #break
+
+    for m in range(offs[5]):
+    #for m in range(5):
+        print 'object-',m
+        vertexlist = []
+        faceslist = []
+        uvlist = []
+        data = meshdata[m][0]
+        plik.seek(data[8]+40)
+        back = plik.tell()
+        for n in range(data[12]):
+            vertexlist.append(f(3))
+            i(1)[0]
+  
+        print plik.tell()
+        print i(4)      
+        for n in range(data[12]):
+            f(4)
+
+        print plik.tell() 
+        print i(4)      
+        for n in range(data[11]):#weights
+            print n,f(4)
+
+        print plik.tell()
+        plik.seek(data[5]+8)
+        print plik.tell() 
+        face_data = []
+        for n in range(data[3]):
+            f(8)
+            i(40)
+            var = i(4)#;print var
+            face_data.append(var)
+            #print plik.tell()
+        nMat = data[3]
+        for n in range(data[3]):#nMat
+            #faceslist = []
+            #uvlist = []
+            plik.seek(face_data[n][2]+8)           
+            for k in range(face_data[n][1]):
+                k,i(4)      
+                #back = plik.tell()      
+            plik.seek(face_data[n][3]+8)
+            nParts = face_data[n][1]
+            for k in range(face_data[n][1]):#nParts
+                #print m,plik.tell()
+                var = B(32)#;print var  
+                v1 = -1
+                v2 = -1
+                uv1 = -1
+                uv2 = -1
+                direct = -1
+                for l in range(var[16]):#nFaces
+                    direct*=-1
+                    #mesh.verts[m].uvco = Vector(uvlist[m])
+                    uv3 = [f(1)[0],1-f(1)[0]]
+                    l,f(1),
+                    v3 = i(1)[0]
+                    #print v1,v2,v3
+                    f(4)
+                    if v1!=-1 and v2!=-1:
+                        if direct&gt;0:
+                            faceslist.append([v1,v2,v3]) 
+                            uvlist.append([uv1,uv2,uv3,n])
+                            #uvlist.append([uv1,uv2,uv3,k])
+                        else: 
+                            faceslist.append([v1,v3,v2]) 
+                            uvlist.append([uv1,uv3,uv2,n])
+                            #uvlist.append([uv1,uv3,uv2,k])
+                    v1=v2
+                    uv1=uv2
+                    v2=v3
+                    uv2=uv3
+        drawmesh('model-'+str(m))
+        vertexuv()
+        Blender.Redraw()
+    print plik.tell()
+        
+
+
+
+def importer(filename):
+    global plik,dirname,basename,skala,nbBones
+    basename = sys.basename(filename)
+    print basename
+    dirname = sys.dirname(filename)
+    for file in os.listdir(dirname):
+        if file.split('.')[-1].lower()=='yobj':
+            plik = open(dirname+os.sep+file,'rb')
+            create_object_name()
+            parser()
+            Redraw()
+            plik.close()
+
+Window.FileSelector (importer)</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks90851'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/41194.html" class="username">shakotay2</a> for the post: </dt>
+			<dd><span title="Thu Aug 11, 2016 1:40 pm"><a href="../Users/4970.html" class="username">Acewell</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput90851'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig90851" class="signature">Tuts: a) Bigchillghost, <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17889" class="postlink">viewtopic.php?f=29&amp;t=17889</a><br>
+b) Extracting simple models: <a href="http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894" class="postlink">http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894</a><br>
+"Quoting the whole thing. Would u ever stop this nonsense?"</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p90854" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile90854">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/30098.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=30098_1424800859.jpg" width="45" height="45" alt="User avatar" /></a>														</div>
+								<a href="../Users/30098.html" class="username">porimac</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=30098&amp;sr=posts">109</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Sep 08, 2010 4:46 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Japan,Kanagawa</dd>
+							    <dd class="profile-posts" data-user-give-id="30098"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/30098/true">63 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="30098"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/30098/false">14 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact porimac">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact porimac</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=90854" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content90854">
+
+					<h3 >
+						<a href="./viewtopic.php?p=90854#p90854">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/90854/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=90854" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post90854' href="./viewtopic.php?f=16&amp;p=90854&amp;thanks=90854&amp;to_id=30098&amp;from_id=123876" title="Say Thanks to the author of the post: porimac"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=90854#p90854" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/30098.html" class="username">porimac</a></strong> &raquo; </span><time datetime="2013-12-14T23:14:28+00:00">Sun Dec 15, 2013 12:14 am</time>
+			</p>
+			
+			
+			
+			<div class="content">very sorry!<br>
+you were so right and I was dead wrong.<br>
+I was mistaken in blender extension associating</div>
+
+			
+			
+									
+						<div id='list_thanks90854'>
+</div>
+<div id='div_post_reput90854'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p122632" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile122632">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/4970.html" class="username">Acewell</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=4970&amp;sr=posts">1330</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Nov 05, 2008 12:16 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="4970"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/4970/true">2710 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="4970"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/4970/false">884 times</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content122632">
+
+					<h3 >
+						<a href="./viewtopic.php?p=122632#p122632">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/122632/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=122632" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post122632' href="./viewtopic.php?f=16&amp;p=122632&amp;thanks=122632&amp;to_id=4970&amp;from_id=123876" title="Say Thanks to the author of the post: Acewell"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=122632#p122632" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/4970.html" class="username">Acewell</a></strong> &raquo; </span><time datetime="2016-09-20T03:52:12+00:00">Tue Sep 20, 2016 4:52 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>shakotay2 wrote:</cite>And this is the 'magic' code snippet where the face data being created:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>        face_data = []
+        for n in range(data[3]):
+            f(8)
+            i(40)
+            var = i(4)#;print var
+            face_data.append(var)
+            #print plik.tell()</code></pre></div></div></blockquote>
+
+Is that code really for creating face indices? i looked through the script but i could not follow it, <br>
+i don't know what data[3], f(8), i(40) and i(4) mean/are.   <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"><br>
+is there a way to newbify that so it can be reused? i think it would be useful with ps2 model formats.  <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"><br>
+<br>
+edit<br>
+okay i think the f(8), i(40) and i(4) are related to this part of the script
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>def i(n):
+    return struct.unpack(n*'i', plik.read(n*4))
+def f(n):
+    return struct.unpack(n*'f', plik.read(n*4))
+</code></pre></div> <br>
+<br>
+and struct.unpack() reads things from binary<br>
+f would be float and i would be integer? and 'plik' is just a substitute for 'bs'?<br>
+and 'n' would be whatever number is in parenthesis?<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Format	C Type	           Python type	        Standard size
+x	     pad byte	         no value	 	 
+c	     char	             bytes of length 1          		 
+b	     signed char	      integer	             1	
+B	     unsigned char	    integer	             1	
+?	     _Bool	            bool	                1	
+h	     short	            integer	             2	
+H	     unsigned short      integer	             2	
+i	     int	              integer	             4	
+I	     unsigned int	     integer	             4	
+l	     long	             integer	             4	
+L	     unsigned long	    integer	             4	
+q	     long long	        integer	             8	
+Q	     unsigned long       long integer	        8	
+f	     float	            float	               4	
+d	     double	           float	               8 	
+s	     char[]	           bytes	 	 
+p	     char[]	           bytes	 	 
+P	     void *	           integer	 	</code></pre></div>
+<a href="https://docs.python.org/3.2/library/struct.html#format-characters" class="postlink">https://docs.python.org/3.2/library/str ... characters</a><br>
+i still don't know what data[3] is referring to though  <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"></div>
+
+			
+			
+									
+						<div id='list_thanks122632'>
+</div>
+<div id='div_post_reput122632'>
+</div>
+
+							<div id="sig122632" class="signature"><span style="font-size:85%;line-height:116%"><a href="http://richwhitehouse.com/noesis/nms/index.php?content=readme" class="postlink">Noesis</a><br>
+<a href="http://forum.xentax.com/viewtopic.php?p=142434#p142434" class="postlink">Hex2obj</a><br>
+<a href="http://aluigi.altervista.org/quickbms.htm" class="postlink">QuickBMS</a><br>
+<a href="https://github.com/Perfare/AssetStudio/releases" class="postlink">Asset Studio</a><br>
+<a href="http://forum.xentax.com/viewtopic.php?p=76307#p76307" class="postlink">TextureFinder</a></span></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p122642" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile122642">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/41194.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=41194_1430129462.jpg" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/41194.html" class="username">shakotay2</a>							</dt>
+
+						<dd class="profile-rank">MEGAVETERAN<br /><img src="./images/ranks/vip-2.png" alt="MEGAVETERAN" title="MEGAVETERAN" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=41194&amp;sr=posts">4291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Apr 20, 2012 9:24 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Nexus, searching for Jim Kirk</dd>
+							    <dd class="profile-posts" data-user-give-id="41194"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/true">1151 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="41194"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/41194/false">2244 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact shakotay2">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact shakotay2</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=122642" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content122642">
+
+					<h3 >
+						<a href="./viewtopic.php?p=122642#p122642">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/122642/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=122642" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post122642' href="./viewtopic.php?f=16&amp;p=122642&amp;thanks=122642&amp;to_id=41194&amp;from_id=123876" title="Say Thanks to the author of the post: shakotay2"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=122642#p122642" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/41194.html" class="username">shakotay2</a></strong> &raquo; </span><time datetime="2016-09-20T17:14:54+00:00">Tue Sep 20, 2016 6:14 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>AceWell wrote:</cite>i still don't know what data[3] is referring to though  <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"></div></blockquote>Mariusz' python scripts shall be used - not understood <img class="smilies" src="./images/smilies/%5Bcolon%5DD.gif" width="15" height="15" alt=":D" title="Very Happy"> <br>
+But you're on a good way so far - maybe insert <em class="text-italics">print data[3]</em> to get a clue.<br>
+<br>
+there's<br>
+meshdata.append([data,pos])<br>
+in one loop<br>
+<br>
+and <br>
+data = meshdata[m][0]<br>
+in another<br>
+<br>
+This is a little bit cryptic so you'll need about 3 hours to fully understand the whole script then another hour to recreate it in Noesis.<br>
+<br>
+The more <em class="text-italics">print</em> cmds you insert into the script the more you'll understand it.</div>
+
+			
+			
+									
+						<div id='list_thanks122642'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/41194.html" class="username">shakotay2</a> for the post: </dt>
+			<dd><span title="Tue Sep 20, 2016 9:03 pm"><a href="../Users/4970.html" class="username">Acewell</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput122642'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+							<div id="sig122642" class="signature">Tuts: a) Bigchillghost, <a href="https://forum.xentax.com/viewtopic.php?f=29&amp;t=17889" class="postlink">viewtopic.php?f=29&amp;t=17889</a><br>
+b) Extracting simple models: <a href="http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894" class="postlink">http://forum.xentax.com/viewtopic.php?f=29&amp;t=10894</a><br>
+"Quoting the whole thing. Would u ever stop this nonsense?"</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p122648" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile122648">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/46032.html" class="username">Naroax</a>							</dt>
+
+						<dd class="profile-rank">beginner</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=46032&amp;sr=posts">30</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Aug 30, 2014 6:44 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="46032"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/46032/true">7 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="46032"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/46032/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Naroax">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Naroax</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=122648" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content122648">
+
+					<h3 >
+						<a href="./viewtopic.php?p=122648#p122648">Re: YOBJ to OBJ convert algorithm</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/122648/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=122648" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post122648' href="./viewtopic.php?f=16&amp;p=122648&amp;thanks=122648&amp;to_id=46032&amp;from_id=123876" title="Say Thanks to the author of the post: Naroax"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=122648#p122648" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/46032.html" class="username">Naroax</a></strong> &raquo; </span><time datetime="2016-09-20T20:23:01+00:00">Tue Sep 20, 2016 9:23 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>AceWell wrote:</cite><blockquote><div><cite>shakotay2 wrote:</cite> i still don't know what data[3] is referring to though  <img class="smilies" src="./images/smilies/%5Bcolon%5D%28.gif" width="15" height="15" alt=":(" title="Sad"></div></blockquote></div></blockquote>
+
+correct me someone if i'm wrong but i think that's the "python slice", like the third segment in that "data", yeah i think it's definitely slicing.</div>
+
+			
+			
+									
+						<div id='list_thanks122648'>
+</div>
+<div id='div_post_reput122648'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=10762" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=10762&amp;watch=topic&amp;start=0&amp;hash=9cd396f1" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=10762&amp;unwatch=topic&amp;start=0&amp;hash=9cd396f1" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=10762&amp;bookmark=1&amp;hash=9cd396f1" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=10762" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=10762&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=10762">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <span style="color: #9E8DA7;" class="username-coloured">Ahrefs [Bot]</span>, <a href="../Users/123876.html" class="username">escape209</a> and 6 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

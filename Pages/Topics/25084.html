@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Extracting 3D Map Models from SSX 3 - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=25084">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=959ea14a0771cc2de19d1bba114b7679" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="16"><a itemprop="item" href="./viewforum.php?f=16"><span itemprop="name">3D/2D models</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./25084.html">Extracting 3D Map Models from SSX 3</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Post questions about game models here, or help out others!<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=25084" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=25084&amp;watch=topic&amp;start=0&amp;hash=2d5016c0" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=25084&amp;unwatch=topic&amp;start=0&amp;hash=2d5016c0" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=25084&amp;bookmark=1&amp;hash=2d5016c0" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=25084" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=25084&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="25084" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p182448" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile182448">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/59703.html" class="username">hoopera</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=59703&amp;sr=posts">6</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Oct 19, 2016 5:18 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="59703"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="59703"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact hoopera">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact hoopera</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=182448" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content182448">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=182448#p182448">Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/182448/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=182448" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post182448' href="./viewtopic.php?f=16&amp;p=182448&amp;thanks=182448&amp;to_id=59703&amp;from_id=123876" title="Say Thanks to the author of the post: hoopera"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=182448#p182448" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/59703.html" class="username">hoopera</a></strong> &raquo; </span><time datetime="2022-02-22T22:31:32+00:00">Tue Feb 22, 2022 11:31 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Lately I've been on a mission to extract the 3D Environments from SSX 3. It's proving to be more difficult than I first anticipated, so I come to you all for some assistance! I've been trying my best to find the best way to get the model from the game, and there's only 2 methods I can think of: Extracting the model directly from the game files, or ripping them with an injector program (Nina Ripper, 3DRipperX). This is how far I've gotten with each one:<br>
+<br>
+<span style="font-size:150%;line-height:116%">Extract from game files:</span><br>
+<br>
+First is getting the game files themselves. SSX 3, and like many other EA sports games, uses .big files for their data storage. This is the game's file structure:<br>
+<img src="https://imgur.com/arKHP97.jpg" class="postimage" alt="Image"><br>
+ You can use the program FinalBIG to view and extract all the .big files directly from the game: <a href="https://www.moddb.com/downloads/final-big-editor/" class="postlink">https://www.moddb.com/downloads/final-big-editor/</a> <br>
+<br>
+After this, we now need to find where the map files are stored. I found this thread on Xentax to help: <a href="https://forum.xentax.com/viewtopic.php?f=16&amp;t=21408&amp;hilit=ssx" class="postlink">viewtopic.php?f=16&amp;t=21408&amp;hilit=ssx</a><br>
+<br>
+TL;DR - Character models are stored in data &gt; char &gt; mdlngc.big as [character]_[part].mnf. Naturally you'd think that game developers would also have their map models as the same file right? If only it were that simple. <br>
+<br>
+As Henchman800 pointed out on that post:
+<blockquote cite="./viewtopic.php?p=159273#p159273"><div><cite><a href="../Users/75368.html">Henchman800</a> wrote: <a href="./viewtopic.php?p=159273#p159273" data-post-id="159273" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Tue Jan 21, 2020 8:56 pm</span></cite>
+Yo guys, check this out:<br>
+a pre-alpha of ssx 3 has been discovered. Strangely EA used the .mpf format for their models in this one....at least thats what i think/see.....<br>
+Usually a .mpf goes with a .mus. the mus-file contains the actual audio and the mpf-file comes with info and offsets to start the song on certrain timecodes. In this particular case it seems to contain 3d info:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>TopBoltD_H
+ HeadBoltA_H HandsA_NIS DummyA_NIS TopBoltD_M
+ HeadBoltA_M TopBoltD_L
+ HeadBoltA_L TopBoltD_Shdw BottomA_Shdw BootsA_Shdw
+ HeadA_Shdw HandsA_Shdw HeadBoltA_Shdw HeadBoltD_H
+ HeadBoltD2_H
+ HeadBoltD_M
+ HeadBoltD2_M
+ HeadBoltD_L
+ HeadBoltD2_L
+ HeadBoltD_Shdw
+ HeadBoltD2_Shdw
+ SplitHair_H HeadBoltB4_H SplitHair_M HeadBoltB4_M SplitHair_L HeadBoltB4_L SplitHair_Shdw HeadBoltB4_Shdw
+ë mY1YßÆ¦ PTQt
+ mY1Y!9¦ PTQD
+ mY1Y 3ZuD
+ ?lowerspine ?middlespine ?upperspine
+ ?clavicleleft ?bicepleft
+ ?biceptwistleft
+ ?forearmleft ?clavicleright ?bicepright
+ ?biceptwistright ?forearmright
+ ?handright
+ ?thighleft ?thighright ?shinright ?footright
+Á p$gAh6tAy)E
+‘Á V=~Ah6tAy)E
+ xR6AÈÂ 3B8G
+ sec_hoodie
+ aXA7V‚Àð F3B7F]A
+Ù m,Ad}u@gG'BÙ m,Ad}u@gG'BX‡ GAqt
+Ù m,Ad}u@gG'BÙ m,Ad}u@gG'BÙ m,Ad}u@gG'B
+ aXA7V‚Àð F3BX‡ GAqt
+ ?lowerspine ?middlespine ?upperspine
+ ?clavicleleft ?bicepleft
+ ?biceptwistleft
+ ?forearmleft ?clavicleright ?bicepright
+ ?biceptwistright ?forearmright
+ ?handright
+ ?thighleft ?thighright ?shinright ?footright
+ sec_hoodie
+À rTEB 5Ahm
+ ?lowerspine ?middlespine ?upperspine
+ ?clavicleleft ?bicepleft
+ ?biceptwistleft
+ ?forearmleft ?clavicleright ?bicepright
+ ?biceptwistright ?forearmright
+ ?handright
+ ?thighleft ?thighright ?shinright ?footright
+ sec_hoodie
+ ?lowerspine ?middlespine ?upperspine
+ ?clavicleleft ?bicepleft
+ ?biceptwistleft
+ ?forearmleft ?clavicleright ?bicepright
+ ?biceptwistright ?forearmright
+ ?handright
+ ?thighleft ?thighright ?shinright ?footright
+ sec_hoodie</code></pre></div>
+
+So hopefully this info and the file itself help to get to its innerts and understand how EA is working their 2003 era models.<br>
+Heres a download to nates .mpf file:<br>
+rocco.zip<br>
+<br>
+I'll be looking into some need for speed stuff....maybe they use the same model containers and nfs extractors work on ssx aswell?<br>
+anybody got info or experience with that? <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":-)" title="Smile">
+</div></blockquote>
+
+If you've played SSX 3, this makes total sense! SSX 3 likes to make it's music be in-time with the gameplay. As in, you make a huge jump, the music's vocals stop and a low-pass filter is heard, but as soon as you land, it comes back in full force. With the gameplay changing the music, you'd have to setup your worlds this way. But, we could still possibly find some models with this. We'll need to know how the game references the maps, and what according to the code, each region is referred to. Thankfully, someone's already done that for us! <a href="http://www.merqurycity.com/ssx_forum/viewtopic.php?f=8&amp;t=12138&amp;p=333003&amp;hilit=MDLPS2#p333003" class="postlink">http://www.merqurycity.com/ssx_forum/vi ... S2#p333003</a><br>
+<br>
+On that page (Posting it here for possible archival/posterity reasons) they've found that the maps are referenced as such:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>The Throne = EBC3 (I guess BC3 = Backcountry 3)
+EBC3_E = between the end of The Throne to Black Station
+
+Black Station = E
+
+E_ERA5 = Area the leads to Gravitude after Black Station
+E_EBA3 = Leads to Much 2 Much
+E_ESS3 = Leads to Kick Doubt
+E_EHP3 = Area that leads to Perpendiculous
+
+EBA3 = Much-2-Much
+ESS3 = Kick Doubt
+EHP3 = Perpendiculous
+ERA5 = Gravitude
+
+ERA5_C = End of Gravitude to Yellow Station
+
+C = Yellow Station
+
+C_CRA3 = Section that Leads to Ruthless Ridge
+C_CHP2 = Leads to Schizophrenia
+C_CBA2 = Section leading towards Launch Time
+
+CHP2 = Schizophrenia
+CBA2 = Launch Time
+CRA3 = Ruthess Ridge
+
+CRA3_D = Between Ruthless Ridge end and Red Station
+
+DBC2 = Ruthless
+
+DBC2_D = End of Ruthless to Red Station
+
+D = Red Station
+
+D_DRA4 = Section that leads to Intimidator
+D_DSS2 = Leads to Style Mile
+
+DSS2 = Style Mile
+DRA4 = Intimidator
+
+DRA4_A = End of Intimidator to Green Station
+
+ABC1 = Happiness
+
+ABC1_A = End of Happiness to Green Station
+
+A = Green Station
+
+A_ARA1 = Leads to Snow Jam
+A_ASS1 = Section leading to R&amp;B
+A_ABA1 = Leads to Crow's Nest
+
+ABA1 = Crow's Nest
+ASS1 = R&amp;B
+ARA1 = Snow Jam
+
+ARA1_B = End of Snow Jam to Blue Station
+
+B = Blue Station
+
+B_BRA2 = Section leading to Metro City
+B_BHP1 = Section leading to The Junction
+
+
+BHP1 = The Junction
+BRA2 = Metro City</code></pre></div>
+
+However, searching through the .big files so far isn't giving me any indication that these are stored in there somewhere. I'm not really finding any .mpf files that are referenced above. However, I can confirm that's how the game references them, because of these files!<br>
+<br>
+<img src="https://imgur.com/L15VWv5.jpg" class="postimage" alt="Image"><br>
+<br>
+These come from data &gt; worlds &gt; bam.big. If I look in bam.gdb with HexEdit (With the data aligned at 88 columns):<br>
+<br>
+<img src="https://imgur.com/UcuFD4s.jpg" class="postimage" alt="Image"><br>
+<br>
+They're all there! So somehow, bam.gdb is referencing all of the levels. I assume that this is a pointer file to somewhere else, but alas this is where my knowledge of data extraction ends. I tried to use this to get some kind of model with 3D Model Researcher, but it's only given me a garbled mess of faces and random vertices.<br>
+<br>
+I tried another step to maybe help locate the exact file, but this also leads me into the next section.<br>
+<br>
+<span style="font-size:150%;line-height:116%">Ripping the models:</span><br>
+<br>
+This method produced the fastest results, but very very dirty and would take a ton of cleanup work to get going. Plus, it'd probably produce a lot of issues with the model itself given that these ripping programs aren't usually the best at setting normals correctly, nor getting super correct UVs (Though it's surprised me in the past with how accurate it is). <br>
+<br>
+The easiest way to do this is to your respective ripping program (I use Ninja Ripper), and open the game with an emulator. Since I'm using the gamecube version of the game, I used Dolphin! <a href="https://dolphin-emu.org/" class="postlink">https://dolphin-emu.org/</a><br>
+<br>
+The process here would be pretty simple: You load into the game where you want to be, and press whatever button to rip the models, throw them in a 3D program like Blender, and get to work putting it together! But, there's a severe issue with this.<br>
+<br>
+<strong class="text-strong"><span style="font-size:200%;line-height:116%">CULLING</span></strong><br>
+<br>
+Culling, the devil of any game...tinkerer? I don't know what I am, just a guy who likes to mess with games honestly. If you're unfamiliar, culling is how modern systems handle rendering geometry that isn't visible to the in-game camera, or rather, how they don't handle it. Culling removes any geometry that is not in view of the camera, and this is why your games look so good and run so well! Every video game in the 3D era uses culling, but when we're trying to extract exact 3D models from a game, it becomes a nightmare.<br>
+<br>
+With culling, we'd have to make sure we get every single angle of the map completely visible, and rip the model multiple times. This adds sooooo much time and tediousness to this process, not to mention that the models aren't always the same orientation due to the in-game camera moving.<br>
+<br>
+Luckily, we have some tools to help with this! First, is Dolphin has built-in freelook camera function that allows you to completely control the direction the camera is facing. This works pretty well with SSX 3 as well, but keep in mind that the camera's translation (position in a 3D space) is locked to the character, but it can be offset and rotated any direction. It lets us do this:<br>
+<br>
+<img src="https://imgur.com/V4p72ga.jpg" class="postimage" alt="Image"><br>
+<br>
+Nice! Closer, but that damn culling...I wish we could get rid of that...<br>
+<br>
+Ah ha! Of course, we have a tool for that too! Please take a look at this, Dolphin VR: <a href="https://github.com/CarlKenner/dolphin" class="postlink">https://github.com/CarlKenner/dolphin</a><br>
+<br>
+Dolphin VR? Why are you linking this? Good question, Me! While Dolphin VR is awesome for playing gamecube/Wii games in full VR (Your mileage may vary there), it also has a few added debugging features that aren't in regular Dolphin, specifically it's debug mode, and a brute forcer.<br>
+<br>
+See, the devs of Dolphin VR ran into the same issues with culling as we do. When you look around with a VR headset in Dolphin, the <em class="text-italics">view</em> is changing, but the <em class="text-italics">in-game camera's operations</em> aren't, at least according to the game they aren't. So, the developer introduced a brute forcer into the program. What this brute forcer does, is it loads a specific save state and references a 'symbol map' that's saved from the debugger. It loads this save state over and over again, and goes through the different hex values that the game's scene is using, and sets their value to either 0 or 1. It's a really dirty way, but often times this is able to find a way to turn off the culling operation within the game entirely! So instead of getting this:<br>
+<br>
+<img src="https://imgur.com/Wvt6zfp.jpg" class="postimage" alt="Image"><br>
+<br>
+We get this!<br>
+<br>
+<img src="https://imgur.com/IoxnT9U.jpg" class="postimage" alt="Image"><br>
+<br>
+Pretty sweet! This is finished up with setting the changed code as an AR (Action Replay) code so that the game can reference it each time. And, there's an entire subreddit dedicated to these codes: <a href="https://www.reddit.com/r/DolphinVRcullin/" class="postlink">https://www.reddit.com/r/DolphinVRcullin/</a><br>
+<br>
+AND, someone has posted culling codes for SSX 3! <a href="https://www.reddit.com/r/DolphinVRcullin/comments/8dkdtk/gcssx_3usa/" class="postlink">https://www.reddit.com/r/DolphinVRculli ... cssx_3usa/</a> Unfortunately, these don't seem to work for me. I'm not sure if that's because they were done with an older version of Dolphin VR and/or game, but we have a method of taking the culling away for our ripping!<br>
+<br>
+For an in-depth guide on how to do this, you can either reference this page, or check out the code block below: (Again, posting as text for posterity sake): <a href="https://forums.oculusvr.com/t5/Games-and-Apps/Dolphin-Emulator-CV1-compatibility/m-p/401451/highlight/true#M34587" class="postlink">https://forums.oculusvr.com/t5/Games-an ... rue#M34587</a><br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Bruteforcing Culling Codes in DolphinVR
+1. OPEN DolphinVR and RUN the game you want to Cull. (Run it with no HMD's running, so DolphinVR runs in 2D mode), Also go to your Documents &gt; Dolphin Emulator &gt; Screenshots folder (or wherever your default screenshots folder is) and DELETE everything you have in there to make things a little simpler later, keep this screenshots folder open.
+
+2. Make sure you have FreeLook enabled and once you get to a point in the game where you are in control (Like a hub world) Hold down the Left and Right mouse buttons over the game window and DRAG your mouse to ROTATE the camera around behind you or to a point where the screen has been culled to black or when you can only see a very small amount of scenery. (You may need to go as far as completely moving the camera to a new position).
+
+3. PAUSE the game, go to the Main Dolphin Window and go to Tools &gt; Debugger, rearrange your windows so you can see everything clearly.
+
+4. (OPTIONAL: I do it anyway because it might make a difference I don't know...) Go to Symbols &gt; Clear Symbols, Click "Yes" on the dialog box, then go to Symbols &gt; Generate Symbol Map.
+
+5. Symbols &gt; Save Symbol Map As... And take note of the game code as this will be the name of the folder generated in the screenshots folder, Click "Save", making sure it is saved in the "Maps" Directory (Alternatively you could just click Symbols &gt; Save Symbol Map, and it will just save without the pop-up "Save As" box)
+
+6. IMPORTANT: BEFORE DOING ANYTHING ELSE!
+Hit SHIFT-F1 to Save State in Slot 1 (OR go to Emulation &gt; Save State &gt; Slot 1) , this will be called by the Bruteforcer as a reference to be used with the .map file, it is VERY IMPORTANT that you DO NOT UNPAUSE THE GAME between saving the .map file and saving to Save Slot 1
+
+7. Hit the STOP button on the emulator and EXIT DolphinVR, Create a shortcut to DolphinVR somewhere, preferably on the Desktop if you haven't got one there already, Right-Click on the Shortcut &gt; Properties, then add the line...
+-bruteforce 0 
+OR
+-bruteforce 1 
+
+...to the end of the "Target:" textbox as shown below. Click Apply and then RUN DolphinVR
+
+(I try to Bruteforce 0 first, then if i don't get any results Ill change it to 1 and do another run of bruteforcing)
+
+8. If everything goes well, DolphinVR should open and start running through the Bruteforcing process automatically, your screen should look similar to what is shown below. Notice that the Screenshots folder now has a file called position.txt and a folder in it.
+
+9. Inside the newly created folder there should be an ever increasing number of screenshots plus an .xml file or two, Right Click anywhere in the folder and Arrange Icons By &gt; Size, making sure that the bigger screenshots are at the top.
+
+As the bruteforcing process is happening you may encounter errors like the one above, this is normal and happens every so often, DolphinVR will almost always crash... but don't worry! the position.txt file saves the number of screenshots it has already saved and continues from where it left off.
+
+If for any reason you want the bruteforcer to start again, delete the position.txt file, more advanced users may want to jump ahead to a certain place in the bruteforcing timeline, you can edit the position file to start from the 2000th screenshot for example.
+
+10. and....WAIT....HOLY SHIT!
+
+While creating this tutorial, I didn't expect to actually find a culling code! WOOOO BONUS! Normally you could expect to be waiting maybe HOURS for a screenshot to pop up that removes culling successfully... just letting you know! :tongue:
+
+So now that we have our screenshot...what the hell do we do with it? Well it is quite simple really, you use this code as a template...
+
+04yyyyyy    6000000x (where x = -bruteforce x, command line)
+04yyyyy(y+4)4E800020
+Where the y's are is the code that was in the name of the screenshot, the second line you need to add 4 in hexadecimal, FOR EXAMPLE: if the top one is 0400000F then the bottom needs to be 04000013, and so on...
+
+Once you code is added... run the game and see how it goes... and for me... it didnt actually go that well... turns out this code is a dud! I'll just have to keep looking!</code></pre></div>
+
+The next hurdle, or brick wall more like it, is render distance. Dolphin can only show so much of the game depending on how the game was coded, so once we're out of that view range, the models seem to disappear. This could possibly be changed with it's own AR code, but if it exists I haven't been able to find it. I've ran both the 0 and 1 bruteforcer for a while and haven't gotten the results I'm looking for, but I'll keep trying!<br>
+<br>
+I also tried a somewhat hybrid of these two methods as well, which is using Dolphin's built in debugging to try and find where the map models are located. There were a few tools needed for this, Dolphin's built in cheat creator, and it's FIFO recorder/player/analyzer.<br>
+<br>
+The cheat creator works much like the brute forcer, it's just far more manual. You give it a memory address range to search, and a value to look for in those addresses, and change the value from 1 to 0 (or 0 to 1) and see what happens. People often use this for infinite money/health/ammo cheats, but it can use any memory address, so there's nothing stopping it from changing anything else. I tried for a bit to play around with the values from the aforementioned culling code for SSX 3, but I wasn't able to get it to work. <br>
+<br>
+Now, the FIFO tool is much much different. For those who are unsure of what FIFO is:<br>
+<br>
+FIFO stands for 'First In First Out'. Put very simply, it's a buffer in the gamecube's RAM that let the CPU and GPU talk to each other, and what allowed the CPU to send commands to the GPU to render your game! (For an in-depth explanation on the Gamecube's architecture, check this: <a href="https://www.copetti.org/writings/consoles/gamecube/" class="postlink">https://www.copetti.org/writings/consoles/gamecube/</a>)<br>
+<br>
+So, Dolphin has a built in tool to analyze this memory buffer, and output exactly what it's doing for each frame that's rendered. You tell it how many frames to record, click record, save the file, then load it up in the analyzer. I did so for a scene (The one I showed above actually) and this was my output: <br>
+<br>
+<img src="https://imgur.com/ko7AnAX.jpg" class="postimage" alt="Image"><br>
+<br>
+I had it analyze 15 frames, but we only really needed one. There was a total of 773 object rendered in the scene, and it has an output for both all of those objects, and some EFB Copies. With the FIFO tool, we can also have it loop a single frame, and then remove/readd the objects in the scene, either one by one or for an entire range. This is how we can find what object is what, and I did just that! For frame 1, this was the list of objects in the scene:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FIFO Analyzer:
+
+0 - 14 - Rider Shadow
+14 - Skybox
+15-31 - Environment Map
+32-256 - Map/World Object
+257 - 275 - Rider
+276 - 290 - Rocks
+291-296 - Rails
+297 - 320 - Trees (Probably Low LOD)
+321 - 324/470/473/475 - Barriers
+325 - 370/405 - 425/450 - 466 - Track Objects (Crowd, stands, etc)
+371 - pebbles/snow clumps
+372 - 396 - Tree Details (Probably Low LOD)
+397 - 404 - Powerups
+426 - 449 - More Trees (Probably High LOD)
+467 - 469/474 - Money
+471 - 472 - Waterfalls
+476 - 480 - Smoke/Clouds
+481 - 482 - Lights
+483 - 767 - Snowflakes
+768 - 769 - Rider Trails
+770 - 772 - Powerup Lights</code></pre></div>
+
+And, when going to the analyzer to reference Object 32:<br>
+<br>
+<img src="https://imgur.com/TvjhWsq.jpg" class="postimage" alt="Image"><br>
+<br>
+Hello vertex and texture mapping information!! To me this seems like a really awesome place to try and fine the specific vertex data for each object/scene to then get them from the game's hex files, but unfortunately, there's no information here on what file they are getting these from.<br>
+<br>
+SO DANG CLOSE! I feel like I'm this close to getting these stinking models, but there's always just one little thing that's stopping me. It's probably just my lack of knowledge of hexadecimal, but I don't know.<br>
+<br>
+This is as far as I've gotten sadly. I've pieced together all of this information over the past 2 days, and I feel like I've gotten a lot farther than most, but I need that last bit of help to get me to the goal, so I'm here!<br>
+<br>
+If anyone can help me get a little farther in any of this, I think that's what would allow us to really crack open these models and get them in the hands of the players. Not that they were meant for that, but hey, the game's almost 20 years old now lol. Thanks for your time!</div>
+
+			
+			
+									
+						<div id='list_thanks182448'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/59703.html" class="username">hoopera</a> for the post: </dt>
+			<dd><span title="Wed Feb 23, 2022 9:55 am"><a href="../Users/75368.html" class="username">Henchman800</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput182448'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p182456" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile182456">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/75368.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=75368_1576848493.png" width="120" height="120" alt="User avatar" /></a>														</div>
+								<a href="../Users/75368.html" class="username">Henchman800</a>							</dt>
+
+						<dd class="profile-rank">mega-veteran<br /><img src="./images/ranks/vip-1.png" alt="mega-veteran" title="mega-veteran" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=75368&amp;sr=posts">308</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Nov 16, 2018 5:00 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="75368"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/75368/true">72 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="75368"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/75368/false">34 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Henchman800">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Henchman800</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=182456" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content182456">
+
+					<h3 >
+						<a href="./viewtopic.php?p=182456#p182456">Re: Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/182456/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=182456" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post182456' href="./viewtopic.php?f=16&amp;p=182456&amp;thanks=182456&amp;to_id=75368&amp;from_id=123876" title="Say Thanks to the author of the post: Henchman800"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=182456#p182456" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/75368.html" class="username">Henchman800</a></strong> &raquo; </span><time datetime="2022-02-23T08:52:38+00:00">Wed Feb 23, 2022 9:52 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Oh my god man!<br>
+Thats some sweet sweet Progress!!<br>
+Theres .mnf .mpf and .mxf ...depending on GameCube, ps2 or Xbox.<br>
+<br>
+But man!<br>
+I Always wanted to do what you Just did Here!!!<br>
+The ssx Community would Love that!<br>
+<br>
+Thanks for your Work in this!</div>
+
+			
+			
+									
+						<div id='list_thanks182456'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/75368.html" class="username">Henchman800</a> for the post: </dt>
+			<dd><span title="Wed Feb 23, 2022 5:07 pm"><a href="../Users/59703.html" class="username">hoopera</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput182456'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p182457" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile182457">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/90253.html" class="username">modeco80</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=90253&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jul 15, 2020 4:04 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="90253"></dd>
+    <dd class="profile-posts" data-user-receive-id="90253"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/90253/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact modeco80">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact modeco80</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=182457" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content182457">
+
+					<h3 >
+						<a href="./viewtopic.php?p=182457#p182457">Re: Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/182457/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=182457" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post182457' href="./viewtopic.php?f=16&amp;p=182457&amp;thanks=182457&amp;to_id=90253&amp;from_id=123876" title="Say Thanks to the author of the post: modeco80"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=182457#p182457" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/90253.html" class="username">modeco80</a></strong> &raquo; </span><time datetime="2022-02-23T08:58:55+00:00">Wed Feb 23, 2022 9:58 am</time>
+			</p>
+			
+			
+			
+			<div class="content">BAM.[x]DB is loaded by the game to provide essential track information (where in the stream to seek, track begin chunks, yada...)<br>
+<br>
+BAM.[x]SB is the actual data that you should shift your attention to, and is essentially formatted like this (loosely following the actual BX code style, at least typenames):<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>struct tBxStreamingFileHeader {
+	uint32_t Magic; // 'CBXS' for a typical file chunk, 'CEND' for the last/ending file chunk
+	uint32_t NextOff; // size in bytes to next tBxStreamingFileHeader
+};
+
+// After this, aligned RefPack (EAC LZSS) compressed data follows
+</code></pre></div>
+
+To make things even "better" (worse), once you decompress all of the files from the stream data, you get a bunch of "interleave" files<br>
+which conform to another data format. Which is:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>struct tBxInterleaveFileHeader {
+	// Retail PS2:
+	// 2 - world models (not beziers)
+	// 3 - unknown
+	// 9 - "Shape" (texture)
+	// 10 - Lightmap (32bpp)
+	// 20 - Audio bank (presumably used to stream in course specific sfx)
+	uint8_t type;
+	uint24_t size; // could also be "next offset". Note that uint24_t is not a real C type, and this is probably a bitfield?
+	
+	uint32_t RID; // resource ID? unknown what this actually means, but the acronym comes up in code
+};
+// file data until next tBxInterleaveFileHeader proceeds...
+</code></pre></div>
+
+I've already written a tool to extract this data (and subsequently uninterleave the decompressed interleave files), but I've only verified its output on PS2 (and I really need to clean it up at some point): <a href="https://github.com/SSXModding/makecbxs" class="postlink">https://github.com/SSXModding/makecbxs</a><br>
+<br>
+Also - just to address it, models using `.m[x]f` (or, .mpf on PS2) as an extension is very unrelated to the PathFinder/SNDPATH_/PATH_ mapfile format, and more a unfortunate collision of extension. Data between the two are completely different.</div>
+
+			
+			
+									
+						<div id='list_thanks182457'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/90253.html" class="username">modeco80</a> for the post: </dt>
+			<dd><span title="Fri Feb 25, 2022 6:11 pm"><a href="../Users/59703.html" class="username">hoopera</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput182457'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;1.72%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 1.72%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p182471" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile182471">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/59703.html" class="username">hoopera</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=59703&amp;sr=posts">6</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Oct 19, 2016 5:18 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="59703"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="59703"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact hoopera">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact hoopera</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=182471" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content182471">
+
+					<h3 >
+						<a href="./viewtopic.php?p=182471#p182471">Re: Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/182471/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=182471" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post182471' href="./viewtopic.php?f=16&amp;p=182471&amp;thanks=182471&amp;to_id=59703&amp;from_id=123876" title="Say Thanks to the author of the post: hoopera"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=182471#p182471" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/59703.html" class="username">hoopera</a></strong> &raquo; </span><time datetime="2022-02-23T14:54:22+00:00">Wed Feb 23, 2022 3:54 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=182457#p182457"><div><cite><a href="../Users/90253.html">modeco80</a> wrote: <a href="./viewtopic.php?p=182457#p182457" data-post-id="182457" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Wed Feb 23, 2022 9:58 am</span></cite>
+BAM.[x]DB is loaded by the game to provide essential track information (where in the stream to seek, track begin chunks, yada...)<br>
+<br>
+BAM.[x]SB is the actual data that you should shift your attention to, and is essentially formatted like this (loosely following the actual BX code style, at least typenames):<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>struct tBxStreamingFileHeader {
+	uint32_t Magic; // 'CBXS' for a typical file chunk, 'CEND' for the last/ending file chunk
+	uint32_t NextOff; // size in bytes to next tBxStreamingFileHeader
+};
+
+// After this, aligned RefPack (EAC LZSS) compressed data follows
+</code></pre></div>
+
+To make things even "better" (worse), once you decompress all of the files from the stream data, you get a bunch of "interleave" files<br>
+which conform to another data format. Which is:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>struct tBxInterleaveFileHeader {
+	// Retail PS2:
+	// 2 - world models (not beziers)
+	// 3 - unknown
+	// 9 - "Shape" (texture)
+	// 10 - Lightmap (32bpp)
+	// 20 - Audio bank (presumably used to stream in course specific sfx)
+	uint8_t type;
+	uint24_t size; // could also be "next offset". Note that uint24_t is not a real C type, and this is probably a bitfield?
+	
+	uint32_t RID; // resource ID? unknown what this actually means, but the acronym comes up in code
+};
+// file data until next tBxInterleaveFileHeader proceeds...
+</code></pre></div>
+
+I've already written a tool to extract this data (and subsequently uninterleave the decompressed interleave files), but I've only verified its output on PS2 (and I really need to clean it up at some point): <a href="https://github.com/SSXModding/makecbxs" class="postlink">https://github.com/SSXModding/makecbxs</a><br>
+<br>
+Also - just to address it, models using `.m[x]f` (or, .mpf on PS2) as an extension is very unrelated to the PathFinder/SNDPATH_/PATH_ mapfile format, and more a unfortunate collision of extension. Data between the two are completely different.
+</div></blockquote>
+
+Oooo nice! That certainly did something! So if what I think is happening is right, these .bin files that are created from it are essentially the different tracks stitched together? Is there any way to read these files or export them to a model besides hex2obj/3d Model Reasearcher? If not, did you happen to know where I could start with finding the vertex and face data?</div>
+
+			
+			
+									
+						<div id='list_thanks182471'>
+</div>
+<div id='div_post_reput182471'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p182472" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile182472">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/59703.html" class="username">hoopera</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=59703&amp;sr=posts">6</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Oct 19, 2016 5:18 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="59703"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="59703"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact hoopera">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact hoopera</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=182472" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content182472">
+
+					<h3 >
+						<a href="./viewtopic.php?p=182472#p182472">Re: Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/182472/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=182472" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post182472' href="./viewtopic.php?f=16&amp;p=182472&amp;thanks=182472&amp;to_id=59703&amp;from_id=123876" title="Say Thanks to the author of the post: hoopera"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=182472#p182472" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/59703.html" class="username">hoopera</a></strong> &raquo; </span><time datetime="2022-02-23T15:35:51+00:00">Wed Feb 23, 2022 4:35 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=182456#p182456"><div><cite><a href="../Users/75368.html">Henchman800</a> wrote: <a href="./viewtopic.php?p=182456#p182456" data-post-id="182456" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Wed Feb 23, 2022 9:52 am</span></cite>
+Oh my god man!<br>
+Thats some sweet sweet Progress!!<br>
+Theres .mnf .mpf and .mxf ...depending on GameCube, ps2 or Xbox.<br>
+<br>
+But man!<br>
+I Always wanted to do what you Just did Here!!!<br>
+The ssx Community would Love that!<br>
+<br>
+Thanks for your Work in this!
+</div></blockquote>
+
+Don't thank me lol, I'm just piecing info together that everyone else already found out <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"></div>
+
+			
+			
+									
+						<div id='list_thanks182472'>
+</div>
+<div id='div_post_reput182472'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p182483" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile182483">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/90253.html" class="username">modeco80</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=90253&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jul 15, 2020 4:04 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="90253"></dd>
+    <dd class="profile-posts" data-user-receive-id="90253"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/90253/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact modeco80">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact modeco80</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=182483" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content182483">
+
+					<h3 >
+						<a href="./viewtopic.php?p=182483#p182483">Re: Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/182483/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=182483" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post182483' href="./viewtopic.php?f=16&amp;p=182483&amp;thanks=182483&amp;to_id=90253&amp;from_id=123876" title="Say Thanks to the author of the post: modeco80"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=182483#p182483" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/90253.html" class="username">modeco80</a></strong> &raquo; </span><time datetime="2022-02-23T21:19:00+00:00">Wed Feb 23, 2022 10:19 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=182471#p182471"><div><cite><a href="../Users/59703.html">hoopera</a> wrote: <a href="./viewtopic.php?p=182471#p182471" data-post-id="182471" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Wed Feb 23, 2022 3:54 pm</span></cite>
+Oooo nice! That certainly did something! So if what I think is happening is right, these .bin files that are created from it are essentially the different tracks stitched together? Is there any way to read these files or export them to a model besides hex2obj/3d Model Reasearcher? If not, did you happen to know where I could start with finding the vertex and face data?
+</div></blockquote>
+
+Each bin file seems to be<br>
+<br>
+- one interleave file for some piece (or all?) textures/lightmaps<br>
+- one interleave file for some piece of track data (models, beziers, Luno script bytecode, audio bank, so on, so forth..)<br>
+<br>
+This data layout seems to be intentional, as they only need to upload (or keep in memory) textures once, whereas for track data they have to load piece by piece.</div>
+
+			
+			
+									
+						<div id='list_thanks182483'>
+</div>
+<div id='div_post_reput182483'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p182512" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile182512">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/59703.html" class="username">hoopera</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=59703&amp;sr=posts">6</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Oct 19, 2016 5:18 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="59703"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="59703"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/59703/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact hoopera">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact hoopera</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=182512" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content182512">
+
+					<h3 >
+						<a href="./viewtopic.php?p=182512#p182512">Re: Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/182512/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=182512" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post182512' href="./viewtopic.php?f=16&amp;p=182512&amp;thanks=182512&amp;to_id=59703&amp;from_id=123876" title="Say Thanks to the author of the post: hoopera"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=182512#p182512" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/59703.html" class="username">hoopera</a></strong> &raquo; </span><time datetime="2022-02-25T18:04:33+00:00">Fri Feb 25, 2022 7:04 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote cite="./viewtopic.php?p=182483#p182483"><div><cite><a href="../Users/90253.html">modeco80</a> wrote: <a href="./viewtopic.php?p=182483#p182483" data-post-id="182483" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Wed Feb 23, 2022 10:19 pm</span></cite>
+<blockquote cite="./viewtopic.php?p=182471#p182471"><div><cite><a href="../Users/59703.html">hoopera</a> wrote: <a href="./viewtopic.php?p=182471#p182471" data-post-id="182471" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><span class="responsive-hide">Wed Feb 23, 2022 3:54 pm</span></cite>
+Oooo nice! That certainly did something! So if what I think is happening is right, these .bin files that are created from it are essentially the different tracks stitched together? Is there any way to read these files or export them to a model besides hex2obj/3d Model Reasearcher? If not, did you happen to know where I could start with finding the vertex and face data?
+</div></blockquote>
+
+Each bin file seems to be<br>
+<br>
+- one interleave file for some piece (or all?) textures/lightmaps<br>
+- one interleave file for some piece of track data (models, beziers, Luno script bytecode, audio bank, so on, so forth..)<br>
+<br>
+This data layout seems to be intentional, as they only need to upload (or keep in memory) textures once, whereas for track data they have to load piece by piece.
+</div></blockquote>
+
+Interesting! I do know that SSX 3 pieces together a track in realtime by streaming different sections of it together, and upon looking at these in HexEdit I can definitely see some good info!<br>
+<br>
+For others viewing the thread, I discussed this a bit more on the SSX community discord, and Modeco80 here was more than helpful! Upon sending me that program of theirs, I was able to extract the bam.xsd to a folder (Yeah .XSD. Though, this tool will work for the .SSB and .GSB versions, which are from the PS2 and Gamecube respectively) and got all of these files and folders!<br>
+<br>
+<img src="https://imgur.com/GCumDf2.jpg" class="postimage" alt="Image"><br>
+<br>
+Going into any of the uninterleaved folders shows this:<br>
+<br>
+<img src="https://imgur.com/fsEl8CL.jpg" class="postimage" alt="Image"><br>
+<br>
+According to Modeco80 and Kris2ffer, these different numbered files correspond to different aspects of the track.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>_2 = Track Model Data
+_3 = Bezier Patch data (SSX 3 uses Bezier Patches to give it's snow a very smooth appearance with very little performance/memory impact. Read more: https://www.gamedeveloper.com/programming/dynamic-level-of-detail-terrain-rendering-with-b-zier-patches)
+_9 = Textures
+_10 = Lightmaps
+_14 = Collision model
+_20 = Most likely music, or data that affects how the music plays. Unsure of what it is exactly.</code></pre></div>
+
+Upon opening the 256_2.bin file for example and aligning the data to 32 columns, this is what I can see in HexEdit:<br>
+<br>
+<img src="https://imgur.com/tt9vgSj.jpg" class="postimage" alt="Image"><br>
+<img src="https://imgur.com/XyD1aLs.jpg" class="postimage" alt="Image"><br>
+<br>
+Now I don't know about you, but looking at these and referencing shakotay2 in his post here: <a href="https://forum.xentax.com/viewtopic.php?t=10894" class="postlink">viewtopic.php?t=10894</a><br>
+<br>
+This looks like vertex and face data! So that's really promising! But there's a bit of an issue. While we <em class="text-italics">should</em> be able to get just the track model somehow, getting the smooth snowy surface is a whole, entirely different bag.<br>
+<br>
+Remember that bezier patch data I referenced above? Well, that's how the game pieces together the track to keep it all smooth, and getting something like a 3D model from that seems to be...very difficult considering how NURBS are interpreted. If that's possible to get from files like this, I have no idea how or where to even start.<br>
+<br>
+But, the snow isn't all that big of a deal to me, really. I kinda just wanted to the track model and the different props and such in the world to mess around with them in 3D programs like Blender or put them in different game engines, or make something cool in like VRChat. At this point though, I'm kinda stuck unfortunately! If anyone's got ideas for where to go, please do let us know!!</div>
+
+			
+			
+									
+						<div id='list_thanks182512'>
+</div>
+<div id='div_post_reput182512'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p187920" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile187920">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/114158.html" class="username">ssxmapper</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=114158&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Oct 24, 2022 1:12 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="114158"></dd>
+    <dd class="profile-posts" data-user-receive-id="114158"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ssxmapper">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ssxmapper</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=187920" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content187920">
+
+					<h3 >
+						<a href="./viewtopic.php?p=187920#p187920">Re: Extracting 3D Map Models from SSX 3</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/187920/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=187920" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post187920' href="./viewtopic.php?f=16&amp;p=187920&amp;thanks=187920&amp;to_id=114158&amp;from_id=123876" title="Say Thanks to the author of the post: ssxmapper"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=187920#p187920" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/114158.html" class="username">ssxmapper</a></strong> &raquo; </span><time datetime="2022-10-24T12:15:45+00:00">Mon Oct 24, 2022 1:15 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br>
+<br>
+I have just figured out how to extract the curved surfaces from the SSX and SSX Tricky maps, so that information may help you with SSX 3. See:<br>
+<a href="https://youtu.be/d3-8wFibjC4" class="postlink">https://youtu.be/d3-8wFibjC4</a><br>
+<a href="https://github.com/SsxMapper/SSXandTrickyMapExtractor" class="postlink">https://github.com/SsxMapper/SSXandTrickyMapExtractor</a><br>
+<br>
+Possibly SSX 3 uses the same format.</div>
+
+			
+			
+									
+						<div id='list_thanks187920'>
+</div>
+<div id='div_post_reput187920'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=25084" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=16&amp;t=25084&amp;watch=topic&amp;start=0&amp;hash=2d5016c0" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=16&amp;t=25084&amp;unwatch=topic&amp;start=0&amp;hash=2d5016c0" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=25084&amp;bookmark=1&amp;hash=2d5016c0" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=25084" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=25084&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=25084">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=16" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “3D/2D models”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a>, <span style="color: #9E8DA7;" class="username-coloured">Google [Bot]</span>, <a href="../Users/123993.html" class="username">zks</a> and 5 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>The Division SDF Archive Format - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=13882">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=f03065a94e53d4183cf1d6f8f99502e7" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="24"><a itemprop="item" href="./viewforum.php?f=24"><span itemprop="name">Game Modding</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="10"><a itemprop="item" href="./viewforum.php?f=10"><span itemprop="name">Game Archive</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./13882.html">The Division SDF Archive Format</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">The Original Forum. Game archives, full of resources. How to open them? Get help here.<br /></div>
+
+	<div class="rules rules-link">
+		<div class="inner">
+
+					<a href="http://forum.xentax.com/viewtopic.php?f=28&amp;t=1270">Forum rules</a>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=13882" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=10&amp;t=13882&amp;watch=topic&amp;start=0&amp;hash=13ef596c" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=10&amp;t=13882&amp;unwatch=topic&amp;start=0&amp;hash=13ef596c" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=13882&amp;bookmark=1&amp;hash=13ef596c" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=13882" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=13882&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="13882" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			138 posts
+							<ul>
+	<li class="dropdown-container dropdown-button-control dropdown-page-jump page-jump">
+		<a class="button button-icon-only dropdown-trigger" href="#" title="Click to jump to page…" role="button"><i class="icon fa-level-down fa-rotate-270" aria-hidden="true"></i><span class="sr-only">Page <strong>1</strong> of <strong>10</strong></span></a>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+				<li>Jump to page:</li>
+				<li class="page-jump-form">
+					<input type="number" name="page-number" min="1" max="999999" title="Enter the page number you wish to go to" class="inputbox tiny" data-per-page="15" data-base-url=".&#x2F;viewtopic.php&#x3F;t&#x3D;13882" data-start-name="start" />
+					<input class="button2" value="Go" type="button" />
+				</li>
+			</ul>
+		</div>
+	</li>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./13882 (1).html" role="button">2</a></li>
+				<li><a class="button" href="./13882 (2).html" role="button">3</a></li>
+				<li><a class="button" href="./13882 (3).html" role="button">4</a></li>
+				<li><a class="button" href="./13882 (4).html" role="button">5</a></li>
+			<li class="ellipsis" role="separator"><span>…</span></li>
+				<li><a class="button" href="./viewtopic.php?t=13882&amp;start=135" role="button">10</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./13882 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p115067" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile115067">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/53982.html" class="username">sgtfrankieboy</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=53982&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Jan 26, 2016 2:11 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="53982"></dd>
+    <dd class="profile-posts" data-user-receive-id="53982"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/53982/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact sgtfrankieboy">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact sgtfrankieboy</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=115067" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content115067">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=115067#p115067">The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/115067/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=115067" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post115067' href="./viewtopic.php?f=10&amp;p=115067&amp;thanks=115067&amp;to_id=53982&amp;from_id=123876" title="Say Thanks to the author of the post: sgtfrankieboy"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=115067#p115067" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/53982.html" class="username">sgtfrankieboy</a></strong> &raquo; </span><time datetime="2016-01-26T11:51:26+00:00">Tue Jan 26, 2016 12:51 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">The Division beta is coming up and I've been looking around the archive format. This is what I've<br>
+discovered at the moment. I'm still looking into it but I'm not very skilled with figuring out <br>
+archive formats. <br>
+<br>
+There are three types of files in the data folder.<br>
+<br>
+<strong class="text-strong">SDFVER</strong><br>
+<br>
+sdfver files are text based files. They contain a numeric key value pair separated by spaces.<br>
+Each pair is for a different section in the sdfdata files (0 = A, 1 = B, 2 = C, etc.)<br>
+The key and value are separated by a colon. Each value consists of 5 numbers divided by a space.<br>
+<br>
+Currently do not know what the numbers mean, I think it has something to do patching / version info.<br>
+<br>
+<strong class="text-strong">SDFTOC</strong><br>
+<br>
+sdftoc files are binary based files with the header magic of "WEST". All sdftoc files have a separator(?).<br>
+The separator starts with "massive " and end with "ubisoft " (spaces being 0x00) in between there are 20<br>
+random characters, this separator is repeated multiple times in a file, and is always at the beginning<br>
+of the file at offset 0x1C and at the very end of the file.<br>
+<br>
+Looking at the name I'm assuming the sdftoc files are Table of Content files, the actual content isn't<br>
+readable directly.<br>
+<br>
+<strong class="text-strong">SDFDATA</strong><br>
+<br>
+sdfdata files are also in a binary format and have the header magic of "BERG". They have the same separator<br>
+as sdftoc files but starting separator is at offset 0x08 and also end with it.<br>
+<br>
+I have come across sdfdata files that have plain text in them and bnk files.<br>
+<br>
+A lot of the sdfdata files only contain the word "dummy".<br>
+<br>
+<strong class="text-strong">Other Observations</strong><br>
+<br>
+Looking at the data folders, there are two "sdf" and "sdf_streaming". <br>
+<br>
+The sdf folder contains most of the game data and is about 27GB in size for the PC Beta.<br>
+In the folder is a single sdftoc and sdfver file both named "sdf". There are 2700 sdfdata files.<br>
+Named "sdf-{0}-{1}.sdfdata". {0} = A, B, or C each section is 1000 files large. {1} = 0000-2699<br>
+<br>
+The sdf_streaming data contains a folder for nyc_manhatten with a lot <br>
+of tile folders and a global folder each of these folders contain a data folder with the previous metioned<br>
+sdf data structure. There is also a "tileconfig.txt" file which contains a JSON like structure with the following <br>
+properties "hasGlobal", "tileSize", and "tiles" which is an array with three numeric values per item.<br>
+<br>
+I have a high feeling this data structure is meant to be mounted similar to a hard drive.</div>
+
+			
+			
+									
+						<div id='list_thanks115067'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/53982.html" class="username">sgtfrankieboy</a> for the post (total 2):</dt>
+			<dd><span title="Mon Feb 22, 2016 8:33 am"><a href="../Users/54598.html" class="username">wantoosree</a></span>, <span title="Tue Oct 17, 2017 5:49 pm"><a href="../Users/66589.html" class="username">wlscks7</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput115067'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;3.45%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 3.45%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p115405" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile115405">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/42594.html" class="username">d875j</a>							</dt>
+
+						<dd class="profile-rank">advanced</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=42594&amp;sr=posts">52</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Jun 17, 2012 3:32 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="42594"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/42594/true">4 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="42594"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/42594/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact d875j">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact d875j</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=115405" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content115405">
+
+					<h3 >
+						<a href="./viewtopic.php?p=115405#p115405">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/115405/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=115405" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post115405' href="./viewtopic.php?f=10&amp;p=115405&amp;thanks=115405&amp;to_id=42594&amp;from_id=123876" title="Say Thanks to the author of the post: d875j"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=115405#p115405" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/42594.html" class="username">d875j</a></strong> &raquo; </span><time datetime="2016-02-03T13:31:23+00:00">Wed Feb 03, 2016 2:31 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Anything new on this?</div>
+
+			
+			
+									
+						<div id='list_thanks115405'>
+</div>
+<div id='div_post_reput115405'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p115432" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile115432">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54193.html" class="username">bulihack</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54193&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Feb 03, 2016 10:06 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54193"></dd>
+    <dd class="profile-posts" data-user-receive-id="54193"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/54193/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bulihack">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bulihack</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=115432" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content115432">
+
+					<h3 >
+						<a href="./viewtopic.php?p=115432#p115432">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/115432/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=115432" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post115432' href="./viewtopic.php?f=10&amp;p=115432&amp;thanks=115432&amp;to_id=54193&amp;from_id=123876" title="Say Thanks to the author of the post: bulihack"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=115432#p115432" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54193.html" class="username">bulihack</a></strong> &raquo; </span><time datetime="2016-02-03T22:01:35+00:00">Wed Feb 03, 2016 11:01 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I hope i can extend the great and investigative post of <strong class="text-strong">sgtfrankieboy </strong> with some further notes.<br>
+<br>
+My primary interest in this content was the audio/music so i did experiments with the resources as focusing on this particular type of content. <br>
+About 260+ of the sdfdata resource files seems to contain both <strong class="text-strong">Audiokinetic Wwise RIFF Vorbis</strong> and  <a href="http://wiki.xentax.com/index.php/Wwise_SoundBank_%28*.bnk%29" class="postlink">Wwise_SoundBank</a> files as embedded content.<br>
+<br>
+The wwise audio files with <em class="text-italics">RIFF/Wave headers</em> easy enough to split out into individual files using regular splitter tools with header management (<strong class="text-strong">vgmtoolbox </strong>did a great job on this). The wave headers were "usual" and a very few of them length were illegal causing the splitter to extract multiple wave headers into one file (this only a few files, compared to the some*10k audio files it found and saved properly). Extracting the actual bnk files and using <strong class="text-strong">bnkextr</strong> might help to get the individual files properly - not tested so far. <br>
+<br>
+Regardless, the <strong class="text-strong">ww2ogg </strong>has done a nice job using the <strong class="text-strong">--pcb packed_codebooks_aoTuV_603.bin</strong> switch, then <strong class="text-strong">revorb</strong>to do the polishing jobs. The ogg files are coming in mono/stereo/surround with VBR and 48khz sample rate. <br>
+<br>
+The music content is just perfect for my taste i made up some playlists for personal joy. All the music is in stereo format, i found no evidence of 5.1 version of any of them. Ambiences are mostly 6 channel ogg files, but stereo and mono are happens sometimes too. Looped music content is very usual, that most likely helps the cinematic experience in the gameplay for sure.<br>
+<br>
+Fun-facts, that some of the dialogues (which was never actually the part of the beta gameplay) are already "here" (spoiler alert heh), and a few lines are text-to-read voice recoded for now. I also found one particular speech line that exists both t2r and real voice actor versions, which (i'm speculate to) all indicates the packages maybe not entirely polished or simply rolling forward without cleaning old/unused content, and no replace will occure in later patches either. However, about 25% of the contents are happens to be binary-duplicates (sometimes more than one duplicate in different sdfdata files) and sometimes alternative versions of a given content (music/speech etc) also occures, that strengthens my suspicions about the largely unpolished packages, and may result in duplicates in other contents (3d models, textures etc) too as well. Such a waste of hdd space.<br>
+<br>
+As a side note, the extracted ogg audio files were always complete and i did not hit missing file ends, which indicates (the high possibility of) that the sdfdata files are always complete. This of course doesn't goes against that any/all of the sdfdata contents would be part of a huge virtual disk file. I also speculate that the sdf_streaming data will most likely be (as the folder structure also indicates) the sliced up open-world model w/o the textures, which helps the snowdrop engine to organize and stream in/out far-parts of the environment with the given lod requirements.<br>
+<br>
+I wish the bests for anyone up to the challenge to decyphering the resource format, and i sure hope this bit of information will also prove to be useful in the process.<br>
+ <img class="smilies" src="./images/smilies/%5Bcolon%5Dup.gif" width="18" height="21" alt=":up:" title="Thumbs up"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/54193.html" class="username">bulihack</a> on Fri Feb 05, 2016 7:01 am, edited 1 time in total.
+									</div>
+			
+						<div id='list_thanks115432'>
+	<div class="notice">
+		<dl>
+			
+			<dt>These users thanked the author <a href="../Users/54193.html" class="username">bulihack</a> for the post (total 2):</dt>
+			<dd><span title="Mon Feb 22, 2016 8:33 am"><a href="../Users/54598.html" class="username">wantoosree</a></span>, <span title="Fri Mar 11, 2016 3:18 am"><a href="../Users/54950.html" class="username">tisnman</a></span></dd>
+		</dl>
+	</div>
+</div>
+<div id='div_post_reput115432'>
+	<div class="notice">
+		<dl>
+			<dt class="small"><strong>Rating:</strong>&nbsp;3.45%</dt>
+			<dd>
+						<div style="width: 150px; height: 15px;" class="thanks_reput_image_back"><div style="height: 15px; width: 3.45%;" class="thanks_reput_image"></div></div>&nbsp;
+						</dd>
+		</dl>
+	</div>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p115480" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile115480">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54215.html" class="username">redspike474</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54215&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Feb 04, 2016 7:24 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54215"></dd>
+    <dd class="profile-posts" data-user-receive-id="54215"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact redspike474">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact redspike474</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=115480" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content115480">
+
+					<h3 >
+						<a href="./viewtopic.php?p=115480#p115480">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/115480/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=115480" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post115480' href="./viewtopic.php?f=10&amp;p=115480&amp;thanks=115480&amp;to_id=54215&amp;from_id=123876" title="Say Thanks to the author of the post: redspike474"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=115480#p115480" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54215.html" class="username">redspike474</a></strong> &raquo; </span><time datetime="2016-02-04T18:27:54+00:00">Thu Feb 04, 2016 7:27 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">This page here<a href="http://zenhax.com/viewtopic.php?t=2072" class="postlink">http://zenhax.com/viewtopic.php?t=2072</a> details how to dump everything from the archives,<br>
+But that method produces thousands and thousands of unnamed files which makes finding anything specific pretty hard.<br>
+<br>
+Good news is it seems everything is pretty much regular formats, xml, lua, .dat, dds, and the raw shader sources are there aswell.<br>
+<br>
+If someone could make a tool that dumps everything with the correct folder structure and filenames... that would be great!</div>
+
+			
+			
+									
+						<div id='list_thanks115480'>
+</div>
+<div id='div_post_reput115480'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p115507" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile115507">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54193.html" class="username">bulihack</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54193&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Feb 03, 2016 10:06 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54193"></dd>
+    <dd class="profile-posts" data-user-receive-id="54193"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/54193/false">2 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact bulihack">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact bulihack</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=115507" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content115507">
+
+					<h3 >
+						<a href="./viewtopic.php?p=115507#p115507">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/115507/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=115507" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post115507' href="./viewtopic.php?f=10&amp;p=115507&amp;thanks=115507&amp;to_id=54193&amp;from_id=123876" title="Say Thanks to the author of the post: bulihack"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=115507#p115507" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54193.html" class="username">bulihack</a></strong> &raquo; </span><time datetime="2016-02-05T06:23:09+00:00">Fri Feb 05, 2016 7:23 am</time>
+			</p>
+			
+			
+			
+			<div class="content">offzip does indeed extract some content but it's a hit and miss. ran trhu a few audio filled sdfdata files but all i got was junk instead of wem/bnk. this is actually the expected result since it indicates that some parts are zip'ed while others are uncompressed data streams.<br>
+<br>
+i also have tested the sdf/../sdf.sdftoc file with the offzip tool and it quickly revealed that the table of contents is actually there in a ziped format, but the unpack had a broken result, where only partial filenames can be human-readed in the output stream. this indicates that either the ziped stream is malformed, the offzip is broken, the inflated/deflated stream is encrypted or the zip algorithm is altered which makes it harder to get the proper index file out of the stream. Anyway, this index file seems to contain all filenames embeded in the /sdf file resource files which have to be used to recreate the folder structure. the same applies to the .sdftoc files in the sdf_streaming folders too.</div>
+
+			
+			
+									
+						<div id='list_thanks115507'>
+</div>
+<div id='div_post_reput115507'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116205" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116205">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54598.html" class="username">wantoosree</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54598&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 22, 2016 8:04 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54598"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/54598/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="54598"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact wantoosree">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact wantoosree</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116205" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116205">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116205#p116205">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116205/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116205" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116205' href="./viewtopic.php?f=10&amp;p=116205&amp;thanks=116205&amp;to_id=54598&amp;from_id=123876" title="Say Thanks to the author of the post: wantoosree"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116205#p116205" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54598.html" class="username">wantoosree</a></strong> &raquo; </span><time datetime="2016-02-22T07:11:34+00:00">Mon Feb 22, 2016 8:11 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Has anyone made any progress on recreating the file structures? I've matched a few files up based on their association with other files, but thats about it.<br>
+<br>
+I've also been unable to find extract the image data, both the pngs and the sprite sheets. This is my first time working with offzip so I don't know whether or not it outputs png from the extracted data but none of the files were extracted as png. I also haven't been able to identify any by the file signature.</div>
+
+			
+			
+									
+						<div id='list_thanks116205'>
+</div>
+<div id='div_post_reput116205'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116220" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116220">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/29080.html" style="color: #00AA00;" class="username-coloured">Gh0stBlade</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=29080&amp;sr=posts">719</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jul 05, 2010 8:55 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="29080"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29080/true">20 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="29080"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29080/false">496 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Gh0stBlade">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Gh0stBlade</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116220" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116220">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116220#p116220">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116220/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116220" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116220' href="./viewtopic.php?f=10&amp;p=116220&amp;thanks=116220&amp;to_id=29080&amp;from_id=123876" title="Say Thanks to the author of the post: Gh0stBlade"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116220#p116220" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/29080.html" style="color: #00AA00;" class="username-coloured">Gh0stBlade</a></strong> &raquo; </span><time datetime="2016-02-22T13:02:10+00:00">Mon Feb 22, 2016 2:02 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">I took a look at the SDF format a while ago. It is pretty complex at the moment. Right now, the TOC files need to be decrypted, that's most likely why nobody has written an unpacker because the TOC seems to be obfuscated/encrypted.</div>
+
+			
+			
+									
+						<div id='list_thanks116220'>
+</div>
+<div id='div_post_reput116220'>
+</div>
+
+							<div id="sig116220" class="signature"><strong class="text-strong"><span style="color:red">Click the thanks button if I helped!</span></strong></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116335" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116335">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/43713.html" class="username">Sir Kane</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43713&amp;sr=posts">104</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 06, 2012 4:14 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="43713"></dd>
+    <dd class="profile-posts" data-user-receive-id="43713"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43713/false">96 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sir Kane">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sir Kane</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116335" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116335">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116335#p116335">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116335/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116335" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116335' href="./viewtopic.php?f=10&amp;p=116335&amp;thanks=116335&amp;to_id=43713&amp;from_id=123876" title="Say Thanks to the author of the post: Sir Kane"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116335#p116335" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43713.html" class="username">Sir Kane</a></strong> &raquo; </span><time datetime="2016-02-25T21:38:18+00:00">Thu Feb 25, 2016 10:38 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">There's no encryption/obfuscation going on in the TOC file.</div>
+
+			
+			
+									
+						<div id='list_thanks116335'>
+</div>
+<div id='div_post_reput116335'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116336" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116336">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/29080.html" style="color: #00AA00;" class="username-coloured">Gh0stBlade</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=29080&amp;sr=posts">719</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jul 05, 2010 8:55 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="29080"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29080/true">20 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="29080"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29080/false">496 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Gh0stBlade">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Gh0stBlade</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116336" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116336">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116336#p116336">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116336/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116336" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116336' href="./viewtopic.php?f=10&amp;p=116336&amp;thanks=116336&amp;to_id=29080&amp;from_id=123876" title="Say Thanks to the author of the post: Gh0stBlade"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116336#p116336" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/29080.html" style="color: #00AA00;" class="username-coloured">Gh0stBlade</a></strong> &raquo; </span><time datetime="2016-02-25T21:43:39+00:00">Thu Feb 25, 2016 10:43 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Sir Kane wrote:</cite>There's no encryption/obfuscation going on in the TOC file.</div></blockquote>
+
+Then what's this block of data?  <img class="smilies" src="./images/smilies/%28%5Bcolon%5D.gif" width="15" height="15" alt="(:" title="reverse smiley"> <br>
+<br>
+<img src="http://i.imgur.com/hyWqaWE.png" class="postimage" alt="Image"></div>
+
+			
+			
+									
+						<div id='list_thanks116336'>
+</div>
+<div id='div_post_reput116336'>
+</div>
+
+							<div id="sig116336" class="signature"><strong class="text-strong"><span style="color:red">Click the thanks button if I helped!</span></strong></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116375" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116375">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54705.html" class="username">Scrapz</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54705&amp;sr=posts">1</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Feb 27, 2016 2:40 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54705"></dd>
+    <dd class="profile-posts" data-user-receive-id="54705"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Scrapz">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Scrapz</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116375" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116375">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116375#p116375">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116375/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116375" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116375' href="./viewtopic.php?f=10&amp;p=116375&amp;thanks=116375&amp;to_id=54705&amp;from_id=123876" title="Say Thanks to the author of the post: Scrapz"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116375#p116375" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54705.html" class="username">Scrapz</a></strong> &raquo; </span><time datetime="2016-02-27T01:44:04+00:00">Sat Feb 27, 2016 2:44 am</time>
+			</p>
+			
+			
+			
+			<div class="content">offzip takes care of that<br>
+<br>
+<img src="https://i.imgur.com/fgMWVy7.png" class="postimage" alt="Image"></div>
+
+			
+			
+									
+						<div id='list_thanks116375'>
+</div>
+<div id='div_post_reput116375'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116377" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116377">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/29080.html" style="color: #00AA00;" class="username-coloured">Gh0stBlade</a>							</dt>
+
+						<dd class="profile-rank">Moderator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=29080&amp;sr=posts">719</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jul 05, 2010 8:55 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="29080"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29080/true">20 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="29080"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/29080/false">496 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Gh0stBlade">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Gh0stBlade</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116377" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116377">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116377#p116377">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116377/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116377" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116377' href="./viewtopic.php?f=10&amp;p=116377&amp;thanks=116377&amp;to_id=29080&amp;from_id=123876" title="Say Thanks to the author of the post: Gh0stBlade"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116377#p116377" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/29080.html" style="color: #00AA00;" class="username-coloured">Gh0stBlade</a></strong> &raquo; </span><time datetime="2016-02-27T02:23:25+00:00">Sat Feb 27, 2016 3:23 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Scrapz wrote:</cite>offzip takes care of that<br>
+<br>
+<img src="https://i.imgur.com/fgMWVy7.png" class="postimage" alt="Image"></div></blockquote>
+
+Actually, no it <strong class="text-strong">doesn't</strong> because that block I highlighted is <strong class="text-strong">NOT</strong> zlib compressed data.  <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+<br>
+The problem here is figuring out how to extract files <strong class="text-strong">properly</strong> without offzip. It's an interesting file format, I've not seen one like this yet. But I'm fairly certain some information is missing in order to unpack the files properly like the offsets and sizes of the data.</div>
+
+			
+			
+									
+						<div id='list_thanks116377'>
+</div>
+<div id='div_post_reput116377'>
+</div>
+
+							<div id="sig116377" class="signature"><strong class="text-strong"><span style="color:red">Click the thanks button if I helped!</span></strong></div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116392" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116392">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/43713.html" class="username">Sir Kane</a>							</dt>
+
+						<dd class="profile-rank">veteran</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=43713&amp;sr=posts">104</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 06, 2012 4:14 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="43713"></dd>
+    <dd class="profile-posts" data-user-receive-id="43713"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/43713/false">96 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Sir Kane">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Sir Kane</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116392" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116392">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116392#p116392">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116392/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116392" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116392' href="./viewtopic.php?f=10&amp;p=116392&amp;thanks=116392&amp;to_id=43713&amp;from_id=123876" title="Say Thanks to the author of the post: Sir Kane"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116392#p116392" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/43713.html" class="username">Sir Kane</a></strong> &raquo; </span><time datetime="2016-02-27T15:38:21+00:00">Sat Feb 27, 2016 4:38 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Names, offsets, sdfdata indices and all that are in the TOC file's zlib compressed chunk. That 0x140 bytes block is probably some signature or something like that.</div>
+
+			
+			
+									
+						<div id='list_thanks116392'>
+</div>
+<div id='div_post_reput116392'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116501" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116501">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54805.html" class="username">lunger</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54805&amp;sr=posts">7</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 02, 2016 8:09 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54805"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/54805/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="54805"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/54805/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact lunger">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact lunger</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116501" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116501">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116501#p116501">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116501/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116501" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116501' href="./viewtopic.php?f=10&amp;p=116501&amp;thanks=116501&amp;to_id=54805&amp;from_id=123876" title="Say Thanks to the author of the post: lunger"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116501#p116501" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54805.html" class="username">lunger</a></strong> &raquo; </span><time datetime="2016-03-02T19:12:47+00:00">Wed Mar 02, 2016 8:12 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Sir Kane wrote:</cite>Names, offsets, sdfdata indices and all that are in the TOC file's zlib compressed chunk. That 0x140 bytes block is probably some signature or something like that.</div></blockquote>
+
+I wasn't able to get clean enough data to determine that, unless I am not viewing it properly... I used offzip to unzip the sdftoc. Then I opened the single dat file with HxD to view it. I see patterns, but also see data that looks fragmented. Maybe HxD isn't the best viewer for the content.<br>
+<br>
+Example pattern:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code> ®..1.. ..á..C......_discover.mmissionB.
+ ®..1'.—.=ã..C......eventtemplate.mmissionB.
+ ®..1å.š.Ôä..C.....uO-£..o_verticalslice_sÿ,£.p ,£.cw,£..bar.mmissionB. 
+</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks116501'>
+</div>
+<div id='div_post_reput116501'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116505" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116505">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54805.html" class="username">lunger</a>							</dt>
+
+						<dd class="profile-rank">ultra-n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54805&amp;sr=posts">7</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 02, 2016 8:09 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54805"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/54805/true">2 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="54805"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/54805/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact lunger">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact lunger</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116505" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116505">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116505#p116505">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116505/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116505" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116505' href="./viewtopic.php?f=10&amp;p=116505&amp;thanks=116505&amp;to_id=54805&amp;from_id=123876" title="Say Thanks to the author of the post: lunger"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116505#p116505" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54805.html" class="username">lunger</a></strong> &raquo; </span><time datetime="2016-03-02T21:59:15+00:00">Wed Mar 02, 2016 10:59 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">After a little more digging, it appears that there is a more specific pattern at play.<br>
+<br>
+In hex:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>42 __ __ AE 1E 00 __
+</code></pre></div>
+
+The 42 is what generates the ASCII 'B' at the end of every visible path. 1E is technically considered a Record Separator. Since AE and 1E are always paired, I am assuming that they symbolize the termination of a record.<br>
+<br>
+So a regex pattern for a record match with two sub matches might be:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>(([0-9A-F]+)42([0-9A-F]{4}))AE1E
+</code></pre></div></div>
+
+			
+			
+									
+						<div id='list_thanks116505'>
+</div>
+<div id='div_post_reput116505'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p116653" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile116653">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/54215.html" class="username">redspike474</a>							</dt>
+
+						<dd class="profile-rank">n00b</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=54215&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Feb 04, 2016 7:24 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="54215"></dd>
+    <dd class="profile-posts" data-user-receive-id="54215"></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact redspike474">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact redspike474</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=116653" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content116653">
+
+					<h3 >
+						<a href="./viewtopic.php?p=116653#p116653">Re: The Division SDF Archive Format</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/116653/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=116653" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post116653' href="./viewtopic.php?f=10&amp;p=116653&amp;thanks=116653&amp;to_id=54215&amp;from_id=123876" title="Say Thanks to the author of the post: redspike474"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=116653#p116653" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/54215.html" class="username">redspike474</a></strong> &raquo; </span><time datetime="2016-03-08T13:04:25+00:00">Tue Mar 08, 2016 2:04 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></div>
+
+			
+			
+													<div class="notice">
+					Last edited by <a href="../Users/54215.html" class="username">redspike474</a> on Thu Mar 24, 2016 7:35 pm, edited 1 time in total.
+									</div>
+			
+						<div id='list_thanks116653'>
+</div>
+<div id='div_post_reput116653'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=13882" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=10&amp;t=13882&amp;watch=topic&amp;start=0&amp;hash=13ef596c" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=10&amp;t=13882&amp;unwatch=topic&amp;start=0&amp;hash=13ef596c" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=13882&amp;bookmark=1&amp;hash=13ef596c" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=13882" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=13882&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=13882">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			138 posts
+							<ul>
+	<li class="dropdown-container dropdown-button-control dropdown-page-jump page-jump">
+		<a class="button button-icon-only dropdown-trigger" href="#" title="Click to jump to page…" role="button"><i class="icon fa-level-down fa-rotate-270" aria-hidden="true"></i><span class="sr-only">Page <strong>1</strong> of <strong>10</strong></span></a>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+				<li>Jump to page:</li>
+				<li class="page-jump-form">
+					<input type="number" name="page-number" min="1" max="999999" title="Enter the page number you wish to go to" class="inputbox tiny" data-per-page="15" data-base-url=".&#x2F;viewtopic.php&#x3F;t&#x3D;13882" data-start-name="start" />
+					<input class="button2" value="Go" type="button" />
+				</li>
+			</ul>
+		</div>
+	</li>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./13882 (1).html" role="button">2</a></li>
+				<li><a class="button" href="./13882 (2).html" role="button">3</a></li>
+				<li><a class="button" href="./13882 (3).html" role="button">4</a></li>
+				<li><a class="button" href="./13882 (4).html" role="button">5</a></li>
+			<li class="ellipsis" role="separator"><span>…</span></li>
+				<li><a class="button" href="./viewtopic.php?t=13882&amp;start=135" role="button">10</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./13882 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=10" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Game Archive”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 11 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>

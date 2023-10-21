@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Setting up secure FTP server - need advice. - XeNTaX</title>
+
+
+	<link rel="canonical" href="https://forum.xentax.com/viewtopic.php?t=1860">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="../../Source/assets/css/font-awesome.min.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/stylesheet.css?assets_version=11" rel="stylesheet">
+<link href="../../Source/styles/prosilver/theme/en/stylesheet.css?assets_version=11" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="../../Source/styles/prosilver/theme/tweaks.css?assets_version=11" rel="stylesheet">
+<![endif]-->
+
+
+<link href="../../Source/ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/hifikabin/headerbanner/styles/prosilver/theme/headerbanner_background.css?assets_version=11" rel="stylesheet" media="screen" />
+<link href="../../Source/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=11" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="../Navigation/index.html" title="Board index">
+					<span class="site_logo"></span>
+				</a>
+				<h1>XeNTaX</h1>
+				<p>Game Research Forum</p>
+				<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+			</div>
+
+									<div class="banner-header">
+	<div style="position:absolute; z-index:-100;">
+	<h1>XeNTaX</h1>
+	<p>Game Research Forum</p>
+	<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+</div>
+<div class="header-banner">
+	<a href="../Navigation/index.html" title="Board index"><img class="header-banner" style="border-radius:0px; width:1500px;" src="../Source/images/gameresforum_logo_1.png" alt="Board index" ></a>
+</div>
+</div>
+
+			</div>
+					</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./search.php?search_id=egosearch" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Your posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=newposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>New posts</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./search.php?search_id=unreadposts" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-red" aria-hidden="true"></i><span>Unread posts</span>
+								</a>
+							</li>
+													<li>
+								<a href="./search.php?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-gray" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="./search.php?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file-o fa-fw icon-blue" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="./search.php" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+											<li class="separator"></li>
+													<li>
+								<a href="./memberlist.php" role="menuitem">
+									<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+								</a>
+							</li>
+																			<li>
+								<a href="./memberlist.php?mode=team" role="menuitem">
+									<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+								</a>
+							</li>
+																<li class="separator"></li>
+
+						<li>
+		<a href="/app.php/toplist"  role="menuitem">
+			<i class="icon fa-star-o fa-fw" aria-hidden="true"></i><span>Posts toplist</span>
+		</a>
+	</li>
+	<li>
+		<a href="/app.php/thankslist"  role="menuitem">
+			<i class="icon fa-thumbs-o-up fa-fw" aria-hidden="true"></i><span>Thanks list</span>
+		</a>
+	</li>
+				</ul>
+			</div>
+		</li>
+
+				<li data-last-responsive="true">
+			<a href="/app.php/help/faq" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+						
+					<li id="username_logged_in" class="rightside " data-skip-responsive="true">
+						<div class="header-profile dropdown-container">
+				<a href="./ucp.php" class="header-avatar dropdown-trigger"> <span class="username">escape209</span></a>
+				<div class="dropdown">
+					<div class="pointer"><div class="pointer-inner"></div></div>
+					<ul class="dropdown-contents" role="menu">
+						
+					
+						<li>
+							<a href="./ucp.php" title="User Control Panel" role="menuitem">
+								<i class="icon fa-sliders fa-fw" aria-hidden="true"></i><span>User Control Panel</span>
+							</a>
+						</li>
+													<li>
+								<a href="../Users/123876.html" title="Profile" role="menuitem">
+									<i class="icon fa-user fa-fw" aria-hidden="true"></i><span>Profile</span>
+								</a>
+							</li>
+						
+						
+						<li class="separator"></li>
+						<li>
+							<a href="./ucp.php?mode=logout&amp;sid=9c649842ae48bcd04444257bd025d4a2" title="Logout" accesskey="x" role="menuitem">
+								<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Logout</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+					</li>
+					<li class="rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=pm&amp;folder=inbox" role="menuitem">
+					<i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>Private messages </span><strong class="badge hidden">0</strong>
+				</a>
+			</li>
+							<li class="dropdown-container dropdown-right rightside" data-skip-responsive="true">
+				<a href="./ucp.php?i=ucp_notifications" id="notification_list_button" class="dropdown-trigger">
+					<i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>Notifications </span><strong class="badge hidden">0</strong>
+				</a>
+				<div id="notification_list" class="dropdown dropdown-extended notification_list">
+	<div class="pointer"><div class="pointer-inner"></div></div>
+	<div class="dropdown-contents">
+		<div class="header">
+			Notifications
+			<span class="header_settings">
+				<a href="./ucp.php?i=ucp_notifications&amp;mode=notification_options">Settings</a>
+							</span>
+		</div>
+
+		<ul>
+							<li class="no_notifications">
+					You have no notifications
+				</li>
+								</ul>
+
+		<div class="footer">
+			<a href="./ucp.php?i=ucp_notifications"><span>See All</span></a>
+		</div>
+	</div>
+</div>
+			</li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+				
+		
+		<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			
+							<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="../Navigation/index.html" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+
+											
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="25"><a itemprop="item" href="./viewforum.php?f=25"><span itemprop="name">MultiEx Commander</span></a><meta itemprop="position" content="2" /></span>
+															
+								<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="11"><a itemprop="item" href="./viewforum.php?f=11"><span itemprop="name">Miscellaneous</span></a><meta itemprop="position" content="3" /></span>
+							
+					</li>
+
+		<li class="rightside responsive-search">
+	<a href="./search.php" title="View the advanced search options" role="menuitem">
+	<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+	</a>
+</li>
+
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+					<div id="phpbb_announcement" style="background-color:#d9efff">
+				<div><strong class="text-strong"><span style="color:#00BF00"><span style="font-size:120%;line-height:116%">Important information: this site is currently <a href="https://forum.xentax.com/viewtopic.php?t=27281" class="postlink">scheduled to go offline indefinitely</a> by end of the year. </span></span></strong></div>
+	</div>
+
+<h2 class="topic-title"><a href="./1860.html">Setting up secure FTP server - need advice.</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Got a comment, question or silly remark that doesn't fit any of the other MultiEx fora? This is the place to post 'em.<br /></div>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="./posting.php?mode=reply&amp;t=1860" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=11&amp;t=1860&amp;watch=topic&amp;start=0&amp;hash=d757f2ff" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=11&amp;t=1860&amp;unwatch=topic&amp;start=0&amp;hash=d757f2ff" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=1860&amp;bookmark=1&amp;hash=d757f2ff" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=1860" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=1860&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="./search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="./search.php" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="1860" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			18 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./1860 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./1860 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p14970" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14970">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/968.html" class="username">NinjaMuffin</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=968&amp;sr=posts">65</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 07, 2006 4:52 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="968"></dd>
+    <dd class="profile-posts" data-user-receive-id="968"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/968/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact NinjaMuffin">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact NinjaMuffin</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=14970" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14970">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=14970#p14970">Setting up secure FTP server - need advice.</a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/14970/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=14970" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post14970' href="./viewtopic.php?f=11&amp;p=14970&amp;thanks=14970&amp;to_id=968&amp;from_id=123876" title="Say Thanks to the author of the post: NinjaMuffin"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=14970#p14970" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/968.html" class="username">NinjaMuffin</a></strong> &raquo; </span><time datetime="2006-04-21T09:39:30+00:00">Fri Apr 21, 2006 10:39 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Hi all <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"><br>
+<br>
+I need to setup a secure FTP server and I was thinking that there might be people on this forum who know about these sort of things...so here I am.<br>
+<br>
+Basically, I need recommendations on what server program to use and possible pros and cons. Also, suggestions on a fast and good router well fit for this purpose would be great.<br>
+<br>
+It needs to be as secure and fast as possible so with that in mind, what do you suggest? Any help on this would be greatly appreciated.<br>
+<br>
+Thank's in advance<br>
+<br>
+Cheers <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"> <br>
+<br>
+N</div>
+
+			
+			
+									
+						<div id='list_thanks14970'>
+</div>
+<div id='div_post_reput14970'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p14985" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14985">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/332.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=332_1356602329.jpg" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="../Users/332.html" style="color: #00AA00;" class="username-coloured">Dinoguy1000</a>							</dt>
+
+						<dd class="profile-rank">Site Admin</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=332&amp;sr=posts">786</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Sep 13, 2004 1:55 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="332"><strong>Has&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/332/true">154 times</a></dd>
+    <dd class="profile-posts" data-user-receive-id="332"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/332/false">163 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Dinoguy1000">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Dinoguy1000</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=14985" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14985">
+
+					<h3 >
+						<a href="./viewtopic.php?p=14985#p14985"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/14985/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=14985" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post14985' href="./viewtopic.php?f=11&amp;p=14985&amp;thanks=14985&amp;to_id=332&amp;from_id=123876" title="Say Thanks to the author of the post: Dinoguy1000"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=14985#p14985" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/332.html" style="color: #00AA00;" class="username-coloured">Dinoguy1000</a></strong> &raquo; </span><time datetime="2006-04-21T12:46:22+00:00">Fri Apr 21, 2006 1:46 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Well, I can't help you thee, but I am curious... What do you need it for? Perhaps a game? I'm not trying to be nosy or anything... <img class="smilies" src="./images/smilies/%5Bcolon%5D%29.gif" width="15" height="15" alt=":)" title="Smile"></div>
+
+			
+			
+									
+						<div id='list_thanks14985'>
+</div>
+<div id='div_post_reput14985'>
+</div>
+
+							<div id="sig14985" class="signature"><span style="font-size:150%;line-height:116%">Welcome to Xentax!</span><br>
+<br>
+<a href="http://forum.xentax.com/viewtopic.php?t=1270" class="postlink">Rules</a> | <a href="http://forum.xentax.com/viewforum.php?f=10" class="postlink">Requests</a> | <a href="http://wiki.xentax.com/index.php?title=Game File Format Central">Wiki</a> | <a href="https://discord.gg/sx9PAJU" class="postlink">Discord</a><br>
+<br>
+If you run across a post that breaks the rules, please <strong class="text-strong">report the post</strong> - a mod or admin will handle it from there.</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p14993" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14993">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/968.html" class="username">NinjaMuffin</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=968&amp;sr=posts">65</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 07, 2006 4:52 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="968"></dd>
+    <dd class="profile-posts" data-user-receive-id="968"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/968/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact NinjaMuffin">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact NinjaMuffin</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=14993" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14993">
+
+					<h3 >
+						<a href="./viewtopic.php?p=14993#p14993"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/14993/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=14993" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post14993' href="./viewtopic.php?f=11&amp;p=14993&amp;thanks=14993&amp;to_id=968&amp;from_id=123876" title="Say Thanks to the author of the post: NinjaMuffin"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=14993#p14993" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/968.html" class="username">NinjaMuffin</a></strong> &raquo; </span><time datetime="2006-04-21T15:56:01+00:00">Fri Apr 21, 2006 4:56 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Sorry to disappoint you, but it's not for a game (sorry). <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"> Oh, and it's all perfectly legal and nothing weird, creepy or anything like that.<br>
+ <br>
+N</div>
+
+			
+			
+									
+						<div id='list_thanks14993'>
+</div>
+<div id='div_post_reput14993'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p14999" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14999">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/456.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=456.gif" width="49" height="50" alt="User avatar" /></a>														</div>
+								<a href="../Users/456.html" class="username">PXR</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=456&amp;sr=posts">61</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 23, 2005 7:55 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> ::1</dd>
+							    <dd class="profile-posts" data-user-give-id="456"></dd>
+    <dd class="profile-posts" data-user-receive-id="456"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/456/false">4 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PXR">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PXR</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=14999" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14999">
+
+					<h3 >
+						<a href="./viewtopic.php?p=14999#p14999"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/14999/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=14999" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post14999' href="./viewtopic.php?f=11&amp;p=14999&amp;thanks=14999&amp;to_id=456&amp;from_id=123876" title="Say Thanks to the author of the post: PXR"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=14999#p14999" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/456.html" class="username">PXR</a></strong> &raquo; </span><time datetime="2006-04-21T22:46:50+00:00">Fri Apr 21, 2006 11:46 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">For what operating system? For windows I'd say <a href="http://www.gene6.com/" class="postlink">Gene6 FTP Server</a>, something a bit more advanced might be <a href="http://www.inicom.net/pages/en.ioftpd-home.php" class="postlink">ioFTPD</a>. If you're running some sort of Linux you can try <a href="http://vsftpd.beasts.org/" class="postlink">vsftpd</a> or <a href="http://www.glftpd.org/" class="postlink">glFTPd</a>.<br>
+<br>
+A good router.. there's many types of them.. just don't get one with packet inspection and such, that really slowes things down. But if you need a really secure, fast and <strong class="text-strong">cheap</strong> one, get an old computer and install some sort of linux-router-distribution. Even better, install <a href="http://www.openbsd.org/" class="postlink">OpenBSD</a> and configure it yourself to a router. <img class="smilies" src="./images/smilies/wink.gif" width="15" height="15" alt=";)" title="Wink"></div>
+
+			
+			
+									
+						<div id='list_thanks14999'>
+</div>
+<div id='div_post_reput14999'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15002" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15002">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/321.html" class="username">Rahly</a>							</dt>
+
+						<dd class="profile-rank">VVIP member<br /><img src="./images/ranks/vip-3.png" alt="VVIP member" title="VVIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=321&amp;sr=posts">411</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Aug 05, 2004 10:17 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="321"></dd>
+    <dd class="profile-posts" data-user-receive-id="321"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/321/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Rahly">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Rahly</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15002" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15002">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15002#p15002"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15002/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15002" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15002' href="./viewtopic.php?f=11&amp;p=15002&amp;thanks=15002&amp;to_id=321&amp;from_id=123876" title="Say Thanks to the author of the post: Rahly"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15002#p15002" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/321.html" class="username">Rahly</a></strong> &raquo; </span><time datetime="2006-04-22T02:09:34+00:00">Sat Apr 22, 2006 3:09 am</time>
+			</p>
+			
+			
+			
+			<div class="content">"Secure FTP" is sooo vague.<br>
+<br>
+i generally don't use FTP because of archaic protocol and implementations. FTP is terrible for what its suppose to do.  And no standard for anything.<br>
+<br>
+are we talking about ftp over ssl, or ftp over ssh?</div>
+
+			
+			
+									
+						<div id='list_thanks15002'>
+</div>
+<div id='div_post_reput15002'>
+</div>
+
+							<div id="sig15002" class="signature">"By nature men are alike.  Through practice they have become far apart."  Confucius (Analect 17:2)</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15027" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15027">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/968.html" class="username">NinjaMuffin</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=968&amp;sr=posts">65</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 07, 2006 4:52 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="968"></dd>
+    <dd class="profile-posts" data-user-receive-id="968"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/968/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact NinjaMuffin">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact NinjaMuffin</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15027" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15027">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15027#p15027"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15027/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15027" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15027' href="./viewtopic.php?f=11&amp;p=15027&amp;thanks=15027&amp;to_id=968&amp;from_id=123876" title="Say Thanks to the author of the post: NinjaMuffin"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15027#p15027" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/968.html" class="username">NinjaMuffin</a></strong> &raquo; </span><time datetime="2006-04-22T22:10:28+00:00">Sat Apr 22, 2006 11:10 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Hi<br>
+<br>
+PXR...I'm on PC myself, but as I was just informed some of the users are on Mac. Thank's on your router advice...much appreciated.<br>
+<br>
+Rahly...yeah I guess it is. As it turns out we have some Mac users some have suggested setting using a (SSL) Virtual Personal Network solution instead.<br>
+<br>
+So what do you guys think about VPN...and are there any good ones you can recommend?<br>
+<br>
+If you have any other solution that you think might be better suited, I'm all ears of course.<br>
+<br>
+Thank's again for your help guys.<br>
+<br>
+Cheers<br>
+<br>
+N</div>
+
+			
+			
+									
+						<div id='list_thanks15027'>
+</div>
+<div id='div_post_reput15027'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15028" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15028">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/456.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=456.gif" width="49" height="50" alt="User avatar" /></a>														</div>
+								<a href="../Users/456.html" class="username">PXR</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=456&amp;sr=posts">61</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 23, 2005 7:55 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> ::1</dd>
+							    <dd class="profile-posts" data-user-give-id="456"></dd>
+    <dd class="profile-posts" data-user-receive-id="456"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/456/false">4 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PXR">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PXR</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15028" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15028">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15028#p15028"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15028/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15028" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15028' href="./viewtopic.php?f=11&amp;p=15028&amp;thanks=15028&amp;to_id=456&amp;from_id=123876" title="Say Thanks to the author of the post: PXR"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15028#p15028" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/456.html" class="username">PXR</a></strong> &raquo; </span><time datetime="2006-04-22T23:24:30+00:00">Sun Apr 23, 2006 12:24 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>NinjaMuffin wrote:</cite>Hi<br>
+<br>
+PXR...I'm on PC myself, but as I was just informed some of the users are on Mac. Thank's on your router advice...much appreciated.<br>
+<br>
+Rahly...yeah I guess it is. As it turns out we have some Mac users some have suggested setting using a (SSL) Virtual Personal Network solution instead.<br>
+<br>
+So what do you guys think about VPN...and are there any good ones you can recommend?<br>
+<br>
+If you have any other solution that you think might be better suited, I'm all ears of course.<br>
+<br>
+Thank's again for your help guys.<br>
+<br>
+Cheers<br>
+<br>
+N</div></blockquote>
+If you're just going to transfer files, FTP is a great way to do it (no matter what rahly says <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz">;)). You want it secure; use FTP-SSL (not ssh-ftp, because that's really slow, at least when I've tested it) to get the data encrypted, all the software I mentioned supports it. People using any operating system can connect to a ftp-server (even with ssl), all that is need is a working ftp-client. Check out <a href="http://www.pure-mac.com/ftp.html" class="postlink">http://www.pure-mac.com/ftp.html</a> for example, it lists several client for MacOS.</div>
+
+			
+			
+									
+						<div id='list_thanks15028'>
+</div>
+<div id='div_post_reput15028'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15029" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15029">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/968.html" class="username">NinjaMuffin</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=968&amp;sr=posts">65</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 07, 2006 4:52 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="968"></dd>
+    <dd class="profile-posts" data-user-receive-id="968"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/968/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact NinjaMuffin">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact NinjaMuffin</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15029" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15029">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15029#p15029"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15029/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15029" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15029' href="./viewtopic.php?f=11&amp;p=15029&amp;thanks=15029&amp;to_id=968&amp;from_id=123876" title="Say Thanks to the author of the post: NinjaMuffin"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15029#p15029" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/968.html" class="username">NinjaMuffin</a></strong> &raquo; </span><time datetime="2006-04-23T06:02:35+00:00">Sun Apr 23, 2006 7:02 am</time>
+			</p>
+			
+			
+			
+			<div class="content">PXR...thank's for the info and the links.<br>
+<br>
+Sounds interesting...as long as it's possible for clients on Mac to use it as well. The server can cost a bit, but I think they'd prefer the clients being free of charge. Dunno how likely that is if they support SSL though.<br>
+<br>
+So what do you think about VPN vs FTP? As you point out, all we really need to do is upload and download files with a high level of security...nothing else.<br>
+<br>
+Thank's again.<br>
+<br>
+Cheers<br>
+<br>
+N</div>
+
+			
+			
+									
+						<div id='list_thanks15029'>
+</div>
+<div id='div_post_reput15029'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15031" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15031">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/456.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=456.gif" width="49" height="50" alt="User avatar" /></a>														</div>
+								<a href="../Users/456.html" class="username">PXR</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=456&amp;sr=posts">61</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 23, 2005 7:55 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> ::1</dd>
+							    <dd class="profile-posts" data-user-give-id="456"></dd>
+    <dd class="profile-posts" data-user-receive-id="456"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/456/false">4 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PXR">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PXR</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15031" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15031">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15031#p15031"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15031/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15031" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15031' href="./viewtopic.php?f=11&amp;p=15031&amp;thanks=15031&amp;to_id=456&amp;from_id=123876" title="Say Thanks to the author of the post: PXR"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15031#p15031" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/456.html" class="username">PXR</a></strong> &raquo; </span><time datetime="2006-04-23T08:29:43+00:00">Sun Apr 23, 2006 9:29 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Then you just have to enforce SSL for both connections and data transfers in the server application. I don't think VPN will be much securer (or better encrypted since it also use SSL).</div>
+
+			
+			
+									
+						<div id='list_thanks15031'>
+</div>
+<div id='div_post_reput15031'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15032" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15032">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/968.html" class="username">NinjaMuffin</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=968&amp;sr=posts">65</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 07, 2006 4:52 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="968"></dd>
+    <dd class="profile-posts" data-user-receive-id="968"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/968/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact NinjaMuffin">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact NinjaMuffin</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15032" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15032">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15032#p15032"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15032/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15032" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15032' href="./viewtopic.php?f=11&amp;p=15032&amp;thanks=15032&amp;to_id=968&amp;from_id=123876" title="Say Thanks to the author of the post: NinjaMuffin"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15032#p15032" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/968.html" class="username">NinjaMuffin</a></strong> &raquo; </span><time datetime="2006-04-23T10:54:24+00:00">Sun Apr 23, 2006 11:54 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Ok, thank's for your help man.<br>
+<br>
+N</div>
+
+			
+			
+									
+						<div id='list_thanks15032'>
+</div>
+<div id='div_post_reput15032'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15050" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15050">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/321.html" class="username">Rahly</a>							</dt>
+
+						<dd class="profile-rank">VVIP member<br /><img src="./images/ranks/vip-3.png" alt="VVIP member" title="VVIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=321&amp;sr=posts">411</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Aug 05, 2004 10:17 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="321"></dd>
+    <dd class="profile-posts" data-user-receive-id="321"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/321/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Rahly">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Rahly</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15050" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15050">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15050#p15050"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15050/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15050" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15050' href="./viewtopic.php?f=11&amp;p=15050&amp;thanks=15050&amp;to_id=321&amp;from_id=123876" title="Say Thanks to the author of the post: Rahly"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15050#p15050" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/321.html" class="username">Rahly</a></strong> &raquo; </span><time datetime="2006-04-24T13:26:38+00:00">Mon Apr 24, 2006 2:26 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>PXR wrote:</cite>FTP is a great way to do it (no matter what rahly says <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz">;)).</div></blockquote>
+
+FTP is terrible, using multiple sockets as a cheap way to transfer, which forces you to open up a lot of ports on your firewall, and to top it off, its a pain to set up correct.<br>
+<br>
+Normal FTP (active ftp) works<br>
+You connect to the ftp command port (21), you issue a command, then you have to say which ip/port to send data back on, then the server has to connect to to that port in order to send the data response (actual file/file listing).  Problem with that is if the user is behind a firewall, these ports are usually blocked.  PITA IMO!<br>
+<br>
+So they added a command PASV aka (Passive FTP)<br>
+Same as above except instead of the server connecting to you for the data transfer, you connect to it.  Fast and easily implemented solution, but terrible, because now, you have open up a range of ports for the server firewall PLUS the ftp command port.  Not to mention the security issues involved in this, for example, if someone connects to that socket before you, they can get the file, bypassing whatever login information is required.<br>
+<br>
+Now because there isn't a way to determine which you are suppose to use, at least programmatically, the user has to decide which to use (ala, if one way doesn't work, use the other).<br>
+<br>
+FTP is a nightmare.<br>
+<br>
+Now comes FTP over SSH, great idea if there ever was one. FTP and Shell are handled over port 22, including SCP (Secure Copy).  The server has to open up a single port, no ranges, and you don't have to worry secondary connections, as commands and data are transfered through the same socket.  Socket is encrypted, and no secondary connections are bypass login security.<br>
+<br>
+Personally, I use winscp, which also has ftp over ssh support, to connect to all my server machines, esp over the internet.  FTP is usually turned off.<br>
+<br>
+FTP is an ancient beast, that needs to be put to rest.</div>
+
+			
+			
+									
+						<div id='list_thanks15050'>
+</div>
+<div id='div_post_reput15050'>
+</div>
+
+							<div id="sig15050" class="signature">"By nature men are alike.  Through practice they have become far apart."  Confucius (Analect 17:2)</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15051" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15051">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/968.html" class="username">NinjaMuffin</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=968&amp;sr=posts">65</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 07, 2006 4:52 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="968"></dd>
+    <dd class="profile-posts" data-user-receive-id="968"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/968/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact NinjaMuffin">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact NinjaMuffin</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15051" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15051">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15051#p15051"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15051/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15051" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15051' href="./viewtopic.php?f=11&amp;p=15051&amp;thanks=15051&amp;to_id=968&amp;from_id=123876" title="Say Thanks to the author of the post: NinjaMuffin"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15051#p15051" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/968.html" class="username">NinjaMuffin</a></strong> &raquo; </span><time datetime="2006-04-24T18:43:31+00:00">Mon Apr 24, 2006 7:43 pm</time>
+			</p>
+			
+			
+			
+			<div class="content">Rahly,<br>
+<br>
+Thank's for your reply.<br>
+<br>
+Yeah I understand the problems of regular FTP. However, the thing I was thinking about was FTP over SSL. I can't see you mentioning FTP over SSL in your latest post...so how does that in your view compare to FTP over SSH? Does FTP over SSL also open up a whole bunch of ports etc?<br>
+<br>
+To perhaps easier understand the specifics of my problem, I'm on a Windows machine which will be the "server". Users are on Windows and Mac so both will have be available as clients.<br>
+<br>
+We will just need to upload, download and share files...nothing more. The simpler, safer and easier the better.<br>
+<br>
+Any recommendations?<br>
+<br>
+Thank's again.<br>
+<br>
+Cheers<br>
+<br>
+N</div>
+
+			
+			
+									
+						<div id='list_thanks15051'>
+</div>
+<div id='div_post_reput15051'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15053" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15053">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="../Users/456.html" class="avatar"><img class="avatar" src="./download/file.php?avatar=456.gif" width="49" height="50" alt="User avatar" /></a>														</div>
+								<a href="../Users/456.html" class="username">PXR</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=456&amp;sr=posts">61</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 23, 2005 7:55 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> ::1</dd>
+							    <dd class="profile-posts" data-user-give-id="456"></dd>
+    <dd class="profile-posts" data-user-receive-id="456"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/456/false">4 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact PXR">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact PXR</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15053" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15053">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15053#p15053"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15053/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15053" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15053' href="./viewtopic.php?f=11&amp;p=15053&amp;thanks=15053&amp;to_id=456&amp;from_id=123876" title="Say Thanks to the author of the post: PXR"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15053#p15053" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/456.html" class="username">PXR</a></strong> &raquo; </span><time datetime="2006-04-24T20:23:43+00:00">Mon Apr 24, 2006 9:23 pm</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Rahly wrote:</cite>Not to mention the security issues involved in this, for example, if someone connects to that socket before you, they can get the file, bypassing whatever login information is required.</div></blockquote>
+If we ignore the fact that sockets can be binded to a specific ip-address, how big of a chance is it that this actually happens? If it's gonna work, the "hacker" has to (probably) hammer multiple ports on the server under a longer period to find the one that is open for data-transfer, in say, like the time of zero to one second before the real client "grabs the slot". Such hammering could easily be stopped automatically by a firewall. So unless the "hacker" knows what port and socket to connect to or actually got the same ip-address as the client, I don't think it's really possible.<br>
+<br>
+<br>
+About FTP over SSH, I believe you, it's more secure. But how about the performance?<br>
+<br>
+When I tested some while ago (with WinSCP) to transfer several gigabytes of data via LAN (100Mbps), I got speeds of about 1MBps - not acceptable. Later I tried transfering with standard SSL-FTP, the speed bursted to 10-11MBps. I don't know, maybe I did something wrong (transfered from my linux server to my windows desktop btw). <img class="smilies" src="./images/smilies/%5Bcolon%5Dp.gif" width="15" height="15" alt=":P" title="Razz"><br>
+<br>
+
+<blockquote><div><cite>NinjaMuffin wrote:</cite>Does FTP over SSL also open up a whole bunch of ports etc?</div></blockquote>
+Yeah, it does, FTP over SSL is exactly the same as usual FTP. The main difference is the that you send some extra commands before starting a transfer, to iniate the SSL-encryption of the data.</div>
+
+			
+			
+									
+						<div id='list_thanks15053'>
+</div>
+<div id='div_post_reput15053'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15057" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15057">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/321.html" class="username">Rahly</a>							</dt>
+
+						<dd class="profile-rank">VVIP member<br /><img src="./images/ranks/vip-3.png" alt="VVIP member" title="VVIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=321&amp;sr=posts">411</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Aug 05, 2004 10:17 am</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="321"></dd>
+    <dd class="profile-posts" data-user-receive-id="321"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/321/false">1 time</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Rahly">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Rahly</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15057" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15057">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15057#p15057"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15057/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15057" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15057' href="./viewtopic.php?f=11&amp;p=15057&amp;thanks=15057&amp;to_id=321&amp;from_id=123876" title="Say Thanks to the author of the post: Rahly"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15057#p15057" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/321.html" class="username">Rahly</a></strong> &raquo; </span><time datetime="2006-04-25T01:23:50+00:00">Tue Apr 25, 2006 2:23 am</time>
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>NinjaMuffin wrote:</cite>I can't see you mentioning FTP over SSL in your latest post...so how does that in your view compare to FTP over SSH? Does FTP over SSL also open up a whole bunch of ports etc?</div></blockquote>
+
+similar, with similar problems as normal ftp.  Although, PXR has it wrong.  SSL is negotiated BEFORE commands are sent, or its not SSL.  SSL was designed for transparency for sockets, a simple replace of function names and you are done.  If its AFTER, then ftp would have had to been reengineered.  This is why sftp has a different port (not 21, but 115).  Now as to performance issues, not 100% sure, i know ftp over ssl encrypts the command channel, this is so things like username and password are encrypted, but i'm not sure if encrypts all the data channels, or maybe it only encrypts the channel if its in "ASCII" mode, i'd have to go look it up.  IF so, then ftp over ssl would be faster in file transfers than ftp over ssh, because EVERYTHING is encrypted in ssh, this requires more CPU on each end.<br>
+
+<blockquote><div><cite>NinjaMuffin wrote:</cite>To perhaps easier understand the specifics of my problem, I'm on a Windows machine which will be the "server". Users are on Windows and Mac so both will have be available as clients.</div></blockquote>
+
+This is even WORSE, because ftp was never designed for windows systems, and all the windows ones i know EMULATE a unix directory for ftp gui client compatibilty, but there is no STANDARD or LAW, that says the directory listings have to be in any particular format.  Directory listing are just a file transfer of a text file, so it can be in ANY format the server deems it to be in.  This is why some clients have problems with other servers.  Yet Another Reason why ftp is terrible.<br>
+
+<blockquote><div><cite>PXR wrote:</cite>If we ignore the fact that sockets can be binded to a specific ip-address, how big of a chance is it that this actually happens? If it's gonna work, the "hacker" has to (probably) hammer multiple ports on the server under a longer period to find the one that is open for data-transfer, in say, like the time of zero to one second before the real client "grabs the slot". Such hammering could easily be stopped automatically by a firewall. So unless the "hacker" knows what port and socket to connect to or actually got the same ip-address as the client, I don't think it's really possible.</div></blockquote>
+
+Your first comment has no bearing on this.  BINDING to an ip address is only for ip addresses of attached adapters, NOT an incoming socket's ip address.  This chance is pretty high nowadays, thousands, if not more, "hackers" are using port scanners, and ones that are automated, and store data from connected sockets for analysis later.<br>
+
+<blockquote><div><cite>PXR wrote:</cite>When I tested some while ago (with WinSCP) to transfer several gigabytes of data via LAN (100Mbps), I got speeds of about 1MBps - not acceptable. Later I tried transfering with standard SSL-FTP, the speed bursted to 10-11MBps. I don't know, maybe I did something wrong (transfered from my linux server to my windows desktop btw). </div></blockquote>
+
+Further supports my belief that the data channels aren't encrypted, but only the command channel is.  Also please note this also depends on your encryption key as well, a bigger one, requires more time for encoding.  If you are using a 256 SSL key, and a 1024 SSH key, which is a factor of 4x.  Basically here, you are trading speed for security.</div>
+
+			
+			
+									
+						<div id='list_thanks15057'>
+</div>
+<div id='div_post_reput15057'>
+</div>
+
+							<div id="sig15057" class="signature">"By nature men are alike.  Through practice they have become far apart."  Confucius (Analect 17:2)</div>			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+				<div id="p15058" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile15058">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="../Users/968.html" class="username">NinjaMuffin</a>							</dt>
+
+						<dd class="profile-rank">VIP member<br /><img src="./images/ranks/vip-2.png" alt="VIP member" title="VIP member" /></dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="./search.php?author_id=968&amp;sr=posts">65</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 07, 2006 4:52 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-give-id="968"></dd>
+    <dd class="profile-posts" data-user-receive-id="968"><strong>Been&nbsp;thanked:</strong> <a href="/app.php/thankslist/givens/968/false">3 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact NinjaMuffin">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact NinjaMuffin</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="./ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=15058" title="Send private message" class="last-cell">
+										<span class="contact-icon pm-icon">Send private message</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content15058">
+
+					<h3 >
+						<a href="./viewtopic.php?p=15058#p15058"></a>
+		</h3>
+
+													<ul class="post-buttons">
+																										<li>
+							<a href="/app.php/post/15058/report" title="Report this post" class="button button-icon-only">
+								<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">Report</span>
+							</a>
+						</li>
+																										<li>
+							<a href="./posting.php?mode=quote&amp;p=15058" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+													<li>
+			<a id='lnk_thanks_post15058' href="./viewtopic.php?f=11&amp;p=15058&amp;thanks=15058&amp;to_id=968&amp;from_id=123876" title="Say Thanks to the author of the post: NinjaMuffin"  class="button button-icon-only">
+				<i class="icon thanks-icon fa-fw" aria-hidden="true"></i><span class="sr-only">Thanks</span>
+			</a>
+		</li>
+					</ul>
+							
+						<p class="author">
+									<a class="unread" href="./viewtopic.php?p=15058#p15058" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="../Users/968.html" class="username">NinjaMuffin</a></strong> &raquo; </span><time datetime="2006-04-25T07:21:10+00:00">Tue Apr 25, 2006 8:21 am</time>
+			</p>
+			
+			
+			
+			<div class="content">Thank you both for your input. This is extremely helpful to me and I truly appreciate it.<br>
+<br>
+Putting the size of the encryption key aside, the question whether the data channel is encrypted or not is certainly interesting. If it's not, then there seems to be a trade-off between speed and security.<br>
+<br>
+Compability with clients using another OS (such as Mac) is of course also very important in this case. I've been recommended using Cygwin, which if I understand it is a sort of Linux environment for Windows. Why would Cygwin be so helpful in this regard? The guy that recommended it also recommended using SSH...but I haven't heard back from him yet so I have no clue about the details.<br>
+<br>
+Thank's again for your replies...greatly appreciated.<br>
+<br>
+Cheers<br>
+<br>
+N</div>
+
+			
+			
+									
+						<div id='list_thanks15058'>
+</div>
+<div id='div_post_reput15058'>
+</div>
+
+										
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="./posting.php?mode=reply&amp;t=1860" class="button" title="Post a reply">
+							<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+													<li>
+						<a href="./viewtopic.php?uid=123876&amp;f=11&amp;t=1860&amp;watch=topic&amp;start=0&amp;hash=d757f2ff" class="watch-topic-link" title="Subscribe topic" data-ajax="toggle_link" data-toggle-class="icon fa-square-o fa-fw" data-toggle-text="Unsubscribe topic" data-toggle-url="./viewtopic.php?uid=123876&amp;f=11&amp;t=1860&amp;unwatch=topic&amp;start=0&amp;hash=d757f2ff" data-update-all=".watch-topic-link">
+							<i class="icon fa-check-square-o fa-fw" aria-hidden="true"></i><span>Subscribe topic</span>
+						</a>
+					</li>
+													<li>
+						<a href="./viewtopic.php?t=1860&amp;bookmark=1&amp;hash=d757f2ff" class="bookmark-link" title="Bookmark topic" data-ajax="alt_text" data-alt-text="Remove from bookmarks" data-update-all=".bookmark-link">
+							<i class="icon fa-bookmark-o fa-fw" aria-hidden="true"></i><span>Bookmark topic</span>
+						</a>
+					</li>
+																<li>
+					<a href="./memberlist.php?mode=email&amp;t=1860" title="Email topic">
+						<i class="icon fa-envelope-o fa-fw" aria-hidden="true"></i><span>Email topic</span>
+					</a>
+				</li>
+												<li>
+					<a href="./viewtopic.php?t=1860&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="./viewtopic.php?t=1860">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			18 posts
+							<ul>
+		<li class="active"><span>1</span></li>
+				<li><a class="button" href="./1860 (1).html" role="button">2</a></li>
+				<li class="arrow next"><a class="button button-icon-only" href="./1860 (1).html" rel="next" role="button"><i class="icon fa-chevron-right fa-fw" aria-hidden="true"></i><span class="sr-only">Next</span></a></li>
+	</ul>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=11" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Miscellaneous”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="../Forums/26 - XeNTaX - General Discussion.html" class="jumpbox-cat-link"> <span> General Discussion</span></a></li>
+																<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Holy Cow!</span></a></li>
+																<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game news</span></a></li>
+																<li><a href="./viewforum.php?f=38" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Tech Tips</span></a></li>
+																<li><a href="./viewforum.php?f=41" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Cool mods</span></a></li>
+																<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Website</span></a></li>
+																<li><a href="./viewforum.php?f=24" class="jumpbox-cat-link"> <span> Game Modding</span></a></li>
+																<li><a href="./viewforum.php?f=29" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Tutorials</span></a></li>
+																<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; 3D/2D models</span></a></li>
+																<li><a href="./viewforum.php?f=17" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Audio file formats</span></a></li>
+																<li><a href="./viewforum.php?f=18" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Graphic file formats</span></a></li>
+																<li><a href="./viewforum.php?f=36" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Video file formats</span></a></li>
+																<li><a href="./viewforum.php?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Archive</span></a></li>
+																<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Compressed files and methods</span></a></li>
+																<li><a href="./viewforum.php?f=13" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Code Talk</span></a></li>
+																<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game Localization</span></a></li>
+																<li><a href="./viewforum.php?f=30" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Savegames</span></a></li>
+																<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Old posts</span></a></li>
+																<li><a href="./viewforum.php?f=37" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Retro games</span></a></li>
+																<li><a href="./viewforum.php?f=25" class="jumpbox-cat-link"> <span> MultiEx Commander</span></a></li>
+																<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; News</span></a></li>
+																<li><a href="./viewforum.php?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Plugins</span></a></li>
+																<li><a href="./viewforum.php?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Troubleshooting</span></a></li>
+																<li><a href="./viewforum.php?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Miscellaneous</span></a></li>
+																<li><a href="./viewforum.php?f=31" class="jumpbox-cat-link"> <span> Tools &amp; Programs</span></a></li>
+																<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Game specific tools</span></a></li>
+																<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; General game tools</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3><a href="./viewonline.php">Who is online</a></h3>
+		<p>Users browsing this forum: <a href="../Users/123876.html" class="username">escape209</a> and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="../Navigation/index.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				<li class="rightside">All times are <span title="UTC+1">UTC+01:00</span></li>
+							<li class="rightside">
+				<a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+							<li class="rightside" data-last-responsive="true">
+					<a href="./memberlist.php" title="View complete list of members" role="menuitem">
+						<i class="icon fa-group fa-fw" aria-hidden="true"></i><span>Members</span>
+					</a>
+				</li>
+												<li class="rightside" data-last-responsive="true">
+				<a href="./memberlist.php?mode=team" role="menuitem">
+					<i class="icon fa-shield fa-fw" aria-hidden="true"></i><span>The team</span>
+				</a>
+			</li>
+							</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				<p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row" role="menu">
+			<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="./assets/javascript/jquery-3.6.0.min.js?assets_version=11"></script>
+<script src="./assets/javascript/core.js?assets_version=11"></script>
+
+
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/forum_fn.js?assets_version=11"></script>
+<script src="./styles/prosilver/template/ajax.js?assets_version=11"></script>
+
+
+
+</body>
+</html>
